@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Detect if running locally or in production
             const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
                 ? 'http://localhost:5000' 
-                : 'https://dremora-backend.onrender.com'; // We will set this up on Render
+                : 'https://dremora.onrender.com'; // Your live Render URL
 
             try {
                 const response = await fetch(`${API_BASE_URL}${endpointPath}`, {
