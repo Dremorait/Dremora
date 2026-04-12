@@ -10,7 +10,8 @@ def setup_db():
         conn = pymysql.connect(
             host=os.getenv("DB_HOST", "localhost"),
             user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD", "")
+            password=os.getenv("DB_PASSWORD", ""),
+            port=int(os.getenv("DB_PORT", 3306))
         )
         cursor = conn.cursor()
         
