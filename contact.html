@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Dremora IT Consultants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Navbar -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand"><img src="assets/images/logo.png" alt="Dremora" style="height: 45px; width: 45px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="internship.html">Internship</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main style="padding-top: 8rem; min-height: 80vh;">
+    <section class="section reveal">
+      <div class="container">
+        <div class="text-center">
+            <h1 class="section-title">Let's Build Something Great</h1>
+            <p class="section-subtitle">Inquire about our services, request a demo of our CRM solutions, or drop an institutional request.</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 3rem; margin-top: 4rem; max-width: 900px; margin-inline: auto;">
+            <!-- Contact Form -->
+            <div style="flex: 2; min-width: 300px;">
+                <div class="glass-panel" style="padding: 2.5rem; background: rgba(18, 22, 41, 0.8);">
+                    <form action="#" method="POST" id="contactForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit;">
+                            <input type="email" name="email" placeholder="Email Address" required style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <select name="subject" required style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit;">
+                                <option value="" disabled selected>Nature of Inquiry</option>
+                                <option value="Web/Software Project Request">Web/Software Project Request</option>
+                                <option value="NagarSeva / CRM Demo Request">NagarSeva / CRM Demo Request</option>
+                                <option value="General Support / Partnership">General Support / Partnership</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <textarea name="message" placeholder="Tell us about your requirements..." rows="5" required style="width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Direct Contact Details -->
+            <div style="flex: 1; min-width: 250px;">
+                <div class="glass-panel" style="padding: 2.5rem; height: 100%;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Direct Contact</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <i class="fa-solid fa-phone" style="color: var(--primary-cyan); font-size: 1.2rem; margin-top: 4px;"></i>
+                            <div>
+                                <span style="display: block; font-weight: bold; margin-bottom: 0.2rem;">Phone</span>
+                                <a href="tel:+919309795878" style="color: var(--text-muted); font-size: 0.9rem;">+91 9309795878</a>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <i class="fa-solid fa-envelope" style="color: var(--primary-cyan); font-size: 1.2rem; margin-top: 4px;"></i>
+                            <div>
+                                <span style="display: block; font-weight: bold; margin-bottom: 0.2rem;">Email</span>
+                                <a href="mailto:dremora.itservices@gmail.com" style="color: var(--text-muted); font-size: 0.9rem;">dremora.itservices@gmail.com</a>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <i class="fa-solid fa-location-dot" style="color: var(--primary-cyan); font-size: 1.2rem; margin-top: 4px;"></i>
+                            <div>
+                                <span style="display: block; font-weight: bold; margin-bottom: 0.2rem;">Office</span>
+                                <span style="color: var(--text-muted); font-size: 0.9rem;">Pune, MAHARASHTRA 411032<br>India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 1px solid var(--border-glass); padding: 4rem 0 2rem; background: #04050a; text-align: center;">
+      <div class="container text-center">
+          <a href="index.html" class="nav-brand" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/logo.png" alt="Dremora" style="height: 55px; width: 55px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+          </a>
+      </div>
+      <div class="container" style="color: var(--text-muted); font-size: 0.85rem;">
+        &copy; 2026 Dremora IT Consultants & Services. All rights reserved.
+      </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>

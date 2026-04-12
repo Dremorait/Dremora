@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Dremora IT Consultants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Navbar -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand"><img src="assets/images/logo.png" alt="Dremora" style="height: 45px; width: 45px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="internship.html">Internship</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main style="padding-top: 6rem; min-height: 80vh;">
+    <!-- Case Study Hero -->
+    <section class="section reveal" style="padding-bottom: 2rem;">
+      <div class="container">
+        <div class="glass-pill pulse-anim" style="margin-bottom: 1rem; margin-inline: auto; display: table; background: rgba(0,210,255,0.1); border-color: var(--primary-cyan); color: var(--primary-cyan);">Case Study: Civic Tech</div>
+        <h1 class="section-title text-center" style="font-size: 3.5rem; margin-bottom: 1rem;">NagarSeva</h1>
+        <p class="section-subtitle text-center" style="max-width: 800px; margin-inline: auto;">A smart digital platform bridging the gap between citizens and municipal authorities, replacing manual friction with real-time AI automation.</p>
+        
+        <div class="float-anim" style="margin: 3rem auto; max-width: 900px; padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass);">
+           <img src="assets/images/dashboard_mockup.png" alt="NagarSeva Demo Dashboard" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem & Solution Grid -->
+    <section class="section reveal" style="background: rgba(18,22,41,0.5); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+           <div class="glass-panel" style="padding: 2.5rem; border-top: 3px solid #ff4d4d;">
+              <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-triangle-exclamation" style="color: #ff4d4d; margin-right: 10px;"></i> The Problem</h3>
+              <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">Traditional municipal systems suffer from manual complaint registration, zero tracking functionality, delayed responses, and lack of transparency.</p>
+              <ul style="color: var(--text-muted); line-height: 1.8; list-style-type: none; padding: 0;">
+                <li><i class="fa-solid fa-xmark" style="color: #ff4d4d; margin-right: 8px;"></i> No unified tracking system</li>
+                <li><i class="fa-solid fa-xmark" style="color: #ff4d4d; margin-right: 8px;"></i> Disjointed cross-department data</li>
+              </ul>
+           </div>
+           <div class="glass-panel" style="padding: 2.5rem; border-top: 3px solid var(--primary-cyan);">
+              <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-lightbulb" style="color: var(--primary-cyan); margin-right: 10px;"></i> Proposed Solution</h3>
+              <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">An automated, user-friendly ecosystem providing transparent governance and lightning-fast issue resolution.</p>
+              <ul style="color: var(--text-muted); line-height: 1.8; list-style-type: none; padding: 0;">
+                <li><i class="fa-solid fa-check" style="color: var(--primary-cyan); margin-right: 8px;"></i> Digital registration & Location tracking</li>
+                <li><i class="fa-solid fa-check" style="color: var(--primary-cyan); margin-right: 8px;"></i> AI-powered smart routing assistant</li>
+              </ul>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Tech Stack -->
+    <section class="section reveal">
+      <div class="container">
+         <div class="text-center" style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">System Architecture</h2>
+            <p style="color: var(--text-muted);">Built on modern, scalable technologies to support massive institutional traffic.</p>
+         </div>
+         
+         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+            <!-- Layers -->
+            <div class="glass-panel text-center" style="padding: 2rem;">
+               <i class="fa-brands fa-html5" style="font-size: 3rem; color: #e34f26; margin-bottom: 1rem;"></i>
+               <h4>Frontend Layer</h4>
+               <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">HTML, CSS, JS, Bootstrap. Highly responsive Glassmorphism design with seamless smooth animations.</p>
+            </div>
+            <div class="glass-panel text-center" style="padding: 2rem;">
+               <i class="fa-brands fa-python" style="font-size: 3rem; color: #f7ca3e; margin-bottom: 1rem;"></i>
+               <h4>Backend API</h4>
+               <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Python Flask Framework powering robust REST API architectures and deep JWT Authentication hooks.</p>
+            </div>
+            <div class="glass-panel text-center" style="padding: 2rem;">
+               <i class="fa-solid fa-database" style="font-size: 3rem; color: #00758f; margin-bottom: 1rem;"></i>
+               <h4>Data & Security</h4>
+               <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">MySQL tracking Users, Complaints, Status Logs & Departments. Secured via bcrypt and RBAC controls.</p>
+            </div>
+            <div class="glass-panel text-center" style="padding: 2rem;">
+               <i class="fa-solid fa-brain" style="font-size: 3rem; color: var(--accent-purple); margin-bottom: 1rem;"></i>
+               <h4>AI Integration</h4>
+               <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Ollama-based Smart Chatbot engine to actively guide citizens, parse logic, and suggest exact departmental routing.</p>
+            </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- Roles & Workflow -->
+    <section class="section reveal" style="background: radial-gradient(circle at center, rgba(138,43,226,0.05) 0%, transparent 70%);">
+      <div class="container">
+         <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 3rem;">Ecosystem Workflow</h2>
+         
+         <!-- Roles -->
+         <div style="display: flex; gap: 2rem; margin-bottom: 4rem; overflow-x: auto; padding-bottom: 1rem;">
+             <div class="glass-panel" style="flex: 1; min-width: 280px; padding: 2rem; border-left: 4px solid #fff;">
+                 <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-user-astronaut" style="margin-right: 8px;"></i> 👤 Citizen</h4>
+                 <p style="color: var(--text-muted); font-size: 0.9rem;">Submit complaints via images seamlessly, track real-time active status updates, and view personal civic resolution history.</p>
+             </div>
+             <div class="glass-panel" style="flex: 1; min-width: 280px; padding: 2rem; border-left: 4px solid var(--primary-cyan);">
+                 <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-user-shield" style="margin-right: 8px;"></i> 🧑‍💼 Admin</h4>
+                 <p style="color: var(--text-muted); font-size: 0.9rem;">View aggregated global complaints, manually manage active personnel, and monitor systemic architectural performance live.</p>
+             </div>
+             <div class="glass-panel" style="flex: 1; min-width: 280px; padding: 2rem; border-left: 4px solid var(--accent-purple);">
+                 <h4 style="margin-bottom: 1rem;"><i class="fa-solid fa-helmet-safety" style="margin-right: 8px;"></i> 🛠️ Field Officer</h4>
+                 <p style="color: var(--text-muted); font-size: 0.9rem;">View assigned local sector complaints, organically update statuses (Pending &rarr; Resolved), and instantly attach closure/resolution notes.</p>
+             </div>
+         </div>
+
+         <!-- Workflow Timeline block -->
+         <div class="glass-panel" style="padding: 3rem 2rem;">
+            <h3 style="margin-bottom: 3rem; text-align: center;">Core Resolution Pipeline Execution</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; text-align: center; color: var(--text-main);">
+               <div style="flex:1;"><i class="fa-solid fa-right-to-bracket fa-2x" style="color: var(--text-muted); margin-bottom:0.5rem;"></i><br><small style="font-weight: bold; letter-spacing: 1px;">1. SECURE AUTH</small></div>
+               <i class="fa-solid fa-arrow-right" style="color: var(--border-glass);"></i>
+               <div style="flex:1;"><i class="fa-solid fa-camera fa-2x" style="color: var(--primary-cyan); margin-bottom:0.5rem;"></i><br><small style="font-weight: bold; letter-spacing: 1px;">2. SNAP & REPORT</small></div>
+               <i class="fa-solid fa-arrow-right" style="color: var(--border-glass);"></i>
+               <div style="flex:1;"><i class="fa-solid fa-robot pulse-anim fa-2x" style="color: var(--accent-purple); margin-bottom:0.5rem;"></i><br><small style="font-weight: bold; letter-spacing: 1px;">3. AI ROUTING</small></div>
+               <i class="fa-solid fa-arrow-right" style="color: var(--border-glass);"></i>
+               <div style="flex:1;"><i class="fa-solid fa-clipboard-check float-anim fa-2x" style="color: #4CAF50; margin-bottom:0.5rem;"></i><br><small style="font-weight: bold; letter-spacing: 1px;">4. EXACT RESOLUTION</small></div>
+            </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- Impact & Conclusion -->
+    <section class="section reveal">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+           <div class="glass-panel" style="padding: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem;"><i class="fa-solid fa-chart-line" style="color: var(--primary-cyan); margin-right:10px;"></i> Results & Real-World Impact</h3>
+              <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">
+                 Fully structured and scalable to be deployed for vast Smart Cities, modern Campus Operations, and dedicated Government Grievance nodes. Architectural stress tests indicate drastically reduced complaint handling latency and skyrocketing citizen-authority satisfaction curves.
+              </p>
+           </div>
+           <div class="glass-panel" style="padding: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem;"><i class="fa-solid fa-satellite-dish" style="color: var(--accent-purple); margin-right:10px;"></i> Future Horizons & Limits</h3>
+              <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">
+                 The current web implementation acts as the foundational nexus. Ongoing phase iterations will construct compiled Android/iOS mobile instances, deploy hardware-level push notifications, introduce Multi-language NLP capabilities, and completely refine AI logic for proactive prediction loops against civic wear-and-tear thresholds.
+              </p>
+           </div>
+        </div>
+        
+        <div class="text-center glass-panel" style="margin-top: 5rem; padding: 4rem 2rem; background: rgba(0, 210, 255, 0.05); border: 1px solid var(--primary-cyan);">
+           <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Architectural Conclusion</h2>
+           <p style="color: var(--text-main); max-width: 800px; margin-inline: auto; font-size: 1.15rem; line-height: 1.8;">
+             NagarSeva functions as a premier, hyper-scalable, and deeply intelligent civic nexus—shattering the restrictive communication silo between the general populace and bureaucratic authorities. By fusing resilient multi-layer software logic with bleeding-edge AI evaluation flows, Dremora transforms legacy grievance pathways into a perfectly synchronized digital ecosystem.
+           </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 1px solid var(--border-glass); padding: 4rem 0 2rem; background: #04050a; text-align: center;">
+      <div class="container" style="color: var(--text-muted); font-size: 0.85rem;">
+        &copy; 2026 Dremora IT Consultants & Services. All rights reserved.
+      </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/ai-chat.js"></script>
+</body>
+</html>

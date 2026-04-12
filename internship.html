@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship | Dremora IT Consultants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Navbar -->
+  <header class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand"><img src="assets/images/logo.png" alt="Dremora" style="height: 45px; width: 45px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="internship.html" class="active">Internship</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main style="padding-top: 6rem; min-height: 80vh;">
+    <!-- Internship Hero Block -->
+    <section class="section text-center reveal" style="padding-bottom: 2rem;">
+      <div class="container">
+        <div class="glass-pill pulse-anim" style="margin-bottom: 1rem; margin-inline: auto; display: table; background: rgba(138,43,226,0.1); border-color: var(--accent-purple); color: var(--accent-purple);">Elite Engineering Fellowship</div>
+        <h1 class="section-title" style="font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(90deg, #fff, var(--accent-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">Skip Tutorial Hell. Build Real Tech.</h1>
+        <p class="section-subtitle" style="max-width: 800px; margin-inline: auto;">Escape theoretical concepts. Join Dremora's hyper-accelerated internship program and push production code to massive live platforms alongside elite senior engineers.</p>
+      </div>
+    </section>
+
+    <section class="section reveal" style="padding-top: 1rem;">
+      <div class="container">
+        <div style="display: flex; flex-wrap: wrap; gap: 4rem; max-width: 1100px; margin-inline: auto;">
+            
+            <!-- Graphic / Persuasive Info Side -->
+            <div style="flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 2rem;">
+                <!-- Card 1 -->
+<div class="glass-panel" style="padding: 2.2rem; border-left: 4px solid var(--primary-cyan); background: linear-gradient(135deg, rgba(18,22,41,0.9), rgba(0,210,255,0.05));">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1rem;"><i class="fa-solid fa-server fa-lg" style="color: var(--primary-cyan); margin-right: 15px;"></i> Commercial Projects</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">You won't be fetching coffee or building basic calculators. You will be actively architecting modules for live platforms like NagarSeva. Your code will natively impact thousands of real users.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="glass-panel" style="padding: 2.2rem; border-left: 4px solid var(--accent-purple); background: linear-gradient(135deg, rgba(18,22,41,0.9), rgba(138,43,226,0.05)); animation-delay: 0.2s;">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1rem;"><i class="fa-solid fa-user-ninja fa-lg" style="color: var(--accent-purple); margin-right: 15px;"></i> Ruthless Mentorship</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">Work in the trenches alongside hardened industry veterans. Extract strictly enforced conventions, clean architecture, and advanced system design directly from the minds of senior developers.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="glass-panel" style="padding: 2.2rem; border-left: 4px solid #ff4d4d; background: linear-gradient(135deg, rgba(18,22,41,0.9), rgba(255,77,77,0.05)); animation-delay: 0.4s;">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1rem;"><i class="fa-solid fa-file-contract fa-lg" style="color: #ff4d4d; margin-right: 15px;"></i> Certified Domination</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">Walk away with a globally verifiable Letter of Recommendation, an elite internship certification, and an unstoppable tech portfolio guaranteed to slice straight through any corporate HR filter.</p>
+                </div>
+            </div>
+
+            <!-- Application Form Side -->
+            <div style="flex: 1.2; min-width: 320px;">
+                <div class="glass-panel pulse-dot" style="padding: 3rem; background: rgba(7, 9, 19, 0.7); border: 1px solid var(--primary-cyan); box-shadow: 0 0 40px rgba(0, 210, 255, 0.1);">
+                    <div style="text-align: center; margin-bottom: 2.5rem;">
+                        <h3 style="font-size: 2.2rem; margin-bottom: 0.5rem; background: var(--gradient-glow); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">Claim Your Seat</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Only the top 5% of applicants are selected to engineer at Dremora. Prove yourself.</p>
+                    </div>
+                    <form action="#" method="POST" id="internshipForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <input type="text" name="name" placeholder="Full Name" required style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; font-size: 0.95rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--primary-cyan)'" onblur="this.style.borderColor='var(--border-glass)'">
+                            <input type="email" name="email" placeholder="Email Address" required style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; font-size: 0.95rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--primary-cyan)'" onblur="this.style.borderColor='var(--border-glass)'">
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <input type="text" name="college" placeholder="College / University" required style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; font-size: 0.95rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--primary-cyan)'" onblur="this.style.borderColor='var(--border-glass)'">
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <select name="domain" required style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.6); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; font-size: 0.95rem; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--primary-cyan)'" onblur="this.style.borderColor='var(--border-glass)'">
+                                <option value="" disabled selected>Select Elite Domain</option>
+                                <option value="frontend">Frontend Architecture & UI (React/Vanilla JS)</option>
+                                <option value="backend">Backend Systems (Python Flask / REST API)</option>
+                                <option value="data">Data Science & AI Infrastructure</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 2.5rem;">
+                            <textarea name="why_join" placeholder="Why are you absolutely necessary for Dremora?" rows="5" required style="width: 100%; padding: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; font-family: inherit; font-size: 0.95rem; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='var(--primary-cyan)'" onblur="this.style.borderColor='var(--border-glass)'"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary pulse-anim" style="width: 100%; padding: 1.2rem; font-size: 1.1rem; letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">Deploy Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 1px solid var(--border-glass); padding: 4rem 0 2rem; background: #04050a; text-align: center;">
+      <div class="container text-center">
+          <a href="index.html" class="nav-brand" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/logo.png" alt="Dremora" style="height: 55px; width: 55px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+          </a>
+      </div>
+      <div class="container" style="color: var(--text-muted); font-size: 0.85rem;">
+        &copy; 2026 Dremora IT Consultants & Services. All rights reserved.
+      </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>
