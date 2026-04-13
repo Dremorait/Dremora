@@ -10,6 +10,15 @@
   animation: pulse-glow 2s infinite ease-in-out;
 }
 
+/* Subtle pulse for pills and badges */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+.pulse-anim {
+  animation: soft-pulse 3s ease-in-out infinite;
+}
+
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-15px); }
@@ -20,7 +29,13 @@
   animation: float 12s ease-in-out infinite;
 }
 
-/* Scroll reveal utility (To be used with Intersection Observer later) */
+/* Fade + slide up — used for filter redraws */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal utility */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
