@@ -1,0 +1,15 @@
+# Dremora IT Consultants & Services – robots.txt
+# https://dremoraitservices.com
+
+User-agent: *
+Allow: /
+
+# Block sensitive/backend paths from indexing
+Disallow: /backend/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /database/
+Disallow: /node_modules/
+
+# Sitemap location
+Sitemap: https://dremoraitservices.com/sitemap.xml
