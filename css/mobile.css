@@ -1,0 +1,267 @@
+/* =====================================================
+   DREMORA — MOBILE RESPONSIVE CSS
+   Comprehensive mobile fixes for all pages
+   ===================================================== */
+
+/* ---- Reusable responsive helper classes ---- */
+/* Use .form-grid-2col on forms instead of inline grid-template-columns: 1fr 1fr */
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Use .flex-row-wrap on horizontal section layouts */
+.flex-row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+/* Use .flex-hero on hero split layouts */
+.flex-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Responsive class collapses ---- */
+@media (max-width: 600px) {
+  .form-grid-2col  { grid-template-columns: 1fr !important; }
+  .flex-row-wrap   { flex-direction: column !important; gap: 2rem !important; }
+  .flex-hero       { flex-direction: column !important; gap: 2rem !important; }
+}
+
+/* ---- Disable heavy effects on mobile for performance ---- */
+@media (max-width: 768px) {
+
+  /* iOS momentum scrolling */
+  body { -webkit-overflow-scrolling: touch; }
+
+  /* Prevent 300ms tap delay on all interactive elements */
+  a, button, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  /* Disable GPU-heavy animations on mobile */
+  .float-anim,
+  .float-anim-delay-1,
+  .float-anim-delay-2,
+  .float-anim-delay-3 {
+    animation: none !important;
+  }
+
+  /* Reduce orb sizes on mobile */
+  .bg-glow::before { width: 300px; height: 300px; }
+  .bg-glow::after  { width: 350px; height: 350px; }
+
+  /* Disable tilt — no hover on touch */
+  .tilt-card { transform: none !important; }
+
+  /* Disable cursor glow on touch */
+  .cursor-glow { display: none !important; }
+
+  /* ---- Base layout ---- */
+  .container { padding: 0 1.25rem; }
+  .section   { padding: 3.5rem 0; }
+
+  .section-title    { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .section-subtitle { font-size: 0.95rem; margin-bottom: 2rem; }
+
+  /* ---- Navbar ---- */
+  .navbar { padding: 1rem 0; }
+  .navbar.scrolled { padding: 0.8rem 0; }
+
+  .nav-links {
+    position: fixed;
+    top: 0; right: -100%;
+    width: min(80vw, 300px);
+    height: 100vh;
+    background: rgba(6, 8, 15, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: calc(var(--z-nav) - 1);
+    border-left: 1px solid var(--border-glass);
+    display: flex;
+  }
+  .nav-links.nav-active { right: 0; }
+  .nav-links a {
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .mobile-menu-btn { display: block; z-index: var(--z-nav); }
+
+  /* ---- Grid Systems — force single column on small screens ---- */
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ---- Feature cards — reduce padding ---- */
+  .feature-card  { padding: 1.8rem 1.5rem; }
+  .feature-card:hover { transform: none; box-shadow: none; }
+
+  /* ---- Process steps — no translateX on hover ---- */
+  .process-step:hover { transform: none; }
+
+  /* ---- Pricing cards — featured card no scale ---- */
+  .pricing-card.featured { transform: none !important; }
+
+  /* ---- Buttons — full width stack on tiny screens ---- */
+  .btn-lg { padding: 1rem 1.8rem; font-size: 0.95rem; }
+
+  /* ---- Hero inline flex stacks ---- */
+  [style*="display: flex"][style*="gap: 5rem"],
+  [style*="display: flex"][style*="gap: 4rem"],
+  [style*="display:flex"][style*="gap:4rem"] {
+    flex-direction: column !important;
+    gap: 2rem !important;
+    align-items: stretch !important;
+  }
+
+  /* ---- Metric card — compact ---- */
+  .metric-card { padding: 1.5rem 1rem; }
+  .metric-number { font-size: 2.2rem; }
+  .metric-label  { font-size: 0.75rem; }
+
+  /* ---- Footer ---- */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem;
+  }
+  .footer-brand p { max-width: 100%; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+  .site-footer { padding: 3rem 0 2rem; }
+
+  /* ---- Tech badge marquee — ensure not clipped ---- */
+  .marquee-track { gap: 1.5rem; }
+  .tech-badge { padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+
+  /* ---- Timeline (about page) ---- */
+  .timeline::before { left: 16px; transform: none; }
+  .timeline-item, .timeline-item:nth-child(even) {
+    flex-direction: row !important;
+    gap: 1rem;
+  }
+
+  /* ---- Internship form grid ---- */
+  #internshipForm [style*="grid-template-columns: 1fr 1fr"],
+  #contactForm [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ---- Remove horizontal overflow from sections ---- */
+  section, main { overflow-x: hidden; }
+
+  /* ---- Glass panels inside hero ---- */
+  [style*="max-width: 900px"][style*="padding: 0"] {
+    width: 100%;
+  }
+
+  /* ---- AI Chat Widget ---- */
+  #ai-chat-widget { bottom: 16px; right: 16px; }
+  #ai-chat-btn { width: 54px; height: 54px; }
+  #ai-chat-panel {
+    width: calc(100vw - 32px) !important;
+    height: calc(100svh - 100px) !important;
+    max-height: 520px;
+    bottom: 70px !important;
+    right: 0 !important;
+    border-radius: 20px;
+  }
+}
+
+/* ---- Small phone (≤ 480px) ---- */
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+
+  .section-title { font-size: clamp(1.5rem, 7vw, 1.9rem); }
+
+  /* Hero buttons — stack vertically */
+  [style*="justify-content: center"][style*="flex-wrap: wrap"] {
+    gap: 0.75rem !important;
+  }
+
+  /* Glass panel padding */
+  .glass-panel { border-radius: 14px; }
+
+  /* process step */
+  .process-step { flex-direction: column; gap: 0.5rem; }
+  .step-number { font-size: 2rem; min-width: unset; }
+
+  /* Contact page — contact cards grid */
+  [style*="repeat(auto-fit, minmax(220px"] { }
+
+  /* Internship form */
+  #internshipForm,
+  #contactForm {
+    padding: 1.5rem !important;
+  }
+
+  /* Pricing cards — reduce padding */
+  .pricing-card { padding: 2rem 1.5rem; }
+
+  /* Feature card padding */
+  .feature-card { padding: 1.5rem 1.2rem; }
+
+  /* Metric row — 2 per row on small */
+  .metric-card { padding: 1.2rem 0.8rem; }
+  .metric-number { font-size: 2rem; }
+}
+
+/* ---- Medium (tablet) ≤ 1024px ---- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem; }
+
+  .section-title { font-size: clamp(2rem, 4vw, 2.6rem); }
+
+  /* Pricing grid — ensure 3 cards don't overflow */
+  .pricing-card.featured { transform: none; }
+
+  /* Container narrower */
+  .container { padding: 0 1.5rem; }
+}
+
+/* ---- Touch: disable hover transitions for performance ---- */
+@media (hover: none) {
+  .feature-card:hover   { transform: none; box-shadow: var(--shadow-card); border-color: var(--border-glass); }
+  .hover-glow:hover     { transform: none; box-shadow: none; border-color: var(--border-glass); }
+  .btn-primary:hover    { transform: none; }
+  .btn-outline:hover    { transform: none; }
+  .btn-purple:hover     { transform: none; }
+  .social-btn:hover     { transform: none; }
+  .process-step:hover   { transform: none; border-color: var(--border-glass); }
+  .pricing-card:hover   { transform: none; }
+  .glow-border:hover    { animation: none; transform: none; }
+  .footer-links a:hover { transform: none; display: inline; }
+}
+
+/* ---- Landscape phone ---- */
+@media (max-width: 768px) and (orientation: landscape) {
+  #ai-chat-panel {
+    height: calc(100svh - 80px) !important;
+    max-height: 380px;
+  }
+  .section { padding: 2.5rem 0; }
+}
+
+/* ---- Safe area for iPhone notch/home bar ---- */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .site-footer { padding-bottom: calc(2rem + env(safe-area-inset-bottom)); }
+  #ai-chat-widget {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    right: calc(16px + env(safe-area-inset-right));
+  }
+}
