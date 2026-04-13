@@ -21,11 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Mobile Menu Toggle ----
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
+    const mobileMenuIcon = mobileMenuBtn.querySelector('i');
     
-    // Future mobile menu logic
     mobileMenuBtn.addEventListener('click', () => {
-        // Toggle mobile menu visibility logic goes here
-        console.log("Mobile menu clicked");
+        navLinks.classList.toggle('nav-active');
+        
+        // Toggle Icon (Bars to X)
+        if (navLinks.classList.contains('nav-active')) {
+            mobileMenuIcon.classList.remove('fa-bars');
+            mobileMenuIcon.classList.add('fa-xmark');
+        } else {
+            mobileMenuIcon.classList.remove('fa-xmark');
+            mobileMenuIcon.classList.add('fa-bars');
+        }
+    });
+
+    // Close menu when a link is clicked
+    const navItems = navLinks.querySelectorAll('a');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('nav-active');
+            mobileMenuIcon.classList.remove('fa-xmark');
+            mobileMenuIcon.classList.add('fa-bars');
+        });
     });
 
     // ---- Scroll Reveal Logic ----
