@@ -1,5 +1,5 @@
 # Dremora IT Consultants & Services – robots.txt
-# https://dremoraitservices.com
+# https://dremora-sigma.vercel.app
 
 User-agent: *
 Allow: /
@@ -12,4 +12,4 @@ Disallow: /database/
 Disallow: /node_modules/
 
 # Sitemap location
-Sitemap: https://dremoraitservices.com/sitemap.xml
+Sitemap: https://dremora-sigma.vercel.app/sitemap.xml
