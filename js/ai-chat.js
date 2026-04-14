@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="chat-header-text">
               <h4>Dremora AI</h4>
-              <p>● Online · Powered by Gemini</p>
+              <p>● Online · Powered by Ollama</p>
             </div>
           </div>
           <button id="ai-chat-close"><i class="fa-solid fa-xmark"></i></button>
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- Powered by -->
-        <div id="ai-chat-powered">Powered by <span>Google Gemini</span> · Dremora IT © 2026</div>
+        <div id="ai-chat-powered">Powered by <span>Antigravity AI</span> · Dremora IT © 2026</div>
 
       </div>
 
@@ -570,41 +570,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ti) ti.remove();
   }
 
-  // ---- API Call ----
+  // ---- Double-send guard ----
+  let isSending = false;
+
+  // ---- Sanitize user input ----
+  function sanitize(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // ---- Set send button state ----
+  function setSendBusy(busy) {
+    isSending = busy;
+    chatSend.disabled = busy;
+    chatSend.style.opacity = busy ? '0.5' : '1';
+    chatSend.style.cursor  = busy ? 'not-allowed' : 'pointer';
+  }
+
+  // ---- API Call — Local Ollama via PHP ----
   async function processAIResponse(msg) {
     showTyping();
 
-    const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-      ? 'http://localhost:5000'
-      : 'https://dremora.onrender.com';
-
     try {
-      const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
-        method: 'POST',
+      const controller = new AbortController();
+      const timeoutId  = setTimeout(() => controller.abort(), 55000); // 55s timeout
+
+      const response = await fetch('/backend/api/ai.php', {
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg })
+        body:    JSON.stringify({ message: msg }),
+        signal:  controller.signal,
       });
+
+      clearTimeout(timeoutId);
+
       const data = await response.json();
       hideTyping();
-      const text = (data.response || 'No response received.').replace(/\n/g, '<br>');
-      createMsgRow(text, 'ai');
+
+      if (!response.ok || data.error) {
+        const errMsg = data.error || 'AI temporarily offline. Please try again.';
+        createMsgRow(`⚠️ ${sanitize(errMsg)}`, 'error');
+      } else {
+        // Convert newlines to <br>, then render
+        const text = (data.reply || 'No response received.')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\n/g, '<br>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');  // bold markdown
+        createMsgRow(text, 'ai');
+      }
     } catch (err) {
       hideTyping();
-      createMsgRow('⚠️ Unable to connect to Dremora AI backend. Please try again later.', 'error');
+      if (err.name === 'AbortError') {
+        createMsgRow('⚠️ Request timed out. Ollama may be busy — please try again.', 'error');
+      } else {
+        createMsgRow('⚠️ AI temporarily offline. Please try again.', 'error');
+      }
+    } finally {
+      setSendBusy(false);
+      chatInput.focus();
     }
   }
 
   // ---- Send Message ----
   function appendMessage() {
+    if (isSending) return;                  // prevent double-send
     const txt = chatInput.value.trim();
     if (!txt) return;
-    createMsgRow(txt, 'user');
+
+    createMsgRow(sanitize(txt), 'user');    // show sanitized text in UI
     chatInput.value = '';
-    processAIResponse(txt);
+    setSendBusy(true);
+    processAIResponse(txt);                 // send raw (PHP will strip_tags)
   }
 
   chatSend.addEventListener('click', appendMessage);
-  chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') appendMessage(); });
+  chatInput.addEventListener('keypress', e => { if (e.key === 'Enter' && !e.shiftKey) appendMessage(); });
 
   // Show tooltip after 3s on first load to attract attention
   setTimeout(() => {
