@@ -157,18 +157,25 @@
   })();
 
 
-  /* ── 8. CONFETTI BURST on popup open (CSS-only fallback safe) ── */
-  (function initConfetti() {
-    const confettiEl = document.querySelector('.popup-confetti');
-    if (!confettiEl) return;
+  /* ── 8. ICON BURST on popup open ── */
+  (function initPopIcon() {
+    const iconEl = document.querySelector('.popup-icon-wrapper');
+    if (!iconEl) return;
 
     // Extra pop animation when popup opens
     setTimeout(() => {
-      confettiEl.style.transform  = 'scale(1.4) rotate(15deg)';
-      confettiEl.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      // Temporarily overwrite animation for a quick pop, then let CSS resume float
+      const originalAnim = iconEl.style.animation;
+      iconEl.style.animation = 'none';
+      iconEl.style.transform  = 'scale(1.3) translateY(-10px)';
+      iconEl.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
       setTimeout(() => {
-        confettiEl.style.transform = '';
-      }, 300);
+        iconEl.style.transform = '';
+        setTimeout(() => {
+          iconEl.style.transition = '';
+          iconEl.style.animation = originalAnim;
+        }, 400);
+      }, 400);
     }, 2200);
   })();
 
