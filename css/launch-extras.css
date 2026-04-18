@@ -1,0 +1,424 @@
+/* ===================================================
+   DREMORA — LAUNCH DAY EXTRAS  (append to bundle)
+   =================================================== */
+
+/* ── 1. TOP ANNOUNCEMENT BAR ── */
+#announcement-bar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 1100;
+  background: linear-gradient(90deg, #FF9933 0%, #FFFFFF 40%, #FFFFFF 60%, #138808 100%);
+  padding: 0;
+  overflow: hidden;
+}
+#announcement-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 8, 15, 0.82);
+  z-index: 0;
+}
+.ann-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.ann-flag {
+  font-size: 1.1rem;
+  animation: flag-wave 2s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: left center;
+}
+@keyframes flag-wave {
+  0%  { transform: rotate(-4deg) scaleX(1); }
+  25% { transform: rotate(0deg) scaleX(1.05); }
+  50% { transform: rotate(4deg) scaleX(1); }
+  75% { transform: rotate(0deg) scaleX(1.05); }
+  100%{ transform: rotate(-4deg) scaleX(1); }
+}
+.ann-badge {
+  background: linear-gradient(135deg, #FF9933, #FF6B00);
+  color: #fff;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: badge-pulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,153,51,0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(255,153,51,0); }
+}
+.ann-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%; transform: translateY(-50%);
+  background: none; border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 1rem; cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.ann-close:hover { color: #fff; }
+
+/* push body down when bar visible */
+body.has-ann-bar { padding-top: 38px; }
+body.has-ann-bar .navbar { top: 38px; }
+
+/* ── 2. INDIAN FLAG BADGE IN NAV ── */
+.india-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,153,51,0.08);
+  border: 1px solid rgba(255,153,51,0.25);
+  border-radius: 99px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FF9933;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+.india-badge:hover {
+  background: rgba(255,153,51,0.15);
+  box-shadow: 0 0 12px rgba(255,153,51,0.2);
+}
+.india-mini-flag {
+  display: inline-flex;
+  flex-direction: column;
+  width: 14px; height: 10px;
+  border-radius: 1px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 4px rgba(255,153,51,0.5);
+}
+.india-mini-flag span {
+  flex: 1;
+  display: block;
+}
+
+/* ── 3. LIVE VISITOR TICKER ── */
+#live-ticker {
+  position: fixed;
+  bottom: 6rem;
+  left: 1.5rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(14,18,38,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,210,255,0.2);
+  border-radius: 99px;
+  padding: 0.55rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-main);
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  animation: ticker-slide-in 0.5s 2s ease-out both;
+  pointer-events: none;
+}
+@keyframes ticker-slide-in {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.live-dot {
+  width: 8px; height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: live-pulse 1.4s ease-in-out infinite;
+  box-shadow: 0 0 8px #00ff88;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* ── 4. WHATSAPP FLOATING BUTTON ── */
+#whatsapp-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 950;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #fff;
+  box-shadow: 0 6px 25px rgba(37,211,102,0.45);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: fab-bounce-in 0.6s 3s ease-out both;
+}
+@keyframes fab-bounce-in {
+  from { opacity: 0; transform: scale(0) rotate(-180deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+#whatsapp-fab:hover {
+  transform: scale(1.12) rotate(8deg);
+  box-shadow: 0 10px 35px rgba(37,211,102,0.6);
+}
+#whatsapp-fab .wa-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  background: rgba(14,18,38,0.95);
+  border: 1px solid rgba(37,211,102,0.3);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+#whatsapp-fab:hover .wa-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── 5. SCROLL-TO-TOP BUTTON ── */
+#scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 950;
+  width: 48px; height: 48px;
+  background: rgba(14,18,38,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,210,255,0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-cyan);
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+#scroll-top-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#scroll-top-btn:hover {
+  background: rgba(0,210,255,0.12);
+  border-color: var(--primary-cyan);
+  box-shadow: 0 4px 20px rgba(0,210,255,0.25);
+  transform: translateY(-4px);
+}
+
+/* ── 6. TESTIMONIALS SECTION ── */
+.testimonials-section {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.8rem;
+  margin-top: 3rem;
+}
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px; right: 1.5rem;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+  background: var(--gradient-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,210,255,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,210,255,0.08);
+}
+.testimonial-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+.testimonial-stars i { color: #ffd700; font-size: 0.85rem; }
+.testimonial-text {
+  color: rgba(240,244,248,0.8);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.t-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+.t-name { font-size: 0.9rem; font-weight: 700; }
+.t-role { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+/* ── 7. LAUNCH POPUP ── */
+#launch-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6,8,15,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fade-in-overlay 0.4s ease;
+}
+@keyframes fade-in-overlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#launch-popup-overlay.hidden { display: none; }
+#launch-popup {
+  background: rgba(14,18,38,0.98);
+  border: 1px solid rgba(0,210,255,0.2);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  animation: popup-slide-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,210,255,0.06);
+}
+@keyframes popup-slide-up {
+  from { opacity: 0; transform: translateY(60px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.popup-confetti {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: confetti-bounce 1.5s ease-in-out infinite;
+}
+@keyframes confetti-bounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-8px) rotate(5deg); }
+}
+.popup-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.popup-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.popup-flag-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FF9933;
+  margin-bottom: 2rem;
+}
+#popup-close-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-glass);
+  color: rgba(255,255,255,0.4);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+#popup-close-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ── 8. STARTUP INDIA STRIP in hero ── */
+.startup-india-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, rgba(255,153,51,0.12), rgba(19,136,8,0.12));
+  border: 1px solid rgba(255,153,51,0.25);
+  border-radius: 99px;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5px;
+  margin-left: 0.5rem;
+}
+.tricolor-bar {
+  display: flex;
+  flex-direction: column;
+  width: 16px; height: 11px;
+  overflow: hidden;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.tricolor-bar span { flex: 1; display: block; }
+
+/* ── MOBILE ADJUSTMENTS ── */
+@media (max-width: 768px) {
+  .india-badge { display: none; }
+}
+@media (max-width: 600px) {
+  #live-ticker { left: 0.75rem; bottom: 7rem; font-size: 0.72rem; }
+  #scroll-top-btn { left: 0.75rem; width: 42px; height: 42px; }
+  #whatsapp-fab { right: 1rem; bottom: 1.25rem; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  #launch-popup { padding: 2rem 1.5rem; }
+  .popup-title { font-size: 1.4rem; }
+  body.has-ann-bar .navbar { top: 44px; }
+  body.has-ann-bar { padding-top: 44px; }
+}
