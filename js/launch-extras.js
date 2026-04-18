@@ -103,40 +103,6 @@
   })();
 
 
-  /* ── 4. LIVE VISITOR COUNTER (Simulated — realistic feel) ── */
-  (function initLiveTicker() {
-    const countEl = document.getElementById('visitor-count');
-    if (!countEl) return;
-
-    // Start with a random realistic base count (18–34)
-    let current = Math.floor(Math.random() * 17) + 18;
-    countEl.textContent = current;
-
-    // Randomly fluctuate every 4–9 seconds
-    function fluctuate() {
-      const delta = Math.random() < 0.55 ? 1 : -1;  // slightly biased upward
-      current = Math.max(12, Math.min(42, current + delta));
-
-      // Animate the number change
-      countEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      countEl.style.opacity    = '0';
-      countEl.style.transform  = 'translateY(-6px)';
-
-      setTimeout(() => {
-        countEl.textContent      = current;
-        countEl.style.opacity    = '1';
-        countEl.style.transform  = 'translateY(0)';
-      }, 300);
-
-      const nextDelay = Math.floor(Math.random() * 5000) + 4000;
-      setTimeout(fluctuate, nextDelay);
-    }
-
-    // Start after 3 seconds so page is settled
-    setTimeout(fluctuate, 3000);
-  })();
-
-
   /* ── 5. WHATSAPP FAB — hide/show on scroll direction ── */
   (function initWhatsAppFab() {
     const fab = document.getElementById('whatsapp-fab');
@@ -189,19 +155,6 @@
     );
     resetIdle();
   })();
-
-
-  /* ── 7. PAGE VISIBILITY — resume animations when tab refocused ── */
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      // Flash the live dot to signal "we're still live"
-      const dot = document.querySelector('.live-dot');
-      if (dot) {
-        dot.style.background = '#fff';
-        setTimeout(() => { dot.style.background = ''; }, 400);
-      }
-    }
-  });
 
 
   /* ── 8. CONFETTI BURST on popup open (CSS-only fallback safe) ── */
