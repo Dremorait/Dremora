@@ -334,12 +334,16 @@ body.has-ann-bar .navbar { top: 38px; }
   border: 1px dashed rgba(255,153,51,0.15);
   animation: ganesha-halo-spin 20s linear infinite reverse;
 }
-.popup-ganesha-svg {
-  width: 80px;
-  height: 86px;
-  filter: drop-shadow(0 0 8px rgba(255,200,0,0.6)) drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+.popup-ganesha-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  filter: drop-shadow(0 0 10px rgba(255,200,0,0.5)) drop-shadow(0 4px 14px rgba(0,0,0,0.6));
   animation: ganesha-gentle-float 3.5s ease-in-out infinite;
   transform-origin: center bottom;
+  display: block;
 }
 @keyframes ganesha-divine-pulse {
   0%, 100% {
