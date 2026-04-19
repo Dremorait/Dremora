@@ -304,26 +304,26 @@ body.has-ann-bar .navbar { top: 38px; }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .popup-icon-wrapper {
-  width: 108px;
-  height: 108px;
+  width: 116px;
+  height: 116px;
   margin: 0 auto 1.5rem;
-  background: radial-gradient(circle at 50% 40%, rgba(255,215,0,0.12), rgba(255,153,51,0.06) 60%, transparent);
-  border: 2px solid rgba(255,215,0,0.55);
+  background: radial-gradient(circle at 50% 40%, rgba(0,210,255,0.14), rgba(58,123,213,0.08) 60%, transparent);
+  border: 2px solid rgba(0,210,255,0.55);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 28px rgba(255,200,0,0.35), 0 0 60px rgba(255,153,51,0.15), inset 0 0 20px rgba(255,215,0,0.08);
-  animation: ganesha-divine-pulse 4s ease-in-out infinite;
+  box-shadow: 0 0 28px rgba(0,210,255,0.35), 0 0 60px rgba(58,123,213,0.2), inset 0 0 20px rgba(0,210,255,0.08);
+  animation: dremora-logo-pulse 4s ease-in-out infinite;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 .popup-icon-wrapper::before {
   content: '';
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1px solid rgba(255,215,0,0.2);
+  border: 1px solid rgba(0,210,255,0.25);
   animation: ganesha-halo-spin 12s linear infinite;
 }
 .popup-icon-wrapper::after {
@@ -331,7 +331,7 @@ body.has-ann-bar .navbar { top: 38px; }
   position: absolute;
   inset: -12px;
   border-radius: 50%;
-  border: 1px dashed rgba(255,153,51,0.15);
+  border: 1px dashed rgba(138,43,226,0.2);
   animation: ganesha-halo-spin 20s linear infinite reverse;
 }
 .popup-ganesha-img {
@@ -340,19 +340,30 @@ body.has-ann-bar .navbar { top: 38px; }
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 30%;
-  filter: drop-shadow(0 0 10px rgba(255,200,0,0.5)) drop-shadow(0 4px 14px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 0 10px rgba(0,210,255,0.5)) drop-shadow(0 4px 14px rgba(0,0,0,0.6));
   animation: ganesha-gentle-float 3.5s ease-in-out infinite;
   transform-origin: center bottom;
   display: block;
 }
-@keyframes ganesha-divine-pulse {
+/* Logo-specific override — clean white padded circle around the Dremora logo */
+.popup-logo-img {
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+  background: rgba(255,255,255,0.96);
+  padding: 10px;
+  filter: drop-shadow(0 0 12px rgba(0,210,255,0.45)) drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+}
+@keyframes dremora-logo-pulse {
   0%, 100% {
-    box-shadow: 0 0 28px rgba(255,200,0,0.35), 0 0 60px rgba(255,153,51,0.15), inset 0 0 20px rgba(255,215,0,0.08);
-    border-color: rgba(255,215,0,0.55);
+    box-shadow: 0 0 28px rgba(0,210,255,0.35), 0 0 60px rgba(58,123,213,0.2), inset 0 0 20px rgba(0,210,255,0.08);
+    border-color: rgba(0,210,255,0.55);
   }
   50% {
-    box-shadow: 0 0 45px rgba(255,200,0,0.6), 0 0 90px rgba(255,153,51,0.3), inset 0 0 30px rgba(255,215,0,0.15);
-    border-color: rgba(255,200,0,0.9);
+    box-shadow: 0 0 50px rgba(0,210,255,0.65), 0 0 90px rgba(58,123,213,0.35), inset 0 0 30px rgba(0,210,255,0.15);
+    border-color: rgba(0,210,255,0.95);
   }
 }
 @keyframes ganesha-gentle-float {
