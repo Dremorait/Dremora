@@ -9,8 +9,8 @@
 
   /* ── 1. LAUNCH POPUP ── */
   (function initLaunchPopup() {
-    const overlay   = document.getElementById('launch-popup-overlay');
-    const closeBtn  = document.getElementById('popup-close-btn');
+    const overlay = document.getElementById('launch-popup-overlay');
+    const closeBtn = document.getElementById('popup-close-btn');
     if (!overlay) return;
 
     // Only show once per session (not every page visit)
@@ -55,7 +55,7 @@
 
   /* ── 2. ANNOUNCEMENT BAR DISMISS ── */
   (function initAnnouncementBar() {
-    const bar      = document.getElementById('announcement-bar');
+    const bar = document.getElementById('announcement-bar');
     const closeBtn = document.getElementById('annCloseBtn');
     if (!bar || !closeBtn) return;
 
@@ -71,8 +71,8 @@
 
     closeBtn.addEventListener('click', () => {
       bar.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      bar.style.opacity    = '0';
-      bar.style.transform  = 'translateY(-100%)';
+      bar.style.opacity = '0';
+      bar.style.transform = 'translateY(-100%)';
       setTimeout(() => {
         bar.remove();
         document.body.classList.remove('has-ann-bar');
@@ -119,11 +119,11 @@
       if (curr > lastScroll && curr > 200) {
         // scrolling down → shrink slightly
         fab.style.transform = 'scale(0.88)';
-        fab.style.opacity   = '0.75';
+        fab.style.opacity = '0.75';
       } else {
         // scrolling up → full size
         fab.style.transform = '';
-        fab.style.opacity   = '1';
+        fab.style.opacity = '1';
       }
 
       lastScroll = curr;
@@ -167,7 +167,7 @@
       // Temporarily overwrite animation for a quick pop, then let CSS resume float
       const originalAnim = iconEl.style.animation;
       iconEl.style.animation = 'none';
-      iconEl.style.transform  = 'scale(1.3) translateY(-10px)';
+      iconEl.style.transform = 'scale(1.3) translateY(-10px)';
       iconEl.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
       setTimeout(() => {
         iconEl.style.transform = '';
