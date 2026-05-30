@@ -5,24 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="144x144" href="assets/images/logo.png">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo.png">
   <link rel="apple-touch-icon" href="assets/images/logo.png">
-  <title>IT Services | Custom Software, AI &amp; Web Development – Dremora IT Pune</title>
-  <meta name="description" content="Explore Dremora IT's premium services: precision web development, AI-powered automation bots, custom business dashboards, and full-stack software engineering in Pune, India.">
-  <meta name="keywords" content="Dremora IT services, custom web development Pune, AI automation India, business dashboard software, CRM development Pune, software engineering India">
+  <title>IT Services &amp; Pricing | Custom Software, AI &amp; Web Development – Dremora IT Pune</title>
+  <meta name="description" content="Explore Dremora IT's premium services with transparent pricing: precision web development from ₹25,000, AI automation bots from ₹75,000, and custom business dashboards from ₹50,000.">
+  <meta name="keywords" content="Dremora IT services pricing, custom web development cost Pune, AI automation price India, business dashboard software cost, CRM development Pune">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Dremora IT Consultants &amp; Services">
   <link rel="canonical" href="https://dremora-sigma.vercel.app/services.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dremora-sigma.vercel.app/services.html">
-  <meta property="og:title" content="IT Services – Custom Software, AI &amp; Web Development | Dremora IT Pune">
-  <meta property="og:description" content="Premium web systems, AI bots, business command centres and custom software engineered by Dremora IT in Pune, India.">
+  <meta property="og:title" content="IT Services &amp; Pricing – Dremora IT Pune">
+  <meta property="og:description" content="Premium web systems from ₹25,000, AI bots from ₹75,000, business dashboards from ₹50,000 — engineered by Dremora IT in Pune, India.">
   <meta property="og:image" content="https://dremora-sigma.vercel.app/assets/images/logo.png">
   <meta property="og:site_name" content="Dremora IT Consultants &amp; Services">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IT Services | Dremora IT Consultants &amp; Services">
-  <meta name="twitter:description" content="Custom web development, AI automation, and software solutions by Dremora IT – Pune, India.">
+  <meta name="twitter:title" content="IT Services &amp; Pricing | Dremora IT">
+  <meta name="twitter:description" content="Custom web development, AI automation, and software solutions with transparent pricing — Dremora IT, Pune.">
   <meta name="twitter:image" content="https://dremora-sigma.vercel.app/assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,8 +31,172 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/mobile.css">
-  <link rel="icon" href="assets/images/logo.png">
+
+  <style>
+    /* ===== CURRENCY TOGGLE ===== */
+    .currency-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    .currency-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    .currency-label.active { color: var(--primary-cyan); }
+    .currency-label.inactive { color: var(--text-muted); }
+    .toggle-track {
+      width: 56px; height: 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border-glass);
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .toggle-track.intl { background: rgba(0,210,255,0.15); border-color: rgba(0,210,255,0.3); }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--primary-cyan);
+      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+      box-shadow: 0 0 10px rgba(0,210,255,0.5);
+    }
+    .toggle-track.intl .toggle-thumb { transform: translateX(28px); }
+
+    /* ===== PRICE DISPLAY ===== */
+    .price-display {
+      margin: 1.5rem 0;
+      padding: 1.25rem 1.5rem;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      transition: border-color 0.3s ease;
+    }
+    .price-display:hover { border-color: rgba(0,210,255,0.25); }
+    .price-from {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .price-value {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .price-value.cyan-price {
+      background: linear-gradient(135deg, #00d2ff, #0099cc);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .price-value.red-price {
+      background: linear-gradient(135deg, #ff4d4d, #ff9500);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .price-value.purple-price {
+      background: linear-gradient(135deg, #8a2be2, #d63af9);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.5;
+    }
+    .price-note strong { color: rgba(255,255,255,0.6); }
+
+    /* ===== PRICE TABLE ===== */
+    .price-table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border-glass);
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    .price-table th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-glass);
+      font-weight: 700;
+    }
+    .price-table th:first-child { border-radius: 16px 0 0 0; }
+    .price-table th:last-child { border-radius: 0 16px 0 0; text-align: right; }
+    .price-table td {
+      padding: 1.2rem 1.5rem;
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--border-glass);
+      vertical-align: middle;
+    }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr { transition: background 0.2s ease; }
+    .price-table tr:hover td { background: rgba(0,210,255,0.03); }
+    .price-table td:last-child { text-align: right; }
+    .price-table .service-name { font-weight: 700; color: #fff; }
+    .price-table .india-price { color: var(--primary-cyan); font-weight: 700; }
+    .price-table .intl-price { color: #a0b8d8; font-weight: 600; font-size: 0.85rem; }
+    .price-table .service-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 10px; margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    .price-table .td-service { display: flex; align-items: center; }
+
+    /* ===== CURRENCY PRICE SWITCH ===== */
+    .intl-price-val { display: none; }
+    .india-price-val { display: block; }
+    body.show-intl .intl-price-val { display: block; }
+    body.show-intl .india-price-val { display: none; }
+
+    /* ===== FAQ / NOTE STRIP ===== */
+    .pricing-note-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: rgba(0,210,255,0.04);
+      border: 1px solid rgba(0,210,255,0.12);
+      border-radius: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+    .pricing-note-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.85rem; color: var(--text-muted);
+    }
+    .pricing-note-item i { color: var(--primary-cyan); }
+
+    /* ===== SERVICE CARD ENHANCEMENTS ===== */
+    .svc-card-inner { display: flex; flex-direction: column; height: 100%; }
+    .svc-card-footer { margin-top: auto; padding-top: 1.5rem; }
+  </style>
 </head>
+
 <body>
   <div class="bg-glow"></div>
 
@@ -60,63 +223,135 @@
     <!-- ===== HERO ===== -->
     <section class="section text-center reveal" style="padding-bottom:3rem;position:relative;overflow:hidden;">
       <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,255,0.06),transparent 70%);top:-200px;right:5%;pointer-events:none;animation:orb-float-1 20s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(138,43,226,0.05),transparent 70%);bottom:-100px;left:5%;pointer-events:none;animation:orb-float-2 24s ease-in-out infinite;"></div>
 
       <div class="container" style="position:relative;z-index:2;max-width:900px;">
-        <div class="glass-pill pill-cyan pulse-anim" style="margin-bottom:1.5rem;">Market Domination Engineering</div>
+        <div class="glass-pill pill-cyan pulse-anim" style="margin-bottom:1.5rem;">
+          <i class="fa-solid fa-rocket"></i> Market Domination Engineering
+        </div>
         <h1 class="section-title" style="font-size:clamp(2rem,5vw,4.5rem);margin-bottom:1.5rem;">
-          We Don't Just Build Apps.
-          <br><span class="gradient-animated-text">We Build Monopolies.</span>
+          We Don't Just Build Apps.<br>
+          <span class="gradient-animated-text">We Build Monopolies.</span>
         </h1>
-        <p class="section-subtitle" style="max-width:750px;margin-inline:auto;">
+        <p class="section-subtitle" style="max-width:750px;margin-inline:auto;margin-bottom:2.5rem;">
           Comprehensive software engineering focused on one goal: maximizing your operational efficiency
           and completely outperforming your competitors through superior technology.
         </p>
+        <!-- Quick Stats -->
+        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+          <div class="glass-panel-cyan" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
+            <i class="fa-solid fa-indian-rupee-sign" style="color:var(--primary-cyan);"></i>
+            <span style="font-weight:700;font-size:0.9rem;">Starts ₹25,000</span>
+          </div>
+          <div class="glass-panel-purple" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
+            <i class="fa-solid fa-dollar-sign" style="color:var(--accent-purple);"></i>
+            <span style="font-weight:700;font-size:0.9rem;">Starts $500 USD</span>
+          </div>
+          <div class="glass-panel" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
+            <i class="fa-solid fa-shield-halved" style="color:var(--accent-gold);"></i>
+            <span style="font-weight:700;font-size:0.9rem;">No Hidden Fees</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ===== SERVICE CARDS ===== -->
     <section class="section" style="padding-top:1rem;">
       <div class="container">
+
+        <!-- Currency Toggle -->
+        <div class="currency-toggle-wrap">
+          <span class="currency-label active" id="label-india">🇮🇳 India (₹ INR)</span>
+          <div class="toggle-track" id="currencyToggle" onclick="toggleCurrency()" title="Switch currency">
+            <div class="toggle-thumb"></div>
+          </div>
+          <span class="currency-label inactive" id="label-intl">🌍 International ($ USD)</span>
+        </div>
+
         <div class="stagger-children" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;">
 
-          <!-- Card 1 -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--primary-cyan);">
+          <!-- ===== CARD 1: PRECISION WEB SYSTEMS ===== -->
+          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--primary-cyan);display:flex;flex-direction:column;">
             <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
               <div class="icon-box icon-box-cyan">
                 <i class="fa-solid fa-code" style="color:var(--primary-cyan);font-size:1.4rem;"></i>
               </div>
               <div class="glass-pill pill-cyan" style="font-size:0.7rem;">Core Service</div>
             </div>
-            <h2 style="font-size:1.4rem;margin-bottom:1rem;">Precision Web Systems</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:2rem;">High-performance, instantaneous rendering architectures. Stop bleeding users through slow load times. We architect flawlessly responsive ecosystems.</p>
-            <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.6rem;">
+            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">Precision Web Systems</h2>
+            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
+              High-performance, instantaneous rendering architectures. Stop bleeding users through slow load times. We architect flawlessly responsive ecosystems built to scale.
+            </p>
+
+            <!-- Price Display -->
+            <div class="price-display">
+              <div>
+                <span class="price-from">Starting from</span>
+                <span class="price-value cyan-price india-price-val">₹25,000</span>
+                <span class="price-value cyan-price intl-price-val">$500 USD</span>
+              </div>
+              <div class="price-note">
+                <strong>India:</strong> ₹25K – ₹1.5L+<br>
+                <strong>Intl:</strong> $500 – $3,000+
+              </div>
+            </div>
+
+            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Full-Stack Custom Development</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> SEO-Optimized Architecture</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Mobile-First Responsive Design</li>
+              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Performance-First Architecture</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline" style="width:100%;border-color:var(--primary-cyan);color:var(--primary-cyan);">Architect Blueprint <i class="fa-solid fa-arrow-right"></i></a>
+
+            <div style="margin-top:auto;">
+              <a href="contact.html" class="btn btn-outline" style="width:100%;border-color:var(--primary-cyan);color:var(--primary-cyan);">
+                Get a Quote <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
 
-          <!-- Card 2 -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-red);">
+          <!-- ===== CARD 2: BUSINESS COMMAND CENTERS ===== -->
+          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-red);display:flex;flex-direction:column;">
             <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
               <div class="icon-box icon-box-red">
                 <i class="fa-solid fa-gears" style="color:var(--accent-red);font-size:1.4rem;"></i>
               </div>
               <div class="glass-pill" style="font-size:0.7rem;border-color:rgba(255,77,77,0.3);color:var(--accent-red);">Enterprise</div>
             </div>
-            <h2 style="font-size:1.4rem;margin-bottom:1rem;">Business Command Centers</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:2rem;">Stop managing chaos. We design bespoke internal CRM pipelines and data dashboards that convert massive structured data streams into actionable leverage.</p>
-            <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.6rem;">
+            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">Business Command Centers</h2>
+            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
+              Stop managing chaos. We design bespoke internal CRM pipelines and data dashboards that convert massive structured data streams into actionable leverage.
+            </p>
+
+            <!-- Price Display -->
+            <div class="price-display" style="border-color:rgba(255,77,77,0.15);">
+              <div>
+                <span class="price-from">Starting from</span>
+                <span class="price-value red-price india-price-val">₹50,000</span>
+                <span class="price-value red-price intl-price-val">$1,000 USD</span>
+              </div>
+              <div class="price-note">
+                <strong>India:</strong> ₹50K – ₹3L+<br>
+                <strong>Intl:</strong> $1,000 – $8,000+
+              </div>
+            </div>
+
+            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Custom CRM Development</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Analytics &amp; BI Dashboards</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Multi-Role Admin Systems</li>
+              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Real-Time Data Pipelines</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline" style="width:100%;border-color:var(--accent-red);color:var(--accent-red);">Construct Dashboard <i class="fa-solid fa-arrow-right"></i></a>
+
+            <div style="margin-top:auto;">
+              <a href="contact.html" class="btn btn-outline" style="width:100%;border-color:var(--accent-red);color:var(--accent-red);">
+                Get a Quote <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
 
-          <!-- Card 3 â€” Featured -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-purple);box-shadow:0 0 40px rgba(138,43,226,0.15);position:relative;">
+          <!-- ===== CARD 3: AI SINGULARITY BOTS — FEATURED ===== -->
+          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-purple);box-shadow:0 0 40px rgba(138,43,226,0.15);position:relative;display:flex;flex-direction:column;">
             <div style="position:absolute;top:-1px;right:1.5rem;background:var(--gradient-glow);color:#fff;padding:0.35rem 1rem;font-size:0.72rem;border-bottom-left-radius:8px;border-bottom-right-radius:8px;font-weight:700;letter-spacing:1px;">
               <i class="fa-solid fa-bolt"></i> HIGH ROI
             </div>
@@ -126,22 +361,181 @@
               </div>
               <div class="glass-pill pill-purple" style="font-size:0.7rem;">Most Advanced</div>
             </div>
-            <h2 style="font-size:1.4rem;margin-bottom:1rem;">AI Singularity Bots</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:2rem;">Replace hundreds of human hours. We integrate custom Gemini and advanced LLM logic specifically tuned to automate your exact support and operational loops.</p>
-            <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.6rem;">
+            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">AI Singularity Bots</h2>
+            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
+              Replace hundreds of human hours. We integrate custom Gemini and advanced LLM logic specifically tuned to automate your exact support and operational loops.
+            </p>
+
+            <!-- Price Display -->
+            <div class="price-display" style="border-color:rgba(138,43,226,0.2);background:rgba(138,43,226,0.05);">
+              <div>
+                <span class="price-from">Starting from</span>
+                <span class="price-value purple-price india-price-val">₹75,000</span>
+                <span class="price-value purple-price intl-price-val">$1,500 USD</span>
+              </div>
+              <div class="price-note">
+                <strong>India:</strong> ₹75K – ₹5L+<br>
+                <strong>Intl:</strong> $1,500 – $15,000+
+              </div>
+            </div>
+
+            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Gemini AI Integration</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Custom LLM Wrappers</li>
               <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> 24/7 Automated Support</li>
+              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Zero-Hallucination Tuning</li>
             </ul>
-            <a href="contact.html" class="btn btn-primary pulse-anim" style="width:100%;box-shadow:0 0 20px rgba(138,43,226,0.3);">Deploy AI Agent <i class="fa-solid fa-robot"></i></a>
+
+            <div style="margin-top:auto;">
+              <a href="contact.html" class="btn btn-primary pulse-anim" style="width:100%;box-shadow:0 0 20px rgba(138,43,226,0.3);">
+                Deploy AI Agent <i class="fa-solid fa-robot"></i>
+              </a>
+            </div>
           </div>
 
+        </div><!-- end grid -->
+
+        <!-- Pricing Notes -->
+        <div class="pricing-note-strip reveal">
+          <div class="pricing-note-item"><i class="fa-solid fa-check-circle"></i> No hidden charges — price quoted is price charged</div>
+          <div class="pricing-note-item"><i class="fa-solid fa-calendar-check"></i> 50% advance, balance on delivery</div>
+          <div class="pricing-note-item"><i class="fa-solid fa-file-contract"></i> All projects governed by a signed agreement</div>
+          <div class="pricing-note-item"><i class="fa-solid fa-headset"></i> Free 30-min discovery call</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== FULL PRICING COMPARISON TABLE ===== -->
+    <section class="section reveal" style="background:rgba(6,8,15,0.7);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:3.5rem;">
+          <div class="section-divider"></div>
+          <div class="glass-pill pill-cyan float-anim" style="margin-bottom:1.5rem;">
+            <i class="fa-solid fa-table"></i> Transparent Pricing
+          </div>
+          <h2 class="section-title">Full Price <span class="text-gradient">Breakdown</span></h2>
+          <p class="section-subtitle">All prices are project-based estimates. Final cost depends on scope, complexity, and timeline. Contact us for a free custom quote.</p>
+        </div>
+
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>🇮🇳 India (INR)</th>
+                <th>🌍 International (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon icon-box-cyan" style="background:rgba(0,210,255,0.1);">
+                      <i class="fa-solid fa-code" style="color:var(--primary-cyan);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">Precision Web Systems</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Full-Stack Web Apps &amp; Landing Pages</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹25,000 – ₹1,50,000+</span></td>
+                <td><span class="intl-price">$500 – $3,000+</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon" style="background:rgba(255,77,77,0.1);">
+                      <i class="fa-solid fa-gears" style="color:var(--accent-red);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">Business Command Centers</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">CRM, Dashboards &amp; Admin Panels</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹50,000 – ₹3,00,000+</span></td>
+                <td><span class="intl-price">$1,000 – $8,000+</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon icon-box-purple" style="background:rgba(138,43,226,0.1);">
+                      <i class="fa-solid fa-brain" style="color:var(--accent-purple);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">AI Singularity Bots</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Custom AI Agents &amp; Gemini Integration</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹75,000 – ₹5,00,000+</span></td>
+                <td><span class="intl-price">$1,500 – $15,000+</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon" style="background:rgba(255,215,0,0.1);">
+                      <i class="fa-solid fa-pen-nib" style="color:var(--accent-gold);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">UI/UX Design &amp; Branding</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Wireframes, Figma, Visual Identity</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹15,000 – ₹80,000+</span></td>
+                <td><span class="intl-price">$300 – $2,000+</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon" style="background:rgba(58,123,213,0.1);">
+                      <i class="fa-solid fa-mobile-screen" style="color:var(--primary-blue);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">Mobile App Development</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Android, iOS &amp; Cross-Platform</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹1,00,000 – ₹5,00,000+</span></td>
+                <td><span class="intl-price">$2,000 – $12,000+</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="td-service">
+                    <div class="service-icon" style="background:rgba(0,210,255,0.08);">
+                      <i class="fa-solid fa-handshake" style="color:var(--primary-cyan);font-size:0.9rem;"></i>
+                    </div>
+                    <div>
+                      <div class="service-name">IT Consulting &amp; Strategy</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Discovery, Audits &amp; Roadmapping</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="india-price">₹5,000 – ₹25,000 / session</span></td>
+                <td><span class="intl-price">$100 – $500 / session</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CTA below table -->
+        <div style="text-align:center;margin-top:2.5rem;">
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">
+            Need a custom scope? Every project is unique — we'll build you a precise quote in 24 hours.
+          </p>
+          <a href="contact.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-paper-plane"></i> Get Free Custom Quote
+          </a>
         </div>
       </div>
     </section>
 
     <!-- ===== HOW WE WORK ===== -->
-    <section class="section reveal" style="background:rgba(6,8,15,0.6);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+    <section class="section reveal" style="border-bottom:1px solid var(--border-glass);">
       <div class="container">
         <div class="text-center" style="margin-bottom:4rem;">
           <div class="section-divider"></div>
@@ -153,29 +547,29 @@
           <div class="process-step hover-glow">
             <div class="step-number">01</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Discovery &amp; Strategy</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Deep dive into your business, workflows, and competitive landscape. We define your technical roadmap and identify quick-win automation opportunities.</p>
+              <h3 style="margin-bottom:0.5rem;">Discovery &amp; Free Strategy Call</h3>
+              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Deep dive into your business, workflows, and competitive landscape. 30-minute free call where we define your technical roadmap and identify quick-win opportunities — no commitment required.</p>
             </div>
           </div>
           <div class="process-step hover-glow">
             <div class="step-number">02</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Design &amp; Architecture</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">We wireframe and architect the system from the database up. Every component is designed for scale, security, and performance from day one.</p>
+              <h3 style="margin-bottom:0.5rem;">Proposal &amp; Fixed Quote</h3>
+              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">You receive a detailed project proposal with a <strong style="color:#fff;">fixed, transparent price</strong>. No hourly billing surprises. Scope, timeline, milestones, and total cost — all in writing before we start.</p>
             </div>
           </div>
           <div class="process-step hover-glow">
             <div class="step-number">03</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Engineering &amp; Development</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Agile sprints with clear milestones. You see progress every week. Weekly demos, feedback loops, and transparent communication throughout.</p>
+              <h3 style="margin-bottom:0.5rem;">Engineering &amp; Weekly Updates</h3>
+              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Agile sprints with clear milestones. You see live progress every week — demos, feedback loops, and complete transparency. 50% advance on kickoff, balance on delivery.</p>
             </div>
           </div>
           <div class="process-step hover-glow">
             <div class="step-number">04</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Deployment &amp; Scale</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Cloud deployment, performance monitoring, and ongoing maintenance. We stay on as your technology partner long after launch day.</p>
+              <h3 style="margin-bottom:0.5rem;">Delivery, Launch &amp; Ongoing Support</h3>
+              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Cloud deployment, handover documentation, and 30 days of complimentary post-launch support. We stay on as your technology partner long after launch day.</p>
             </div>
           </div>
         </div>
@@ -199,7 +593,7 @@
           <span class="tech-badge"><i class="fa-solid fa-cloud" style="color:#8a2be2;"></i> Cloud</span>
           <span class="tech-badge"><i class="fa-solid fa-brain" style="color:#d63af9;"></i> LLM / NLP</span>
           <span class="tech-badge"><i class="fa-brands fa-hubspot" style="color:#ff7a59;"></i> CRM APIs</span>
-          <!-- Duplicate -->
+          <!-- Duplicate for seamless loop -->
           <span class="tech-badge"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> Python</span>
           <span class="tech-badge"><i class="fa-brands fa-react" style="color:#61dafb;"></i> React</span>
           <span class="tech-badge"><i class="fa-brands fa-aws" style="color:#ff9900;"></i> AWS</span>
@@ -214,58 +608,49 @@
       </div>
     </section>
 
-    <!-- ===== PRICING ===== -->
-    <section class="section reveal">
+    <!-- ===== FAQ STRIP ===== -->
+    <section class="section reveal" style="padding:4rem 0;">
       <div class="container">
-        <div class="text-center" style="margin-bottom:4rem;">
+        <div class="text-center" style="margin-bottom:3rem;">
           <div class="section-divider"></div>
-          <h2 class="section-title">Strategic <span class="text-gradient">Retainers</span></h2>
-          <p class="section-subtitle">Transparent, scalable pricing. No hidden fees. Full technical dominance delivered alongside your growth.</p>
+          <h2 class="section-title">Pricing <span class="text-gradient">FAQs</span></h2>
         </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1000px;margin-inline:auto;">
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;align-items:center;max-width:1100px;margin-inline:auto;">
-
-          <!-- Starter -->
-          <div class="pricing-card hover-glow" style="border-top:3px solid rgba(255,255,255,0.15);">
-            <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.5rem;">Starter Matrix</p>
-            <div style="font-size:2.5rem;font-weight:800;margin:0.5rem 0;color:#fff;">Affordable</div>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-glass);">Perfect for establishing your baseline digital presence with hyper-optimized tech.</p>
-            <ul style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Full-Stack Web Development</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Basic UI/UX Overhaul</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Monthly Server Maintenance</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:rgba(255,255,255,0.25);"><i class="fa-solid fa-xmark" style="color:var(--accent-red);"></i> No Custom AI Integrations</li>
-            </ul>
-            <a href="contact.html" class="btn btn-outline" style="width:100%;">Initiate Starter</a>
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--primary-cyan);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">Are prices negotiable?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Yes — for startups, NGOs, and educational institutions we offer special rates. Reach out and mention your org type.</p>
           </div>
 
-          <!-- Most Popular -->
-          <div class="pricing-card featured hover-glow" style="border-top:3px solid var(--primary-cyan);transform:scale(1.04);position:relative;">
-            <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--primary-cyan);color:#000;padding:0.4rem 1.5rem;border-radius:99px;font-size:0.78rem;font-weight:800;letter-spacing:1px;white-space:nowrap;">MOST DEPLOYED</div>
-            <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary-cyan);margin-bottom:0.5rem;">Monopoly Tier</p>
-            <div style="font-size:2.5rem;font-weight:800;margin:0.5rem 0;color:#fff;">Competitive</div>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-glass);">Complete business automation and technical scale for aggressive market growth.</p>
-            <ul style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:#fff;"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Custom Dashboard Engineering</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:#fff;"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Advanced NLP/AI Agent Wrappers</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:#fff;"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Priority Cloud Architecture</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:#fff;"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Direct Senior Engineer Line</li>
-            </ul>
-            <a href="contact.html" class="btn btn-primary" style="width:100%;">Demand Monopoly <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--accent-purple);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">What's included in the price?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Design, development, testing, deployment, and 30 days of post-launch support — all included. No surprise add-ons.</p>
           </div>
 
-          <!-- Enterprise -->
-          <div class="pricing-card hover-glow" style="border-top:3px solid var(--accent-purple);">
-            <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent-purple);margin-bottom:0.5rem;">Singularity Custom</p>
-            <div style="font-size:2.5rem;font-weight:800;margin:0.5rem 0;color:#fff;">Let's Talk</div>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-glass);">Bespoke system design requiring highly secure infrastructure or multi-tenant logic.</p>
-            <ul style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Deep Learning &amp; Advanced Models</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Multi-platform Native Mobile Apps</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Dedicated DevOps Team</li>
-              <li style="display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Fully Whitelabeled Solutions</li>
-            </ul>
-            <a href="contact.html" class="btn btn-outline" style="width:100%;border-color:var(--accent-purple);color:var(--accent-purple);">Book War Room Pitch</a>
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--accent-gold);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">How do I pay?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">50% advance before kickoff, 50% on delivery. We accept UPI, NEFT, IMPS (India) and Wise / PayPal (International).</p>
+          </div>
+
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--primary-blue);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">How long does a project take?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Web systems: 2–6 weeks. Dashboards/CRMs: 4–10 weeks. AI agents: 3–8 weeks. Timelines are agreed upfront.</p>
+          </div>
+
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--accent-red);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">What if I need changes after delivery?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Minor revisions within scope are covered. Larger scope changes are quoted separately, transparently, before work begins.</p>
+          </div>
+
+          <div class="feature-card hover-glow" style="padding:2rem;">
+            <i class="fa-solid fa-circle-question" style="color:var(--primary-cyan);font-size:1.3rem;margin-bottom:1rem;display:block;"></i>
+            <h3 style="font-size:1rem;margin-bottom:0.7rem;">Is there a refund policy?</h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Yes. See our full <a href="refund-policy.html" style="color:var(--primary-cyan);">Refund Policy</a> for details on cancellation and refund eligibility windows.</p>
           </div>
 
         </div>
@@ -275,11 +660,15 @@
     <!-- CTA -->
     <section class="section reveal text-center" style="border-top:1px solid var(--border-glass);">
       <div class="container">
-        <div class="glass-panel" style="padding:5rem 3rem;background:linear-gradient(135deg,rgba(0,210,255,0.04),rgba(138,43,226,0.04));border-color:rgba(0,210,255,0.12);max-width:800px;margin-inline:auto;">
+        <div class="glass-panel" style="padding:5rem 3rem;background:linear-gradient(135deg,rgba(0,210,255,0.04),rgba(138,43,226,0.04));border-color:rgba(0,210,255,0.12);max-width:800px;margin-inline:auto;position:relative;overflow:hidden;">
+          <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,255,0.06),transparent 70%);top:-100px;right:-80px;pointer-events:none;"></div>
+          <div class="glass-pill pill-cyan float-anim" style="margin-bottom:1.5rem;"><i class="fa-solid fa-bolt"></i> Ready?</div>
           <h2 class="section-title" style="margin-bottom:1rem;">Ready to dominate your market?</h2>
-          <p class="section-subtitle" style="margin-bottom:2rem;">Let's build the exact system your business needs to operate at maximum efficiency.</p>
+          <p class="section-subtitle" style="margin-bottom:2rem;">Book a free 30-minute discovery call — no pitch, just strategy. We'll map out exactly what you need and send you a precise quote within 24 hours.</p>
           <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-            <a href="contact.html" class="btn btn-primary btn-lg">Start Engineering <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-phone"></i> Book Free Call
+            </a>
             <a href="projects.html" class="btn btn-outline btn-lg">See Our Work</a>
           </div>
         </div>
@@ -297,10 +686,11 @@
           <a href="index.html"><img src="assets/images/logo.png" alt="Dremora" style="height:52px;width:52px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);margin-bottom:1rem;"></a>
           <p>Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/company/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://twitter.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/company/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://twitter.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com/dremora.it/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://github.com/Dremorait" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:dremora.itservices@gmail.com" class="social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
         <div>
@@ -314,28 +704,29 @@
           </ul>
         </div>
         <div>
-          <p class="footer-heading">Services</p>
+          <p class="footer-heading">Legal</p>
           <ul class="footer-links">
-            <li><a href="services.html">Web Development</a></li>
-            <li><a href="services.html">AI Automation</a></li>
-            <li><a href="services.html">CRM Systems</a></li>
-            <li><a href="services.html">UI/UX Design</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="course-guidelines.html">Course Guidelines</a></li>
+            <li><a href="refund-policy.html">Refund Policy</a></li>
           </ul>
         </div>
         <div>
           <p class="footer-heading">Get In Touch</p>
           <div style="display:flex;flex-direction:column;gap:1rem;">
-            <a href="tel:+919309795878" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-phone" style="color:var(--primary-cyan);"></i> +91 9309795878</a>
-            <a href="mailto:dremora.itservices@gmail.com" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-envelope" style="color:var(--primary-cyan);"></i> dremora.itservices@gmail.com</a>
+            <a href="tel:+919309795878" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-phone" style="color:var(--primary-cyan);width:16px;"></i> +91 9309795878</a>
+            <a href="mailto:dremora.itservices@gmail.com" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-envelope" style="color:var(--primary-cyan);width:16px;"></i> dremora.itservices@gmail.com</a>
+            <p style="display:flex;align-items:flex-start;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-location-dot" style="color:var(--primary-cyan);width:16px;margin-top:3px;"></i> Pune, Maharashtra 411032, India</p>
           </div>
-          <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;font-size:0.85rem;padding:0.6rem 1.4rem;">Get a Quote</a>
+          <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;font-size:0.85rem;padding:0.6rem 1.4rem;">Get a Free Quote</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
         <div style="display:flex;gap:1.5rem;">
-          <a href="#" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Privacy</a>
-          <a href="#" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Terms</a>
+          <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Privacy</a>
+          <a href="terms-of-service.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Terms</a>
         </div>
       </div>
     </div>
@@ -343,7 +734,21 @@
 
   <script src="js/main.js"></script>
   <script src="js/sam-assistant.js"></script>
+
+  <script>
+    function toggleCurrency() {
+      const body = document.body;
+      const toggle = document.getElementById('currencyToggle');
+      const labelIndia = document.getElementById('label-india');
+      const labelIntl = document.getElementById('label-intl');
+
+      const isIntl = body.classList.toggle('show-intl');
+      toggle.classList.toggle('intl', isIntl);
+      labelIndia.classList.toggle('active', !isIntl);
+      labelIndia.classList.toggle('inactive', isIntl);
+      labelIntl.classList.toggle('active', isIntl);
+      labelIntl.classList.toggle('inactive', !isIntl);
+    }
+  </script>
 </body>
 </html>
-
-
