@@ -10,6 +10,17 @@ Disallow: /.env
 Disallow: /.git/
 Disallow: /database/
 Disallow: /node_modules/
+Disallow: /api/
+Disallow: /fix_projects.py
+Disallow: /git
+
+# Allow all CSS and JS (important for Google to render the page)
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+# Crawl delay (in seconds) — polite crawling
+Crawl-delay: 5
 
 # Sitemap location
 Sitemap: https://dremora-sigma.vercel.app/sitemap.xml
