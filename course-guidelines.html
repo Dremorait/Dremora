@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <title>Course Guidelines | Dremora IT Internship Program</title>
+  <meta name="description" content="Dremora IT Internship & Course Guidelines – understand the rules, expectations, conduct standards, and program structure for all participants.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Dremora IT Consultants &amp; Services">
+  <link rel="canonical" href="https://dremora-sigma.vercel.app/course-guidelines.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <style>
+    .legal-hero {
+      padding: 8rem 0 4rem; position: relative; overflow: hidden;
+      text-align: center; border-bottom: 1px solid var(--border-glass);
+    }
+    .legal-hero::before {
+      content: ''; position: absolute; width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.05), transparent 70%);
+      top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none;
+    }
+    .legal-body { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+    .legal-section {
+      margin-bottom: 3rem; padding: 2.5rem; background: var(--bg-card);
+      border: 1px solid var(--border-glass); border-radius: 20px;
+      border-left: 3px solid var(--accent-gold); backdrop-filter: blur(12px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .legal-section:hover {
+      border-left-color: var(--primary-cyan);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 20px rgba(255,215,0,0.04);
+    }
+    .legal-section h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--text-main);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
+    }
+    .legal-section h2 i { color: var(--accent-gold); font-size: 1rem; }
+    .legal-section p, .legal-section li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.85; margin-bottom: 0.75rem; }
+    .legal-section ul { list-style: none; padding: 0; }
+    .legal-section ul li { padding-left: 1.5rem; position: relative; }
+    .legal-section ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent-gold); font-weight: 700; }
+    .legal-last-updated {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1.2rem; background: rgba(255,215,0,0.07);
+      border: 1px solid rgba(255,215,0,0.25); border-radius: 99px;
+      font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 1.5rem;
+    }
+    .legal-contact-box {
+      margin-top: 3rem; padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(255,215,0,0.04), rgba(0,210,255,0.04));
+      border: 1px solid rgba(255,215,0,0.15); border-radius: 20px; text-align: center;
+    }
+    .highlight-box {
+      padding: 1.5rem; border-radius: 14px;
+      background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.15);
+      margin-bottom: 1rem;
+    }
+    .highlight-box strong { color: var(--accent-gold); }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <header class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.png" alt="Dremora" style="height:42px;width:42px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);">
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="internship.html" class="active">Internship</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="legal-hero">
+      <div class="container">
+        <div class="glass-pill pill-gold float-anim" style="margin-bottom:1.5rem;">
+          <i class="fa-solid fa-graduation-cap"></i> Internship Program
+        </div>
+        <h1 class="section-title" style="font-size:clamp(2rem,5vw,3.8rem);margin-bottom:1rem;">
+          Course <span class="text-gradient">Guidelines</span>
+        </h1>
+        <p style="color:var(--text-muted);font-size:1.05rem;max-width:650px;margin:0 auto;">
+          Everything you need to know about Dremora's internship program — structure, expectations, conduct, and how we help you succeed.
+        </p>
+      </div>
+    </div>
+
+    <div class="legal-body">
+      <div class="text-center" style="margin-bottom:3rem;">
+        <span class="legal-last-updated"><i class="fa-solid fa-calendar-check"></i> Last Updated: May 2026</span>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-rocket"></i> 1. Program Overview</h2>
+        <p>The Dremora IT Internship Program is a <strong style="color:#fff;">real-world, hands-on learning experience</strong> designed for aspiring software developers, designers, and tech enthusiasts. Unlike typical internship programs, at Dremora you work on live production projects — building actual systems that impact real users.</p>
+        <div class="highlight-box">
+          <strong>Duration:</strong> <span style="color:var(--text-muted);">1 to 3 months (flexible, based on project)</span><br>
+          <strong>Mode:</strong> <span style="color:var(--text-muted);">Remote / Hybrid (Pune-based candidates may opt for on-site)</span><br>
+          <strong>Stipend:</strong> <span style="color:var(--text-muted);">Performance-based (details shared during onboarding)</span><br>
+          <strong>Certification:</strong> <span style="color:var(--text-muted);">Completion certificate issued upon successful program completion</span>
+        </div>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-list-check"></i> 2. Eligibility &amp; Selection</h2>
+        <p>To be eligible for Dremora's internship program:</p>
+        <ul>
+          <li>You must be currently enrolled in or have completed a degree in Computer Science, IT, Engineering, Design, or a related field.</li>
+          <li>You must have at least foundational knowledge of programming (any language), web development, or UI/UX design.</li>
+          <li>You must be able to commit to the agreed number of hours per week (minimum 20 hrs/week).</li>
+          <li>You must complete a brief technical assessment or portfolio review as part of the selection process.</li>
+        </ul>
+        <p>Selection is merit-based. We evaluate applicants on problem-solving ability, learning attitude, and communication skills — not just technical scores.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-calendar-days"></i> 3. Program Structure</h2>
+        <p>The internship is structured into three phases:</p>
+        <ul>
+          <li><strong style="color:#fff;">Phase 1 — Onboarding (Week 1):</strong> Introduction to Dremora's tech stack, tools, workflow, and project codebase. Setup development environment and complete orientation tasks.</li>
+          <li><strong style="color:#fff;">Phase 2 — Core Development (Weeks 2–8):</strong> Work on assigned features, modules, or projects under mentor guidance. Weekly reviews and code walkthroughs.</li>
+          <li><strong style="color:#fff;">Phase 3 — Capstone &amp; Review (Final 2 weeks):</strong> Complete a capstone module, conduct peer reviews, and present your work to the team.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-code"></i> 4. Technical Standards</h2>
+        <p>All interns are expected to maintain the following technical standards:</p>
+        <ul>
+          <li>Write clean, commented, and readable code following Dremora's internal coding conventions.</li>
+          <li>Use version control (Git) for all work — commit messages must be clear and descriptive.</li>
+          <li>Conduct self-review before submitting any pull request or deliverable.</li>
+          <li>Attend all scheduled technical reviews and stand-up meetings.</li>
+          <li>Test your code before submission — untested code will be sent back for revision.</li>
+          <li>Never push directly to the main branch without mentor approval.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-handshake-simple"></i> 5. Code of Conduct</h2>
+        <p>Dremora fosters a culture of respect, growth, and professionalism. All interns must:</p>
+        <ul>
+          <li>Treat all team members, mentors, and clients with respect and professionalism at all times.</li>
+          <li>Maintain confidentiality of all internal projects, client data, and proprietary business information.</li>
+          <li>Be honest about progress — if you're stuck, raise it early rather than staying silent.</li>
+          <li>Avoid plagiarism — all code and design must be original or properly attributed.</li>
+          <li>Not share access credentials, internal documents, or project assets with external parties.</li>
+          <li>Report any issues, conflicts, or concerns to the mentor or program lead promptly.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-clock"></i> 6. Attendance &amp; Communication</h2>
+        <ul>
+          <li>Interns are expected to maintain <strong style="color:#fff;">at least 80% attendance</strong> in scheduled meetings and check-ins.</li>
+          <li>Inform your mentor at least <strong style="color:#fff;">24 hours in advance</strong> if you cannot attend a scheduled session.</li>
+          <li>Respond to messages on official communication channels (WhatsApp/Slack/Email) within <strong style="color:#fff;">4 working hours</strong> during business days.</li>
+          <li>Daily stand-up updates are required in the intern group — brief summary of what you did, what you plan to do, and any blockers.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-star"></i> 7. Evaluation &amp; Certification</h2>
+        <p>Interns are evaluated on the following criteria at the end of the program:</p>
+        <ul>
+          <li><strong style="color:#fff;">Technical Quality (40%):</strong> Code quality, problem-solving approach, and technical understanding.</li>
+          <li><strong style="color:#fff;">Project Contribution (30%):</strong> Actual features built, bugs fixed, and impact delivered.</li>
+          <li><strong style="color:#fff;">Professionalism (20%):</strong> Punctuality, communication, teamwork, and conduct.</li>
+          <li><strong style="color:#fff;">Learning &amp; Growth (10%):</strong> Demonstrable improvement from start to end of the program.</li>
+        </ul>
+        <p>Interns scoring <strong style="color:#fff;">70% or above</strong> receive a completion certificate and letter of recommendation. Outstanding performers may be offered a full-time or extended role at Dremora.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2><i class="fa-solid fa-xmark-circle"></i> 8. Termination from Program</h2>
+        <p>Dremora reserves the right to terminate an intern's participation in the program due to:</p>
+        <ul>
+          <li>Repeated violation of the Code of Conduct.</li>
+          <li>Persistent non-attendance or non-responsiveness without valid reason.</li>
+          <li>Breach of confidentiality or sharing of internal information.</li>
+          <li>Plagiarism, dishonesty, or submission of copied work.</li>
+        </ul>
+        <p>In such cases, no certificate will be issued, and the intern will be removed from all internal systems immediately.</p>
+      </div>
+
+      <div class="legal-contact-box reveal">
+        <i class="fa-solid fa-graduation-cap" style="font-size:2rem;color:var(--accent-gold);margin-bottom:1rem;display:block;"></i>
+        <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">Ready to Apply or Have Questions?</h3>
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;max-width:500px;margin-inline:auto;">Check out our internship page for the latest openings, or reach out to us directly with any program queries.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="internship.html" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> Apply Now</a>
+          <a href="mailto:dremora.itservices@gmail.com" class="btn btn-outline">Email Us</a>
+        </div>
+        <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted);">Dremora IT Consultants &amp; Services &middot; Pune, Maharashtra 411032, India</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-gradient-bar"></div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html"><img src="assets/images/logo.png" alt="Dremora" style="height:52px;width:52px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);margin-bottom:1rem;"></a>
+          <p>Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/company/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://twitter.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com/dremora.it/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://github.com/Dremorait" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:dremora.itservices@gmail.com" class="social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-heading">Navigation</p>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="internship.html">Internship</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Legal</p>
+          <ul class="footer-links">
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="course-guidelines.html">Course Guidelines</a></li>
+            <li><a href="refund-policy.html">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Get In Touch</p>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <a href="tel:+919309795878" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-phone" style="color:var(--primary-cyan);width:16px;"></i> +91 9309795878</a>
+            <a href="mailto:dremora.itservices@gmail.com" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-envelope" style="color:var(--primary-cyan);width:16px;"></i> dremora.itservices@gmail.com</a>
+            <p style="display:flex;align-items:flex-start;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-location-dot" style="color:var(--primary-cyan);width:16px;margin-top:3px;"></i> Pune, Maharashtra 411032, India</p>
+          </div>
+          <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;font-size:0.85rem;padding:0.6rem 1.4rem;">Start a Project</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Privacy</a>
+          <a href="terms-of-service.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
