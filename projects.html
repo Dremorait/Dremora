@@ -69,7 +69,7 @@
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-      gap: 2rem;
+      gap: 2.5rem;
       margin-bottom: 5rem;
     }
 
@@ -93,7 +93,7 @@
     .project-card[data-color="blue"]:hover { border-color: #60a5fa; box-shadow: 0 20px 60px rgba(96,165,250,0.15); }
 
     .project-card-mockup {
-      width: 100%; height: 220px;
+      width: 100%; height: 240px;
       overflow: hidden; position: relative;
       display: flex; align-items: center; justify-content: center;
     }
@@ -101,7 +101,29 @@
       width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.5s ease;
     }
-    .project-card:hover .project-card-mockup img { transform: scale(1.04); }
+    .project-card-mockup-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,8,15,0.55) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .project-card:hover .project-card-mockup-overlay { opacity: 1; }
+    .mockup-overlay-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0,210,255,0.25);
+      border: 1px solid rgba(0,210,255,0.5);
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+    }
+    .project-card:hover .project-card-mockup img { transform: scale(1.05); }
     .project-card-body { padding: 1.75rem; }
     .project-badge {
       display: inline-block;
@@ -555,20 +577,30 @@
           <!-- CARD 1: NagarSeva -->
           <div class="project-card reveal" data-color="cyan" data-category="civic" data-project="nagarseva">
             <div class="project-card-mockup">
-              <img src="assets/images/dashboard_mockup.png" alt="NagarSeva Civic Platform Dashboard" loading="lazy">
+              <img src="assets/images/nagarseva_dashboard.png" alt="NagarSeva Civic Complaint Management Dashboard - Pune Municipal Corporation" loading="lazy">
+              <div class="project-card-mockup-overlay">
+                <span class="mockup-overlay-tag">🏛️ Civic Tech · AI-Powered</span>
+              </div>
             </div>
             <div class="project-card-body">
-              <span class="project-badge badge-cyan">Civic Tech</span>
+              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
+                <span class="project-badge badge-cyan" style="margin-bottom:0;">Civic Tech</span>
+                <span style="font-size:0.7rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🟢 In Production</span>
+              </div>
               <h3 class="project-card-title">NagarSeva</h3>
-              <p class="project-card-desc">AI-powered civic complaint management platform for municipal corporations. End-to-end complaint lifecycle with real-time tracking, role-based access, and Gemini AI routing.</p>
+              <p class="project-card-desc">AI-powered civic complaint management platform for municipal corporations. End-to-end complaint lifecycle with real-time tracking, role-based access, and Gemini AI routing for 1,200+ daily complaints.</p>
               <div class="project-stack-tags">
                 <span class="stack-tag">Python Flask</span><span class="stack-tag">MySQL</span>
                 <span class="stack-tag">Gemini AI</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">JWT</span>
               </div>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
+                <div><div style="font-size:1.1rem;font-weight:800;color:var(--primary-cyan);">1,247</div><div style="font-size:0.72rem;color:var(--text-muted);">Complaints Handled</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">4.2h</div><div style="font-size:0.72rem;color:var(--text-muted);">Avg Response Time</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">94%</div><div style="font-size:0.72rem;color:var(--text-muted);">Resolution Rate</div></div>
+              </div>
               <div class="project-card-cta" onclick="openModal('nagarseva')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
             </div>
           </div>
-
           <!-- CARD 2: CRM Pipeline -->
           <div class="project-card reveal" data-color="blue" data-category="crm" data-project="crm">
             <div class="project-card-mockup">
@@ -585,6 +617,7 @@
                   <div class="mockup-topbar">
                     <span class="mockup-topbar-title">Sales Pipeline</span>
                     <div class="mockup-topbar-right">
+                      <span style="font-size:7px;color:#4ade80;font-weight:700;background:rgba(74,222,128,0.1);padding:2px 6px;border-radius:4px;">● Live</span>
                       <div class="avatar-sm"></div>
                     </div>
                   </div>
@@ -628,18 +661,26 @@
               </div>
             </div>
             <div class="project-card-body">
-              <span class="project-badge badge-blue">CRM & Sales</span>
+              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
+                <span class="project-badge badge-blue" style="margin-bottom:0;">CRM &amp; Sales</span>
+                <span style="font-size:0.7rem;font-weight:700;color:#60a5fa;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🔵 Enterprise</span>
+              </div>
               <h3 class="project-card-title">NexusCRM Pipeline</h3>
               <p class="project-card-desc">Intelligent visual CRM with Kanban deal pipeline, automated email sequences, revenue forecasting, and AI-assisted follow-up recommendations for B2B sales teams.</p>
               <div class="project-stack-tags">
                 <span class="stack-tag">React</span><span class="stack-tag">Node.js</span>
                 <span class="stack-tag">PostgreSQL</span><span class="stack-tag">Gemini AI</span><span class="stack-tag">Redis</span>
               </div>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
+                <div><div style="font-size:1.1rem;font-weight:800;color:#60a5fa;">₹79L+</div><div style="font-size:0.72rem;color:var(--text-muted);">Pipeline Tracked</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">43%</div><div style="font-size:0.72rem;color:var(--text-muted);">Conversion Uplift</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">8 teams</div><div style="font-size:0.72rem;color:var(--text-muted);">Using Live</div></div>
+              </div>
               <div class="project-card-cta" onclick="openModal('crm')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
             </div>
           </div>
 
-          <!-- CARD 3: Cafe & Restaurant -->
+           <!-- CARD 3: Cafe & Restaurant -->
           <div class="project-card reveal" data-color="orange" data-category="hospitality" data-project="cafe">
             <div class="project-card-mockup">
               <div class="mockup-cafe">
@@ -683,29 +724,51 @@
               </div>
             </div>
             <div class="project-card-body">
-              <span class="project-badge badge-orange">Hospitality</span>
+              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
+                <span class="project-badge badge-orange" style="margin-bottom:0;">Hospitality</span>
+                <span style="font-size:0.7rem;font-weight:700;color:#fb923c;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🟠 POS Ready</span>
+              </div>
               <h3 class="project-card-title">BrewSpace POS</h3>
-              <p class="project-card-desc">All-in-one cafe & restaurant management system with visual floor plan, POS billing, inventory tracking, staff scheduling, and daily revenue analytics.</p>
+              <p class="project-card-desc">All-in-one cafe &amp; restaurant management system with visual floor plan, POS billing, inventory tracking, staff scheduling, and daily revenue analytics.</p>
               <div class="project-stack-tags">
                 <span class="stack-tag">Vue.js</span><span class="stack-tag">FastAPI</span>
                 <span class="stack-tag">MongoDB</span><span class="stack-tag">Socket.IO</span><span class="stack-tag">PWA</span>
               </div>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fb923c;">₹18K+</div><div style="font-size:0.72rem;color:var(--text-muted);">Daily Revenue Tracked</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">16 tables</div><div style="font-size:0.72rem;color:var(--text-muted);">Live Floor Plan</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">4.8★</div><div style="font-size:0.72rem;color:var(--text-muted);">Staff Rating</div></div>
+              </div>
               <div class="project-card-cta" onclick="openModal('cafe')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+          </div>
+></div>
             </div>
           </div>
 
           <!-- CARD 4: AgroTrack -->
           <div class="project-card reveal" data-color="green" data-category="agro" data-project="agro">
             <div class="project-card-mockup">
-              <img src="assets/images/agro_smart_irrigation.png" alt="AgroTrack Smart Irrigation Dashboard" loading="lazy">
+              <img src="assets/images/agrotrack_dashboard.png" alt="AgroTrack Smart Irrigation IoT Dashboard" loading="lazy">
+              <div class="project-card-mockup-overlay">
+                <span class="mockup-overlay-tag" style="border-color:rgba(74,222,128,0.5);background:rgba(74,222,128,0.2);">🌾 AgriTech · IoT</span>
+              </div>
             </div>
             <div class="project-card-body">
-              <span class="project-badge badge-green">AgriTech</span>
+              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
+                <span class="project-badge badge-green" style="margin-bottom:0;">AgriTech</span>
+                <span style="font-size:0.7rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🌱 IoT Live</span>
+              </div>
               <h3 class="project-card-title">AgroTrack Smart Irrigation</h3>
-              <p class="project-card-desc">IoT-powered precision agriculture platform for Indian farmers. Real-time soil moisture monitoring, weather-adaptive irrigation scheduling, and water usage analytics.</p>
+              <p class="project-card-desc">IoT-powered precision agriculture platform for Indian farmers. Real-time soil moisture monitoring, weather-adaptive irrigation scheduling, and water usage analytics across 4 field zones.</p>
               <div class="project-stack-tags">
                 <span class="stack-tag">Python</span><span class="stack-tag">MQTT</span>
                 <span class="stack-tag">InfluxDB</span><span class="stack-tag">React</span><span class="stack-tag">Raspberry Pi</span>
+              </div>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
+                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">34%</div><div style="font-size:0.72rem;color:var(--text-muted);">Water Saved</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#a3e635;">12</div><div style="font-size:0.72rem;color:var(--text-muted);">Active Sensors</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">4/4</div><div style="font-size:0.72rem;color:var(--text-muted);">Zones Online</div></div>
               </div>
               <div class="project-card-cta" onclick="openModal('agro')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
             </div>
@@ -732,7 +795,7 @@
                     <div class="live-info">
                       <div class="live-subject">Physics – Wave Optics</div>
                       <div class="live-teacher">Prof. Ramesh K.</div>
-                      <div class="live-time">⏳ 1h 24m remaining â€¢ 386 students live</div>
+                      <div class="live-time">⏳ 1h 24m remaining • 386 students live</div>
                     </div>
                   </div>
                   <div class="course-progress-row">
@@ -753,7 +816,7 @@
                     </div>
                   </div>
                   <div class="test-scores">
-                    <div class="score-card"><div class="score-val" style="color: #a855f7;">94</div><div class="score-label">Last Test</div><div class="score-rank">?? Rank 12</div></div>
+                    <div class="score-card"><div class="score-val" style="color: #a855f7;">94</div><div class="score-label">Last Test</div><div class="score-rank">🏆 Rank 12</div></div>
                     <div class="score-card"><div class="score-val" style="color: #fbbf24;">🔥 21</div><div class="score-label">Day Streak</div></div>
                     <div class="score-card"><div class="score-val" style="color: #60a5fa;">1,840</div><div class="score-label">XP Points</div></div>
                   </div>
@@ -761,12 +824,20 @@
               </div>
             </div>
             <div class="project-card-body">
-              <span class="project-badge badge-purple">EdTech</span>
+              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
+                <span class="project-badge badge-purple" style="margin-bottom:0;">EdTech</span>
+                <span style="font-size:0.7rem;font-weight:700;color:#a855f7;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🎓 LMS Live</span>
+              </div>
               <h3 class="project-card-title">EduPro Coaching Platform</h3>
-              <p class="project-card-desc">Advanced LMS for coaching institutes: live classes, AI-generated practice tests, doubt forum with priority queues, rank predictor and personalized study planner.</p>
+              <p class="project-card-desc">Advanced LMS for coaching institutes: live classes with 386 concurrent students, AI-generated practice tests, doubt forum, rank predictor and personalized study planner.</p>
               <div class="project-stack-tags">
                 <span class="stack-tag">Next.js</span><span class="stack-tag">Django</span>
                 <span class="stack-tag">Redis</span><span class="stack-tag">WebRTC</span><span class="stack-tag">Gemini AI</span>
+              </div>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
+                <div><div style="font-size:1.1rem;font-weight:800;color:#a855f7;">386</div><div style="font-size:0.72rem;color:var(--text-muted);">Concurrent Students</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">94%</div><div style="font-size:0.72rem;color:var(--text-muted);">Test Score Avg</div></div>
+                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">21 day</div><div style="font-size:0.72rem;color:var(--text-muted);">Avg Streak</div></div>
               </div>
               <div class="project-card-cta" onclick="openModal('edupro')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
             </div>
