@@ -80,7 +80,7 @@
     top: 0; right: -100%;
     width: min(80vw, 300px);
     height: 100vh;
-    background: rgba(6, 8, 15, 0.98);
+    background: rgba(0, 0, 0, 0.98);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
@@ -88,7 +88,7 @@
     align-items: flex-start;
     gap: 0.5rem;
     padding: 2rem 1.5rem;
-    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: right var(--motion-normal) cubic-bezier(0.77, 0, 0.175, 1);
     z-index: calc(var(--z-nav) - 1);
     border-left: 1px solid var(--border-glass);
     display: flex;
@@ -99,7 +99,7 @@
     font-weight: 600;
     padding: 0.8rem 1rem;
     width: 100%;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
   }
   .mobile-menu-btn { display: block; z-index: var(--z-nav); }
 

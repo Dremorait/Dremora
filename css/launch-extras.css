@@ -69,7 +69,7 @@
   background: none; border: none;
   color: rgba(255,255,255,0.5);
   font-size: 1.2rem; cursor: pointer;
-  transition: color 0.2s;
+  transition: color var(--motion-instant) ease;
   line-height: 1;
   z-index: 9999;
   padding: 0.8rem;
@@ -87,7 +87,7 @@ body.has-ann-bar .navbar { top: 38px; }
   gap: 0.4rem;
   background: rgba(255,153,51,0.08);
   border: 1px solid rgba(255,153,51,0.25);
-  border-radius: 99px;
+  border-radius: var(--radius-lg);
   padding: 0.3rem 0.75rem;
   font-size: 0.72rem;
   font-weight: 700;
@@ -95,7 +95,7 @@ body.has-ann-bar .navbar { top: 38px; }
   letter-spacing: 0.5px;
   text-transform: uppercase;
   cursor: default;
-  transition: all 0.3s ease;
+  transition: all var(--motion-fast) ease;
 }
 .india-badge:hover {
   background: rgba(255,153,51,0.15);
@@ -133,7 +133,7 @@ body.has-ann-bar .navbar { top: 38px; }
   color: #fff;
   box-shadow: 0 6px 25px rgba(37,211,102,0.45);
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all var(--motion-fast) cubic-bezier(0.34, 1.56, 0.64, 1);
   animation: fab-bounce-in 0.6s 3s ease-out both;
 }
 @keyframes fab-bounce-in {
@@ -144,20 +144,24 @@ body.has-ann-bar .navbar { top: 38px; }
   transform: scale(1.12) rotate(8deg);
   box-shadow: 0 10px 35px rgba(37,211,102,0.6);
 }
+#whatsapp-fab:focus-visible {
+  outline: 2px solid #25D366;
+  outline-offset: 3px;
+}
 #whatsapp-fab .wa-tooltip {
   position: absolute;
   right: calc(100% + 12px);
-  background: rgba(14,18,38,0.95);
+  background: rgba(33,33,38,0.95);
   border: 1px solid rgba(37,211,102,0.3);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.4rem 0.9rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
   opacity: 0;
   transform: translateX(10px);
-  transition: all 0.3s ease;
+  transition: all var(--motion-fast) ease;
   pointer-events: none;
 }
 #whatsapp-fab:hover .wa-tooltip {
@@ -172,10 +176,10 @@ body.has-ann-bar .navbar { top: 38px; }
   left: 2rem;
   z-index: 950;
   width: 48px; height: 48px;
-  background: rgba(14,18,38,0.92);
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,210,255,0.25);
-  border-radius: 12px;
+  border: 1px solid rgba(108,71,255,0.25);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,18 +188,22 @@ body.has-ann-bar .navbar { top: 38px; }
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: all var(--motion-fast) cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-4);
 }
 #scroll-top-btn.visible {
   opacity: 1;
   transform: translateY(0);
 }
 #scroll-top-btn:hover {
-  background: rgba(0,210,255,0.12);
+  background: rgba(108,71,255,0.12);
   border-color: var(--primary-cyan);
-  box-shadow: 0 4px 20px rgba(0,210,255,0.25);
+  box-shadow: 0 4px 20px rgba(108,71,255,0.25);
   transform: translateY(-4px);
+}
+#scroll-top-btn:focus-visible {
+  outline: 2px solid var(--surface-raised);
+  outline-offset: 2px;
 }
 
 /* ── 6. TESTIMONIALS SECTION ── */
@@ -213,9 +221,9 @@ body.has-ann-bar .navbar { top: 38px; }
 .testimonial-card {
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   padding: 2rem;
-  transition: all 0.35s ease;
+  transition: all var(--motion-fast) ease;
   position: relative;
   overflow: hidden;
 }
@@ -235,8 +243,8 @@ body.has-ann-bar .navbar { top: 38px; }
 }
 .testimonial-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(0,210,255,0.2);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,210,255,0.08);
+  border-color: rgba(108,71,255,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(108,71,255,0.08);
 }
 .testimonial-stars {
   display: flex;
@@ -288,16 +296,16 @@ body.has-ann-bar .navbar { top: 38px; }
 }
 #launch-popup-overlay.hidden { display: none; }
 #launch-popup {
-  background: rgba(14,18,38,0.98);
-  border: 1px solid rgba(0,210,255,0.2);
-  border-radius: 24px;
+  background: rgba(33,33,38,0.98);
+  border: 1px solid rgba(108,71,255,0.2);
+  border-radius: var(--radius-md);
   padding: 3rem 2.5rem;
   max-width: 520px;
   width: 100%;
   text-align: center;
   position: relative;
   animation: popup-slide-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,210,255,0.06);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(108,71,255,0.06);
 }
 @keyframes popup-slide-up {
   from { opacity: 0; transform: translateY(60px) scale(0.92); }
@@ -307,13 +315,13 @@ body.has-ann-bar .navbar { top: 38px; }
   width: 116px;
   height: 116px;
   margin: 0 auto 1.5rem;
-  background: radial-gradient(circle at 50% 40%, rgba(0,210,255,0.14), rgba(58,123,213,0.08) 60%, transparent);
-  border: 2px solid rgba(0,210,255,0.55);
+  background: radial-gradient(circle at 50% 40%, rgba(108,71,255,0.14), rgba(90,61,216,0.08) 60%, transparent);
+  border: 2px solid rgba(108,71,255,0.55);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 28px rgba(0,210,255,0.35), 0 0 60px rgba(58,123,213,0.2), inset 0 0 20px rgba(0,210,255,0.08);
+  box-shadow: 0 0 28px rgba(108,71,255,0.35), 0 0 60px rgba(90,61,216,0.2), inset 0 0 20px rgba(108,71,255,0.08);
   animation: dremora-logo-pulse 4s ease-in-out infinite;
   position: relative;
   overflow: hidden;
@@ -323,7 +331,7 @@ body.has-ann-bar .navbar { top: 38px; }
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1px solid rgba(0,210,255,0.25);
+  border: 1px solid rgba(108,71,255,0.25);
   animation: ganesha-halo-spin 12s linear infinite;
 }
 .popup-icon-wrapper::after {
@@ -331,7 +339,7 @@ body.has-ann-bar .navbar { top: 38px; }
   position: absolute;
   inset: -12px;
   border-radius: 50%;
-  border: 1px dashed rgba(138,43,226,0.2);
+  border: 1px dashed rgba(139,92,246,0.2);
   animation: ganesha-halo-spin 20s linear infinite reverse;
 }
 .popup-ganesha-img {
@@ -340,7 +348,7 @@ body.has-ann-bar .navbar { top: 38px; }
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 30%;
-  filter: drop-shadow(0 0 10px rgba(0,210,255,0.5)) drop-shadow(0 4px 14px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 0 10px rgba(108,71,255,0.5)) drop-shadow(0 4px 14px rgba(0,0,0,0.6));
   animation: ganesha-gentle-float 3.5s ease-in-out infinite;
   transform-origin: center bottom;
   display: block;
@@ -354,16 +362,16 @@ body.has-ann-bar .navbar { top: 38px; }
   object-position: center;
   background: rgba(255,255,255,0.96);
   padding: 10px;
-  filter: drop-shadow(0 0 12px rgba(0,210,255,0.45)) drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 0 12px rgba(108,71,255,0.45)) drop-shadow(0 4px 16px rgba(0,0,0,0.5));
 }
 @keyframes dremora-logo-pulse {
   0%, 100% {
-    box-shadow: 0 0 28px rgba(0,210,255,0.35), 0 0 60px rgba(58,123,213,0.2), inset 0 0 20px rgba(0,210,255,0.08);
-    border-color: rgba(0,210,255,0.55);
+    box-shadow: 0 0 28px rgba(108,71,255,0.35), 0 0 60px rgba(90,61,216,0.2), inset 0 0 20px rgba(108,71,255,0.08);
+    border-color: rgba(108,71,255,0.55);
   }
   50% {
-    box-shadow: 0 0 50px rgba(0,210,255,0.65), 0 0 90px rgba(58,123,213,0.35), inset 0 0 30px rgba(0,210,255,0.15);
-    border-color: rgba(0,210,255,0.95);
+    box-shadow: 0 0 50px rgba(108,71,255,0.65), 0 0 90px rgba(90,61,216,0.35), inset 0 0 30px rgba(108,71,255,0.15);
+    border-color: rgba(108,71,255,0.95);
   }
 }
 @keyframes ganesha-gentle-float {
@@ -405,8 +413,8 @@ body.has-ann-bar .navbar { top: 38px; }
   font-size: 1rem;
   cursor: pointer;
   padding: 0.3rem 0.65rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  border-radius: var(--radius-xs);
+  transition: all var(--motion-instant) ease;
 }
 #popup-close-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
@@ -417,7 +425,7 @@ body.has-ann-bar .navbar { top: 38px; }
   gap: 0.5rem;
   background: linear-gradient(90deg, rgba(255,153,51,0.12), rgba(19,136,8,0.12));
   border: 1px solid rgba(255,153,51,0.25);
-  border-radius: 99px;
+  border-radius: var(--radius-lg);
   padding: 0.4rem 1rem;
   font-size: 0.75rem;
   font-weight: 700;
