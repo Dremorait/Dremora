@@ -7,50 +7,6 @@
 (function () {
   'use strict';
 
-  /* ── 1. LAUNCH POPUP ── */
-  (function initLaunchPopup() {
-    const overlay = document.getElementById('launch-popup-overlay');
-    const closeBtn = document.getElementById('popup-close-btn');
-    if (!overlay) return;
-
-    // Only show once per session (not every page visit)
-    const POPUP_KEY = 'dremora_launch_popup_seen';
-    if (sessionStorage.getItem(POPUP_KEY)) {
-      overlay.classList.add('hidden');
-      return;
-    }
-
-    // Show after 1.8 seconds
-    const showTimer = setTimeout(() => {
-      overlay.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // prevent scroll while open
-    }, 1800);
-
-    function closePopup() {
-      overlay.style.opacity = '0';
-      overlay.style.transition = 'opacity 0.35s ease';
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-        document.body.style.overflow = '';
-      }, 350);
-      sessionStorage.setItem(POPUP_KEY, '1');
-    }
-
-    closeBtn && closeBtn.addEventListener('click', closePopup);
-
-    // Click outside popup box closes it
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closePopup();
-    });
-
-    // ESC key closes it
-    document.addEventListener('keydown', function esc(e) {
-      if (e.key === 'Escape') {
-        closePopup();
-        document.removeEventListener('keydown', esc);
-      }
-    });
-  })();
 
 
   /* ── 2. ANNOUNCEMENT BAR DISMISS ── */
@@ -156,27 +112,5 @@
     resetIdle();
   })();
 
-
-  /* ── 8. ICON BURST on popup open ── */
-  (function initPopIcon() {
-    const iconEl = document.querySelector('.popup-icon-wrapper');
-    if (!iconEl) return;
-
-    // Extra pop animation when popup opens
-    setTimeout(() => {
-      // Temporarily overwrite animation for a quick pop, then let CSS resume float
-      const originalAnim = iconEl.style.animation;
-      iconEl.style.animation = 'none';
-      iconEl.style.transform = 'scale(1.3) translateY(-10px)';
-      iconEl.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      setTimeout(() => {
-        iconEl.style.transform = '';
-        setTimeout(() => {
-          iconEl.style.transition = '';
-          iconEl.style.animation = originalAnim;
-        }, 400);
-      }, 400);
-    }, 2200);
-  })();
 
 })();
