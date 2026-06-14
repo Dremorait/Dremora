@@ -103,6 +103,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -272,7 +273,8 @@
     /* ===== SERVICE CARD ENHANCEMENTS ===== */
     .svc-card-inner { display: flex; flex-direction: column; height: 100%; }
     .svc-card-footer { margin-top: auto; padding-top: 1.5rem; }
-  </style>
+
+  <link rel="stylesheet" href="css/neobrutalism.css">
 </head>
 
 <body>
@@ -296,204 +298,147 @@
     </div>
   </header>
 
-  <main style="padding-top:6rem;">
-
-    <!-- ===== HERO ===== -->
-    <section class="section text-center reveal" style="padding-bottom:3rem;position:relative;overflow:hidden;">
-      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,255,0.06),transparent 70%);top:-200px;right:5%;pointer-events:none;animation:orb-float-1 20s ease-in-out infinite;"></div>
-      <div style="position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(138,43,226,0.05),transparent 70%);bottom:-100px;left:5%;pointer-events:none;animation:orb-float-2 24s ease-in-out infinite;"></div>
-
+    <!-- ===== NEOBRUTALISM HERO ===== -->
+    <section class="section text-center" style="padding-bottom:3rem;position:relative;">
       <div class="container" style="position:relative;z-index:2;max-width:900px;">
-        <div class="glass-pill pill-cyan pulse-anim" style="margin-bottom:1.5rem;">
-          <i class="fa-solid fa-rocket"></i> Market Domination Engineering
+        <div class="font-handwritten" style="color:#3b82f6;transform:rotate(-1deg);margin-bottom:1rem;font-size:1.5rem;">
+          Make Short Videos That Pop
         </div>
-        <h1 class="section-title" style="font-size:clamp(2rem,5vw,4.5rem);margin-bottom:1.5rem;">
-          We Don't Just Build Apps.<br>
-          <span class="gradient-animated-text">We Build Monopolies.</span>
-        </h1>
-        <p class="section-subtitle" style="max-width:750px;margin-inline:auto;margin-bottom:2.5rem;">
-          Comprehensive software engineering focused on one goal: maximizing your operational efficiency
-          and completely outperforming your competitors through superior technology.
+        <div style="position:relative;display:inline-block;margin-bottom:1.5rem;">
+          <h1 class="font-handwritten" style="font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#ffffff;transform:rotate(-1deg);line-height:1.2;">
+            Creative Pricing
+            <div style="position:absolute;right:-40px;top:0;color:#f59e0b;transform:rotate(12deg);font-size:2rem;">✨</div>
+            <div style="position:absolute;left:-30px;bottom:0;color:#3b82f6;transform:rotate(-12deg);font-size:2rem;">⭐️</div>
+          </h1>
+          <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%) rotate(-1deg);width:180px;height:12px;background:rgba(59,130,246,0.2);border-radius:99px;filter:blur(2px);"></div>
+        </div>
+        <p class="font-handwritten" style="font-size:1.4rem;color:rgba(255,255,255,0.7);transform:rotate(-1deg);max-width:700px;margin-inline:auto;">
+          Edit, enhance, and go viral in minutes. No complex setups.
         </p>
-        <!-- Quick Stats -->
-        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-          <div class="glass-panel-cyan" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
-            <i class="fa-solid fa-indian-rupee-sign" style="color:var(--primary-cyan);"></i>
-            <span style="font-weight:700;font-size:0.9rem;">Starts ₹25,000</span>
-          </div>
-          <div class="glass-panel-purple" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
-            <i class="fa-solid fa-dollar-sign" style="color:var(--accent-purple);"></i>
-            <span style="font-weight:700;font-size:0.9rem;">Starts $500 USD</span>
-          </div>
-          <div class="glass-panel" style="padding:0.9rem 1.8rem;border-radius:50px;display:flex;align-items:center;gap:0.7rem;">
-            <i class="fa-solid fa-shield-halved" style="color:var(--accent-gold);"></i>
-            <span style="font-weight:700;font-size:0.9rem;">No Hidden Fees</span>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- ===== SERVICE CARDS ===== -->
     <section class="section" style="padding-top:1rem;">
       <div class="container">
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;max-width:1100px;margin-inline:auto;">
 
-        <!-- Currency Toggle -->
-        <div class="currency-toggle-wrap">
-          <span class="currency-label active" id="label-india">🇮🇳 India (₹ INR)</span>
-          <div class="toggle-track" id="currencyToggle" onclick="toggleCurrency()" title="Switch currency">
-            <div class="toggle-thumb"></div>
-          </div>
-          <span class="currency-label inactive" id="label-intl">🌍 International ($ USD)</span>
-        </div>
-
-        <div class="stagger-children" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;">
-
-          <!-- ===== CARD 1: PRECISION WEB SYSTEMS ===== -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--primary-cyan);display:flex;flex-direction:column;">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-              <div class="icon-box icon-box-cyan">
-                <i class="fa-solid fa-code" style="color:var(--primary-cyan);font-size:1.4rem;"></i>
+          <!-- Tier 1 -->
+          <div class="neo-card" style="transform:rotate(-1deg);">
+            <div style="padding:2rem;">
+              <div style="width:50px;height:50px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;color:#f59e0b;font-size:1.2rem;">
+                <i class="fa-solid fa-pen-nib"></i>
               </div>
-              <div class="glass-pill pill-cyan" style="font-size:0.7rem;">Core Service</div>
-            </div>
-            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">Precision Web Systems</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
-              High-performance, instantaneous rendering architectures. Stop bleeding users through slow load times. We architect flawlessly responsive ecosystems built to scale.
-            </p>
-
-            <!-- Price Display -->
-            <div class="price-display">
-              <div>
-                <span class="price-from">Starting from</span>
-                <span class="price-value cyan-price india-price-val">₹25,000</span>
-                <span class="price-value cyan-price intl-price-val">$500 USD</span>
+              <h3 class="font-handwritten" style="font-size:2rem;margin-bottom:0.5rem;color:#ffffff;">Creator</h3>
+              <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:1.5rem;">Perfect for short video beginners</p>
+              <div class="font-handwritten" style="margin-bottom:1.5rem;">
+                <span style="font-size:2.5rem;font-weight:700;color:#ffffff;">$29</span>
+                <span style="color:rgba(255,255,255,0.7);font-size:1.2rem;">/month</span>
               </div>
-              <div class="price-note">
-                <strong>India:</strong> ₹25K – ₹1.5L+<br>
-                <strong>Intl:</strong> $500 – $3,000+
-              </div>
-            </div>
-
-            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Full-Stack Custom Development</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> SEO-Optimized Architecture</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Mobile-First Responsive Design</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Performance-First Architecture</li>
-            </ul>
-
-            <div style="margin-top:auto;">
-              <a href="mailto:dremora.itservices@gmail.com?subject=Quote%20Request%20%E2%80%93%20Precision%20Web%20System%20%7C%20Dremora%20IT&body=Hi%20Dremora%20Team%2C%0A%0AI%27m%20interested%20in%20getting%20a%20custom%20web%20system%20built%20for%20my%20business.%0A%0A%E2%80%94%E2%80%94%20MY%20PROJECT%20DETAILS%20%E2%80%94%E2%80%94%0A%0A%E2%80%A2%20Project%20Type%3A%20%5Be.g.%20Business%20Website%20%2F%20Web%20App%20%2F%20E-Commerce%20%2F%20Landing%20Page%5D%0A%E2%80%A2%20Key%20Features%20Needed%3A%20%5BDescribe%20the%20main%20functionality%20you%20need%5D%0A%E2%80%A2%20Expected%20Budget%3A%20Rs.%20_______%20%28or%20%24%20_______%20USD%29%0A%E2%80%A2%20Preferred%20Timeline%3A%20%5Be.g.%202%20weeks%20%2F%201%20month%20%2F%20ASAP%5D%0A%E2%80%A2%20Current%20Website%20%28if%20any%29%3A%20%5BYour%20existing%20site%20URL%5D%0A%E2%80%A2%20Industry%20%2F%20Business%20Type%3A%20%5BYour%20industry%5D%0A%0APlease%20share%20a%20detailed%20quote%20and%20your%20earliest%20availability%20for%20a%20free%2030-min%20discovery%20call.%0A%0ALooking%20forward%20to%20hearing%20from%20you!%0A%0ABest%20regards%2C%0A%5BYour%20Full%20Name%5D%0A%5BYour%20Company%20%2F%20Business%20Name%5D%0A%5BYour%20Contact%20Number%5D" class="btn btn-outline" style="width:100%;border-color:var(--primary-cyan);color:var(--primary-cyan);">
-                <i class="fa-solid fa-envelope"></i> Get a Quote
-              </a>
+              <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.8rem;list-style:none;padding:0;">
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">60-second Video Export</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">10 Trending Templates</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Auto Text-to-Speech</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Basic Transitions</span>
+                </li>
+              </ul>
+              <a href="contact.html" class="neo-btn font-handwritten" style="width:100%;">Get Started</a>
             </div>
           </div>
 
-          <!-- ===== CARD 2: BUSINESS COMMAND CENTERS ===== -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-red);display:flex;flex-direction:column;">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-              <div class="icon-box icon-box-red">
-                <i class="fa-solid fa-gears" style="color:var(--accent-red);font-size:1.4rem;"></i>
+          <!-- Tier 2 -->
+          <div class="neo-card" style="transform:rotate(1deg);">
+            <div style="position:absolute;top:-10px;right:-10px;background:#8a2be2;color:#ffffff;padding:4px 12px;border:2px solid #ffffff;border-radius:99px;font-family:'Kalam', cursive;transform:rotate(12deg);font-weight:700;">Popular!</div>
+            <div style="padding:2rem;">
+              <div style="width:50px;height:50px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;color:#3b82f6;font-size:1.2rem;">
+                <i class="fa-solid fa-star"></i>
               </div>
-              <div class="glass-pill" style="font-size:0.7rem;border-color:rgba(255,77,77,0.3);color:var(--accent-red);">Enterprise</div>
-            </div>
-            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">Business Command Centers</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
-              Stop managing chaos. We design bespoke internal CRM pipelines and data dashboards that convert massive structured data streams into actionable leverage.
-            </p>
-
-            <!-- Price Display -->
-            <div class="price-display" style="border-color:rgba(255,77,77,0.15);">
-              <div>
-                <span class="price-from">Starting from</span>
-                <span class="price-value red-price india-price-val">₹50,000</span>
-                <span class="price-value red-price intl-price-val">$1,000 USD</span>
+              <h3 class="font-handwritten" style="font-size:2rem;margin-bottom:0.5rem;color:#ffffff;">Influencer</h3>
+              <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:1.5rem;">For serious content creators</p>
+              <div class="font-handwritten" style="margin-bottom:1.5rem;">
+                <span style="font-size:2.5rem;font-weight:700;color:#ffffff;">$79</span>
+                <span style="color:rgba(255,255,255,0.7);font-size:1.2rem;">/month</span>
               </div>
-              <div class="price-note">
-                <strong>India:</strong> ₹50K – ₹3L+<br>
-                <strong>Intl:</strong> $1,000 – $8,000+
-              </div>
-            </div>
-
-            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Custom CRM Development</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Analytics &amp; BI Dashboards</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Multi-Role Admin Systems</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-red);"></i> Real-Time Data Pipelines</li>
-            </ul>
-
-            <div style="margin-top:auto;">
-              <a href="mailto:dremora.itservices@gmail.com?subject=Quote%20Request%20%E2%80%93%20Business%20Command%20Center%20%7C%20Dremora%20IT&body=Hi%20Dremora%20Team%2C%0A%0AI%27m%20looking%20to%20build%20a%20custom%20CRM%20%2F%20Admin%20Dashboard%20%2F%20Business%20Command%20Center%20for%20my%20organization.%0A%0A%E2%80%94%E2%80%94%20MY%20PROJECT%20DETAILS%20%E2%80%94%E2%80%94%0A%0A%E2%80%A2%20System%20Type%3A%20%5Be.g.%20CRM%20%2F%20Admin%20Panel%20%2F%20Analytics%20Dashboard%20%2F%20ERP%5D%0A%E2%80%A2%20Number%20of%20Users%20%2F%20Roles%3A%20%5BHow%20many%20team%20members%20will%20use%20it%3F%5D%0A%E2%80%A2%20Key%20Modules%20Needed%3A%20%5Be.g.%20lead%20tracking%2C%20reports%2C%20invoicing%2C%20staff%20management%5D%0A%E2%80%A2%20Expected%20Budget%3A%20Rs.%20_______%20%28or%20%24%20_______%20USD%29%0A%E2%80%A2%20Preferred%20Timeline%3A%20%5Be.g.%206%20weeks%20%2F%202%20months%5D%0A%E2%80%A2%20Current%20Tools%20You%20Use%3A%20%5Be.g.%20Excel%20%2F%20Zoho%20%2F%20existing%20software%5D%0A%E2%80%A2%20Industry%20%2F%20Business%20Type%3A%20%5BYour%20industry%5D%0A%0APlease%20share%20a%20detailed%20quote%20and%20schedule%20a%20free%2030-min%20discovery%20call%20at%20your%20earliest%20convenience.%0A%0ALooking%20forward%20to%20hearing%20from%20you!%0A%0ABest%20regards%2C%0A%5BYour%20Full%20Name%5D%0A%5BYour%20Company%20%2F%20Organization%20Name%5D%0A%5BYour%20Contact%20Number%5D" class="btn btn-outline" style="width:100%;border-color:var(--accent-red);color:var(--accent-red);">
-                <i class="fa-solid fa-envelope"></i> Get a Quote
-              </a>
+              <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.8rem;list-style:none;padding:0;">
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">3-minute Video Export</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Voice Effects &amp; Filters</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Trending Sound Library</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Auto Captions &amp; Subtitles</span>
+                </li>
+              </ul>
+              <a href="contact.html" class="neo-btn neo-btn-primary font-handwritten" style="width:100%;">Get Started</a>
             </div>
           </div>
 
-          <!-- ===== CARD 3: AI SINGULARITY BOTS — FEATURED ===== -->
-          <div class="feature-card hover-glow tilt-card" style="border-top:3px solid var(--accent-purple);box-shadow:0 0 40px rgba(138,43,226,0.15);position:relative;display:flex;flex-direction:column;">
-            <div style="position:absolute;top:-1px;right:1.5rem;background:var(--gradient-glow);color:#fff;padding:0.35rem 1rem;font-size:0.72rem;border-bottom-left-radius:8px;border-bottom-right-radius:8px;font-weight:700;letter-spacing:1px;">
-              <i class="fa-solid fa-bolt"></i> HIGH ROI
-            </div>
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-              <div class="icon-box icon-box-purple">
-                <i class="fa-solid fa-brain" style="color:var(--accent-purple);font-size:1.4rem;"></i>
+          <!-- Tier 3 -->
+          <div class="neo-card" style="transform:rotate(-2deg);">
+            <div style="padding:2rem;">
+              <div style="width:50px;height:50px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;color:#a855f7;font-size:1.2rem;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
               </div>
-              <div class="glass-pill pill-purple" style="font-size:0.7rem;">Most Advanced</div>
-            </div>
-            <h2 style="font-size:1.4rem;margin-bottom:0.8rem;">AI Singularity Bots</h2>
-            <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.75;margin-bottom:1.5rem;">
-              Replace hundreds of human hours. We integrate custom Gemini and advanced LLM logic specifically tuned to automate your exact support and operational loops.
-            </p>
-
-            <!-- Price Display -->
-            <div class="price-display" style="border-color:rgba(138,43,226,0.2);background:rgba(138,43,226,0.05);">
-              <div>
-                <span class="price-from">Starting from</span>
-                <span class="price-value purple-price india-price-val">₹75,000</span>
-                <span class="price-value purple-price intl-price-val">$1,500 USD</span>
+              <h3 class="font-handwritten" style="font-size:2rem;margin-bottom:0.5rem;color:#ffffff;">Pro Studio</h3>
+              <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:1.5rem;">For viral content masters</p>
+              <div class="font-handwritten" style="margin-bottom:1.5rem;">
+                <span style="font-size:2.5rem;font-weight:700;color:#ffffff;">$149</span>
+                <span style="color:rgba(255,255,255,0.7);font-size:1.2rem;">/month</span>
               </div>
-              <div class="price-note">
-                <strong>India:</strong> ₹75K – ₹5L+<br>
-                <strong>Intl:</strong> $1,500 – $15,000+
-              </div>
-            </div>
-
-            <ul style="margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Gemini AI Integration</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Custom LLM Wrappers</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> 24/7 Automated Support</li>
-              <li style="display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:var(--text-muted);"><i class="fa-solid fa-check" style="color:var(--accent-purple);"></i> Zero-Hallucination Tuning</li>
-            </ul>
-
-            <div style="margin-top:auto;">
-              <a href="mailto:dremora.itservices@gmail.com?subject=Quote%20Request%20%E2%80%93%20AI%20Singularity%20Bot%20%7C%20Dremora%20IT&body=Hi%20Dremora%20Team%2C%0A%0AI%27m%20interested%20in%20deploying%20a%20custom%20AI%20agent%20%2F%20automation%20bot%20for%20my%20business%20using%20Dremora%27s%20AI%20Singularity%20Bots%20service.%0A%0A%E2%80%94%E2%80%94%20MY%20PROJECT%20DETAILS%20%E2%80%94%E2%80%94%0A%0A%E2%80%A2%20Use%20Case%3A%20%5Be.g.%20Customer%20Support%20Bot%20%2F%20Lead%20Generation%20%2F%20Internal%20Process%20Automation%5D%0A%E2%80%A2%20Platform%3A%20%5Be.g.%20Website%20%2F%20WhatsApp%20%2F%20Telegram%20%2F%20Internal%20System%5D%0A%E2%80%A2%20Daily%20Volume%3A%20%5BApprox.%20how%20many%20queries%20or%20tasks%20per%20day%3F%5D%0A%E2%80%A2%20Expected%20Budget%3A%20Rs.%20_______%20%28or%20%24%20_______%20USD%29%0A%E2%80%A2%20Preferred%20Timeline%3A%20%5BWhen%20do%20you%20want%20this%20live%3F%5D%0A%E2%80%A2%20Existing%20Systems%20to%20Integrate%3A%20%5Be.g.%20your%20website%2C%20CRM%2C%20WhatsApp%20Business%5D%0A%E2%80%A2%20Industry%20%2F%20Business%20Type%3A%20%5BYour%20industry%5D%0A%0APlease%20share%20your%20pricing%2C%20timeline%2C%20and%20schedule%20a%20free%2030-min%20discovery%20call%20at%20the%20earliest.%0A%0ALooking%20forward%20to%20hearing%20from%20you!%0A%0ABest%20regards%2C%0A%5BYour%20Full%20Name%5D%0A%5BYour%20Company%20%2F%20Business%20Name%5D%0A%5BYour%20Contact%20Number%5D" class="btn btn-primary pulse-anim" style="width:100%;box-shadow:0 0 20px rgba(138,43,226,0.3);">
-                <i class="fa-solid fa-robot"></i> Deploy AI Agent
-              </a>
+              <ul style="margin-bottom:2rem;display:flex;flex-direction:column;gap:0.8rem;list-style:none;padding:0;">
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Multi-clip Editing</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Green Screen Effects</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Viral Sound Detection</span>
+                </li>
+                <li style="display:flex;align-items:center;gap:0.8rem;">
+                  <div style="width:24px;height:24px;border-radius:50%;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;"><i class="fa-solid fa-check"></i></div>
+                  <span class="font-handwritten" style="font-size:1.1rem;color:#ffffff;">Engagement Analytics</span>
+                </li>
+              </ul>
+              <a href="contact.html" class="neo-btn font-handwritten" style="width:100%;">Get Started</a>
             </div>
           </div>
-
         </div><!-- end grid -->
-
-        <!-- Pricing Notes -->
-        <div class="pricing-note-strip reveal">
-          <div class="pricing-note-item"><i class="fa-solid fa-check-circle"></i> No hidden charges — price quoted is price charged</div>
-          <div class="pricing-note-item"><i class="fa-solid fa-calendar-check"></i> 50% advance, balance on delivery</div>
-          <div class="pricing-note-item"><i class="fa-solid fa-file-contract"></i> All projects governed by a signed agreement</div>
-          <div class="pricing-note-item"><i class="fa-solid fa-headset"></i> Free 30-min discovery call</div>
-        </div>
-
       </div>
     </section>
 
     <!-- ===== FULL PRICING COMPARISON TABLE ===== -->
-    <section class="section reveal" style="background:rgba(6,8,15,0.7);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+    <section class="section reveal" style="border-top:3px solid #ffffff;border-bottom:3px solid #ffffff;">
       <div class="container">
         <div class="text-center" style="margin-bottom:3.5rem;">
-          <div class="section-divider"></div>
-          <div class="glass-pill pill-cyan float-anim" style="margin-bottom:1.5rem;">
-            <i class="fa-solid fa-table"></i> Transparent Pricing
+          <div class="font-handwritten" style="color:#f59e0b;font-size:1.5rem;transform:rotate(-1deg);margin-bottom:1rem;">
+            Transparent Pricing
           </div>
-          <h2 class="section-title">Full Price <span class="text-gradient">Breakdown</span></h2>
-          <p class="section-subtitle">All prices are project-based estimates. Final cost depends on scope, complexity, and timeline. Contact us for a free custom quote.</p>
+          <h2 class="font-handwritten" style="font-size:3rem;font-weight:700;color:#ffffff;transform:rotate(1deg);">Full Price Breakdown</h2>
+          <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.2rem;max-width:600px;margin-inline:auto;transform:rotate(-1deg);">All prices are project-based estimates. Final cost depends on scope, complexity, and timeline.</p>
         </div>
 
         <div class="price-table-wrap">
@@ -510,46 +455,46 @@
                 <td>
                   <div class="td-service">
                     <div class="service-icon icon-box-cyan" style="background:rgba(0,210,255,0.1);">
-                      <i class="fa-solid fa-code" style="color:var(--primary-cyan);font-size:0.9rem;"></i>
+                      <i class="fa-solid fa-pen-nib" style="color:var(--primary-cyan);font-size:0.9rem;"></i>
                     </div>
                     <div>
-                      <div class="service-name">Precision Web Systems</div>
-                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Full-Stack Web Apps &amp; Landing Pages</div>
+                      <div class="service-name">Creator</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Short Video Editing &amp; Templates</div>
                     </div>
                   </div>
                 </td>
-                <td><span class="india-price">₹25,000 – ₹1,50,000+</span></td>
-                <td><span class="intl-price">$500 – $3,000+</span></td>
+                <td><span class="india-price">₹2,400 / mo</span></td>
+                <td><span class="intl-price">$29 / mo</span></td>
               </tr>
               <tr>
                 <td>
                   <div class="td-service">
                     <div class="service-icon" style="background:rgba(255,77,77,0.1);">
-                      <i class="fa-solid fa-gears" style="color:var(--accent-red);font-size:0.9rem;"></i>
+                      <i class="fa-solid fa-star" style="color:var(--accent-red);font-size:0.9rem;"></i>
                     </div>
                     <div>
-                      <div class="service-name">Business Command Centers</div>
-                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">CRM, Dashboards &amp; Admin Panels</div>
+                      <div class="service-name">Influencer</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Advanced Effects &amp; Auto Captions</div>
                     </div>
                   </div>
                 </td>
-                <td><span class="india-price">₹50,000 – ₹3,00,000+</span></td>
-                <td><span class="intl-price">$1,000 – $8,000+</span></td>
+                <td><span class="india-price">₹6,500 / mo</span></td>
+                <td><span class="intl-price">$79 / mo</span></td>
               </tr>
               <tr>
                 <td>
                   <div class="td-service">
                     <div class="service-icon icon-box-purple" style="background:rgba(138,43,226,0.1);">
-                      <i class="fa-solid fa-brain" style="color:var(--accent-purple);font-size:0.9rem;"></i>
+                      <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent-purple);font-size:0.9rem;"></i>
                     </div>
                     <div>
-                      <div class="service-name">AI Singularity Bots</div>
-                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Custom AI Agents &amp; Gemini Integration</div>
+                      <div class="service-name">Pro Studio</div>
+                      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Full Automation &amp; Analytics</div>
                     </div>
                   </div>
                 </td>
-                <td><span class="india-price">₹75,000 – ₹5,00,000+</span></td>
-                <td><span class="intl-price">$1,500 – $15,000+</span></td>
+                <td><span class="india-price">₹12,400 / mo</span></td>
+                <td><span class="intl-price">$149 / mo</span></td>
               </tr>
               <tr>
                 <td>
@@ -602,52 +547,51 @@
 
         <!-- CTA below table -->
         <div style="text-align:center;margin-top:2.5rem;">
-          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">
+          <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.2rem;margin-bottom:1.5rem;transform:rotate(-1deg);">
             Need a custom scope? Every project is unique — we'll build you a precise quote in 24 hours.
           </p>
-          <a href="contact.html" class="btn btn-primary btn-lg">
-            <i class="fa-solid fa-paper-plane"></i> Get Free Custom Quote
+          <a href="contact.html" class="neo-btn font-handwritten">
+            Get Free Custom Quote
           </a>
         </div>
       </div>
     </section>
 
     <!-- ===== HOW WE WORK ===== -->
-    <section class="section reveal" style="border-bottom:1px solid var(--border-glass);">
+    <section class="section reveal" style="border-bottom:3px solid #ffffff;">
       <div class="container">
         <div class="text-center" style="margin-bottom:4rem;">
-          <div class="section-divider"></div>
-          <h2 class="section-title">How We <span class="text-gradient">Work</span></h2>
-          <p class="section-subtitle">Our proven 4-step process that transforms your idea into production-ready software.</p>
+          <h2 class="font-handwritten" style="font-size:3rem;font-weight:700;color:#ffffff;transform:rotate(-1deg);">How We Work</h2>
+          <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.2rem;transform:rotate(1deg);">Our proven 4-step process.</p>
         </div>
 
-        <div class="stagger-children" style="display:flex;flex-direction:column;gap:1.5rem;max-width:800px;margin-inline:auto;">
-          <div class="process-step hover-glow">
-            <div class="step-number">01</div>
+        <div class="stagger-children" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;max-width:1100px;margin-inline:auto;">
+          <div class="process-step hover-glow" style="flex-direction:column;align-items:center;text-align:center;transform:rotate(-1deg);">
+            <div class="step-number" style="margin-bottom:1rem;font-size:4rem;">01</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Discovery &amp; Free Strategy Call</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Deep dive into your business, workflows, and competitive landscape. 30-minute free call where we define your technical roadmap and identify quick-win opportunities — no commitment required.</p>
+              <h3 class="font-handwritten" style="margin-bottom:0.5rem;font-size:1.5rem;">Discovery &amp; Strategy</h3>
+              <p class="font-handwritten" style="font-size:1.1rem;line-height:1.5;">30-minute free call where we define your roadmap and identify quick-win opportunities.</p>
             </div>
           </div>
-          <div class="process-step hover-glow">
-            <div class="step-number">02</div>
+          <div class="process-step hover-glow" style="flex-direction:column;align-items:center;text-align:center;transform:rotate(1deg);">
+            <div class="step-number" style="margin-bottom:1rem;font-size:4rem;">02</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Proposal &amp; Fixed Quote</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">You receive a detailed project proposal with a <strong style="color:#fff;">fixed, transparent price</strong>. No hourly billing surprises. Scope, timeline, milestones, and total cost — all in writing before we start.</p>
+              <h3 class="font-handwritten" style="margin-bottom:0.5rem;font-size:1.5rem;">Fixed Quote</h3>
+              <p class="font-handwritten" style="font-size:1.1rem;line-height:1.5;">You receive a detailed proposal with a fixed price. No hourly billing surprises.</p>
             </div>
           </div>
-          <div class="process-step hover-glow">
-            <div class="step-number">03</div>
+          <div class="process-step hover-glow" style="flex-direction:column;align-items:center;text-align:center;transform:rotate(-2deg);">
+            <div class="step-number" style="margin-bottom:1rem;font-size:4rem;">03</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Engineering &amp; Weekly Updates</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Agile sprints with clear milestones. You see live progress every week — demos, feedback loops, and complete transparency. 50% advance on kickoff, balance on delivery.</p>
+              <h3 class="font-handwritten" style="margin-bottom:0.5rem;font-size:1.5rem;">Weekly Updates</h3>
+              <p class="font-handwritten" style="font-size:1.1rem;line-height:1.5;">Agile sprints. You see live progress every week — demos and complete transparency.</p>
             </div>
           </div>
-          <div class="process-step hover-glow">
-            <div class="step-number">04</div>
+          <div class="process-step hover-glow" style="flex-direction:column;align-items:center;text-align:center;transform:rotate(2deg);">
+            <div class="step-number" style="margin-bottom:1rem;font-size:4rem;">04</div>
             <div>
-              <h3 style="margin-bottom:0.5rem;">Delivery, Launch &amp; Ongoing Support</h3>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Cloud deployment, handover documentation, and 30 days of complimentary post-launch support. We stay on as your technology partner long after launch day.</p>
+              <h3 class="font-handwritten" style="margin-bottom:0.5rem;font-size:1.5rem;">Launch &amp; Support</h3>
+              <p class="font-handwritten" style="font-size:1.1rem;line-height:1.5;">Cloud deployment and 30 days of free post-launch support.</p>
             </div>
           </div>
         </div>

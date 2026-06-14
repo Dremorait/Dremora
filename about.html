@@ -36,10 +36,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/neobrutalism.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/mobile.css">
   <link rel="icon" href="assets/images/logo.png">
@@ -69,57 +71,50 @@
 
     <!-- ===== HERO ===== -->
     <section class="section text-center" style="padding-bottom:4rem;position:relative;overflow:hidden;">
-      <!-- Decorative floaters -->
-      <div class="float-anim" style="position:absolute;top:8%;left:12%;opacity:0.4;"><i class="fa-solid fa-code" style="font-size:3.5rem;color:var(--primary-cyan);"></i></div>
-      <div class="float-anim-delay-2" style="position:absolute;bottom:15%;right:12%;opacity:0.35;"><i class="fa-solid fa-microchip" style="font-size:4rem;color:var(--accent-purple);"></i></div>
-      <div class="pulse-anim" style="position:absolute;top:35%;right:4%;opacity:0.12;"><i class="fa-solid fa-circle-nodes" style="font-size:7rem;color:var(--primary-blue);"></i></div>
-      <div class="float-anim-delay-1" style="position:absolute;top:20%;left:4%;opacity:0.15;"><i class="fa-solid fa-brain" style="font-size:5rem;color:var(--accent-purple);"></i></div>
-
       <div class="container" style="position:relative;z-index:2;max-width:900px;">
-        <div class="glass-pill pill-cyan float-anim" style="margin-bottom:2rem;">
-          <span style="width:8px;height:8px;background:var(--primary-cyan);border-radius:50%;box-shadow:0 0 12px var(--primary-cyan);"></span>
+        <div class="neo-border font-handwritten float-anim" style="margin-bottom:2rem;display:inline-block;padding:0.5rem 1.2rem;background:#00d2ff;color:#06080F;font-weight:700;transform:rotate(-2deg);">
+          <span style="width:8px;height:8px;background:#06080F;border-radius:50%;display:inline-block;margin-right:0.5rem;"></span>
           The Dremora Advantage
         </div>
-        <h1 class="section-title" style="font-size:clamp(2.2rem,5vw,4.5rem);margin-bottom:1.5rem;">
+        <h1 class="section-title font-handwritten" style="font-size:clamp(2.2rem,5vw,4.5rem);margin-bottom:1.5rem;color:#ffffff;transform:rotate(1deg);">
           We Don't Just Write Code.<br>
-          <span class="gradient-animated-text">We Engineer Market Leaders.</span>
+          <span style="color:#fbbf24;">We Engineer Market Leaders.</span>
         </h1>
-        <p style="color:var(--text-muted);font-size:1.15rem;line-height:1.85;max-width:800px;margin-inline:auto;margin-bottom:3rem;">
+        <p class="font-handwritten" style="color:rgba(255,255,255,0.8);font-size:1.3rem;line-height:1.85;max-width:800px;margin-inline:auto;margin-bottom:3rem;transform:rotate(-1deg);">
           In today's hyper-competitive digital landscape, out-of-the-box software isn't enough.
-          <strong style="color:#fff;">Dremora</strong> is your strategic technology partner. We architect highly-scalable,
+          <strong style="color:#ffffff;">Dremora</strong> is your strategic technology partner. We architect highly-scalable,
           custom problem-solving software designed to dominate your niche, drastically cut operational costs
           through deep automation, and multiply your revenue streams.
         </p>
 
         <!-- Stat badges -->
         <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-          <div class="glass-panel-cyan hover-glow" style="padding:1rem 2rem;border-radius:50px;text-align:center;">
-            <span class="metric-number text-gradient" style="font-size:2rem;" data-counter data-target="100" data-suffix="%">100%</span>
-            <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Tailored Architecture</div>
+          <div class="neo-card" style="padding:1rem 2rem;text-align:center;transform:rotate(-2deg);">
+            <span class="font-handwritten" style="font-size:2.5rem;color:#00d2ff;font-weight:700;" data-counter data-target="100" data-suffix="%">100%</span>
+            <div class="font-handwritten" style="font-size:1.1rem;color:#ffffff;margin-top:0.2rem;">Tailored Architecture</div>
           </div>
-          <div class="glass-panel-purple hover-glow" style="padding:1rem 2rem;border-radius:50px;text-align:center;">
-            <span class="metric-number" style="font-size:2rem;background:var(--gradient-cosmic);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;" data-counter data-target="3" data-suffix="x">3x</span>
-            <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Avg. Growth Velocity</div>
+          <div class="neo-card" style="padding:1rem 2rem;text-align:center;transform:rotate(1deg);">
+            <span class="font-handwritten" style="font-size:2.5rem;color:#8a2be2;font-weight:700;" data-counter data-target="3" data-suffix="x">3x</span>
+            <div class="font-handwritten" style="font-size:1.1rem;color:#ffffff;margin-top:0.2rem;">Avg. Growth Velocity</div>
           </div>
-          <div class="glass-panel hover-glow" style="padding:1rem 2rem;border-radius:50px;text-align:center;">
-            <span class="metric-number text-gradient-gold" style="font-size:2rem;" data-counter data-target="50" data-suffix="+">50+</span>
-            <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Projects Delivered</div>
+          <div class="neo-card" style="padding:1rem 2rem;text-align:center;transform:rotate(-1deg);">
+            <span class="font-handwritten" style="font-size:2.5rem;color:#fbbf24;font-weight:700;" data-counter data-target="50" data-suffix="+">50+</span>
+            <div class="font-handwritten" style="font-size:1.1rem;color:#ffffff;margin-top:0.2rem;">Projects Delivered</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== MISSION & VISION ===== -->
-    <section class="section reveal" style="background:rgba(6,8,15,0.6);border-top:1px solid var(--border-glass);">
+    <section class="section reveal" style="border-top:3px solid #ffffff;border-bottom:3px solid #ffffff;">
       <div class="container">
         <div style="display:flex;flex-wrap:wrap;gap:4rem;align-items:center;justify-content:center;">
 
           <div style="flex:1;min-width:300px;max-width:580px;">
-            <div class="section-divider" style="margin:0 0 1.5rem;"></div>
-            <h2 class="section-title" style="margin-bottom:2rem;">How We <span class="text-gradient">Grow Your Business</span></h2>
+            <h2 class="section-title font-handwritten" style="margin-bottom:2rem;font-size:3rem;transform:rotate(-1deg);color:#ffffff;">How We <span style="color:#00d2ff;">Grow Your Business</span></h2>
 
-            <div class="glass-panel" style="padding:2.5rem;border-left:3px solid var(--primary-cyan);margin-bottom:2rem;">
-              <p style="color:var(--text-muted);font-size:1rem;line-height:1.85;">
+            <div class="neo-card" style="padding:2.5rem;margin-bottom:2rem;transform:rotate(1deg);">
+              <p class="font-handwritten" style="color:rgba(255,255,255,0.8);font-size:1.2rem;line-height:1.85;">
                 We take a consultative approach to growth. By deeply understanding your workflow, we strategize and
                 build tailored software solutions that automate your core processes. From intelligent CRM tools to
                 high-performance customer portals, we engineer architectures that allow businesses to scale
@@ -128,27 +123,27 @@
             </div>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
-              <div class="feature-card hover-glow" style="padding:1.8rem;border-left:3px solid var(--accent-purple);">
-                <i class="fa-solid fa-eye" style="color:var(--accent-purple);font-size:1.5rem;margin-bottom:0.8rem;display:block;"></i>
-                <h3 style="font-size:1.1rem;margin-bottom:0.5rem;">Our Vision</h3>
-                <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.65;">To become the definitive digital headquarters for startups providing bleeding-edge technology that standardizes business automation.</p>
+              <div class="neo-card" style="padding:1.8rem;transform:rotate(-1deg);">
+                <i class="fa-solid fa-eye" style="color:#8a2be2;font-size:1.8rem;margin-bottom:0.8rem;display:block;"></i>
+                <h3 class="font-handwritten" style="font-size:1.4rem;margin-bottom:0.5rem;color:#ffffff;">Our Vision</h3>
+                <p class="font-handwritten" style="color:rgba(255,255,255,0.8);font-size:1.1rem;line-height:1.65;">To become the definitive digital headquarters for startups providing bleeding-edge technology that standardizes business automation.</p>
               </div>
-              <div class="feature-card hover-glow" style="padding:1.8rem;border-left:3px solid var(--primary-blue);">
-                <i class="fa-solid fa-bullseye" style="color:var(--primary-blue);font-size:1.5rem;margin-bottom:0.8rem;display:block;"></i>
-                <h3 style="font-size:1.1rem;margin-bottom:0.5rem;">Our Mission</h3>
-                <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.65;">To actively engineer smart platforms, deliver premium end-to-end IT services, and solve complex business problems through code.</p>
+              <div class="neo-card" style="padding:1.8rem;transform:rotate(2deg);">
+                <i class="fa-solid fa-bullseye" style="color:#fbbf24;font-size:1.8rem;margin-bottom:0.8rem;display:block;"></i>
+                <h3 class="font-handwritten" style="font-size:1.4rem;margin-bottom:0.5rem;color:#ffffff;">Our Mission</h3>
+                <p class="font-handwritten" style="color:rgba(255,255,255,0.8);font-size:1.1rem;line-height:1.65;">To actively engineer smart platforms, deliver premium end-to-end IT services, and solve complex business problems through code.</p>
               </div>
             </div>
           </div>
 
           <div style="flex:0.8;min-width:300px;max-width:450px;text-align:center;position:relative;">
-            <div class="float-anim glass-panel" style="padding:0.75rem;">
-              <img src="assets/images/business_growth.png" alt="Dremora IT – Business growth through custom software" loading="lazy" style="border-radius:14px;width:100%;border:1px solid var(--border-glass);">
-              <div class="glass-panel float-anim-delay-1" style="position:absolute;bottom:25px;right:15px;padding:1rem 1.25rem;display:flex;align-items:center;gap:0.8rem;background:rgba(14,18,38,0.95);">
-                <i class="fa-solid fa-chart-line" style="font-size:1.4rem;color:var(--primary-cyan);"></i>
+            <div class="float-anim neo-card" style="padding:0.75rem;transform:rotate(-2deg);">
+              <img src="assets/images/business_growth.png" alt="Dremora IT – Business growth through custom software" loading="lazy" style="border-radius:14px;width:100%;border:3px solid #ffffff;">
+              <div class="neo-border float-anim-delay-1" style="position:absolute;bottom:25px;right:15px;padding:1rem 1.25rem;display:flex;align-items:center;gap:0.8rem;background:#00d2ff;color:#06080F;box-shadow:4px 4px 0px 0px #ffffff;">
+                <i class="fa-solid fa-chart-line" style="font-size:1.4rem;color:#06080F;"></i>
                 <div style="text-align:left;">
-                  <div style="font-size:0.85rem;font-weight:700;">Scalability</div>
-                  <div style="font-size:0.75rem;color:var(--text-muted);">Unlocking growth</div>
+                  <div class="font-handwritten" style="font-size:1.1rem;font-weight:700;">Scalability</div>
+                  <div class="font-handwritten" style="font-size:0.9rem;color:rgba(0,0,0,0.7);">Unlocking growth</div>
                 </div>
               </div>
             </div>
@@ -159,62 +154,61 @@
     </section>
 
     <!-- ===== COMPANY VALUES ===== -->
-    <section class="section">
+    <section class="section" style="border-top:3px solid #ffffff;border-bottom:3px solid #ffffff;">
       <div class="container">
         <div class="text-center reveal" style="margin-bottom:4rem;">
-          <div class="section-divider"></div>
-          <h2 class="section-title">Our Core <span class="text-gradient">Values</span></h2>
-          <p class="section-subtitle">The principles that guide every decision, every line of code, and every client engagement.</p>
+          <h2 class="section-title font-handwritten" style="margin-bottom:2rem;font-size:3rem;transform:rotate(1deg);color:#ffffff;">Our Core <span style="color:#fbbf24;">Values</span></h2>
+          <p class="section-subtitle font-handwritten" style="font-size:1.2rem;transform:rotate(-1deg);">The principles that guide every decision, every line of code, and every client engagement.</p>
         </div>
 
         <div class="stagger-children" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;">
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(0,210,255,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-code-branch" style="color:var(--primary-cyan);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(-1deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#00d2ff;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-code-branch" style="color:#06080F;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Engineering Precision</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">Every system is architected with scalability, maintainability, and performance as non-negotiables from day one.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Engineering Precision</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">Every system is architected with scalability, maintainability, and performance as non-negotiables from day one.</p>
           </div>
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(138,43,226,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-users" style="color:var(--accent-purple);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(2deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#8a2be2;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-users" style="color:#ffffff;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Client Partnership</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">We work alongside you, not just for you. Transparent communication, honest timelines, shared ambition.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Client Partnership</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">We work alongside you, not just for you. Transparent communication, honest timelines, shared ambition.</p>
           </div>
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-lightbulb" style="color:var(--accent-gold);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(-2deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#fbbf24;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-lightbulb" style="color:#06080F;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Innovation Culture</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">We embrace the latest AI, cloud, and automation technologies before they become industry standards.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Innovation Culture</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">We embrace the latest AI, cloud, and automation technologies before they become industry standards.</p>
           </div>
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(58,123,213,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-handshake" style="color:var(--primary-blue);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(1deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-handshake" style="color:#ffffff;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Integrity First</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">We say what we'll do, and we do what we say. No overpromising. No hidden costs.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Integrity First</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">We say what we'll do, and we do what we say. No overpromising. No hidden costs.</p>
           </div>
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,77,77,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-fire" style="color:var(--accent-red);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(-1deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#e40046;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-fire" style="color:#ffffff;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Relentless Drive</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">We obsess over the details that make a product go from good to remarkable â€” and never settle for less.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Relentless Drive</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">We obsess over the details that make a product go from good to remarkable — and never settle for less.</p>
           </div>
 
-          <div class="feature-card hover-glow tilt-card">
-            <div style="width:50px;height:50px;border-radius:14px;background:rgba(0,210,255,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-              <i class="fa-solid fa-leaf" style="color:var(--primary-cyan);font-size:1.3rem;"></i>
+          <div class="neo-card text-center" style="transform:rotate(2deg);padding:2rem;">
+            <div class="neo-border" style="width:60px;height:60px;border-radius:50%;background:#00d2ff;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:4px 4px 0px 0px #ffffff;">
+              <i class="fa-solid fa-leaf" style="color:#06080F;font-size:1.5rem;"></i>
             </div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.1rem;">Sustainable Growth</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">We build systems meant to last â€” clean code, documented architecture, scalable infrastructure.</p>
+            <h3 class="font-handwritten" style="margin-bottom:0.7rem;font-size:1.4rem;color:#ffffff;">Sustainable Growth</h3>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;">We build systems meant to last — clean code, documented architecture, scalable infrastructure.</p>
           </div>
 
         </div>
@@ -222,39 +216,38 @@
     </section>
 
     <!-- ===== WHAT WE BUILD ===== -->
-    <section class="section reveal" style="background:rgba(6,8,15,0.6);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+    <section class="section reveal" style="border-top:3px solid #ffffff;border-bottom:3px solid #ffffff;">
       <div class="container">
         <div class="text-center" style="margin-bottom:4rem;">
-          <div class="section-divider"></div>
-          <h2 class="section-title">What We <span class="text-gradient">Build</span></h2>
-          <p class="section-subtitle">A snapshot of the systems and platforms we've engineered for clients and institutions.</p>
+          <h2 class="section-title font-handwritten" style="margin-bottom:1.5rem;font-size:3rem;transform:rotate(-1deg);color:#ffffff;">What We <span style="color:#8a2be2;">Build</span></h2>
+          <p class="section-subtitle font-handwritten" style="font-size:1.2rem;transform:rotate(1deg);">A snapshot of the systems and platforms we've engineered for clients and institutions.</p>
         </div>
 
         <div class="stagger-children" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
-          <div class="glass-panel-cyan hover-glow" style="padding:1.8rem;border-radius:16px;text-align:center;">
-            <i class="fa-solid fa-city" style="font-size:2rem;color:var(--primary-cyan);margin-bottom:1rem;"></i>
-            <h4 style="font-size:1rem;margin-bottom:0.5rem;">Civic Systems</h4>
-            <p style="color:var(--text-muted);font-size:0.85rem;">NagarSeva-style municipal management platforms</p>
+          <div class="neo-card" style="padding:1.8rem;text-align:center;transform:rotate(1deg);">
+            <i class="fa-solid fa-city" style="font-size:2.5rem;color:#00d2ff;margin-bottom:1rem;"></i>
+            <h4 class="font-handwritten" style="font-size:1.3rem;margin-bottom:0.5rem;color:#ffffff;">Civic Systems</h4>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;">NagarSeva-style municipal management platforms</p>
           </div>
-          <div class="glass-panel hover-glow" style="padding:1.8rem;border-radius:16px;text-align:center;border-color:rgba(138,43,226,0.2);">
-            <i class="fa-solid fa-robot" style="font-size:2rem;color:var(--accent-purple);margin-bottom:1rem;"></i>
-            <h4 style="font-size:1rem;margin-bottom:0.5rem;">AI Chatbots</h4>
-            <p style="color:var(--text-muted);font-size:0.85rem;">Gemini-powered support agents &amp; automation bots</p>
+          <div class="neo-card" style="padding:1.8rem;text-align:center;transform:rotate(-1deg);">
+            <i class="fa-solid fa-robot" style="font-size:2.5rem;color:#8a2be2;margin-bottom:1rem;"></i>
+            <h4 class="font-handwritten" style="font-size:1.3rem;margin-bottom:0.5rem;color:#ffffff;">AI Chatbots</h4>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;">Gemini-powered support agents &amp; automation bots</p>
           </div>
-          <div class="glass-panel hover-glow" style="padding:1.8rem;border-radius:16px;text-align:center;border-color:rgba(58,123,213,0.2);">
-            <i class="fa-solid fa-chart-bar" style="font-size:2rem;color:var(--primary-blue);margin-bottom:1rem;"></i>
-            <h4 style="font-size:1rem;margin-bottom:0.5rem;">Data Dashboards</h4>
-            <p style="color:var(--text-muted);font-size:0.85rem;">Business intelligence &amp; analytics command centres</p>
+          <div class="neo-card" style="padding:1.8rem;text-align:center;transform:rotate(2deg);">
+            <i class="fa-solid fa-chart-bar" style="font-size:2.5rem;color:#3b82f6;margin-bottom:1rem;"></i>
+            <h4 class="font-handwritten" style="font-size:1.3rem;margin-bottom:0.5rem;color:#ffffff;">Data Dashboards</h4>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;">Business intelligence &amp; analytics command centres</p>
           </div>
-          <div class="glass-panel hover-glow" style="padding:1.8rem;border-radius:16px;text-align:center;border-color:rgba(255,215,0,0.2);">
-            <i class="fa-solid fa-store" style="font-size:2rem;color:var(--accent-gold);margin-bottom:1rem;"></i>
-            <h4 style="font-size:1rem;margin-bottom:0.5rem;">E-Commerce</h4>
-            <p style="color:var(--text-muted);font-size:0.85rem;">Custom storefronts, CRM &amp; order management systems</p>
+          <div class="neo-card" style="padding:1.8rem;text-align:center;transform:rotate(-2deg);">
+            <i class="fa-solid fa-store" style="font-size:2.5rem;color:#fbbf24;margin-bottom:1rem;"></i>
+            <h4 class="font-handwritten" style="font-size:1.3rem;margin-bottom:0.5rem;color:#ffffff;">E-Commerce</h4>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;">Custom storefronts, CRM &amp; order management systems</p>
           </div>
-          <div class="glass-panel hover-glow" style="padding:1.8rem;border-radius:16px;text-align:center;border-color:rgba(255,77,77,0.2);">
-            <i class="fa-solid fa-graduation-cap" style="font-size:2rem;color:var(--accent-red);margin-bottom:1rem;"></i>
-            <h4 style="font-size:1rem;margin-bottom:0.5rem;">EdTech Platforms</h4>
-            <p style="color:var(--text-muted);font-size:0.85rem;">Learning management systems &amp; coaching platforms</p>
+          <div class="neo-card" style="padding:1.8rem;text-align:center;transform:rotate(1deg);">
+            <i class="fa-solid fa-graduation-cap" style="font-size:2.5rem;color:#e40046;margin-bottom:1rem;"></i>
+            <h4 class="font-handwritten" style="font-size:1.3rem;margin-bottom:0.5rem;color:#ffffff;">EdTech Platforms</h4>
+            <p class="font-handwritten" style="color:rgba(255,255,255,0.7);font-size:1.1rem;">Learning management systems &amp; coaching platforms</p>
           </div>
         </div>
       </div>
@@ -263,12 +256,12 @@
     <!-- ===== CTA ===== -->
     <section class="section reveal text-center">
       <div class="container">
-        <div class="glass-panel" style="padding:5rem 3rem;background:linear-gradient(135deg,rgba(0,210,255,0.04),rgba(138,43,226,0.04));border-color:rgba(0,210,255,0.12);max-width:800px;margin-inline:auto;">
-          <h2 class="section-title" style="margin-bottom:1rem;">Ready to collaborate?</h2>
-          <p class="section-subtitle" style="margin-bottom:2rem;">Let's talk about your vision and engineer something remarkable together.</p>
-          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-            <a href="contact.html" class="btn btn-primary btn-lg">Start a Project <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="services.html" class="btn btn-outline btn-lg">Our Services</a>
+        <div class="neo-card" style="padding:5rem 3rem;background:#8a2be2;max-width:800px;margin-inline:auto;transform:rotate(-1deg);">
+          <h2 class="section-title font-handwritten" style="margin-bottom:1rem;font-size:3rem;color:#ffffff;">Ready to collaborate?</h2>
+          <p class="section-subtitle font-handwritten" style="margin-bottom:2rem;font-size:1.3rem;color:rgba(255,255,255,0.9);">Let's talk about your vision and engineer something remarkable together.</p>
+          <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+            <a href="contact.html" class="neo-btn font-handwritten" style="background:#00d2ff !important;color:#06080F !important;transform:rotate(1deg);">Start a Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="services.html" class="neo-btn font-handwritten" style="transform:rotate(-1deg);">Our Services</a>
           </div>
         </div>
       </div>
@@ -277,53 +270,77 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
+  <footer class="site-footer" style="border-top:3px solid #ffffff;background:#06080F;padding-top:4rem;">
     <div class="container">
-      <div class="footer-gradient-bar"></div>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html"><img src="assets/images/logo.png" alt="Dremora" style="height:52px;width:52px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);margin-bottom:1rem;"></a>
-          <p>Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
-          <div class="footer-social">
-            <a href="https://www.linkedin.com/company/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://twitter.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+          <a href="index.html">
+            <img src="assets/images/logo.png" alt="Dremora"
+              style="height:60px;width:60px;object-fit:contain;background:#ffffff;padding:5px;border-radius:50%;border:3px solid #00d2ff;margin-bottom:1rem;transform:rotate(-5deg);">
+          </a>
+          <p class="font-handwritten" style="font-size:1.1rem;color:rgba(255,255,255,0.8);">Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
+          <div class="footer-social" style="display:flex;gap:1rem;">
+            <a href="https://www.linkedin.com/company/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank"
+              rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://twitter.com/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
+              aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com/dremora.it/" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
+              aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://github.com/Dremorait" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
+              aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:dremora.itservices@gmail.com" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;"
+              aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
+
         <div>
-          <p class="footer-heading">Navigation</p>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Our Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="internship.html">Internship</a></li>
-            <li><a href="contact.html">Contact</a></li>
+          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Navigation</p>
+          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
+            <li><a href="about.html" style="color:#ffffff;text-decoration:none;">About Us</a></li>
+            <li><a href="services.html" style="color:#ffffff;text-decoration:none;">Our Services</a></li>
+            <li><a href="projects.html" style="color:#ffffff;text-decoration:none;">Projects</a></li>
+            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">Internship</a></li>
+            <li><a href="contact.html" style="color:#ffffff;text-decoration:none;">Contact</a></li>
           </ul>
         </div>
+
         <div>
-          <p class="footer-heading">Legal</p>
-          <ul class="footer-links">
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms-of-service.html">Terms of Service</a></li>
-            <li><a href="course-guidelines.html">Course Guidelines</a></li>
-            <li><a href="refund-policy.html">Refund Policy</a></li>
+          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Legal</p>
+          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
+            <li><a href="privacy-policy.html" style="color:#ffffff;text-decoration:none;">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" style="color:#ffffff;text-decoration:none;">Terms of Service</a></li>
+            <li><a href="course-guidelines.html" style="color:#ffffff;text-decoration:none;">Course Guidelines</a></li>
+            <li><a href="refund-policy.html" style="color:#ffffff;text-decoration:none;">Refund Policy</a></li>
           </ul>
         </div>
+
         <div>
-          <p class="footer-heading">Get In Touch</p>
+          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Get In Touch</p>
           <div style="display:flex;flex-direction:column;gap:1rem;">
-            <a href="tel:+919309795878" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-phone" style="color:var(--primary-cyan);"></i> +91 9309795878</a>
-            <a href="mailto:dremora.itservices@gmail.com" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><i class="fa-solid fa-envelope" style="color:var(--primary-cyan);"></i> dremora.itservices@gmail.com</a>
+            <a href="tel:+919309795878"
+              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
+              <i class="fa-solid fa-phone" style="color:#00d2ff;width:16px;"></i> +91 9309795878
+            </a>
+            <a href="mailto:dremora.itservices@gmail.com"
+              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
+              <i class="fa-solid fa-envelope" style="color:#00d2ff;width:16px;"></i>
+              dremora.itservices@gmail.com
+            </a>
+            <p class="font-handwritten" style="display:flex;align-items:flex-start;gap:0.8rem;color:#ffffff;font-size:1.1rem;">
+              <i class="fa-solid fa-location-dot" style="color:#00d2ff;width:16px;margin-top:3px;"></i>
+              Pune, Maharashtra 411032, India
+            </p>
           </div>
-          <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;font-size:0.85rem;padding:0.6rem 1.4rem;">Start a Project</a>
+          <a href="contact.html" class="neo-btn font-handwritten"
+            style="margin-top:1.5rem;font-size:1rem;padding:0.6rem 1.4rem;display:inline-block;transform:rotate(-2deg);">Start a Project</a>
         </div>
       </div>
-      <div class="footer-bottom">
+
+      <div class="footer-bottom font-handwritten" style="border-top:3px solid #ffffff;margin-top:3rem;padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;color:#ffffff;font-size:1.1rem;">
         <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
         <div style="display:flex;gap:1.5rem;">
-          <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Privacy</a>
-          <a href="terms-of-service.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Terms</a>
+          <a href="privacy-policy.html" style="color:#ffffff;text-decoration:none;">Privacy</a>
+          <a href="terms-of-service.html" style="color:#ffffff;text-decoration:none;">Terms</a>
         </div>
       </div>
     </div>
