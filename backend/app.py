@@ -84,8 +84,9 @@ def submit_contact():
         }).execute()
         return jsonify({"status": "success", "message": "Inquiry received successfully!"}), 200
     except Exception as e:
-        print(e)
-        return jsonify({"status": "error", "message": "Failed to submit inquiry."}), 500
+        error_msg = str(e)
+        print("Contact Error:", error_msg)
+        return jsonify({"status": "error", "message": f"Failed to submit inquiry: {error_msg}"}), 500
 
 @app.route('/api/internship/apply', methods=['POST'])
 def submit_internship():
@@ -101,8 +102,9 @@ def submit_internship():
         }).execute()
         return jsonify({"status": "success", "message": "Application submitted successfully!"}), 200
     except Exception as e:
-        print(f"Internship Error: {e}")
-        return jsonify({"status": "error", "message": "Failed to submit application."}), 500
+        error_msg = str(e)
+        print("Internship Error:", error_msg)
+        return jsonify({"status": "error", "message": f"Failed to submit application: {error_msg}"}), 500
 
 if __name__ == '__main__':
     # Use environment port for deployment (Render/Railway), default to 5000 for local
