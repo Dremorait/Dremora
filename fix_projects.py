@@ -70,9 +70,9 @@ content = content.replace('<div class="ts-icon">??</div><div class="ts-title">Fa
 content = content.replace('3Ã—', '3×')
 content = content.replace('2Ã—', '2×')
 content = content.replace('10Ã—', '10×')
-content = content.replace('â€”', '—')
-content = content.replace('Ã¢â‚¬â€œ', '—')
-content = content.replace('â€“', '–')
+content = content.replace('—', '—')
+content = content.replace('—', '—')
+content = content.replace('–', '–')
 
 with open('c:\\xampp\\htdocs\\Dremora\\projects.html', 'w', encoding='utf-8') as f:
     f.write(content)

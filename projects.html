@@ -1,1678 +1,253 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGCG2F6PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7BGCG2F6PK');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGCG2F6PK"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7BGCG2F6PK');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="144x144" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
-  <title>Projects & Case Studies | Dremora IT Consultants & Services</title>
-  <meta name="description" content="Explore Dremora IT's project portfolio: NagarSeva civic platform, CRM Pipeline, Cafe & Restaurant POS, AgroTrack smart irrigation, EduPro coaching platform, and AI Agent for IT companies.">
-  <meta name="keywords" content="Dremora projects, NagarSeva, CRM pipeline, restaurant POS, smart irrigation, EdTech coaching, AI agent IT productivity, Dremora IT portfolio">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Dremora IT Consultants & Services">
+  <title>Our Work – Dremora IT | Projects & Case Studies</title>
+  <meta name="description" content="See what Dremora IT has built — honest case studies of real projects including the NagarSeva civic platform prototype.">
   <link rel="canonical" href="https://dremora-sigma.vercel.app/projects.html">
-  <meta property="og:type" content="website">
+  <meta property="og:title" content="Our Work – Dremora IT | Projects & Case Studies">
+  <meta property="og:description" content="Honest case studies from Dremora IT. NagarSeva civic platform and more.">
   <meta property="og:url" content="https://dremora-sigma.vercel.app/projects.html">
-  <meta property="og:title" content="Projects & Case Studies | Dremora IT">
-  <meta property="og:description" content="Full project portfolio of Dremora IT – AI, CRM, AgriTech, EdTech & more.">
-  <meta property="og:image" content="https://dremora-sigma.vercel.app/assets/images/dashboard_mockup.png">
-  <meta property="og:site_name" content="Dremora IT Consultants & Services">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Projects | Dremora IT">
-  <meta name="twitter:description" content="Case studies: NagarSeva, CRM, Restaurant POS, AgroTrack, EduPro, AI Agent.">
-  <meta name="twitter:image" content="https://dremora-sigma.vercel.app/assets/images/dashboard_mockup.png">
+  <meta property="og:image" content="https://dremora-sigma.vercel.app/assets/images/logo.png">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <meta name="theme-color" content="#090909">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/neobrutalism.css">
   <link rel="stylesheet" href="css/animations.css">
-  <style>
-    /* ===== PROJECTS PAGE SPECIFIC STYLES ===== */
-    .projects-hero {
-      padding: 7rem 0 4rem;
-      text-align: center;
-      position: relative;
-    }
-    .projects-hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 80%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--primary-cyan), var(--accent-purple), transparent);
-    }
-    .project-filter-bar {
-      display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
-      margin: 2.5rem 0;
-    }
-    .filter-btn {
-      padding: 0.5rem 1.4rem;
-      border-radius: 0;
-      border: 3px solid #ffffff;
-      background: #06080F;
-      color: #ffffff;
-      cursor: pointer; font-family: 'Kalam', cursive;
-      font-size: 1.1rem; font-weight: 700;
-      transition: all 0.2s ease;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: #00d2ff;
-      border-color: #00d2ff;
-      color: #06080F;
-      transform: translate(-2px, -2px) rotate(1deg);
-      box-shadow: 4px 4px 0px 0px #ffffff;
-    }
-
-    /* ===== PROJECT GRID CARDS ===== */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-      gap: 2.5rem;
-      margin-bottom: 5rem;
-    }
-
-    .project-card {
-      background: #06080F;
-      border: 3px solid #ffffff;
-      border-radius: 0;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    .project-card:hover {
-      transform: translate(-4px, -4px) rotate(-1deg);
-      box-shadow: 8px 8px 0px 0px #ffffff;
-    }
-    .project-card[data-color="cyan"]:hover { border-color: #00d2ff; box-shadow: 8px 8px 0px 0px #00d2ff; }
-    .project-card[data-color="orange"]:hover { border-color: #ff8c42; box-shadow: 8px 8px 0px 0px #ff8c42; }
-    .project-card[data-color="green"]:hover { border-color: #4ade80; box-shadow: 8px 8px 0px 0px #4ade80; }
-    .project-card[data-color="purple"]:hover { border-color: var(--accent-purple); box-shadow: 8px 8px 0px 0px var(--accent-purple); }
-    .project-card[data-color="blue"]:hover { border-color: #60a5fa; box-shadow: 8px 8px 0px 0px #60a5fa; }
-
-    .project-card-mockup {
-      width: 100%; height: 240px;
-      overflow: hidden; position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .project-card-mockup img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .project-card-mockup-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(6,8,15,0.55) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
-    }
-    .project-card:hover .project-card-mockup-overlay { opacity: 1; }
-    .mockup-overlay-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(0,210,255,0.25);
-      border: 1px solid rgba(0,210,255,0.5);
-      padding: 0.3rem 0.75rem;
-      border-radius: 99px;
-    }
-    .project-card:hover .project-card-mockup img { transform: scale(1.05); }
-    .project-card-body { padding: 1.75rem; }
-    .project-badge {
-      display: inline-block;
-      padding: 0.3rem 0.9rem; border-radius: 50px;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
-      margin-bottom: 0.9rem; text-transform: uppercase;
-    }
-    .badge-cyan { background: rgba(0,210,255,0.12); color: var(--primary-cyan); border: 1px solid rgba(0,210,255,0.3); }
-    .badge-orange { background: rgba(255,140,66,0.12); color: #ff8c42; border: 1px solid rgba(255,140,66,0.3); }
-    .badge-green { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
-    .badge-purple { background: rgba(138,43,226,0.12); color: #a855f7; border: 1px solid rgba(138,43,226,0.3); }
-    .badge-blue { background: rgba(96,165,250,0.12); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
-    .badge-gold { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
-
-    .project-card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .project-card-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.2rem; }
-    .project-stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.3rem; }
-    .stack-tag {
-      padding: 0.25rem 0.7rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 6px; font-size: 0.78rem;
-      color: var(--text-muted); font-weight: 500;
-    }
-    .project-card-cta {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.85rem; font-weight: 600;
-      color: var(--primary-cyan); cursor: pointer;
-      transition: gap 0.3s ease;
-    }
-    .project-card:hover .project-card-cta { gap: 0.8rem; }
-
-    /* ===== INLINE MOCKUP IMAGES (SVG/CSS) ===== */
-    .mockup-crm {
-      background: linear-gradient(135deg, #0d1117 0%, #0f172a 100%);
-      width: 100%; height: 100%; position: relative; overflow: hidden;
-      display: flex; gap: 0;
-    }
-    .mockup-sidebar {
-      width: 52px; background: rgba(255,255,255,0.04);
-      border-right: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; align-items: center;
-      padding-top: 1rem; gap: 1.2rem;
-    }
-    .mockup-sidebar i { color: rgba(255,255,255,0.3); font-size: 14px; }
-    .mockup-sidebar i.active { color: #00d2ff; }
-    .mockup-main { flex: 1; padding: 12px; overflow: hidden; }
-    .mockup-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 10px;
-    }
-    .mockup-topbar-title { font-size: 11px; font-weight: 700; color: #f0f4f8; }
-    .mockup-topbar-right { display: flex; gap: 6px; align-items: center; }
-    .avatar-sm { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #00d2ff, #8a2be2); }
-    .kanban-cols { display: flex; gap: 8px; height: calc(100% - 35px); overflow: hidden; }
-    .k-col { flex: 1; min-width: 0; }
-    .k-col-header {
-      font-size: 8px; font-weight: 700; letter-spacing: 0.5px;
-      text-transform: uppercase; padding: 4px 0; margin-bottom: 6px;
-      border-bottom: 2px solid;
-    }
-    .k-col.lead .k-col-header { color: #a0aec0; border-color: #a0aec0; }
-    .k-col.qualified .k-col-header { color: #60a5fa; border-color: #60a5fa; }
-    .k-col.proposal .k-col-header { color: #fbbf24; border-color: #fbbf24; }
-    .k-col.negotiation .k-col-header { color: #fb923c; border-color: #fb923c; }
-    .k-col.won .k-col-header { color: #4ade80; border-color: #4ade80; }
-    .k-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 5px; padding: 5px 6px; margin-bottom: 5px;
-    }
-    .k-card-company { font-size: 7.5px; font-weight: 600; color: #f0f4f8; margin-bottom: 2px; }
-    .k-card-value { font-size: 7px; color: #4ade80; font-weight: 700; }
-    .k-card-bar { height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 3px; overflow: hidden; }
-    .k-card-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #00d2ff, #8a2be2); }
-    .mockup-crm-chart {
-      position: absolute; bottom: 8px; right: 8px;
-      width: 90px; height: 50px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 6px; padding: 4px; overflow: hidden;
-    }
-    .mini-chart-label { font-size: 6px; color: var(--text-muted); margin-bottom: 3px; }
-    .mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 30px; }
-    .mini-bar { flex: 1; border-radius: 2px 2px 0 0; background: linear-gradient(0deg, #00d2ff, #3a7bd5); opacity: 0.7; }
-
-    /* CAFE MOCKUP */
-    .mockup-cafe {
-      background: linear-gradient(135deg, #fdf6ec 0%, #fef3e2 100%);
-      width: 100%; height: 100%; position: relative; overflow: hidden;
-      display: flex; flex-direction: column;
-    }
-    .cafe-header {
-      background: #7c4f2a;
-      padding: 10px 14px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .cafe-header-title { color: #fdf6ec; font-size: 11px; font-weight: 700; }
-    .cafe-stats { display: flex; gap: 12px; padding: 8px 14px; background: #fff8f0; border-bottom: 1px solid #f0d9c0; }
-    .cafe-stat { text-align: center; }
-    .cafe-stat-val { font-size: 13px; font-weight: 800; color: #7c4f2a; }
-    .cafe-stat-label { font-size: 7px; color: #b8946a; font-weight: 500; }
-    .cafe-body { flex: 1; display: flex; gap: 0; overflow: hidden; }
-    .cafe-floor { flex: 1; padding: 10px; }
-    .cafe-floor-title { font-size: 8px; font-weight: 700; color: #7c4f2a; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .cafe-tables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .cafe-table-item {
-      aspect-ratio: 1; border-radius: 50%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      font-size: 7px; font-weight: 700; cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .cafe-table-item.available { background: #d1fae5; color: #065f46; border: 2px solid #6ee7b7; }
-    .cafe-table-item.occupied { background: #fed7aa; color: #9a3412; border: 2px solid #fb923c; }
-    .cafe-table-item.reserved { background: #fecaca; color: #991b1b; border: 2px solid #f87171; }
-    .cafe-table-item .table-num { font-size: 9px; font-weight: 800; }
-    .cafe-order-panel {
-      width: 110px; background: white;
-      border-left: 1px solid #f0d9c0; padding: 8px;
-      display: flex; flex-direction: column;
-    }
-    .cafe-order-title { font-size: 8px; font-weight: 700; color: #7c4f2a; margin-bottom: 6px; }
-    .cafe-order-item {
-      display: flex; justify-content: space-between;
-      font-size: 7px; color: #4a3728; padding: 3px 0;
-      border-bottom: 1px solid #f5e8d8;
-    }
-    .cafe-order-total {
-      margin-top: 6px; padding-top: 4px;
-      display: flex; justify-content: space-between;
-      font-size: 8px; font-weight: 700; color: #7c4f2a;
-    }
-    .cafe-nav {
-      display: flex; background: #7c4f2a; 
-      padding: 6px;
-    }
-    .cafe-nav-item {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      gap: 2px; font-size: 6px; color: rgba(255,255,255,0.6);
-    }
-    .cafe-nav-item.active { color: #fbbf24; }
-    .cafe-nav-item i { font-size: 10px; }
-
-    /* AGRO MOCKUP */
-    .mockup-agro {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-
-    /* COACHING MOCKUP */
-    .mockup-coaching {
-      background: linear-gradient(135deg, #0a0e1a 0%, #0f0a1a 100%);
-      width: 100%; height: 100%; position: relative; overflow: hidden;
-      display: flex;
-    }
-    .coaching-sidebar {
-      width: 44px; background: rgba(124,58,237,0.15);
-      border-right: 1px solid rgba(124,58,237,0.2);
-      display: flex; flex-direction: column; align-items: center;
-      padding-top: 12px; gap: 1rem;
-    }
-    .coaching-sidebar i { font-size: 13px; color: rgba(255,255,255,0.3); }
-    .coaching-sidebar i.active { color: #a855f7; }
-    .coaching-main { flex: 1; padding: 10px; overflow: hidden; }
-    .coaching-live-banner {
-      background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(220,38,38,0.2));
-      border: 1px solid rgba(124,58,237,0.4); border-radius: 8px;
-      padding: 8px; margin-bottom: 8px; display: flex; gap: 8px; align-items: center;
-    }
-    .live-thumb {
-      width: 50px; height: 35px; background: #1e1033;
-      border-radius: 4px; flex-shrink: 0; display: flex;
-      align-items: center; justify-content: center; position: relative;
-      overflow: hidden;
-    }
-    .live-thumb::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, #7c3aed 0%, #1e1033 100%);
-      opacity: 0.6;
-    }
-    .live-thumb i { font-size: 14px; color: white; position: relative; z-index: 1; }
-    .live-badge {
-      position: absolute; top: 3px; left: 3px;
-      background: #dc2626; color: white;
-      font-size: 5px; font-weight: 700; padding: 1px 3px;
-      border-radius: 3px; letter-spacing: 0.5px;
-    }
-    .live-info { flex: 1; }
-    .live-subject { font-size: 9px; font-weight: 700; color: #f0f4f8; }
-    .live-teacher { font-size: 7px; color: #a0aec0; }
-    .live-time { font-size: 7px; color: #a855f7; margin-top: 2px; }
-    .course-progress-row { display: flex; gap: 6px; margin-bottom: 8px; }
-    .course-prog-card {
-      flex: 1; background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 6px;
-    }
-    .cp-subject { font-size: 7.5px; font-weight: 700; color: #f0f4f8; margin-bottom: 3px; }
-    .cp-bar-bg { height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 2px; }
-    .cp-bar-fill { height: 100%; border-radius: 3px; }
-    .cp-pct { font-size: 6.5px; color: #a0aec0; }
-    .test-scores { display: flex; gap: 6px; }
-    .score-card {
-      flex: 1; background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07); border-radius: 6px;
-      padding: 5px; text-align: center;
-    }
-    .score-val { font-size: 16px; font-weight: 800; }
-    .score-label { font-size: 6px; color: #a0aec0; }
-    .score-rank { font-size: 7px; color: #fbbf24; margin-top: 1px; }
-
-    /* AI AGENT MOCKUP */
-    .mockup-ai {
-      background: linear-gradient(135deg, #080c12 0%, #0a0f1a 100%);
-      width: 100%; height: 100%; position: relative; overflow: hidden;
-      display: flex;
-    }
-    .ai-sidebar {
-      width: 44px; background: rgba(0,102,255,0.08);
-      border-right: 1px solid rgba(0,102,255,0.15);
-      display: flex; flex-direction: column; align-items: center;
-      padding-top: 10px; gap: 1rem;
-    }
-    .ai-sidebar i { font-size: 12px; color: rgba(255,255,255,0.25); }
-    .ai-sidebar i.active { color: #0066ff; }
-    .ai-main { flex: 1; padding: 10px; overflow: hidden; display: flex; flex-direction: column; }
-    .ai-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .ai-topbar-title { font-size: 10px; font-weight: 700; color: #f0f4f8; }
-    .ai-credit-bar {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 7px; color: #a0aec0;
-    }
-    .credit-track {
-      width: 50px; height: 4px; background: rgba(255,255,255,0.1);
-      border-radius: 4px; overflow: hidden;
-    }
-    .credit-fill { height: 100%; background: linear-gradient(90deg, #0066ff, #00d2ff); width: 68%; border-radius: 4px; }
-    .agents-row { display: flex; gap: 5px; margin-bottom: 8px; }
-    .agent-card {
-      flex: 1; background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 6px; padding: 5px;
-    }
-    .agent-card.running { border-color: rgba(0,102,255,0.4); }
-    .agent-name { font-size: 7px; font-weight: 700; color: #f0f4f8; margin-bottom: 2px; }
-    .agent-task { font-size: 6px; color: #a0aec0; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .agent-status {
-      font-size: 6px; font-weight: 700;
-      padding: 1px 4px; border-radius: 3px;
-    }
-    .status-running { background: rgba(0,102,255,0.2); color: #60a5fa; }
-    .status-idle { background: rgba(255,255,255,0.05); color: #a0aec0; }
-    .ai-log {
-      flex: 1;
-      background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 6px; padding: 5px; overflow: hidden;
-      font-family: monospace;
-    }
-    .log-line { font-size: 6.5px; margin-bottom: 2px; }
-    .log-line .ts { color: #4a5568; margin-right: 4px; }
-    .log-line.info .msg { color: #60a5fa; }
-    .log-line.success .msg { color: #4ade80; }
-    .log-line.warn .msg { color: #fbbf24; }
-
-    /* ===== CASE STUDY DETAIL MODAL ===== */
-    .case-study-modal {
-      display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
-      overflow-y: auto; padding: 2rem 1rem;
-    }
-    .case-study-modal.open { display: block; animation: fadeInModal 0.3s ease; }
-    @keyframes fadeInModal {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .modal-inner {
-      max-width: 1000px; margin: 0 auto;
-      background: #0a0e1a; border: 1px solid var(--border-glass);
-      border-radius: 24px; overflow: hidden; position: relative;
-    }
-    .modal-close-btn {
-      position: absolute; top: 1.2rem; right: 1.2rem;
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(255,255,255,0.08); border: 1px solid var(--border-glass);
-      color: var(--text-muted); font-size: 16px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; z-index: 10;
-    }
-    .modal-close-btn:hover { background: rgba(255,75,75,0.2); color: #ff4d4d; border-color: #ff4d4d; }
-    .modal-hero {
-      padding: 3rem 3rem 2rem;
-      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
-      border-bottom: 1px solid var(--border-glass);
-    }
-    .modal-mockup-wrapper {
-      width: 100%; height: 340px; border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--border-glass); margin-bottom: 2rem;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .modal-body { padding: 2.5rem 3rem; }
-    .case-grid-2 {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-      margin-bottom: 2rem;
-    }
-    .case-grid-4 {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .case-grid-3 {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .cs-panel {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px; padding: 1.75rem;
-    }
-    .cs-panel h4 {
-      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.9rem;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .cs-panel ul { list-style: none; padding: 0; }
-    .cs-panel ul li {
-      display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.875rem; color: var(--text-muted);
-      padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-      line-height: 1.6;
-    }
-    .cs-panel ul li:last-child { border-bottom: none; }
-    .cs-panel ul li i { margin-top: 3px; flex-shrink: 0; font-size: 0.8rem; }
-    .cs-tech-chip {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.4rem 1rem; border-radius: 50px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.82rem; font-weight: 500; margin: 0.25rem;
-    }
-    .metric-card {
-      text-align: center; padding: 1.5rem;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
-    }
-    .metric-val { font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.4rem; }
-    .metric-label { font-size: 0.8rem; color: var(--text-muted); }
-    .timeline-steps {
-      display: flex; gap: 0; align-items: stretch;
-      margin-bottom: 2rem; overflow-x: auto;
-    }
-    .timeline-step {
-      flex: 1; min-width: 120px; text-align: center;
-      padding: 1rem 0.5rem; position: relative;
-    }
-    .timeline-step:not(:last-child)::after {
-      content: '';
-      position: absolute; top: 2rem; right: 0;
-      width: 1px; height: calc(100% - 4rem);
-      background: rgba(255,255,255,0.1);
-    }
-    .ts-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
-    .ts-title { font-size: 0.75rem; font-weight: 700; color: var(--text-main); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.3rem; }
-    .ts-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
-
-    /* SECTION LABELS */
-    .cs-section-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--text-muted);
-      margin-bottom: 1rem; margin-top: 2rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .cs-section-label::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(255,255,255,0.08);
-    }
-
-    /* HERO NUMBERS */
-    .hero-stats-row {
-      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
-      margin-top: 2rem;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat-val { font-size: 2.5rem; font-weight: 800; }
-    .hero-stat-label { font-size: 0.85rem; color: var(--text-muted); }
-
-    /* Back btn */
-    .back-to-projects {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.875rem; color: var(--text-muted);
-      padding: 0.5rem 1.2rem; border: 1px solid var(--border-glass);
-      border-radius: 50px; cursor: pointer;
-      transition: all 0.3s ease; background: rgba(255,255,255,0.03);
-      margin-bottom: 2rem;
-    }
-    .back-to-projects:hover { color: var(--primary-cyan); border-color: var(--primary-cyan); }
-
-    @media (max-width: 768px) {
-      .projects-grid { grid-template-columns: 1fr; }
-      .case-grid-2 { grid-template-columns: 1fr; }
-      .case-grid-3 { grid-template-columns: 1fr; }
-      .case-grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .modal-hero { padding: 2rem 1.5rem 1.5rem; }
-      .modal-body { padding: 1.5rem; }
-      .modal-mockup-wrapper { height: 200px; }
-    }
-  </style>
-  <link rel="icon" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <!-- Navbar -->
-  <header class="navbar scrolled" id="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-brand"><img src="assets/images/logo.png" alt="Dremora" style="height: 45px; width: 45px; object-fit: contain; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></a>
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="projects.html" class="active">Projects</a>
-        <a href="internship.html">Internship</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
-    </div>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="projects-hero">
-      <div class="container">
-        <div class="neo-border font-handwritten pulse-anim" style="margin-bottom: 1.5rem; display: inline-block; padding:0.5rem 1.2rem; background: #00d2ff; color: #06080F; font-weight:700; transform:rotate(-2deg);">Portfolio & Case Studies</div>
-        <h1 class="section-title font-handwritten" style="font-size: 4.5rem; margin-bottom: 1rem; color:#ffffff; transform:rotate(1deg);">Our <span style="color:#fbbf24;">Work.</span></h1>
-        <p class="section-subtitle font-handwritten" style="max-width: 650px; margin-inline: auto; font-size:1.3rem; color:rgba(255,255,255,0.8); transform:rotate(-1deg);">Real solutions built for real industries. Every project here is a deep-dive into problem discovery, architecture, execution and measurable impact.</p>
-
-        <!-- Filter Bar -->
-        <div class="project-filter-bar" id="filterBar">
-          <button class="filter-btn active" data-filter="all">All Projects</button>
-          <button class="filter-btn" data-filter="civic">Civic Tech</button>
-          <button class="filter-btn" data-filter="crm">CRM</button>
-          <button class="filter-btn" data-filter="hospitality">Hospitality</button>
-          <button class="filter-btn" data-filter="agro">AgriTech</button>
-          <button class="filter-btn" data-filter="edtech">EdTech</button>
-          <button class="filter-btn" data-filter="ai">AI Agents</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS GRID -->
-    <section style="padding: 0 0 5rem;">
-      <div class="container">
-        <div class="projects-grid" id="projectsGrid">
-
-          <!-- CARD 1: NagarSeva -->
-          <div class="project-card reveal" data-color="cyan" data-category="civic" data-project="nagarseva">
-            <div class="project-card-mockup">
-              <img src="assets/images/nagarseva_dashboard.png" alt="NagarSeva Civic Complaint Management Dashboard - Pune Municipal Corporation" loading="lazy">
-              <div class="project-card-mockup-overlay">
-                <span class="mockup-overlay-tag">🏛️ Civic Tech · AI-Powered</span>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
-                <span class="project-badge badge-cyan" style="margin-bottom:0;">Civic Tech</span>
-                <span style="font-size:0.7rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🟢 In Production</span>
-              </div>
-              <h3 class="project-card-title">NagarSeva</h3>
-              <p class="project-card-desc">AI-powered civic complaint management platform for municipal corporations. End-to-end complaint lifecycle with real-time tracking, role-based access, and Gemini AI routing for 1,200+ daily complaints.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">Python Flask</span><span class="stack-tag">MySQL</span>
-                <span class="stack-tag">Gemini AI</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">JWT</span>
-              </div>
-              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
-                <div><div style="font-size:1.1rem;font-weight:800;color:var(--primary-cyan);">1,247</div><div style="font-size:0.72rem;color:var(--text-muted);">Complaints Handled</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">4.2h</div><div style="font-size:0.72rem;color:var(--text-muted);">Avg Response Time</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">94%</div><div style="font-size:0.72rem;color:var(--text-muted);">Resolution Rate</div></div>
-              </div>
-              <div class="project-card-cta" onclick="openModal('nagarseva')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-          <!-- CARD 2: CRM Pipeline -->
-          <div class="project-card reveal" data-color="blue" data-category="crm" data-project="crm">
-            <div class="project-card-mockup">
-              <!-- CRM Inline Mockup -->
-              <div class="mockup-crm">
-                <div class="mockup-sidebar">
-                  <i class="fa-solid fa-grip-vertical active"></i>
-                  <i class="fa-solid fa-users"></i>
-                  <i class="fa-solid fa-chart-bar"></i>
-                  <i class="fa-solid fa-envelope"></i>
-                  <i class="fa-solid fa-gear"></i>
-                </div>
-                <div class="mockup-main">
-                  <div class="mockup-topbar">
-                    <span class="mockup-topbar-title">Sales Pipeline</span>
-                    <div class="mockup-topbar-right">
-                      <span style="font-size:7px;color:#4ade80;font-weight:700;background:rgba(74,222,128,0.1);padding:2px 6px;border-radius:4px;">● Live</span>
-                      <div class="avatar-sm"></div>
-                    </div>
-                  </div>
-                  <div class="kanban-cols">
-                    <div class="k-col lead">
-                      <div class="k-col-header">Lead</div>
-                      <div class="k-card"><div class="k-card-company">TechNova Pvt Ltd</div><div class="k-card-value">₹2.4L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:20%"></div></div></div>
-                      <div class="k-card"><div class="k-card-company">Infra Corp</div><div class="k-card-value">₹5.1L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:15%"></div></div></div>
-                    </div>
-                    <div class="k-col qualified">
-                      <div class="k-col-header">Qualified</div>
-                      <div class="k-card"><div class="k-card-company">RealtyMax</div><div class="k-card-value">₹8.7L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:40%"></div></div></div>
-                      <div class="k-card"><div class="k-card-company">Nexus Retail</div><div class="k-card-value">₹3.2L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:38%"></div></div></div>
-                    </div>
-                    <div class="k-col proposal">
-                      <div class="k-col-header">Proposal</div>
-                      <div class="k-card"><div class="k-card-company">Zenta Pharma</div><div class="k-card-value">₹14L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:62%"></div></div></div>
-                    </div>
-                    <div class="k-col negotiation">
-                      <div class="k-col-header">Negotiate</div>
-                      <div class="k-card"><div class="k-card-company">GlobeShip</div><div class="k-card-value">₹22L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:78%"></div></div></div>
-                    </div>
-                    <div class="k-col won">
-                      <div class="k-col-header">Won 🏆</div>
-                      <div class="k-card"><div class="k-card-company">AlphaEdge</div><div class="k-card-value">₹31L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:100%"></div></div></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mockup-crm-chart">
-                  <div class="mini-chart-label">Monthly Revenue</div>
-                  <div class="mini-bars">
-                    <div class="mini-bar" style="height:40%"></div>
-                    <div class="mini-bar" style="height:55%"></div>
-                    <div class="mini-bar" style="height:48%"></div>
-                    <div class="mini-bar" style="height:70%"></div>
-                    <div class="mini-bar" style="height:62%"></div>
-                    <div class="mini-bar" style="height:90%"></div>
-                    <div class="mini-bar" style="height:78%"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
-                <span class="project-badge badge-blue" style="margin-bottom:0;">CRM &amp; Sales</span>
-                <span style="font-size:0.7rem;font-weight:700;color:#60a5fa;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🔵 Enterprise</span>
-              </div>
-              <h3 class="project-card-title">NexusCRM Pipeline</h3>
-              <p class="project-card-desc">Intelligent visual CRM with Kanban deal pipeline, automated email sequences, revenue forecasting, and AI-assisted follow-up recommendations for B2B sales teams.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">React</span><span class="stack-tag">Node.js</span>
-                <span class="stack-tag">PostgreSQL</span><span class="stack-tag">Gemini AI</span><span class="stack-tag">Redis</span>
-              </div>
-              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
-                <div><div style="font-size:1.1rem;font-weight:800;color:#60a5fa;">₹79L+</div><div style="font-size:0.72rem;color:var(--text-muted);">Pipeline Tracked</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">43%</div><div style="font-size:0.72rem;color:var(--text-muted);">Conversion Uplift</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">8 teams</div><div style="font-size:0.72rem;color:var(--text-muted);">Using Live</div></div>
-              </div>
-              <div class="project-card-cta" onclick="openModal('crm')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-           <!-- CARD 3: Cafe & Restaurant -->
-          <div class="project-card reveal" data-color="orange" data-category="hospitality" data-project="cafe">
-            <div class="project-card-mockup">
-              <div class="mockup-cafe">
-                <div class="cafe-header">
-                  <span class="cafe-header-title">☕ BrewSpace POS</span>
-                  <span style="font-size:8px; color: #fde68a; font-weight: 700;">🔴 LIVE</span>
-                </div>
-                <div class="cafe-stats">
-                  <div class="cafe-stat"><div class="cafe-stat-val">₹18,420</div><div class="cafe-stat-label">Today's Revenue</div></div>
-                  <div class="cafe-stat"><div class="cafe-stat-val">84</div><div class="cafe-stat-label">Orders</div></div>
-                  <div class="cafe-stat"><div class="cafe-stat-val">12/16</div><div class="cafe-stat-label">Tables Active</div></div>
-                  <div class="cafe-stat"><div class="cafe-stat-val">4.8★</div><div class="cafe-stat-label">Rating</div></div>
-                </div>
-                <div class="cafe-body">
-                  <div class="cafe-floor">
-                    <div class="cafe-floor-title">🗺️ Floor Plan</div>
-                    <div class="cafe-tables-grid">
-                      <div class="cafe-table-item occupied"><div class="table-num">T1</div><div>2 pax</div></div>
-                      <div class="cafe-table-item available"><div class="table-num">T2</div><div>Free</div></div>
-                      <div class="cafe-table-item reserved"><div class="table-num">T3</div><div>Resv.</div></div>
-                      <div class="cafe-table-item occupied"><div class="table-num">T4</div><div>4 pax</div></div>
-                      <div class="cafe-table-item available"><div class="table-num">T5</div><div>Free</div></div>
-                      <div class="cafe-table-item occupied"><div class="table-num">T6</div><div>6 pax</div></div>
-                    </div>
-                  </div>
-                  <div class="cafe-order-panel">
-                    <div class="cafe-order-title">🧾 Table 4 Order</div>
-                    <div class="cafe-order-item"><span>Cappuccino ×2</span><span>₹280</span></div>
-                    <div class="cafe-order-item"><span>Avocado Toast</span><span>₹320</span></div>
-                    <div class="cafe-order-item"><span>Blueberry Muffin</span><span>₹180</span></div>
-                    <div class="cafe-order-item"><span>Iced Latte</span><span>₹160</span></div>
-                    <div class="cafe-order-total"><span>Total</span><span>₹940</span></div>
-                  </div>
-                </div>
-                <div class="cafe-nav">
-                  <div class="cafe-nav-item active"><i class="fa-solid fa-utensils"></i><span>Menu</span></div>
-                  <div class="cafe-nav-item"><i class="fa-solid fa-table-cells"></i><span>Tables</span></div>
-                  <div class="cafe-nav-item"><i class="fa-solid fa-receipt"></i><span>Orders</span></div>
-                  <div class="cafe-nav-item"><i class="fa-solid fa-chart-pie"></i><span>Reports</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
-                <span class="project-badge badge-orange" style="margin-bottom:0;">Hospitality</span>
-                <span style="font-size:0.7rem;font-weight:700;color:#fb923c;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🟠 POS Ready</span>
-              </div>
-              <h3 class="project-card-title">BrewSpace POS</h3>
-              <p class="project-card-desc">All-in-one cafe &amp; restaurant management system with visual floor plan, POS billing, inventory tracking, staff scheduling, and daily revenue analytics.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">Vue.js</span><span class="stack-tag">FastAPI</span>
-                <span class="stack-tag">MongoDB</span><span class="stack-tag">Socket.IO</span><span class="stack-tag">PWA</span>
-              </div>
-              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fb923c;">₹18K+</div><div style="font-size:0.72rem;color:var(--text-muted);">Daily Revenue Tracked</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">16 tables</div><div style="font-size:0.72rem;color:var(--text-muted);">Live Floor Plan</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">4.8★</div><div style="font-size:0.72rem;color:var(--text-muted);">Staff Rating</div></div>
-              </div>
-              <div class="project-card-cta" onclick="openModal('cafe')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <!-- CARD 4: AgroTrack -->
-          <div class="project-card reveal" data-color="green" data-category="agro" data-project="agro">
-            <div class="project-card-mockup">
-              <img src="assets/images/agrotrack_dashboard.png" alt="AgroTrack Smart Irrigation IoT Dashboard" loading="lazy">
-              <div class="project-card-mockup-overlay">
-                <span class="mockup-overlay-tag" style="border-color:rgba(74,222,128,0.5);background:rgba(74,222,128,0.2);">🌾 AgriTech · IoT</span>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
-                <span class="project-badge badge-green" style="margin-bottom:0;">AgriTech</span>
-                <span style="font-size:0.7rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🌱 IoT Live</span>
-              </div>
-              <h3 class="project-card-title">AgroTrack Smart Irrigation</h3>
-              <p class="project-card-desc">IoT-powered precision agriculture platform for Indian farmers. Real-time soil moisture monitoring, weather-adaptive irrigation scheduling, and water usage analytics across 4 field zones.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">Python</span><span class="stack-tag">MQTT</span>
-                <span class="stack-tag">InfluxDB</span><span class="stack-tag">React</span><span class="stack-tag">Raspberry Pi</span>
-              </div>
-              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
-                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">34%</div><div style="font-size:0.72rem;color:var(--text-muted);">Water Saved</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#a3e635;">12</div><div style="font-size:0.72rem;color:var(--text-muted);">Active Sensors</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">4/4</div><div style="font-size:0.72rem;color:var(--text-muted);">Zones Online</div></div>
-              </div>
-              <div class="project-card-cta" onclick="openModal('agro')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <!-- CARD 5: EduPro -->
-          <div class="project-card reveal" data-color="purple" data-category="edtech" data-project="edupro">
-            <div class="project-card-mockup">
-              <div class="mockup-coaching">
-                <div class="coaching-sidebar">
-                  <i class="fa-solid fa-house active"></i>
-                  <i class="fa-solid fa-book-open"></i>
-                  <i class="fa-solid fa-video"></i>
-                  <i class="fa-solid fa-clipboard-list"></i>
-                  <i class="fa-solid fa-trophy"></i>
-                  <i class="fa-regular fa-comment-dots"></i>
-                </div>
-                <div class="coaching-main">
-                  <div class="coaching-live-banner">
-                    <div class="live-thumb">
-                      <i class="fa-solid fa-chalkboard-teacher"></i>
-                      <span class="live-badge">LIVE</span>
-                    </div>
-                    <div class="live-info">
-                      <div class="live-subject">Physics – Wave Optics</div>
-                      <div class="live-teacher">Prof. Ramesh K.</div>
-                      <div class="live-time">⏳ 1h 24m remaining • 386 students live</div>
-                    </div>
-                  </div>
-                  <div class="course-progress-row">
-                    <div class="course-prog-card">
-                      <div class="cp-subject">Physics</div>
-                      <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:78%; background: linear-gradient(90deg, #7c3aed, #a855f7);"></div></div>
-                      <div class="cp-pct">78% Complete</div>
-                    </div>
-                    <div class="course-prog-card">
-                      <div class="cp-subject">Chemistry</div>
-                      <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:62%; background: linear-gradient(90deg, #0066ff, #60a5fa);"></div></div>
-                      <div class="cp-pct">62% Complete</div>
-                    </div>
-                    <div class="course-prog-card">
-                      <div class="cp-subject">Maths</div>
-                      <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:89%; background: linear-gradient(90deg, #059669, #4ade80);"></div></div>
-                      <div class="cp-pct">89% Complete</div>
-                    </div>
-                  </div>
-                  <div class="test-scores">
-                    <div class="score-card"><div class="score-val" style="color: #a855f7;">94</div><div class="score-label">Last Test</div><div class="score-rank">🏆 Rank 12</div></div>
-                    <div class="score-card"><div class="score-val" style="color: #fbbf24;">🔥 21</div><div class="score-label">Day Streak</div></div>
-                    <div class="score-card"><div class="score-val" style="color: #60a5fa;">1,840</div><div class="score-label">XP Points</div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;">
-                <span class="project-badge badge-purple" style="margin-bottom:0;">EdTech</span>
-                <span style="font-size:0.7rem;font-weight:700;color:#a855f7;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);padding:0.2rem 0.6rem;border-radius:99px;">🎓 LMS Live</span>
-              </div>
-              <h3 class="project-card-title">EduPro Coaching Platform</h3>
-              <p class="project-card-desc">Advanced LMS for coaching institutes: live classes with 386 concurrent students, AI-generated practice tests, doubt forum, rank predictor and personalized study planner.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">Next.js</span><span class="stack-tag">Django</span>
-                <span class="stack-tag">Redis</span><span class="stack-tag">WebRTC</span><span class="stack-tag">Gemini AI</span>
-              </div>
-              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem;">
-                <div><div style="font-size:1.1rem;font-weight:800;color:#a855f7;">386</div><div style="font-size:0.72rem;color:var(--text-muted);">Concurrent Students</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#4ade80;">94%</div><div style="font-size:0.72rem;color:var(--text-muted);">Test Score Avg</div></div>
-                <div><div style="font-size:1.1rem;font-weight:800;color:#fbbf24;">21 day</div><div style="font-size:0.72rem;color:var(--text-muted);">Avg Streak</div></div>
-              </div>
-              <div class="project-card-cta" onclick="openModal('edupro')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <!-- CARD 6: AI Agent -->
-          <div class="project-card reveal" data-color="cyan" data-category="ai" data-project="aiagent">
-            <div class="project-card-mockup">
-              <div class="mockup-ai">
-                <div class="ai-sidebar">
-                  <i class="fa-solid fa-gauge active"></i>
-                  <i class="fa-solid fa-robot"></i>
-                  <i class="fa-solid fa-list-check"></i>
-                  <i class="fa-solid fa-plug"></i>
-                  <i class="fa-solid fa-chart-line"></i>
-                  <i class="fa-solid fa-gear"></i>
-                </div>
-                <div class="ai-main">
-                  <div class="ai-topbar">
-                    <span class="ai-topbar-title">OrbitAgent — Team: Engineering</span>
-                    <div class="ai-credit-bar">
-                      <span>Credits</span>
-                      <div class="credit-track"><div class="credit-fill"></div></div>
-                      <span>68%</span>
-                    </div>
-                  </div>
-                  <div class="agents-row">
-                    <div class="agent-card running">
-                      <div class="agent-name">CodeReview Bot</div>
-                      <div class="agent-task">Analyzing PR #247 ...</div>
-                      <span class="agent-status status-running">⚡ Running</span>
-                    </div>
-                    <div class="agent-card running">
-                      <div class="agent-name">Test-Gen AI</div>
-                      <div class="agent-task">Writing unit tests</div>
-                      <span class="agent-status status-running">⚡ Running</span>
-                    </div>
-                    <div class="agent-card">
-                      <div class="agent-name">DocWriter</div>
-                      <div class="agent-task">Idle — awaiting</div>
-                      <span class="agent-status status-idle">💤 Idle</span>
-                    </div>
-                  </div>
-                  <div class="ai-log">
-                    <div class="log-line info"><span class="ts">09:31:14</span><span class="msg">[CodeReview] Checking security: auth module...</span></div>
-                    <div class="log-line success"><span class="ts">09:31:09</span><span class="msg">[Deploy] Production deploy ? (3.2s)</span></div>
-                    <div class="log-line warn"><span class="ts">09:30:55</span><span class="msg">[Test-Gen] Coverage gap detected: 67% ? 94%</span></div>
-                    <div class="log-line success"><span class="ts">09:30:42</span><span class="msg">[DocWriter] API docs generated for /auth/v2</span></div>
-                    <div class="log-line info"><span class="ts">09:30:31</span><span class="msg">[Optimizer] Refactored 3 functions ? 40% faster</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="project-card-body">
-              <span class="project-badge badge-cyan">AI Agents</span>
-              <h3 class="project-card-title">OrbitAgent — IT Productivity AI</h3>
-              <p class="project-card-desc">Autonomous multi-agent orchestration platform for IT teams. Automates code reviews, documentation, test generation, deployment pipelines, and sprint planning.</p>
-              <div class="project-stack-tags">
-                <span class="stack-tag">LangChain</span><span class="stack-tag">Gemini 2.0</span>
-                <span class="stack-tag">FastAPI</span><span class="stack-tag">Docker</span><span class="stack-tag">GitHub API</span>
-              </div>
-              <div class="project-card-cta" onclick="openModal('aiagent')">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-        </div><!-- /projects-grid -->
-      </div>
-    </section>
-  </main>
-
-  <!-- ====================================================
-       CASE STUDY MODALS — 6 Projects
-  ===================================================== -->
-
-  <!-- MODAL: NagarSeva -->
-  <div class="case-study-modal" id="modal-nagarseva">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(0,210,255,0.08); border-color: var(--primary-cyan); color: var(--primary-cyan); font-size: 0.75rem; letter-spacing: 1px;">Civic Tech Â· Case Study #01</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">NagarSeva</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">A smart digital platform bridging the gap between citizens and municipal authorities, replacing manual friction with real-time AI automation.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">3x</div><div class="hero-stat-label">Faster Resolution</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">40%</div><div class="hero-stat-label">Less Manual Work</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">5K+</div><div class="hero-stat-label">Complaints Handled</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">3</div><div class="hero-stat-label">User Roles</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem;">
-          <img src="assets/images/dashboard_mockup.png" alt="NagarSeva Dashboard" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Citizens queued at offices to file paper complaints — no digital channel existed</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Zero tracking after submission — status was unknown for weeks</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Complaints routed manually across departments causing delays and loss</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> No accountability for field officers or audit trail for resolutions</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid var(--primary-cyan);">
-            <h4><i class="fa-solid fa-lightbulb" style="color:var(--primary-cyan);"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Mobile-friendly web app for digital complaint registration with photo evidence</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Real-time status tracking dashboard visible to citizens</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Gemini AI auto-routes each complaint to the correct department based on category & location</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Role-based dashboards for Citizen, Admin, and Field Officer</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> Python Flask</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-database" style="color:#00758f;"></i> MySQL</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-brain" style="color:#a855f7;"></i> Gemini AI</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-html5" style="color:#e34f26;"></i> HTML/CSS/JS</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-shield-halved" style="color:#4ade80;"></i> JWT Auth</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-lock" style="color:#60a5fa;"></i> bcrypt</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-server" style="color:#a0aec0;"></i> REST API</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Workflow</div>
-        <div class="timeline-steps" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 1.5rem 0; margin-bottom: 2rem;">
-          <div class="timeline-step"><div class="ts-icon">🔐</div><div class="ts-title">Secure Auth</div><div class="ts-desc">JWT-based login for Citizen, Admin, Officer</div></div>
-          <div class="timeline-step"><div class="ts-icon">📸</div><div class="ts-title">Snap & Report</div><div class="ts-desc">Upload photo complaint with GPS tag</div></div>
-          <div class="timeline-step"><div class="ts-icon">🤖</div><div class="ts-title">AI Routing</div><div class="ts-desc">Gemini AI assigns department automatically</div></div>
-          <div class="timeline-step"><div class="ts-icon">👷</div><div class="ts-title">Field Action</div><div class="ts-desc">Officer resolves & attaches closure note</div></div>
-          <div class="timeline-step"><div class="ts-icon">🔔</div><div class="ts-title">Citizen Notified</div><div class="ts-desc">Status updates push to citizen dashboard</div></div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val" style="color:var(--primary-cyan);">3×</div><div class="metric-label">Faster Resolution</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">40%</div><div class="metric-label">Reduced Manual Ops</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">98%</div><div class="metric-label">AI Routing Accuracy</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#fbbf24;">5K+</div><div class="metric-label">Complaints Processed</div></div>
-        </div>
-      </div>
-    </div>
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Dremora IT">
+      <img src="assets/images/logo.png" alt="Dremora IT" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="nav-logo-mark" style="display:none">D</div>
+      <div><div class="nav-logo-text">Dremora IT</div><div class="nav-logo-tagline">Technology Studio</div></div>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link active">Work</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav-cta btn-magnetic">Book A Call</a>
+    <button class="nav-mobile-btn" id="navMobileBtn" aria-label="Open menu" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
   </div>
+</header>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="services.html" class="nav-link">Services</a>
+  <a href="projects.html" class="nav-link active">Work</a>
+  <a href="about.html" class="nav-link">About</a>
+  <a href="contact.html" class="nav-link">Contact</a>
+  <a href="contact.html" class="btn btn-primary nav-cta" style="margin-top:12px">Book A Discovery Call</a>
+</div>
 
-  <!-- MODAL: CRM Pipeline -->
-  <div class="case-study-modal" id="modal-crm">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(96,165,250,0.08); border-color: #60a5fa; color: #60a5fa; font-size: 0.75rem; letter-spacing: 1px;">CRM Â· Case Study #02</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">NexusCRM Pipeline</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">Intelligent visual CRM with Kanban deal tracking, AI-powered follow-up intelligence, revenue forecasting, and deep integration with email & calendar tools.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val" style="background: linear-gradient(135deg,#60a5fa,#3a7bd5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">32%</div><div class="hero-stat-label">Higher Close Rate</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="background: linear-gradient(135deg,#60a5fa,#3a7bd5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">5h</div><div class="hero-stat-label">Sales Admin Saved/Week</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="background: linear-gradient(135deg,#60a5fa,#3a7bd5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">8</div><div class="hero-stat-label">Pipeline Visibility</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="background: linear-gradient(135deg,#60a5fa,#3a7bd5); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">AI</div><div class="hero-stat-label">Follow-up Engine</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem;">
-          <div class="mockup-crm" style="height: 340px;">
-            <div class="mockup-sidebar">
-              <i class="fa-solid fa-grip-vertical active"></i>
-              <i class="fa-solid fa-users"></i>
-              <i class="fa-solid fa-chart-bar"></i>
-              <i class="fa-solid fa-envelope"></i>
-              <i class="fa-solid fa-gear"></i>
-            </div>
-            <div class="mockup-main" style="padding: 16px;">
-              <div class="mockup-topbar">
-                <span class="mockup-topbar-title" style="font-size: 14px;">Sales Pipeline – Q2 2026</span>
-                <div class="mockup-topbar-right"><div class="avatar-sm"></div></div>
-              </div>
-              <div class="kanban-cols" style="height: calc(100% - 40px);">
-                <div class="k-col lead"><div class="k-col-header">Lead (8)</div>
-                  <div class="k-card"><div class="k-card-company">TechNova Pvt Ltd</div><div class="k-card-value">₹2.4L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:20%"></div></div></div>
-                  <div class="k-card"><div class="k-card-company">Infra Corp</div><div class="k-card-value">₹5.1L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:15%"></div></div></div>
-                  <div class="k-card"><div class="k-card-company">QuickServ</div><div class="k-card-value">₹1.8L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:10%"></div></div></div>
-                </div>
-                <div class="k-col qualified"><div class="k-col-header">Qualified (5)</div>
-                  <div class="k-card"><div class="k-card-company">RealtyMax</div><div class="k-card-value">₹8.7L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:40%"></div></div></div>
-                  <div class="k-card"><div class="k-card-company">Nexus Retail</div><div class="k-card-value">₹3.2L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:38%"></div></div></div>
-                </div>
-                <div class="k-col proposal"><div class="k-col-header">Proposal (4)</div>
-                  <div class="k-card"><div class="k-card-company">Zenta Pharma</div><div class="k-card-value">₹14L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:62%"></div></div></div>
-                  <div class="k-card"><div class="k-card-company">NovaBuild</div><div class="k-card-value">₹9.4L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:58%"></div></div></div>
-                </div>
-                <div class="k-col negotiation"><div class="k-col-header">Negotiate (2)</div>
-                  <div class="k-card"><div class="k-card-company">GlobeShip</div><div class="k-card-value">₹22L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:78%"></div></div></div>
-                </div>
-                <div class="k-col won"><div class="k-col-header">Won 🏆 (3)</div>
-                  <div class="k-card"><div class="k-card-company">AlphaEdge</div><div class="k-card-value">₹31L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:100%"></div></div></div>
-                  <div class="k-card"><div class="k-card-company">DataSphere</div><div class="k-card-value">₹18L</div><div class="k-card-bar"><div class="k-card-bar-fill" style="width:100%"></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#60a5fa"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Sales teams relied on disconnected Excel sheets and WhatsApp for pipeline tracking</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Deals fell through cracks with no automated follow-up reminders</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Managers had zero real-time visibility into team pipeline health</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Forecasting was manual, error-prone and always outdated</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid #60a5fa;">
-            <h4><i class="fa-solid fa-lightbulb" style="color:#60a5fa;"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#60a5fa;"></i> Visual Kanban pipeline with drag-and-drop deal management across 5 stages</li>
-              <li><i class="fa-solid fa-check" style="color:#60a5fa;"></i> AI engine analyzes communication history and suggests optimal follow-up timing</li>
-              <li><i class="fa-solid fa-check" style="color:#60a5fa;"></i> Real-time manager dashboard with win rate, cycle time, and conversion analytics</li>
-              <li><i class="fa-solid fa-check" style="color:#60a5fa;"></i> Revenue forecast model using weighted pipeline probability scoring</li>
-            </ul>
-          </div>
-        </div>
+<main style="padding-top:var(--nav-height);">
 
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#60a5fa"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-brands fa-react" style="color:#61dafb;"></i> React</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-node-js" style="color:#8cc84b;"></i> Node.js / Express</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-database" style="color:#336791;"></i> PostgreSQL</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-brain" style="color:#a855f7;"></i> Gemini AI</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-bolt" style="color:#fbbf24;"></i> Redis Cache</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-google" style="color:#4285f4;"></i> Gmail OAuth</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-cloud" style="color:#a0aec0;"></i> REST + WebSocket</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#60a5fa"></i> Workflow</div>
-        <div class="timeline-steps" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 1.5rem 0; margin-bottom: 2rem;">
-          <div class="timeline-step"><div class="ts-icon">🎯</div><div class="ts-title">Lead Capture</div><div class="ts-desc">Web form, CSV import or LinkedIn auto-capture</div></div>
-          <div class="timeline-step"><div class="ts-icon">🧠</div><div class="ts-title">Qualify</div><div class="ts-desc">AI scores lead quality 0-100 using ICP fit</div></div>
-          <div class="timeline-step"><div class="ts-icon">⚡</div><div class="ts-title">Engage</div><div class="ts-desc">Automated email sequences + meeting scheduler</div></div>
-          <div class="timeline-step"><div class="ts-icon">🤝</div><div class="ts-title">Negotiate</div><div class="ts-desc">Contract sharing, objection tracker, e-sign</div></div>
-          <div class="timeline-step"><div class="ts-icon">🏆</div><div class="ts-title">Win & Retain</div><div class="ts-desc">Handoff to CS team + renewal pipeline seeded</div></div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#60a5fa"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val" style="color:#60a5fa;">32%</div><div class="metric-label">Higher Close Rate</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">5h</div><div class="metric-label">Admin Time Saved/Week</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">91%</div><div class="metric-label">AI Lead Accuracy</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#fbbf24;">2×</div><div class="metric-label">Pipeline Capacity</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: Cafe & Restaurant -->
-  <div class="case-study-modal" id="modal-cafe">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero" style="background: linear-gradient(180deg, rgba(124,79,42,0.15) 0%, transparent 100%);">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(255,140,66,0.1); border-color: #ff8c42; color: #ff8c42; font-size: 0.75rem; letter-spacing: 1px;">Hospitality Â· Case Study #03</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">BrewSpace POS ☕</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">A beautifully designed, all-in-one cafe and restaurant management system. From floor plans to kitchen displays, billing to inventory — everything in one warm, elegant interface.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#ff8c42;">28%</div><div class="hero-stat-label">Faster Table Turnover</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#ff8c42;">Zero</div><div class="hero-stat-label">Order Errors</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#ff8c42;">4.9★</div><div class="hero-stat-label">Owner Satisfaction</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#ff8c42;">PWA</div><div class="hero-stat-label">Works Offline</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem; height: 280px;">
-          <div class="mockup-cafe" style="height: 280px;">
-            <div class="cafe-header">
-              <span class="cafe-header-title">? BrewSpace — Koregaon Park, Pune</span>
-              <span style="font-size:9px; color: #fde68a; font-weight: 700;">🔴 LIVE  Sunday 7:42 PM</span>
-            </div>
-            <div class="cafe-stats">
-              <div class="cafe-stat"><div class="cafe-stat-val">₹18,420</div><div class="cafe-stat-label">Today's Revenue</div></div>
-              <div class="cafe-stat"><div class="cafe-stat-val">84</div><div class="cafe-stat-label">Orders Today</div></div>
-              <div class="cafe-stat"><div class="cafe-stat-val">12/16</div><div class="cafe-stat-label">Tables Active</div></div>
-              <div class="cafe-stat"><div class="cafe-stat-val">4.8★</div><div class="cafe-stat-label">Live Rating</div></div>
-              <div class="cafe-stat"><div class="cafe-stat-val">₹219</div><div class="cafe-stat-label">Avg Bill</div></div>
-            </div>
-            <div class="cafe-body" style="flex: 1; overflow: hidden;">
-              <div class="cafe-floor">
-                <div class="cafe-floor-title">🗺️ Live Floor Plan</div>
-                <div class="cafe-tables-grid">
-                  <div class="cafe-table-item occupied"><div class="table-num">T1</div><div>2 pax</div></div>
-                  <div class="cafe-table-item available"><div class="table-num">T2</div><div>Free</div></div>
-                  <div class="cafe-table-item reserved"><div class="table-num">T3</div><div>7PM</div></div>
-                  <div class="cafe-table-item occupied"><div class="table-num">T4</div><div>4 pax</div></div>
-                  <div class="cafe-table-item available"><div class="table-num">T5</div><div>Free</div></div>
-                  <div class="cafe-table-item occupied"><div class="table-num">T6</div><div>6 pax</div></div>
-                </div>
-              </div>
-              <div class="cafe-order-panel">
-                <div class="cafe-order-title">?? Table 4 — Active</div>
-                <div class="cafe-order-item"><span>Cappuccino ×2</span><span>₹280</span></div>
-                <div class="cafe-order-item"><span>Avocado Toast</span><span>₹320</span></div>
-                <div class="cafe-order-item"><span>Blueberry Muffin</span><span>₹180</span></div>
-                <div class="cafe-order-item"><span>Iced Matcha Latte</span><span>₹160</span></div>
-                <div class="cafe-order-total"><span>Total</span><span>₹940</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#ff8c42"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Paper KOTs and verbal orders caused kitchen confusion and wrong dishes</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Billing required manual calculation — slow and error-prone at peak hours</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Inventory tracked in notebooks — always running out of key ingredients</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Owners had no visibility into daily sales, popular items, or staff performance</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid #ff8c42;">
-            <h4><i class="fa-solid fa-lightbulb" style="color:#ff8c42;"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#ff8c42;"></i> Visual floor plan with real-time table status and one-tap order management</li>
-              <li><i class="fa-solid fa-check" style="color:#ff8c42;"></i> Digital KOT system instantly pushes orders to kitchen display screen</li>
-              <li><i class="fa-solid fa-check" style="color:#ff8c42;"></i> Auto inventory deduction per order with low-stock alerts sent to owner WhatsApp</li>
-              <li><i class="fa-solid fa-check" style="color:#ff8c42;"></i> Daily/weekly revenue dashboards with bestsellers, peak hours, category splits</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#ff8c42"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-brands fa-vuejs" style="color:#42d392;"></i> Vue.js 3</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> FastAPI</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-database" style="color:#4DB33D;"></i> MongoDB</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-plug" style="color:#60a5fa;"></i> Socket.IO</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-mobile-screen" style="color:#a855f7;"></i> PWA (Offline Mode)</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-whatsapp" style="color:#4ade80;"></i> WhatsApp API</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-print" style="color:#a0aec0;"></i> Thermal Printer API</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#ff8c42"></i> Key Features</div>
-        <div class="case-grid-3" style="margin-bottom: 2rem;">
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-table-cells" style="color:#ff8c42;"></i> Table Management</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Color-coded live floor plan</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Advance reservations with WhatsApp confirmation</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Table merge and split support</li>
-            </ul>
-          </div>
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-receipt" style="color:#ff8c42;"></i> Billing & POS</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Split bill by item or person</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> GST-compliant thermal receipt print</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> UPI, card, cash multi-payment</li>
-            </ul>
-          </div>
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-boxes-stacked" style="color:#ff8c42;"></i> Inventory</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Recipe-level deduction per order</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Daily indent and vendor management</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Low stock WhatsApp alerts</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#ff8c42"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val" style="color:#ff8c42;">28%</div><div class="metric-label">Faster Table Turnover</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">0</div><div class="metric-label">Billing Errors</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">22%</div><div class="metric-label">Food Cost Reduction</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#60a5fa;">3 min</div><div class="metric-label">Avg Order to KOT</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: AgroTrack -->
-  <div class="case-study-modal" id="modal-agro">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero" style="background: linear-gradient(180deg, rgba(74,222,128,0.08) 0%, transparent 100%);">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(74,222,128,0.08); border-color: #4ade80; color: #4ade80; font-size: 0.75rem; letter-spacing: 1px;">AgriTech Â· Case Study #04</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">AgroTrack 🌱</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">IoT-powered precision agriculture platform for Indian farmers. Real-time soil monitoring, weather-adaptive irrigation automation, and crop health analytics — accessible even on basic smartphones.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#4ade80;">40%</div><div class="hero-stat-label">Water Saved</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#4ade80;">18%</div><div class="hero-stat-label">Yield Increase</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#4ade80;">24/7</div><div class="hero-stat-label">Automated Monitoring</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#4ade80;">₹0</div><div class="hero-stat-label">Farmer App Cost</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem;">
-          <img src="assets/images/agro_smart_irrigation.png" alt="AgroTrack Smart Irrigation Platform Dashboard" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#4ade80"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Indian farmers lose 30-50% of irrigation water due to over-watering and poor scheduling</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Crop disease detected late — causing significant yield loss before treatment</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Climate variability makes traditional almanac-based farming unreliable</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Expensive manual soil testing done only once or twice a season</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid #4ade80;">
-            <h4><i class="fa-solid fa-lightbulb" style="color:#4ade80;"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> ₹800 IoT sensor node measures soil moisture, NPK, temperature every 15 mins</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> AI analyzes sensor + weather API data to auto-schedule optimal irrigation windows</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> WhatsApp-based alert system — no smartphone app required for basic farmers</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Web dashboard for Krishi Vigyan Kendra advisors to monitor multiple farms</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#4ade80"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> Python</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-microchip" style="color:#60a5fa;"></i> Raspberry Pi 4</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-tower-broadcast" style="color:#4ade80;"></i> MQTT Protocol</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-database" style="color:#ff8c42;"></i> InfluxDB</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-react" style="color:#61dafb;"></i> React Dashboard</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-whatsapp" style="color:#4ade80;"></i> WhatsApp Alerts</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-cloud-sun-rain" style="color:#a0aec0;"></i> OpenWeatherMap API</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#4ade80"></i> System Architecture</div>
-        <div class="timeline-steps" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 1.5rem 0; margin-bottom: 2rem;">
-          <div class="timeline-step"><div class="ts-icon">🌡️</div><div class="ts-title">Soil Sensor</div><div class="ts-desc">IoT node reads moisture, NPK, temp every 15 min</div></div>
-          <div class="timeline-step"><div class="ts-icon">📡</div><div class="ts-title">MQTT Publish</div><div class="ts-desc">Data transmitted to cloud broker over LoRa/WiFi</div></div>
-          <div class="timeline-step"><div class="ts-icon">🧠</div><div class="ts-title">AI Analysis</div><div class="ts-desc">ML model + weather data decides irrigation need</div></div>
-          <div class="timeline-step"><div class="ts-icon">💧</div><div class="ts-title">Valve Control</div><div class="ts-desc">Auto opens/closes irrigation valve via relay</div></div>
-          <div class="timeline-step"><div class="ts-icon">📱</div><div class="ts-title">Farmer Alert</div><div class="ts-desc">WhatsApp/SMS reports sent to farmer</div></div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#4ade80"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">40%</div><div class="metric-label">Water Saved</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#60a5fa;">18%</div><div class="metric-label">Yield Increase</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">₹800</div><div class="metric-label">Node Hardware Cost</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#fbbf24;">24/7</div><div class="metric-label">Automated Irrigation</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: EduPro -->
-  <div class="case-study-modal" id="modal-edupro">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero" style="background: linear-gradient(180deg, rgba(124,58,237,0.1) 0%, transparent 100%);">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(168,85,247,0.08); border-color: #a855f7; color: #a855f7; font-size: 0.75rem; letter-spacing: 1px;">EdTech Â· Case Study #05</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">EduPro Coaching 🎓</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">Advanced LMS platform built for IIT-JEE and NEET coaching institutes. Live HD classes, AI-generated adaptive tests, doubt resolution queues, and real-time rank prediction engine.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#a855f7;">22%</div><div class="hero-stat-label">Score Improvement</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#a855f7;">3×</div><div class="hero-stat-label">Doubt Resolution Speed</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#a855f7;">500+</div><div class="hero-stat-label">Students on Platform</div></div>
-          <div class="hero-stat"><div class="hero-stat-val" style="color:#a855f7;">AI</div><div class="hero-stat-label">Adaptive Test Engine</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem; height: 280px;">
-          <div class="mockup-coaching" style="height: 280px;">
-            <div class="coaching-sidebar">
-              <i class="fa-solid fa-house active"></i>
-              <i class="fa-solid fa-book-open"></i>
-              <i class="fa-solid fa-video"></i>
-              <i class="fa-solid fa-clipboard-list"></i>
-              <i class="fa-solid fa-trophy"></i>
-              <i class="fa-regular fa-comment-dots"></i>
-            </div>
-            <div class="coaching-main">
-              <div class="coaching-live-banner">
-                <div class="live-thumb">
-                  <i class="fa-solid fa-chalkboard-teacher"></i>
-                  <span class="live-badge">LIVE</span>
-                </div>
-                <div class="live-info">
-                  <div class="live-subject">Physics – Wave Optics & Diffraction</div>
-                  <div class="live-teacher">Prof. Ramesh Kumar â€¢ IIT Bombay Alumni</div>
-                  <div class="live-time">⏳ 1h 24m remaining â€¢ 386 students watching</div>
-                </div>
-              </div>
-              <div class="course-progress-row">
-                <div class="course-prog-card">
-                  <div class="cp-subject">🧲 Physics</div>
-                  <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:78%; background: linear-gradient(90deg, #7c3aed, #a855f7);"></div></div>
-                  <div class="cp-pct">78% Complete Â· 16/22 chapters</div>
-                </div>
-                <div class="course-prog-card">
-                  <div class="cp-subject">🧪 Chemistry</div>
-                  <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:62%; background: linear-gradient(90deg, #0066ff, #60a5fa);"></div></div>
-                  <div class="cp-pct">62% Complete Â· 14/23 chapters</div>
-                </div>
-                <div class="course-prog-card">
-                  <div class="cp-subject">➗ Maths</div>
-                  <div class="cp-bar-bg"><div class="cp-bar-fill" style="width:89%; background: linear-gradient(90deg, #059669, #4ade80);"></div></div>
-                  <div class="cp-pct">89% Complete Â· 20/22 chapters</div>
-                </div>
-              </div>
-              <div class="test-scores">
-                <div class="score-card"><div class="score-val" style="color: #a855f7;">94/120</div><div class="score-label">Last Full Test</div><div class="score-rank">🏆 AIR Rank ~1240</div></div>
-                <div class="score-card"><div class="score-val" style="color: #fbbf24;">🔥 21</div><div class="score-label">Day Streak</div></div>
-                <div class="score-card"><div class="score-val" style="color: #60a5fa;">1,840</div><div class="score-label">XP Points</div></div>
-                <div class="score-card"><div class="score-val" style="color: #4ade80;">12</div><div class="score-label">Doubts Resolved</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#a855f7"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Physical coaching institutes limit batch sizes — quality teachers can't scale</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Generic practice tests don't adapt to a student's individual weak areas</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Doubts filed via notebook stay unresolved for days at large institutes</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Students lose motivation without gamification or progress visibility</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid #a855f7;">
-            <h4><i class="fa-solid fa-lightbulb" style="color:#a855f7;"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#a855f7;"></i> HD live classes via WebRTC with interactive whiteboard and Q&A panel</li>
-              <li><i class="fa-solid fa-check" style="color:#a855f7;"></i> AI generates personalized test papers weighted on student's weak chapters</li>
-              <li><i class="fa-solid fa-check" style="color:#a855f7;"></i> Doubts queued by topic, auto-assigned to subject mentors with SLA tracking</li>
-              <li><i class="fa-solid fa-check" style="color:#a855f7;"></i> Streak system, XP points, leaderboards, and rank predictor dashboard</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#a855f7"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-brands fa-js" style="color:#f7ca3e;"></i> Next.js 14</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> Django REST</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-bolt" style="color:#ff8c42;"></i> Redis Queues</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-video" style="color:#60a5fa;"></i> WebRTC Live</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-brain" style="color:#a855f7;"></i> Gemini AI Tests</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-database" style="color:#336791;"></i> PostgreSQL</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-shield" style="color:#4ade80;"></i> Razorpay</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:#a855f7"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">22%</div><div class="metric-label">Avg Score Improvement</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">3×</div><div class="metric-label">Doubt Resolution Speed</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#60a5fa;">500+</div><div class="metric-label">Students Enrolled</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#fbbf24;">94%</div><div class="metric-label">Completion Rate</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: AI Agent -->
-  <div class="case-study-modal" id="modal-aiagent">
-    <div class="modal-inner">
-      <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-hero" style="background: linear-gradient(180deg, rgba(0,102,255,0.1) 0%, transparent 100%);">
-        <button class="back-to-projects" onclick="closeModal()"><i class="fa-solid fa-arrow-left"></i> All Projects</button>
-        <div class="glass-pill" style="display: table; margin-bottom: 1rem; background: rgba(0,210,255,0.08); border-color: var(--primary-cyan); color: var(--primary-cyan); font-size: 0.75rem; letter-spacing: 1px;">AI Agents Â· Case Study #06</div>
-        <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem;">OrbitAgent 🤖</h2>
-        <p style="color: var(--text-muted); max-width: 680px; font-size: 1rem; line-height: 1.7;">Autonomous multi-agent AI platform that acts as an invisible senior engineer on every IT team. It reviews code, writes docs, generates tests, monitors deployments, and plans sprints — around the clock.</p>
-        <div class="hero-stats-row">
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">60%</div><div class="hero-stat-label">Engineering Hours Saved</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">10×</div><div class="hero-stat-label">Code Review Speed</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">94%</div><div class="hero-stat-label">Test Coverage Target</div></div>
-          <div class="hero-stat"><div class="hero-stat-val text-gradient">0</div><div class="hero-stat-label">Critical Bugs in Prod</div></div>
-        </div>
-        <div class="modal-mockup-wrapper" style="margin-top: 2rem; height: 280px;">
-          <div class="mockup-ai" style="height: 280px;">
-            <div class="ai-sidebar">
-              <i class="fa-solid fa-gauge active"></i>
-              <i class="fa-solid fa-robot"></i>
-              <i class="fa-solid fa-list-check"></i>
-              <i class="fa-solid fa-plug"></i>
-              <i class="fa-solid fa-chart-line"></i>
-              <i class="fa-solid fa-gear"></i>
-            </div>
-            <div class="ai-main">
-              <div class="ai-topbar">
-                <span class="ai-topbar-title">OrbitAgent — Team: Engineering  Sprint 14</span>
-                <div class="ai-credit-bar"><span>API Credits</span><div class="credit-track"><div class="credit-fill"></div></div><span>68%</span></div>
-              </div>
-              <div class="agents-row">
-                <div class="agent-card running"><div class="agent-name">🔍 CodeReview Bot</div><div class="agent-task">Analyzing PR #247 — auth module security</div><span class="agent-status status-running">⚡ Running Â· 2m 14s</span></div>
-                <div class="agent-card running"><div class="agent-name">🧪 Test-Gen AI</div><div class="agent-task">Writing unit tests for /payment/v3</div><span class="agent-status status-running">⚡ Running Â· 45s</span></div>
-                <div class="agent-card"><div class="agent-name">📝 DocWriter</div><div class="agent-task">Idle — awaiting PR merge</div><span class="agent-status status-idle">💤 Idle</span></div>
-                <div class="agent-card running"><div class="agent-name">🛡️ Deploy Guard</div><div class="agent-task">Monitoring prod — 0 errors</div><span class="agent-status status-running">⚡ Running</span></div>
-              </div>
-              <div class="ai-log">
-                <div class="log-line info"><span class="ts">09:31:14</span><span class="msg">[CodeReview] Detected: potential SQL injection risk in /users/search — flagged</span></div>
-                <div class="log-line success"><span class="ts">09:31:09</span><span class="msg">[DeployGuard] Production deploy v2.4.1 successful ✅ Zero downtime (3.2s)</span></div>
-                <div class="log-line warn"><span class="ts">09:30:55</span><span class="msg">[Test-Gen] Code coverage gap: /payment module 67% ⚠️ targeting 94%</span></div>
-                <div class="log-line success"><span class="ts">09:30:42</span><span class="msg">[DocWriter] API documentation generated for /auth/v2 — 24 endpoints covered</span></div>
-                <div class="log-line info"><span class="ts">09:30:31</span><span class="msg">[Optimizer] Refactored 3 N+1 query patterns ⚡ 40% latency improvement</span></div>
-                <div class="log-line success"><span class="ts">09:29:58</span><span class="msg">[Sprint Planner] Sprint 14 tasks distributed to 6 engineers based on capacity</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Problem & Solution</div>
-        <div class="case-grid-2">
-          <div class="cs-panel" style="border-top: 3px solid #ff4d4d;">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d4d;"></i> The Problem</h4>
-            <ul>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Senior engineers spend 40% of time on code reviews, docs, and test writing — not building</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Code quality inconsistency across team members with different experience levels</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Security vulnerabilities pass undetected in PRs due to review overload</li>
-              <li><i class="fa-solid fa-xmark" style="color:#ff4d4d;"></i> Outdated API documentation causes inter-team friction and integration bugs</li>
-            </ul>
-          </div>
-          <div class="cs-panel" style="border-top: 3px solid var(--primary-cyan);">
-            <h4><i class="fa-solid fa-lightbulb" style="color:var(--primary-cyan);"></i> Our Solution</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> 5 specialized AI agents running in parallel — each expert in one engineering function</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> GitHub webhook triggers automatic code review within 60 seconds of every PR</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> OWASP-aware security scanner flags injection risks, auth flaws, and dependency CVEs</li>
-              <li><i class="fa-solid fa-check" style="color:var(--primary-cyan);"></i> Auto-generates living documentation from code annotations — always up-to-date</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Agent Roles</div>
-        <div class="case-grid-3" style="margin-bottom: 2rem;">
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-magnifying-glass-code" style="color:var(--primary-cyan);"></i> CodeReview Bot</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> OWASP security scanning on every PR</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Code quality score + refactor suggestions</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Auto-blocks unsafe merges to main</li>
-            </ul>
-          </div>
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-flask-vial" style="color:#a855f7;"></i> Test-Gen AI</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Generates unit + integration tests per function</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Identifies coverage gaps and writes missing cases</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Supports Jest, Pytest, and PHPUnit</li>
-            </ul>
-          </div>
-          <div class="cs-panel">
-            <h4><i class="fa-solid fa-file-code" style="color:#fbbf24;"></i> DocWriter Agent</h4>
-            <ul>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Auto-generates OpenAPI/Swagger from code</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Writes inline JSDoc & Python docstrings</li>
-              <li><i class="fa-solid fa-check" style="color:#4ade80;"></i> Syncs docs to Notion or Confluence</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Tech Stack</div>
-        <div style="margin-bottom: 2rem;">
-          <span class="cs-tech-chip"><i class="fa-solid fa-link-slash" style="color:#fbbf24;"></i> LangChain</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-brain" style="color:#a855f7;"></i> Gemini 2.0 Flash</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-python" style="color:#f7ca3e;"></i> FastAPI</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-docker" style="color:#2496ed;"></i> Docker Compose</span>
-          <span class="cs-tech-chip"><i class="fa-brands fa-github" style="color:#f0f4f8;"></i> GitHub Webhooks</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-bolt" style="color:#ff8c42;"></i> Redis Task Queue</span>
-          <span class="cs-tech-chip"><i class="fa-solid fa-server" style="color:#4ade80;"></i> Kubernetes</span>
-        </div>
-
-        <div class="cs-section-label"><i class="fa-solid fa-circle-dot" style="color:var(--primary-cyan)"></i> Results & Impact</div>
-        <div class="case-grid-4">
-          <div class="metric-card"><div class="metric-val text-gradient">60%</div><div class="metric-label">Engineering Hours Freed</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#4ade80;">10×</div><div class="metric-label">Faster PR Reviews</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#a855f7;">94%</div><div class="metric-label">Test Coverage Achieved</div></div>
-          <div class="metric-card"><div class="metric-val" style="color:#fbbf24;">0</div><div class="metric-label">Critical Security Bugs in Prod</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="site-footer" style="border-top:3px solid #ffffff;background:#06080F;padding-top:4rem;">
+  <!-- PAGE HERO -->
+  <section class="section" style="border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden;">
+    <div id="hero-sparkles-prj" data-sparkles="section" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></div>
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html">
-            <img src="assets/images/logo.png" alt="Dremora"
-              style="height:60px;width:60px;object-fit:contain;background:#ffffff;padding:5px;border-radius:50%;border:3px solid #00d2ff;margin-bottom:1rem;transform:rotate(-5deg);">
-          </a>
-          <p class="font-handwritten" style="font-size:1.1rem;color:rgba(255,255,255,0.8);">Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
-          <div class="footer-social" style="display:flex;gap:1rem;">
-            <a href="https://www.linkedin.com/company/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank"
-              rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://twitter.com/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/dremora.it/" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/Dremorait" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="mailto:dremora.itservices@gmail.com" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;"
-              aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          </div>
-        </div>
+      <div class="section-label mx-auto reveal mb-6" style="margin-bottom:var(--space-6);">Our Work</div>
+      <h1 class="reveal" style="transition-delay:80ms;max-width:640px;margin-inline:auto;margin-bottom:var(--space-6);">What We've Built</h1>
+      <p class="reveal" style="transition-delay:160ms;color:var(--text-secondary);font-size:var(--text-lg);max-width:520px;margin-inline:auto;line-height:var(--leading-relaxed);">We're a young studio. We show our real work — clearly labelled for what it is. No inflated claims, no borrowed screenshots.</p>
 
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Navigation</p>
-          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
-            <li><a href="about.html" style="color:#ffffff;text-decoration:none;">About Us</a></li>
-            <li><a href="services.html" style="color:#ffffff;text-decoration:none;">Our Services</a></li>
-            <li><a href="projects.html" style="color:#ffffff;text-decoration:none;">Projects</a></li>
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">Internship</a></li>
-            <li><a href="contact.html" style="color:#ffffff;text-decoration:none;">Contact</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Legal</p>
-          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
-            <li><a href="privacy-policy.html" style="color:#ffffff;text-decoration:none;">Privacy Policy</a></li>
-            <li><a href="terms-of-service.html" style="color:#ffffff;text-decoration:none;">Terms of Service</a></li>
-            <li><a href="course-guidelines.html" style="color:#ffffff;text-decoration:none;">Course Guidelines</a></li>
-            <li><a href="refund-policy.html" style="color:#ffffff;text-decoration:none;">Refund Policy</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Get In Touch</p>
-          <div style="display:flex;flex-direction:column;gap:1rem;">
-            <a href="tel:+919309795878"
-              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
-              <i class="fa-solid fa-phone" style="color:#00d2ff;width:16px;"></i> +91 9309795878
-            </a>
-            <a href="mailto:dremora.itservices@gmail.com"
-              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
-              <i class="fa-solid fa-envelope" style="color:#00d2ff;width:16px;"></i>
-              dremora.itservices@gmail.com
-            </a>
-            <p class="font-handwritten" style="display:flex;align-items:flex-start;gap:0.8rem;color:#ffffff;font-size:1.1rem;">
-              <i class="fa-solid fa-location-dot" style="color:#00d2ff;width:16px;margin-top:3px;"></i>
-              Pune, Maharashtra 411032, India
-            </p>
-          </div>
-          <a href="contact.html" class="neo-btn font-handwritten"
-            style="margin-top:1.5rem;font-size:1rem;padding:0.6rem 1.4rem;display:inline-block;transform:rotate(-2deg);">Start a Project</a>
-        </div>
+      <!-- Honest context note -->
+      <div class="reveal" style="transition-delay:240ms;margin-top:var(--space-8);display:inline-flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-4) var(--space-5);background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2);border-radius:var(--radius-xl);max-width:560px;text-align:left;">
+        <svg style="color:#D97706;flex-shrink:0;margin-top:2px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+        <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-relaxed);margin:0;">Each project below is clearly labelled as either a Prototype Build (our own initiative), a Concept Project, or a Client Project. We don't exaggerate our portfolio.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="footer-bottom font-handwritten" style="border-top:3px solid #ffffff;margin-top:3rem;padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;color:#ffffff;font-size:1.1rem;">
-        <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
-        <div style="display:flex;gap:1.5rem;">
-          <a href="privacy-policy.html" style="color:#ffffff;text-decoration:none;">Privacy</a>
-          <a href="terms-of-service.html" style="color:#ffffff;text-decoration:none;">Terms</a>
+  <!-- ======= NAGARSEVA CASE STUDY ======= -->
+  <section class="section" style="border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="max-width:860px;margin-inline:auto;">
+
+        <!-- Project header -->
+        <div class="reveal" style="margin-bottom:var(--space-10);">
+          <div style="display:flex;gap:var(--space-3);margin-bottom:var(--space-5);flex-wrap:wrap;">
+            <span class="badge badge-orange">Prototype Build</span>
+            <span class="badge badge-gray">Concept Project</span>
+            <span class="badge badge-gray">Civic Technology</span>
+          </div>
+          <h2 style="font-size:clamp(1.875rem,4vw,3rem);margin-bottom:var(--space-4);">NagarSeva Platform</h2>
+          <p style="color:var(--text-secondary);font-size:var(--text-lg);line-height:var(--leading-relaxed);max-width:640px;">A civic complaint and governance management platform built as an internal prototype to demonstrate our capability in building complex, multi-role web applications.</p>
+        </div>
+
+        <!-- Visual representation -->
+        <div class="reveal" style="margin-bottom:var(--space-12);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:var(--space-10);position:relative;overflow:hidden;">
+                    <div style="position:relative;z-index:1;display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center;">
+            <!-- Simulated UI panels -->
+            <div style="flex:1;min-width:200px;max-width:320px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-4);">
+              <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4);">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--success);"></div>
+                <span style="font-size:var(--text-xs);font-weight:600;color:var(--text-muted);">CITIZEN PORTAL</span>
+              </div>
+              <div style="height:8px;border-radius:4px;background:var(--bg-secondary);margin-bottom:var(--space-3);width:80%;"></div>
+              <div style="height:8px;border-radius:4px;background:var(--border-accent);margin-bottom:var(--space-3);width:60%;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2);margin-top:var(--space-4);">
+                <div style="height:36px;background:var(--accent-subtle);border:1px solid var(--border-accent);border-radius:var(--radius-md);"></div>
+                <div style="height:36px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);"></div>
+                <div style="height:36px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);"></div>
+                <div style="height:36px;background:var(--success-subtle);border:1px solid rgba(22,163,74,0.25);border-radius:var(--radius-md);"></div>
+              </div>
+            </div>
+            <div style="flex:1;min-width:200px;max-width:280px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-4);">
+              <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4);">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></div>
+                <span style="font-size:var(--text-xs);font-weight:600;color:var(--text-muted);">ADMIN DASHBOARD</span>
+              </div>
+              <div style="height:80px;background:var(--bg-secondary);border-radius:var(--radius-lg);margin-bottom:var(--space-3);display:flex;align-items:flex-end;padding:var(--space-2);gap:var(--space-1);">
+                <div style="flex:1;height:40%;background:var(--accent-subtle);border-radius:2px;"></div>
+                <div style="flex:1;height:70%;background:var(--accent);border-radius:2px;"></div>
+                <div style="flex:1;height:55%;background:var(--accent-subtle);border-radius:2px;"></div>
+                <div style="flex:1;height:85%;background:var(--accent);border-radius:2px;"></div>
+                <div style="flex:1;height:45%;background:var(--accent-subtle);border-radius:2px;"></div>
+              </div>
+              <div style="height:8px;border-radius:4px;background:var(--border);margin-bottom:var(--space-2);"></div>
+              <div style="height:8px;border-radius:4px;background:var(--border);width:70%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study Sections -->
+        <div class="stagger-children" style="display:flex;flex-direction:column;gap:var(--space-10);">
+
+          <!-- The Challenge -->
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5);">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--warning-subtle);border:1px solid rgba(217,119,6,0.3);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#D97706;">01</div>
+              <h3 style="font-size:var(--text-lg);font-weight:600;">The Challenge</h3>
+            </div>
+            <p style="color:var(--text-secondary);line-height:var(--leading-relaxed);margin-bottom:var(--space-4);">Municipal governments in India often rely on paper-based complaint systems or fragmented digital tools. Citizens have no visibility into whether their complaints are being addressed, and administrators have no unified dashboard to track and assign issues efficiently.</p>
+            <p style="color:var(--text-secondary);line-height:var(--leading-relaxed);">We built NagarSeva as a prototype to demonstrate how a well-designed digital system could address this — integrating citizen-facing submission, AI-powered categorization, and administrative workflow management in one platform.</p>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5);">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-subtle);border:1px solid var(--border-accent);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--accent-bright);">02</div>
+              <h3 style="font-size:var(--text-lg);font-weight:600;">Our Approach</h3>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);">
+              <div style="display:flex;gap:var(--space-3);align-items:flex-start;">
+                <svg style="color:var(--accent-bright);flex-shrink:0;margin-top:3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                <div><strong style="color:var(--text-primary);font-size:var(--text-sm);">Role-based access</strong><span style="color:var(--text-secondary);font-size:var(--text-sm);"> — Citizens, field staff, and administrators each see a different interface appropriate to their role.</span></div>
+              </div>
+              <div style="display:flex;gap:var(--space-3);align-items:flex-start;">
+                <svg style="color:var(--accent-bright);flex-shrink:0;margin-top:3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                <div><strong style="color:var(--text-primary);font-size:var(--text-sm);">AI categorization</strong><span style="color:var(--text-secondary);font-size:var(--text-sm);"> — Complaints submitted by citizens are automatically categorized using Google Gemini, reducing manual admin triage time.</span></div>
+              </div>
+              <div style="display:flex;gap:var(--space-3);align-items:flex-start;">
+                <svg style="color:var(--accent-bright);flex-shrink:0;margin-top:3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                <div><strong style="color:var(--text-primary);font-size:var(--text-sm);">Status transparency</strong><span style="color:var(--text-secondary);font-size:var(--text-sm);"> — Citizens can track complaint status in real-time without needing to call or visit an office.</span></div>
+              </div>
+              <div style="display:flex;gap:var(--space-3);align-items:flex-start;">
+                <svg style="color:var(--accent-bright);flex-shrink:0;margin-top:3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                <div><strong style="color:var(--text-primary);font-size:var(--text-sm);">Analytics dashboard</strong><span style="color:var(--text-secondary);font-size:var(--text-sm);"> — Administrators can view complaint volumes, resolution rates, and staff performance at a glance.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech Stack -->
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5);">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--success-subtle);border:1px solid rgba(22,163,74,0.3);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#4ADE80;">03</div>
+              <h3 style="font-size:var(--text-lg);font-weight:600;">Technology Used</h3>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);">
+              <div style="padding:var(--space-3) var(--space-4);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);"><strong style="color:var(--text-primary);">Python + Flask</strong><br><span style="color:var(--text-muted);font-size:var(--text-xs);">Backend API</span></div>
+              <div style="padding:var(--space-3) var(--space-4);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);"><strong style="color:var(--text-primary);">PostgreSQL</strong><br><span style="color:var(--text-muted);font-size:var(--text-xs);">Database</span></div>
+              <div style="padding:var(--space-3) var(--space-4);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);"><strong style="color:var(--text-primary);">Google Gemini</strong><br><span style="color:var(--text-muted);font-size:var(--text-xs);">AI Categorization</span></div>
+              <div style="padding:var(--space-3) var(--space-4);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);"><strong style="color:var(--text-primary);">HTML/CSS/JS</strong><br><span style="color:var(--text-muted);font-size:var(--text-xs);">Frontend</span></div>
+              <div style="padding:var(--space-3) var(--space-4);background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);"><strong style="color:var(--text-primary);">JWT Auth</strong><br><span style="color:var(--text-muted);font-size:var(--text-xs);">Authentication</span></div>
+            </div>
+          </div>
+
+          <!-- Outcome -->
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5);">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#A78BFA;">04</div>
+              <h3 style="font-size:var(--text-lg);font-weight:600;">Outcome & Key Learnings</h3>
+            </div>
+            <p style="color:var(--text-secondary);line-height:var(--leading-relaxed);margin-bottom:var(--space-4);">NagarSeva demonstrates our ability to architect and deliver complex multi-role systems with AI integrations. The prototype is fully functional and serves as a reference implementation for potential government or civic technology clients.</p>
+            <div style="padding:var(--space-4);background:var(--bg-secondary);border-radius:var(--radius-lg);border-left:3px solid var(--accent);">
+              <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-relaxed);margin:0;"><strong style="color:var(--text-primary);">Key learning:</strong> Designing software for non-technical end users (government staff) requires significantly more UX investment than building for developers. Simplicity is a feature, not an afterthought.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script src="js/main.js"></script>
-  <script src="js/sam-assistant.js"></script>
-  <script>
-    // ===== PROJECT FILTER =====
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+  <!-- MORE PROJECTS NOTE -->
+  <section class="section" style="border-bottom:1px solid var(--border);background:var(--bg-secondary);">
+    <div class="container">
+      <div class="card reveal" style="max-width:680px;margin-inline:auto;text-align:center;padding:var(--space-12);">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-subtle);border:1px solid var(--border-accent);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-6);"><svg style="color:var(--accent-bright);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg></div>
+        <h3 style="margin-bottom:var(--space-4);">Building Our Portfolio</h3>
+        <p style="color:var(--text-secondary);line-height:var(--leading-relaxed);margin-bottom:var(--space-6);">We're a new studio. We show what we've actually built — not projects we've borrowed or inflated. As we take on client projects, this page will grow with real work and honest case studies.</p>
+        <p style="color:var(--text-secondary);line-height:var(--leading-relaxed);font-size:var(--text-sm);">If you're considering working with us and want to see more of our technical capabilities, we're happy to do a 30-minute call and walk you through our code, architecture decisions, and approach.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:var(--space-6);">Schedule A Technical Call</a>
+      </div>
+    </div>
+  </section>
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        projectCards.forEach(card => {
-          const cat = card.dataset.category;
-          if (filter === 'all' || cat === filter) {
-            card.style.display = 'block';
-            card.style.animation = 'fadeInUp 0.4s ease forwards';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
+  <!-- CTA -->
+  <section class="section" style="position:relative;overflow:hidden;">
+    <div id="cta-sparkles-prj" data-sparkles="cta" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></div>
+    <div class="container text-center">
+      <div class="reveal" style="max-width:560px;margin-inline:auto;">
+        <h2 style="margin-bottom:var(--space-4);">Have a project in mind?</h2>
+        <p style="color:var(--text-secondary);margin-bottom:var(--space-8);line-height:var(--leading-relaxed);">Let's talk about what you're building. A 30-minute call costs nothing and helps both of us figure out if we're the right fit.</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="contact.html" class="btn btn-primary btn-lg btn-magnetic">Book A Free Call</a>
+          <a href="services.html" class="btn btn-secondary btn-lg">See Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // ===== MODAL OPEN / CLOSE =====
-    function openModal(projectId) {
-      const modal = document.getElementById('modal-' + projectId);
-      if (!modal) return;
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      modal.scrollTop = 0;
-    }
+</main>
 
-    function closeModal() {
-      document.querySelectorAll('.case-study-modal.open').forEach(m => {
-        m.classList.remove('open');
-      });
-      document.body.style.overflow = '';
-    }
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:var(--space-4);"><div class="nav-logo-mark">D</div><div style="margin-left:var(--space-3);"><div class="nav-logo-text" style="font-size:var(--text-sm);">Dremora IT</div></div></a>
+        <p>A technology studio building websites, web applications, and AI automation systems for businesses. Based in Pune, India.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/dremoraitservices" class="footer-social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://github.com/Dremorait" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:dremora.itservices@gmail.com" class="footer-social-link" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div><p class="footer-heading">Navigation</p><ul class="footer-links"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="services.html" class="footer-link">Services</a></li><li><a href="about.html" class="footer-link">About</a></li><li><a href="contact.html" class="footer-link">Contact</a></li></ul></div>
+      <div><p class="footer-heading">Services</p><ul class="footer-links"><li><a href="services.html#websites" class="footer-link">Website Development</a></li><li><a href="services.html#webapps" class="footer-link">Web Applications</a></li><li><a href="services.html#ai" class="footer-link">AI Automation</a></li></ul></div>
+      <div><p class="footer-heading">Legal</p><ul class="footer-links"><li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li><li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li><li><a href="refund-policy.html" class="footer-link">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Dremora IT. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div></div>
+  </div>
+</footer>
 
-    // Close on backdrop click
-    document.querySelectorAll('.case-study-modal').forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-    });
-
-    // Close on ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Also make cards clickable (not just the CTA link)
-    projectCards.forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (!e.target.closest('.project-card-cta')) return;
-        // CTA click handled by onclick attribute already
-      });
-    });
-
-    // Note: .reveal scroll animation is handled by main.js (adds .active class)
-  </script>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg></button>
+<script src="js/main.js" defer></script>
+<script src="js/sparkles.js" defer></script>
 </body>
 </html>
-
-

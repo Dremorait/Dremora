@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import pymysql
+from supabase import create_client, Client
 import google.generativeai as genai
 from dotenv import load_dotenv
 
@@ -23,16 +23,13 @@ if GEMINI_API_KEY and GEMINI_API_KEY != "YOUR_GEMINI_API_KEY_HERE":
 else:
     model = None
 
-# Helper to get DB connection
-def get_db_connection():
-    return pymysql.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", ""),
-        database=os.getenv("DB_NAME", "dremora_db"),
-        port=int(os.getenv("DB_PORT", 3306)),
-        cursorclass=pymysql.cursors.DictCursor
-    )
+# Helper to get DB connection (Supabase client)
+def get_supabase_client() -> Client:
+    url: str = os.environ.get("SUPABASE_URL")
+    key: str = os.environ.get("SUPABASE_KEY")
+    if not url or not key:
+        raise ValueError("Missing Supabase credentials in .env")
+    return create_client(url, key)
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -62,14 +59,11 @@ User Query: {user_msg}
         response = model.generate_content(prompt)
         # Log to DB (optional, wrapping in try/except)
         try:
-            conn = get_db_connection()
-            with conn.cursor() as cursor:
-                cursor.execute(
-                    "INSERT INTO ai_chat_logs (user_query, ai_response) VALUES (%s, %s)",
-                    (user_msg, str(response.text))
-                )
-            conn.commit()
-            conn.close()
+            supabase = get_supabase_client()
+            supabase.table("ai_chat_logs").insert({
+                "user_query": user_msg,
+                "ai_response": str(response.text)
+            }).execute()
         except Exception as e:
             print("DB Log Error:", e)
 
@@ -81,14 +75,13 @@ User Query: {user_msg}
 def submit_contact():
     data = request.json
     try:
-        conn = get_db_connection()
-        with conn.cursor() as cursor:
-            cursor.execute(
-                "INSERT INTO contacts (name, email, subject, message) VALUES (%s, %s, %s, %s)",
-                (data.get('name'), data.get('email'), data.get('subject', 'General Inquiry'), data.get('message'))
-            )
-        conn.commit()
-        conn.close()
+        supabase = get_supabase_client()
+        supabase.table("contacts").insert({
+            "name": data.get('name'),
+            "email": data.get('email'),
+            "subject": data.get('subject', 'General Inquiry'),
+            "message": data.get('message')
+        }).execute()
         return jsonify({"status": "success", "message": "Inquiry received successfully!"}), 200
     except Exception as e:
         print(e)
@@ -98,14 +91,14 @@ def submit_contact():
 def submit_internship():
     data = request.json
     try:
-        conn = get_db_connection()
-        with conn.cursor() as cursor:
-            cursor.execute(
-                "INSERT INTO internships (name, email, college, domain, why_join) VALUES (%s, %s, %s, %s, %s)",
-                (data.get('name'), data.get('email'), data.get('college'), data.get('domain'), data.get('why_join'))
-            )
-        conn.commit()
-        conn.close()
+        supabase = get_supabase_client()
+        supabase.table("internships").insert({
+            "name": data.get('name'),
+            "email": data.get('email'),
+            "college": data.get('college'),
+            "domain": data.get('domain'),
+            "why_join": data.get('why_join')
+        }).execute()
         return jsonify({"status": "success", "message": "Application submitted successfully!"}), 200
     except Exception as e:
         print(f"Internship Error: {e}")

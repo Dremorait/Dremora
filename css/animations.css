@@ -1,38 +1,74 @@
-/* ===== DREMORA ANIMATIONS â€” PREMIUM EDITION ===== */
+/* ==========================================================================
+   DREMORA IT â€” ANIMATIONS
+   ========================================================================== */
 
-/* ---- Keyframes ---- */
+/* --------------------------------------------------------------------------
+   1. KEYFRAME DEFINITIONS
+   -------------------------------------------------------------------------- */
 
-@keyframes pulse-glow {
-  0%   { box-shadow: 0 0 8px var(--primary-cyan); transform: scale(1); }
-  50%  { box-shadow: 0 0 22px var(--primary-cyan), 0 0 40px var(--accent-purple); transform: scale(1.1); }
-  100% { box-shadow: 0 0 8px var(--primary-cyan); transform: scale(1); }
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes soft-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.7; }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70%  { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 
 @keyframes float {
-  0%   { transform: translateY(0px) rotate(0deg); }
-  25%  { transform: translateY(-12px) rotate(1deg); }
-  75%  { transform: translateY(6px) rotate(-1deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-40px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: translateX(0); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 @keyframes shimmer {
@@ -40,24 +76,8 @@
   100% { background-position: 200% center; }
 }
 
-@keyframes orb-float-1 {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(60px, -80px) scale(1.1); }
-  66%  { transform: translate(-40px, 40px) scale(0.95); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes orb-float-2 {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(-80px, 60px) scale(1.05); }
-  66%  { transform: translate(50px, -30px) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes orb-float-3 {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(30px, -60px) scale(1.15); }
-  100% { transform: translate(0, 0) scale(1); }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 @keyframes gradient-shift {
@@ -66,36 +86,14 @@
   100% { background-position: 0% 50%; }
 }
 
-@keyframes border-glow-spin {
-  0%   { border-color: var(--primary-cyan); box-shadow: 0 0 20px rgba(108,71,255,0.3); }
-  33%  { border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(139,92,246,0.3); }
-  66%  { border-color: var(--primary-blue); box-shadow: 0 0 20px rgba(90,61,216,0.3); }
-  100% { border-color: var(--primary-cyan); box-shadow: 0 0 20px rgba(108,71,255,0.3); }
-}
-
-@keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes line-grow {
-  from { width: 0; opacity: 0; }
-  to   { width: 100%; opacity: 1; }
-}
-
-@keyframes timeline-draw {
+@keyframes timeline-fill {
   from { height: 0; }
   to   { height: 100%; }
 }
 
-@keyframes glow-pulse-btn {
-  0%, 100% { box-shadow: 0 4px 15px rgba(108,71,255,0.3), 0 0 0 0 rgba(108,71,255,0.4); }
-  50%       { box-shadow: 0 6px 25px rgba(108,71,255,0.5), 0 0 0 10px rgba(108,71,255,0); }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes count-up {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes cursor-blink {
@@ -103,150 +101,268 @@
   50%       { opacity: 0; }
 }
 
-@keyframes count-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* --------------------------------------------------------------------------
+   2. REVEAL ANIMATION CLASSES
+   These are set to initial hidden state and animated by JS IntersectionObserver
+   -------------------------------------------------------------------------- */
 
-/* ---- Utility Classes ---- */
-
-.pulse-dot {
-  animation: pulse-glow 2s infinite ease-in-out;
-}
-
-.pulse-anim {
-  animation: soft-pulse 3s ease-in-out infinite;
-}
-
-.float-anim {
-  animation: float 9s ease-in-out infinite;
-}
-
-.float-anim-delay-1 { animation: float 11s ease-in-out infinite; animation-delay: 1.5s; }
-.float-anim-delay-2 { animation: float 13s ease-in-out infinite; animation-delay: 3s; }
-.float-anim-delay-3 { animation: float 10s ease-in-out infinite; animation-delay: 0.7s; }
-
-/* Shimmer text effect */
-.shimmer-text {
-  background: linear-gradient(90deg, var(--text-main) 0%, var(--primary-cyan) 30%, var(--accent-purple) 60%, var(--text-main) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: shimmer 4s linear infinite;
-}
-
-/* Gradient animated text */
-.gradient-animated-text {
-  background: linear-gradient(270deg, var(--primary-cyan), var(--accent-purple), var(--primary-blue), var(--primary-cyan));
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: gradient-shift 5s ease infinite;
-}
-
-/* Glow border card */
-.glow-border {
-  transition: all var(--motion-normal) ease;
-}
-.glow-border:hover {
-  animation: border-glow-spin 2s linear infinite;
-  transform: translateY(-6px);
-}
-
-/* Scroll reveal utility */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
 }
-.reveal.active {
+
+.reveal.revealed {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Staggered children â€” JS adds delay via CSS variable */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+.stagger-children.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* From left */
 .reveal-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateX(-28px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
 }
-.reveal-left.active { opacity: 1; transform: translateX(0); }
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
 
+/* From right */
 .reveal-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateX(28px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
 }
-.reveal-right.active { opacity: 1; transform: translateX(0); }
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-/* Stagger children */
-.stagger-children > * { opacity: 0; transform: translateY(30px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.stagger-children.active > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.1s; }
-.stagger-children.active > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.2s; }
-.stagger-children.active > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.3s; }
-.stagger-children.active > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.4s; }
-.stagger-children.active > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.5s; }
-.stagger-children.active > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.6s; }
+/* Scale in */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
 
-/* Marquee */
+/* --------------------------------------------------------------------------
+   3. MARQUEE / INFINITE SCROLL
+   -------------------------------------------------------------------------- */
 .marquee-wrapper {
   overflow: hidden;
-  white-space: nowrap;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
 }
+
 .marquee-track {
+  display: flex;
+  gap: var(--space-6);
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
   display: inline-flex;
-  gap: 4rem;
-  animation: marquee-scroll 25s linear infinite;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
 }
-.marquee-track:hover { animation-play-state: paused; }
 
-/* Cursor glow */
-.cursor-glow {
+.marquee-item:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.marquee-item svg,
+.marquee-item i {
+  font-size: 1em;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. FLOATING ANIMATION
+   -------------------------------------------------------------------------- */
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-delay {
+  animation: float 5s ease-in-out 1s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   5. GRADIENT TEXT
+   -------------------------------------------------------------------------- */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #3B82F6 50%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. SHIMMER LOADING EFFECT
+   -------------------------------------------------------------------------- */
+.shimmer {
+  background: linear-gradient(90deg,
+    var(--bg-card) 0%,
+    var(--bg-card-hover) 50%,
+    var(--bg-card) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+
+/* --------------------------------------------------------------------------
+   7. PROGRESS LINE (Timeline)
+   -------------------------------------------------------------------------- */
+.timeline-line-fill {
+  animation: timeline-fill 1.2s var(--ease-out) forwards;
+  animation-play-state: paused;
+}
+
+.timeline-line-fill.revealed {
+  animation-play-state: running;
+}
+
+/* --------------------------------------------------------------------------
+   8. PULSE RING (CTA button)
+   -------------------------------------------------------------------------- */
+.pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   9. SPIN (loading states)
+   -------------------------------------------------------------------------- */
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   10. PAGE TRANSITION OVERLAY
+   -------------------------------------------------------------------------- */
+.page-transition-overlay {
   position: fixed;
-  width: 20px; height: 20px;
-  background: radial-gradient(circle, rgba(108,71,255,0.6) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+  inset: 0;
+  background: var(--bg-primary);
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width var(--motion-fast) ease, height var(--motion-fast) ease;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
 }
 
-/* Typewriter cursor */
-.typewriter-cursor {
-  display: inline-block;
-  width: 3px;
-  background: var(--primary-cyan);
-  animation: cursor-blink 0.8s step-end infinite;
-  margin-left: 2px;
-  vertical-align: middle;
-  height: 0.85em;
+.page-transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
-/* Glow card hover effect */
-.hover-glow {
-  transition: all var(--motion-fast) ease;
-  cursor: pointer;
-}
-.hover-glow:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 20px 60px rgba(108,71,255,0.15), 0 8px 20px rgba(0,0,0,0.4);
-  border-color: rgba(108,71,255,0.35);
+/* --------------------------------------------------------------------------
+   11. HERO ORBITAL ANIMATIONS (Sparkle system + Hero visual)
+   -------------------------------------------------------------------------- */
+
+/* Orbit clockwise — outer ring (99px radius) */
+@keyframes drm-orbit-cw {
+  from { transform: rotate(0deg)   translateX(-99px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(-99px) rotate(-360deg); }
 }
 
-/* Progress bar animation */
-.progress-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  width: 0;
-  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* Orbit counter-clockwise — inner ring (62px radius) */
+@keyframes drm-orbit-ccw {
+  from { transform: rotate(0deg)    translateX(-62px) rotate(0deg); }
+  to   { transform: rotate(-360deg) translateX(-62px) rotate(360deg); }
 }
-.progress-bar-fill.animate { width: var(--target-width); }
 
-/* Badge spin */
-.badge-spin { animation: spin-slow 20s linear infinite; }
+/* Orbit mid — offset starting angle, mid ring (80px radius) */
+@keyframes drm-orbit-mid {
+  from { transform: rotate(40deg)  translateX(-80px) rotate(-40deg); }
+  to   { transform: rotate(400deg) translateX(-80px) rotate(-400deg); }
+}
+
+/* Pulsing halo rings */
+@keyframes drm-pulse-ring {
+  0%, 100% { opacity: 0.14; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.38; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Pulsing dot glow */
+@keyframes drm-pulse-dot {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   12. HERO ORBITAL SATELLITE ANIMATIONS (reference-image style)
+   -------------------------------------------------------------------------- */
+
+/* Arm rotates CW — badge at left:170px; top:-20px orbits at ~190px radius */
+@keyframes hero-orbit-arm-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Counter-rotation keeps badge upright while arm spins CW */
+@keyframes hero-cnt-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* Arm rotates CCW */
+@keyframes hero-orbit-arm-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* Counter-rotation keeps badge upright while arm spins CCW */
+@keyframes hero-cnt-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
