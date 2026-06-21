@@ -192,7 +192,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: var(--weight-extrabold); }
+h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: var(--weight-extrabold); }
 h2 { font-size: clamp(1.875rem, 4vw, 3rem);  font-weight: var(--weight-bold); }
 h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: var(--weight-semibold); }
 h4 { font-size: var(--text-xl);  font-weight: var(--weight-semibold); }

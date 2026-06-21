@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGCG2F6PK"></script>
@@ -58,12 +58,60 @@
 <main style="padding-top:var(--nav-height);">
 
   <!-- PAGE HERO -->
-  <section class="section" style="border-bottom:1px solid var(--border);text-align:center;padding-bottom:var(--space-16);position:relative;overflow:hidden;">
+  <section class="hero-section bg-premium" style="border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden;">
     <div id="hero-sparkles-svc" data-sparkles="section" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></div>
-    <div class="container">
+    <div class="container" style="position:relative;z-index:2;">
       <div class="section-label mx-auto reveal mb-6" style="margin-bottom:var(--space-6);">Services</div>
-      <h1 class="reveal" style="transition-delay:80ms;max-width:720px;margin-inline:auto;margin-bottom:var(--space-6);">Three services. No fluff.</h1>
-      <p class="reveal" style="transition-delay:160ms;color:var(--text-secondary);font-size:var(--text-lg);max-width:560px;margin-inline:auto;line-height:var(--leading-relaxed);">We don't try to do everything. We focus on three things that we can confidently deliver — and explain exactly what each one involves.</p>
+      <h1 class="reveal" style="transition-delay:80ms;max-width:800px;margin-inline:auto;margin-bottom:var(--space-6);">Enterprise technology solutions without the enterprise bloat.</h1>
+      <p class="reveal" style="transition-delay:160ms;color:var(--text-secondary);font-size:var(--text-lg);max-width:600px;margin-inline:auto;line-height:var(--leading-relaxed);margin-bottom:var(--space-8);">We build robust digital ecosystems. From scalable web applications to intelligent automation, we focus on what drives your business forward.</p>
+      
+      <!-- Social Proof Testimonial -->
+      <div class="reveal" style="transition-delay:200ms;display:inline-flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-4);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:100px;margin-bottom:var(--space-12);">
+        <div style="display:flex;gap:2px;color:var(--accent);">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <span style="font-size:var(--text-sm);color:var(--text-secondary);font-weight:500;">98% Client Satisfaction</span>
+      </div>
+
+      <!-- Service Preview Cards -->
+      <div class="stagger-children reveal" style="transition-delay:240ms;display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:var(--space-6);text-align:left;margin-bottom:var(--space-12);">
+        <a href="#websites" class="card contact-opt-card" style="text-decoration:none;display:block;">
+          <div style="font-size:2rem;color:var(--accent);margin-bottom:var(--space-4);"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3 style="margin-bottom:var(--space-2);color:var(--text-primary);">Website Development</h3>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:0;">High-performance, SEO-optimized business websites and landing pages.</p>
+        </a>
+        <a href="#webapps" class="card contact-opt-card" style="text-decoration:none;display:block;">
+          <div style="font-size:2rem;color:var(--accent);margin-bottom:var(--space-4);"><i class="fa-solid fa-layer-group"></i></div>
+          <h3 style="margin-bottom:var(--space-2);color:var(--text-primary);">Web Applications</h3>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:0;">Custom dashboards, CRMs, and management portals tailored to your workflows.</p>
+        </a>
+        <a href="#ai" class="card contact-opt-card" style="text-decoration:none;display:block;">
+          <div style="font-size:2rem;color:var(--accent);margin-bottom:var(--space-4);"><i class="fa-solid fa-robot"></i></div>
+          <h3 style="margin-bottom:var(--space-2);color:var(--text-primary);">AI Automation</h3>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:0;">Intelligent chatbots and automated sequences that eliminate manual tasks.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO MARQUEE -->
+  <section class="logo-marquee-wrapper">
+    <div class="logo-marquee">
+      <i class="fa-brands fa-aws"></i>
+      <i class="fa-brands fa-stripe"></i>
+      <i class="fa-brands fa-react"></i>
+      <i class="fa-brands fa-node-js"></i>
+      <i class="fa-brands fa-python"></i>
+      <i class="fa-brands fa-github"></i>
+      <i class="fa-solid fa-database"></i>
+      <!-- Duplicate for infinite effect -->
+      <i class="fa-brands fa-aws"></i>
+      <i class="fa-brands fa-stripe"></i>
+      <i class="fa-brands fa-react"></i>
+      <i class="fa-brands fa-node-js"></i>
+      <i class="fa-brands fa-python"></i>
+      <i class="fa-brands fa-github"></i>
+      <i class="fa-solid fa-database"></i>
     </div>
   </section>
 
@@ -250,6 +298,105 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK TIMELINE -->
+  <section class="section" style="border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header centered reveal">
+        <div class="section-label mx-auto">Process</div>
+        <h2 class="section-title">How We Work</h2>
+        <p class="section-subtitle">A transparent, step-by-step process to take your project from concept to deployment.</p>
+      </div>
+      <div class="timeline-grid reveal">
+        <div class="timeline-step">
+          <div class="timeline-number">1</div>
+          <h3 style="margin-bottom:var(--space-2);font-size:var(--text-lg);">Discovery Call</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We discuss your goals, technical requirements, and define the exact scope of the project.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">2</div>
+          <h3 style="margin-bottom:var(--space-2);font-size:var(--text-lg);">Planning & Strategy</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We map out the architecture, design system, and timeline before writing a single line of code.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">3</div>
+          <h3 style="margin-bottom:var(--space-2);font-size:var(--text-lg);">Development</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We build your solution using modern, scalable technologies. You get regular milestone updates.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">4</div>
+          <h3 style="margin-bottom:var(--space-2);font-size:var(--text-lg);">Launch & Support</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We handle deployment, ensure performance, and provide dedicated post-launch support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section" style="background:var(--bg-secondary);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header centered reveal">
+        <div class="section-label mx-auto">Benefits</div>
+        <h2 class="section-title">Why Choose Dremora</h2>
+      </div>
+      <div class="stagger-children reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:var(--space-6);max-width:1000px;margin-inline:auto;">
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-bolt"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">Fast Delivery</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">Optimized development cycles ensure your product launches in weeks, not months.</p>
+        </div>
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-user-tie"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">Direct Founder Communication</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">No account managers. You speak directly with the engineers building your product.</p>
+        </div>
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-code"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">No Outsourcing</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">Everything is built in-house. We maintain absolute control over code quality and security.</p>
+        </div>
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-layer-group"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">Modern Technology Stack</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We use React, Python, and scalable databases to ensure your app won't break at scale.</p>
+        </div>
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-file-invoice"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">Transparent Pricing</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">Fixed scope pricing. What we quote is what you pay. No hidden server fees.</p>
+        </div>
+        <div class="card contact-opt-card">
+          <div style="font-size:1.5rem;color:var(--accent);margin-bottom:var(--space-3);"><i class="fa-solid fa-headset"></i></div>
+          <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);">Long-Term Support</h3>
+          <p style="color:var(--text-secondary);font-size:var(--text-sm);margin:0;">We stick around after launch to handle maintenance, updates, and scaling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS -->
+  <section class="section" style="border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="stagger-children reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:var(--space-8);max-width:1000px;margin-inline:auto;">
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3w</div>
+          <div class="stat-label">Average Delivery</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">&lt;4h</div>
+          <div class="stat-label">Support Response</div>
         </div>
       </div>
     </div>

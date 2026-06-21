@@ -415,7 +415,28 @@
   window.DRMtoast = showToast;
 
   /* ========================================================================
-     14. ACTIVE STATE FOR AI CHAT (legacy compat)
+     14. FAQ ACCORDION
+     ======================================================================== */
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.parentElement;
+      const isActive = parent.classList.contains('active');
+      
+      // Close all other FAQs
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Toggle current FAQ
+      if (!isActive) {
+        parent.classList.add('active');
+      }
+    });
+  });
+
+  /* ========================================================================
+     15. ACTIVE STATE FOR AI CHAT (legacy compat)
      ======================================================================== */
   // If there's a legacy AI chat widget from previous version, we keep it.
   // The PHP endpoint (backend/api/ai.php) handles the actual AI calls.
