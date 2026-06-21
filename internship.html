@@ -165,6 +165,11 @@
               </div>
 
               <form action="#" method="POST" id="internshipForm">
+                <!-- Honeypot Field -->
+                <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                  <label for="website_url">If you are a human, leave this blank</label>
+                  <input type="text" name="website_url" id="website_url" tabindex="-1" autocomplete="off">
+                </div>
                 <div class="form-grid-2col" style="margin-bottom:1rem;gap:1rem;display:grid;grid-template-columns:1fr 1fr;">
                   <div class="form-group" style="margin-bottom:0;">
                     <input type="text" name="name" placeholder="Full Name" required class="neo-border font-handwritten" style="width:100%;padding:0.8rem;background:#ffffff;color:#06080F;font-size:1.1rem;">

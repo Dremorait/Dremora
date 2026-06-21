@@ -90,12 +90,38 @@ $curlError  = curl_error($ch);
 $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
+// ---- Rate Limiting (Session/IP based) ----
+session_start();
+$rateLimitMax = 10;
+$rateLimitWindow = 60; // seconds
+$clientIP = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$rateKey = 'rate_limit_' . md5($clientIP);
+
+if (!isset($_SESSION[$rateKey])) {
+    $_SESSION[$rateKey] = ['count' => 1, 'first_request' => time()];
+} else {
+    $timePassed = time() - $_SESSION[$rateKey]['first_request'];
+    if ($timePassed < $rateLimitWindow) {
+        if ($_SESSION[$rateKey]['count'] >= $rateLimitMax) {
+            http_response_code(429);
+            echo json_encode(['error' => 'Too Many Requests. Please wait a minute before trying again.']);
+            exit;
+        }
+        $_SESSION[$rateKey]['count']++;
+    } else {
+        // Reset window
+        $_SESSION[$rateKey] = ['count' => 1, 'first_request' => time()];
+    }
+}
+
 // ---- Handle cURL Failures (Ollama offline) ----
 if ($ollamaRaw === false || !empty($curlError)) {
     http_response_code(503);
+    // Hardened error message: DO NOT expose $curlError to the client
+    error_log("Ollama cURL Error: " . $curlError);
     echo json_encode([
-        'error' => 'AI temporarily offline. Please try again.',
-        'debug' => $curlError,
+        'error' => 'AI service temporarily unavailable. Please try again later.',
+        // Removed debug output to prevent info leakage
     ]);
     exit;
 }
@@ -105,9 +131,10 @@ $ollamaData = json_decode($ollamaRaw, true);
 
 if (json_last_error() !== JSON_ERROR_NONE || !isset($ollamaData['response'])) {
     http_response_code(502);
+    error_log("Ollama JSON Error or Missing Response: " . $ollamaRaw);
     echo json_encode([
-        'error' => 'AI temporarily offline. Please try again.',
-        'debug' => 'Unexpected response from Ollama.',
+        'error' => 'AI service temporarily unavailable. Please try again later.',
+        // Removed debug output
     ]);
     exit;
 }

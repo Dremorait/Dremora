@@ -31,17 +31,24 @@ Since you have a GitHub account, you need to push these files to a new repositor
    - **Start Command**: `gunicorn --chdir backend app:app`
 5. **Environment Variables**:
    - `GEMINI_API_KEY`: Paste your API Key.
-   - `DB_HOST`: (Enter your Cloud MySQL host later).
-   - `DB_USER`: (Enter your Cloud MySQL user later).
-   - `DB_PASSWORD`: (Enter your Cloud MySQL password later).
-   - `DB_NAME`: `dremora_db`
+   - `SUPABASE_URL`: Your Supabase Project URL.
+   - `SUPABASE_KEY`: Your Supabase Service Role Key.
+   - `ALLOWED_ORIGINS`: Comma separated allowed frontend URLs (e.g., `https://dremora.in,https://www.dremora.in`).
+   - `ADMIN_SECRET_TOKEN`: A secure random string for backend admin access (e.g., generated via `openssl rand -hex 32`).
 
 ## Phase 3: Deploy Frontend (Vercel)
 
 1. **Log in to [Vercel](https://vercel.com/)** with GitHub.
 2. Click **Add New** > **Project**.
 3. Import your **Dremora** repository.
-4. Vercel will automatically detect it's a static site. Click **Deploy**.
+4. Vercel will automatically detect it's a static site and apply the security headers from `vercel.json`. Click **Deploy**.
+
+## Phase 4: WAF & DDoS Protection (Cloudflare)
+
+To maximize security against Layer 7 DDoS attacks:
+1. Move your domain DNS to **Cloudflare**.
+2. Go to **Security > WAF** and create custom rules to challenge requests from known malicious ASNs or countries you don't serve.
+3. Go to **Security > Bots** and enable **Bot Fight Mode**.
 
 ## Phase 4: Database (The Final Piece)
 

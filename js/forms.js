@@ -42,7 +42,10 @@ function showToast(message, type = 'success') {
     ? `<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
     : `<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`;
 
-  toast.innerHTML = `${icon}<span>${message}</span>`;
+  toast.innerHTML = icon;
+  const textSpan = document.createElement('span');
+  textSpan.textContent = message;
+  toast.appendChild(textSpan);
 
   // Inject keyframe once
   if (!document.getElementById('toastStyle')) {
@@ -66,6 +69,25 @@ function showFormSuccess() {
   }
 }
 
+// ─── Security Helpers ────────────────────────────────────────────────────────
+function sanitizeInput(str) {
+  if (!str) return '';
+  // Basic sanitization: strip angle brackets to prevent script injection
+  return str.toString().replace(/[<>]/g, '');
+}
+
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function isValidPhone(phone) {
+  // Allow empty or basic phone formats (e.g. +91 9999999999)
+  if (!phone) return true;
+  const re = /^[+]?[\d\s-]{7,15}$/;
+  return re.test(phone);
+}
+
 // ─── Contact form handler ────────────────────────────────────────────────────
 async function handleContactSubmit(e) {
   e.preventDefault();
@@ -73,33 +95,59 @@ async function handleContactSubmit(e) {
   const btn  = form.querySelector('button[type="submit"]');
   const orig = btn.innerHTML;
 
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
-  btn.disabled  = true;
+  // Honeypot Trap
+  const honeypot = form.querySelector('input[name="website_url"]');
+  if (honeypot && honeypot.value) {
+    console.log('Bot detected. Silently rejecting.');
+    // Pretend to succeed
+    showFormSuccess();
+    showToast('Message sent! We\'ll be in touch within 4 hours.', 'success');
+    form.reset();
+    return;
+  }
 
   const data = Object.fromEntries(new FormData(form).entries());
+
+  // Input Validation
+  if (data.email && !isValidEmail(data.email)) {
+    showToast('Please enter a valid email address.', 'error');
+    return;
+  }
+  if (data.phone && !isValidPhone(data.phone)) {
+    showToast('Please enter a valid phone number.', 'error');
+    return;
+  }
+  if (data.message && data.message.length > 2000) {
+    showToast('Message is too long. Please keep it under 2000 characters.', 'error');
+    return;
+  }
+
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+  btn.disabled  = true;
 
   try {
     const sb = getSupabase();
     const { error } = await sb.from('contacts').insert({
-      name    : data.name    || null,
-      email   : data.email   || null,
-      phone   : data.phone   || null,
-      subject : data.subject || 'General Inquiry',
-      message : data.message || null,
-      inquiry_type: data.budget || null,   // re-use inquiry_type for budget context
+      name    : sanitizeInput(data.name)    || null,
+      email   : sanitizeInput(data.email)   || null,
+      phone   : sanitizeInput(data.phone)   || null,
+      subject : sanitizeInput(data.subject) || 'General Inquiry',
+      message : sanitizeInput(data.message) || null,
+      inquiry_type: sanitizeInput(data.budget) || null,
     });
 
     if (error) throw error;
 
-    // Show the inline success state
     showFormSuccess();
     showToast('Message sent! We\'ll be in touch within 4 hours.', 'success');
     form.reset();
 
   } catch (err) {
     console.error('Contact submit error:', err);
-    const msg = err?.message || 'Unknown error';
+    // Sanitize the error message just in case
+    const msg = sanitizeInput(err?.message || 'Unknown error');
     showToast(`Failed to submit inquiry. ${msg}`, 'error');
+  } finally {
     btn.innerHTML = orig;
     btn.disabled  = false;
   }
@@ -112,19 +160,34 @@ async function handleInternshipSubmit(e) {
   const btn  = form.querySelector('button[type="submit"]');
   const orig = btn.innerHTML;
 
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting…';
-  btn.disabled  = true;
+  // Honeypot Trap
+  const honeypot = form.querySelector('input[name="website_url"]');
+  if (honeypot && honeypot.value) {
+    console.log('Bot detected. Silently rejecting.');
+    showToast('Application submitted! We\'ll review it shortly.', 'success');
+    form.reset();
+    return;
+  }
 
   const data = Object.fromEntries(new FormData(form).entries());
+
+  // Input Validation
+  if (data.email && !isValidEmail(data.email)) {
+    showToast('Please enter a valid email address.', 'error');
+    return;
+  }
+
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting…';
+  btn.disabled  = true;
 
   try {
     const sb = getSupabase();
     const { error } = await sb.from('internships').insert({
-      name    : data.name     || data.full_name || null,
-      email   : data.email    || null,
-      college : data.college  || data.college_name || null,
-      domain  : data.domain   || data.selected_domain || null,
-      why_join: data.why_join || data.message || null,
+      name    : sanitizeInput(data.name || data.full_name) || null,
+      email   : sanitizeInput(data.email) || null,
+      college : sanitizeInput(data.college || data.college_name) || null,
+      domain  : sanitizeInput(data.domain || data.selected_domain) || null,
+      why_join: sanitizeInput(data.why_join || data.message) || null,
     });
 
     if (error) throw error;
@@ -134,7 +197,7 @@ async function handleInternshipSubmit(e) {
 
   } catch (err) {
     console.error('Internship submit error:', err);
-    const msg = err?.message || 'Unknown error';
+    const msg = sanitizeInput(err?.message || 'Unknown error');
     showToast(`Failed to submit application. ${msg}`, 'error');
   } finally {
     btn.innerHTML = orig;

@@ -1,18 +1,35 @@
 import os
-from flask import Flask, jsonify, request
+import re
+from functools import wraps
+from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from supabase import create_client, Client
 import google.generativeai as genai
 from dotenv import load_dotenv
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from email_validator import validate_email, EmailNotValidError
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
 
 # Basic Configuration
-app.config['SECRET_KEY'] = 'dremora-super-secret-key-2026'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dremora-super-secret-key-2026')
+
+# ---- CORS Hardening ----
+allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+ALLOWED_ORIGINS = [origin.strip() for origin in allowed_origins_env.split(",")]
+CORS(app, resources={r"/api/*": {"origins": ALLOWED_ORIGINS}})
+
+# ---- Rate Limiting ----
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://" # Use Redis for distributed production
+)
 
 # Configure Gemini AI
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -36,11 +53,56 @@ def get_supabase_client() -> Client:
         _supabase_client = create_client(url, key)
     return _supabase_client
 
+# ---- Security Helpers ----
+def sanitize_input(value, max_length=2000):
+    """Strips HTML tags and restricts length."""
+    if not isinstance(value, str):
+        return None
+    # Strip basic HTML tags
+    clean_val = re.sub(r'<[^>]*>', '', value)
+    return clean_val.strip()[:max_length]
+
+def is_valid_email(email_str):
+    try:
+        validate_email(email_str, check_deliverability=False)
+        return True
+    except EmailNotValidError:
+        return False
+
+# ---- RBAC Middleware ----
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get("Authorization")
+        admin_token = os.environ.get("ADMIN_SECRET_TOKEN")
+        
+        if not admin_token:
+            # If backend not configured properly, deny access securely
+            app.logger.error("ADMIN_SECRET_TOKEN not configured.")
+            return jsonify({"error": "Unauthorized"}), 401
+            
+        if not auth_header or not auth_header.startswith("Bearer "):
+            return jsonify({"error": "Unauthorized"}), 401
+            
+        token = auth_header.split(" ")[1]
+        if token != admin_token:
+            return jsonify({"error": "Unauthorized"}), 401
+            
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/api/health', methods=['GET'])
+@limiter.exempt
 def health_check():
-    return jsonify({"status": "healthy", "service": "Dremora Backend API"}), 200
+    return jsonify({"status": "healthy", "service": "Dremora Backend API (Secured)"}), 200
+
+@app.route('/api/admin/health', methods=['GET'])
+@admin_required
+def admin_health_check():
+    return jsonify({"status": "admin_healthy", "message": "Admin clearance verified."}), 200
 
 @app.route('/api/ai/chat', methods=['POST'])
+@limiter.limit("20 per minute")
 def ai_chat():
     data = request.json
     user_msg = data.get('message', '')
@@ -74,42 +136,67 @@ User Query: {user_msg}
 
         return jsonify({"response": response.text})
     except Exception as e:
-        return jsonify({"response": f"AI Engine encountered an error: {str(e)}"}), 500
+        app.logger.error(f"AI Chat Error: {str(e)}")
+        return jsonify({"response": "AI Engine is temporarily unavailable."}), 500
 
 @app.route('/api/contact', methods=['POST'])
+@limiter.limit("5 per minute")
 def submit_contact():
     data = request.json
     try:
+        # Strict Input Validation
+        name = sanitize_input(data.get('name'), 100)
+        email = sanitize_input(data.get('email'), 100)
+        subject = sanitize_input(data.get('subject', 'General Inquiry'), 200)
+        message = sanitize_input(data.get('message'), 2000)
+
+        if not name or not message:
+            return jsonify({"status": "error", "message": "Name and message are required."}), 400
+            
+        if email and not is_valid_email(email):
+            return jsonify({"status": "error", "message": "Invalid email address."}), 400
+
         supabase = get_supabase_client()
         supabase.table("contacts").insert({
-            "name": data.get('name'),
-            "email": data.get('email'),
-            "subject": data.get('subject', 'General Inquiry'),
-            "message": data.get('message')
+            "name": name,
+            "email": email,
+            "subject": subject,
+            "message": message
         }).execute()
         return jsonify({"status": "success", "message": "Inquiry received successfully!"}), 200
     except Exception as e:
-        error_msg = str(e)
-        print("Contact Error:", error_msg)
-        return jsonify({"status": "error", "message": f"Failed to submit inquiry: {error_msg}"}), 500
+        app.logger.error(f"Contact Error: {str(e)}")
+        return jsonify({"status": "error", "message": "Failed to submit inquiry due to an internal error."}), 500
 
 @app.route('/api/internship/apply', methods=['POST'])
+@limiter.limit("5 per minute")
 def submit_internship():
     data = request.json
     try:
+        name = sanitize_input(data.get('name'), 100)
+        email = sanitize_input(data.get('email'), 100)
+        college = sanitize_input(data.get('college'), 255)
+        domain = sanitize_input(data.get('domain'), 255)
+        why_join = sanitize_input(data.get('why_join'), 3000)
+
+        if not name or not email:
+            return jsonify({"status": "error", "message": "Name and email are required."}), 400
+            
+        if not is_valid_email(email):
+            return jsonify({"status": "error", "message": "Invalid email address."}), 400
+
         supabase = get_supabase_client()
         supabase.table("internships").insert({
-            "name": data.get('name'),
-            "email": data.get('email'),
-            "college": data.get('college'),
-            "domain": data.get('domain'),
-            "why_join": data.get('why_join')
+            "name": name,
+            "email": email,
+            "college": college,
+            "domain": domain,
+            "why_join": why_join
         }).execute()
         return jsonify({"status": "success", "message": "Application submitted successfully!"}), 200
     except Exception as e:
-        error_msg = str(e)
-        print("Internship Error:", error_msg)
-        return jsonify({"status": "error", "message": f"Failed to submit application: {error_msg}"}), 500
+        app.logger.error(f"Internship Error: {str(e)}")
+        return jsonify({"status": "error", "message": "Failed to submit application due to an internal error."}), 500
 
 if __name__ == '__main__':
     # Use environment port for deployment (Render/Railway), default to 5000 for local

@@ -116,6 +116,11 @@
 
           <!-- The Form -->
           <form id="contactForm" novalidate>
+            <!-- Honeypot Field -->
+            <div style="position: absolute; left: -9999px;" aria-hidden="true">
+              <label for="website_url">If you are a human, leave this blank</label>
+              <input type="text" name="website_url" id="website_url" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-grid-2" style="margin-bottom:var(--space-4);">
               <div class="form-group">
                 <label class="form-label" for="contactName">Full Name *</label>

@@ -12,11 +12,11 @@ CREATE TABLE IF NOT EXISTS admins (
 
 CREATE TABLE IF NOT EXISTS contacts (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL CHECK (char_length(name) > 0),
+    email VARCHAR(100) NOT NULL CHECK (email ~* '^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
     phone VARCHAR(20),
     subject VARCHAR(200),
-    message TEXT NOT NULL,
+    message TEXT NOT NULL CHECK (char_length(message) <= 2000),
     inquiry_type VARCHAR(50),
     status VARCHAR(50) DEFAULT 'unread',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -24,14 +24,14 @@ CREATE TABLE IF NOT EXISTS contacts (
 
 CREATE TABLE IF NOT EXISTS internships (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL, -- Matched from db_setup.py / forms.js
+    name VARCHAR(100) NOT NULL CHECK (char_length(name) > 0), -- Matched from db_setup.py / forms.js
     full_name VARCHAR(100),     -- Legacy from dremora_schema.sql
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL CHECK (email ~* '^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
     college VARCHAR(255),       -- Matched from db_setup.py
     college_name VARCHAR(200),  -- Legacy from dremora_schema.sql
     domain VARCHAR(255),        -- Matched from db_setup.py
     selected_domain VARCHAR(100),-- Legacy from dremora_schema.sql
-    why_join TEXT,              -- Matched from db_setup.py
+    why_join TEXT CHECK (char_length(why_join) <= 3000), -- Matched from db_setup.py
     message TEXT,               -- Legacy from dremora_schema.sql
     application_status VARCHAR(50) DEFAULT 'pending',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
