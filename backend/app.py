@@ -23,13 +23,18 @@ if GEMINI_API_KEY and GEMINI_API_KEY != "YOUR_GEMINI_API_KEY_HERE":
 else:
     model = None
 
-# Helper to get DB connection (Supabase client)
+# Supabase client — created once at startup (singleton)
+_supabase_client: Client = None
+
 def get_supabase_client() -> Client:
-    url: str = os.environ.get("SUPABASE_URL")
-    key: str = os.environ.get("SUPABASE_KEY")
-    if not url or not key:
-        raise ValueError("Missing Supabase credentials in .env")
-    return create_client(url, key)
+    global _supabase_client
+    if _supabase_client is None:
+        url: str = os.environ.get("SUPABASE_URL")
+        key: str = os.environ.get("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials in .env")
+        _supabase_client = create_client(url, key)
+    return _supabase_client
 
 @app.route('/api/health', methods=['GET'])
 def health_check():

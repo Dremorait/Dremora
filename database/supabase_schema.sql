@@ -63,5 +63,30 @@ ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE internships ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ai_chat_logs ENABLE ROW LEVEL SECURITY;
 
--- If you want the backend to access them freely while using the Service Role Key or direct Postgres connection,
--- no additional RLS policies are strictly required, as Postgres superuser/postgres role bypasses RLS.
+-- ============================================================
+-- RLS POLICIES: Allow anonymous users to INSERT from the browser
+-- Run these in Supabase SQL Editor to enable direct form submissions
+-- ============================================================
+
+-- Allow anyone (anon) to submit a contact inquiry
+DROP POLICY IF EXISTS "allow_anon_insert_contacts" ON contacts;
+CREATE POLICY "allow_anon_insert_contacts"
+  ON contacts FOR INSERT
+  TO anon
+  WITH CHECK (true);
+
+-- Allow anyone (anon) to submit an internship application
+DROP POLICY IF EXISTS "allow_anon_insert_internships" ON internships;
+CREATE POLICY "allow_anon_insert_internships"
+  ON internships FOR INSERT
+  TO anon
+  WITH CHECK (true);
+
+-- Allow anyone (anon) to log AI chat messages
+DROP POLICY IF EXISTS "allow_anon_insert_ai_chat_logs" ON ai_chat_logs;
+CREATE POLICY "allow_anon_insert_ai_chat_logs"
+  ON ai_chat_logs FOR INSERT
+  TO anon
+  WITH CHECK (true);
+
+-- NOTE: No SELECT policy for anon = data stays private (admin-only reads via service role)
