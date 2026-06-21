@@ -1,23 +1,39 @@
 /* ==========================================================================
-   DREMORA IT — RESPONSIVE / MOBILE
+   DREMORA IT — RESPONSIVE / MOBILE  (full rewrite — June 2026)
+   Covers: index, contact, services, about, projects, internship pages
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   BREAKPOINTS:
-   sm:  640px
-   md:  768px
-   lg:  1024px
-   xl:  1280px
+   BREAKPOINTS
+   xs:   480px  (small phones)
+   sm:   640px  (large phones)
+   md:   768px  (tablets portrait)
+   lg:   1024px (tablets landscape / small laptops)
+   xl:   1280px (desktops)
    -------------------------------------------------------------------------- */
 
-/* --- Large Desktop (>1280px) --- */
+/* ── Global safe-zone ─────────────────────────────────────────────────────── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, video, iframe, svg {
+  max-width: 100%;
+}
+
+/* ── Large Desktop (>1280px) ──────────────────────────────────────────────── */
 @media (min-width: 1280px) {
   .container {
     padding-inline: var(--space-8);
   }
 }
 
-/* --- Below XL (≤1280px) --- */
+/* ── Below XL (≤1280px) ──────────────────────────────────────────────────── */
 @media (max-width: 1280px) {
   .footer-grid {
     grid-template-columns: 1.5fr 1fr 1fr;
@@ -35,7 +51,7 @@
   }
 }
 
-/* --- Below LG (≤1024px) --- */
+/* ── Below LG (≤1024px) ──────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root {
     --nav-height: 64px;
@@ -53,28 +69,15 @@
   }
 
   /* Nav */
-  .nav-links {
-    display: none;
-  }
-
-  .nav-cta {
-    display: none;
-  }
-
-  .nav-mobile-btn {
-    display: flex;
-  }
+  .nav-links { display: none; }
+  .nav-cta   { display: none; }
+  .nav-mobile-btn { display: flex; }
 
   /* Grid adjustments */
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
 
-  .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Hero layout */
+  /* Hero two-col */
   .hero-two-col {
     flex-direction: column;
     align-items: center;
@@ -102,7 +105,7 @@
   }
 }
 
-/* --- Below MD (≤768px) --- */
+/* ── Below MD (≤768px) — TABLETS PORTRAIT ────────────────────────────────── */
 @media (max-width: 768px) {
   :root {
     --nav-height: 60px;
@@ -205,45 +208,183 @@
     font-size: var(--text-sm);
   }
 
-  /* Hero floating stat cards — hide on mobile */
-  .hero-stat-card {
-    display: none;
-  }
+  /* Hide floating stat cards on mobile */
+  .hero-stat-card { display: none; }
 
-  /* Section labels */
-  .section-subtitle {
-    font-size: var(--text-base);
-  }
+  .section-subtitle { font-size: var(--text-base); }
 
   /* Service detail page */
-  .services-hero-two-col {
-    flex-direction: column;
-  }
+  .services-hero-two-col { flex-direction: column; }
 
   /* About page */
-  .about-two-col {
-    flex-direction: column;
-  }
+  .about-two-col { flex-direction: column; }
 
   /* Contact page two-col */
-  .contact-two-col {
-    flex-direction: column;
-  }
+  .contact-two-col { flex-direction: column; }
 
   /* Project detail */
-  .project-detail-grid {
-    flex-direction: column;
+  .project-detail-grid { flex-direction: column; }
+
+  /* ── INDEX: Hero section ── */
+  #home {
+    min-height: auto !important;
+    padding-top: var(--nav-height) !important;
+    padding-bottom: var(--space-12) !important;
+  }
+
+  /* Stack hero two-col cleanly */
+  .hero-two-col {
+    flex-direction: column !important;
+    gap: var(--space-8) !important;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Hero text side */
+  .hero-two-col > div:first-child {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100%;
+    flex: none !important;
+  }
+
+  /* Hero CTA row — stack on narrow */
+  .hero-cta-row {
+    justify-content: center;
+  }
+
+  /* Stats row below hero headline */
+  .hero-two-col > div:first-child > div[style*="border-top"] {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-6) !important;
+  }
+
+  /* ── INDEX: Hero Orbital Visual ── */
+  .hero-visual,
+  .hero-two-col > div.hero-visual,
+  [class*="hero-visual"] {
+    width: min(380px, 90vw) !important;
+    max-width: 90vw !important;
+    min-width: 0 !important;
+    flex: none !important;
+    margin-inline: auto;
+  }
+
+  /* Scale down the orbital visual container itself */
+  .hero-visual > div[style*="aspect-ratio"] {
+    max-width: 100% !important;
+  }
+
+  /* ── Hero orbital: scale down fixed-px elements via CSS transform ── */
+  /* Wrap all absolute-positioned orbit elements inside a scale container */
+  div[style*="aspect-ratio:1/1"] > div[style*="radial-gradient(ellipse"] {
+    transform-origin: center center;
+  }
+
+  /* Shrink the orbit rings on mobile (target via parent container scale) */
+  /* We use the .hero-visual-scale class added below, or target by structure */
+
+  /* ── INDEX: Hero corner info cards — shrink on mobile ── */
+  /* TL card: Available */
+  div[style*="top:14px;left:14px"] {
+    padding: 8px 10px !important;
+    font-size: 0.6rem !important;
+  }
+  div[style*="top:14px;left:14px"] div[style*="font-size:0.88rem"] {
+    font-size: 0.75rem !important;
+  }
+
+  /* TR card: 24/7 */
+  div[style*="top:14px;right:14px"] {
+    padding: 8px 10px !important;
+  }
+  div[style*="top:14px;right:14px"] div[style*="font-size:1.7rem"] {
+    font-size: 1.2rem !important;
+  }
+  div[style*="top:14px;right:14px"] div[style*="font-size:0.62rem"] {
+    font-size: 0.55rem !important;
+  }
+
+  /* BL card: Stats */
+  div[style*="bottom:56px;left:14px"] {
+    padding: 8px 10px !important;
+  }
+
+  /* BR card: Built With */
+  div[style*="bottom:56px;right:14px"] {
+    padding: 8px 10px !important;
+  }
+
+  /* Central sphere — slightly smaller */
+  div[style*="width:132px;height:132px;border-radius:50%"] {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  /* ── INDEX: Featured Work card (NagarSeva) ── */
+  div[style*="display:flex;flex-wrap:wrap"] > div[style*="aspect-ratio:4/3"] {
+    aspect-ratio: 16/9 !important;
+    min-width: 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── INDEX: Section header flex wraps on mobile ── */
+  .section-header[style*="display:flex;align-items:flex-end"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--space-4) !important;
+  }
+
+  /* ── CONTACT page ── */
+  .contact-two-col {
+    flex-direction: column !important;
+    gap: var(--space-8) !important;
+  }
+
+  /* Contact info cards row (top of contact page) */
+  div[style*="justify-content:center"][style*="flex-wrap:wrap"][style*="gap:var(--space-4)"] {
+    gap: var(--space-3) !important;
+  }
+
+  /* ── SERVICES page ── */
+  .services-hero-two-col {
+    flex-direction: column !important;
+    gap: var(--space-8) !important;
+  }
+
+  /* Service detail grid */
+  div[style*="display:grid;grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── ABOUT page ── */
+  .about-two-col {
+    flex-direction: column !important;
+    gap: var(--space-8) !important;
+  }
+
+  /* About profile image */
+  div[style*="flex:1;min-width:280px;max-width:400px"] {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* ── Marquee ── */
+  .marquee-track {
+    gap: var(--space-4) !important;
   }
 }
 
-/* --- Below SM (≤640px) --- */
+/* ── Below SM (≤640px) — PHONES LANDSCAPE / LARGE PHONES ─────────────────── */
 @media (max-width: 640px) {
   .container {
     padding-inline: var(--space-4);
   }
 
   h1 {
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
+    font-size: clamp(1.75rem, 9vw, 2.5rem);
     letter-spacing: -0.02em;
   }
 
@@ -285,21 +426,376 @@
     font-size: var(--text-xs);
   }
 
-  /* Hero CTA row */
+  /* Hero CTA row — full width stack */
   .hero-cta-row {
     flex-direction: column;
     width: 100%;
+    gap: var(--space-3) !important;
   }
 
   .hero-cta-row .btn {
     width: 100%;
     justify-content: center;
   }
+
+  /* ── Hero orbital visual on small phones ── */
+  /* Scale down the whole orbital card proportionally */
+  div[style*="aspect-ratio:1/1"] > div[style*="radial-gradient(ellipse"] {
+    font-size: 10px; /* scale-down trick for em-based items */
+  }
+
+  /* Shrink orbit rings to fit screen */
+  /* Outer ring: 370px → ~240px */
+  div[style*="width:370px;height:370px"] {
+    width: min(240px, 68vw) !important;
+    height: min(240px, 68vw) !important;
+  }
+
+  /* Mid ring: 280px → ~180px */
+  div[style*="width:280px;height:280px"] {
+    width: min(180px, 51vw) !important;
+    height: min(180px, 51vw) !important;
+  }
+
+  /* Inner ring: 185px → ~118px */
+  div[style*="width:185px;height:185px"] {
+    width: min(118px, 34vw) !important;
+    height: min(118px, 34vw) !important;
+  }
+
+  /* Satellite arms: 165px → ~105px radius */
+  div[style*="left:165px;top:-20px"] {
+    left: min(105px, 30vw) !important;
+  }
+
+  /* AI sat arm: 120px → ~76px */
+  div[style*="left:120px;top:-20px"] {
+    left: min(76px, 22vw) !important;
+  }
+
+  /* Central sphere: 132px → 80px */
+  div[style*="width:132px;height:132px;border-radius:50%"] {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  div[style*="width:152px;height:152px;"] {
+    width: 98px !important;
+    height: 98px !important;
+  }
+
+  /* Glow aura: 200px → 120px */
+  div[style*="width:200px;height:200px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient"] {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  /* Satellite icon bubbles */
+  div[style*="width:40px;height:40px;border-radius:50%"] {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* Corner cards — hide BL and BR on very small screens, keep TL and TR */
+  div[style*="bottom:56px;left:14px"],
+  div[style*="bottom:56px;right:14px"] {
+    display: none !important;
+  }
+
+  /* Orbital label text — smaller or hide on xs */
+  div[style*="right:5%;pointer-events:none"],
+  div[style*="left:4%;pointer-events:none"],
+  div[style*="bottom:34%;right:4%"] {
+    display: none !important;
+  }
+
+  /* Bottom tagline inside orbital — hide */
+  div[style*="bottom:14px;left:50%;transform:translateX(-50%)"] {
+    display: none !important;
+  }
+
+  /* TR corner card: 24/7 — adjust positioning */
+  div[style*="top:14px;right:14px"] {
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  /* TL corner card: Available — adjust positioning */
+  div[style*="top:14px;left:14px"] {
+    top: 10px !important;
+    left: 10px !important;
+  }
+
+  /* ── Contact page — info strip cards ── */
+  div[style*="justify-content:center;margin-top:var(--space-8)"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  div[style*="justify-content:center;margin-top:var(--space-8)"] > a,
+  div[style*="justify-content:center;margin-top:var(--space-8)"] > div {
+    width: 100% !important;
+  }
+
+  /* ── INTERNSHIP page — form layout ── */
+  div[class*="form-grid-2col"],
+  .form-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Featured Work card (NagarSeva) ── */
+  div[style*="flex:1;min-width:280px;padding:var(--space-10)"] {
+    padding: var(--space-6) !important;
+    min-width: 0 !important;
+  }
+
+  /* Buttons inside cards */
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: var(--space-2) var(--space-4);
+  }
 }
 
-/* --------------------------------------------------------------------------
-   PRINT STYLES
-   -------------------------------------------------------------------------- */
+/* ── Below XS (≤480px) — SMALL PHONES ───────────────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    --nav-height: 56px;
+  }
+
+  .container {
+    padding-inline: var(--space-3);
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 9.5vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 7vw, 1.75rem);
+  }
+
+  /* Section padding tighter */
+  .section {
+    padding-block: var(--space-8);
+  }
+
+  /* Card padding tighter */
+  .card {
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Hide the hero orbital on very small phones — show fallback */
+  .hero-visual-mobile-hide {
+    display: none !important;
+  }
+
+  /* Orbital wrapper — cap height so it doesn't overflow */
+  div[style*="aspect-ratio:1/1"] {
+    max-height: 70vw !important;
+    overflow: hidden !important;
+  }
+
+  /* Outer ring */
+  div[style*="width:370px;height:370px"] {
+    width: min(200px, 58vw) !important;
+    height: min(200px, 58vw) !important;
+  }
+
+  /* Mid ring */
+  div[style*="width:280px;height:280px"] {
+    width: min(150px, 43vw) !important;
+    height: min(150px, 43vw) !important;
+  }
+
+  /* Inner ring */
+  div[style*="width:185px;height:185px"] {
+    width: min(98px, 28vw) !important;
+    height: min(98px, 28vw) !important;
+  }
+
+  /* Satellite arms */
+  div[style*="left:165px;top:-20px"] {
+    left: min(88px, 25vw) !important;
+  }
+
+  div[style*="left:120px;top:-20px"] {
+    left: min(63px, 18vw) !important;
+  }
+
+  /* Central sphere */
+  div[style*="width:132px;height:132px;border-radius:50%"] {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  div[style*="width:152px;height:152px"] {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  /* Satellite icon bubbles */
+  div[style*="width:40px;height:40px;border-radius:50%"] {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  /* Internship neobrutalism layout */
+  div[style*="flex:1;min-width:300px;max-width:520px"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    width: 100% !important;
+  }
+
+  /* Internship form card */
+  div[style*="padding:clamp(1.5rem,4vw,3rem)"] {
+    padding: var(--space-5) !important;
+  }
+
+  /* Footer on xs */
+  .footer-bottom p,
+  .footer-bottom-links a {
+    font-size: 0.7rem;
+  }
+
+  /* Nav logo tagline — hide on very small */
+  .nav-logo-tagline {
+    display: none;
+  }
+
+  /* Section label text */
+  .section-label {
+    font-size: 0.65rem;
+  }
+
+  /* Fixed chat widget + scroll button — smaller and tighter */
+  .chat-widget-btn {
+    width: 44px;
+    height: 44px;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    font-size: 1rem;
+  }
+
+  .scroll-top {
+    right: calc(var(--space-4) + 44px + var(--space-2));
+    bottom: var(--space-4);
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ── Tablet specific (768px–1024px) ─────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Hero visual on tablet — show but limit size */
+  .hero-visual,
+  div[style*="flex:1;min-width:320px;max-width:540px"] {
+    max-width: 380px !important;
+  }
+
+  /* Two-col grids — keep 2 col on tablet */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contact info strip — 3 across on tablet */
+  div[style*="justify-content:center;margin-top:var(--space-8)"] {
+    justify-content: center !important;
+  }
+
+  /* Services grid — 2 col */
+  div[style*="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Process grid — 3 col on tablet */
+  .process-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ── Internship page — neobrutalism cards stack properly ─────────────────── */
+@media (max-width: 900px) {
+  /* Internship hero stats row */
+  div[style*="display:flex;gap:2rem;justify-content:center"] {
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Benefits + Form two-col layout */
+  div[style*="display:flex;flex-wrap:wrap;gap:4rem;align-items:flex-start"] {
+    gap: 2rem !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  div[style*="flex:1;min-width:300px;max-width:520px;display:flex;flex-direction:column"] {
+    max-width: 100% !important;
+  }
+
+  div[style*="flex:1.2;min-width:300px;max-width:520px"] {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ── Services page specific ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Services hero section */
+  div[style*="flex:1;min-width:280px;max-width:480px"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Pricing / comparison tables */
+  div[style*="display:grid;grid-template-columns:repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About page team / values grid */
+  div[style*="display:grid;grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Projects page ───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Project detail two-col */
+  div[style*="display:flex;gap:var(--space-12);flex-wrap:wrap"] {
+    flex-direction: column !important;
+    gap: var(--space-6) !important;
+  }
+
+  /* Project meta row */
+  .project-meta {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+}
+
+/* ── About page ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* About hero two-col — image full width then text */
+  div[style*="flex:1;min-width:300px;max-width:400px;text-align:center"] {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Values cards grid */
+  div[style*="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Timeline/story section */
+  div[style*="border-left:2px solid var(--border-accent)"] {
+    padding-left: var(--space-4) !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
 @media print {
   .navbar,
   .nav-drawer,
