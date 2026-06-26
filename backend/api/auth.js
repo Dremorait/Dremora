@@ -46,7 +46,7 @@ router.post('/intern/login', async (req, res) => {
     const intern = interns[0];
 
     if (!process.env.JWT_SECRET) {
-      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+      return res.status(500).json({ success: false, message: 'Missing environment variable: JWT_SECRET', code: 'SERVER_ERROR' });
     }
 
     const token = jwt.sign(
@@ -110,7 +110,7 @@ router.post('/admin/login', async (req, res) => {
     }
 
     if (!process.env.JWT_SECRET) {
-      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+      return res.status(500).json({ success: false, message: 'Missing environment variable: JWT_SECRET', code: 'SERVER_ERROR' });
     }
 
     const token = jwt.sign(
