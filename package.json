@@ -11,5 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/Dremorait/Dremora.git"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.22.0"
+  }
 }
