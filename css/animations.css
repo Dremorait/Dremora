@@ -1,5 +1,5 @@
-/* ==========================================================================
-   DREMORA IT — ANIMATIONS
+﻿/* ==========================================================================
+   DREMORA IT â€” ANIMATIONS
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -119,7 +119,7 @@
   transform: translateY(0);
 }
 
-/* Staggered children — JS adds delay via CSS variable */
+/* Staggered children â€” JS adds delay via CSS variable */
 .stagger-children > * {
   opacity: 0;
   transform: translateY(24px);
@@ -309,19 +309,19 @@
    11. HERO ORBITAL ANIMATIONS (Sparkle system + Hero visual)
    -------------------------------------------------------------------------- */
 
-/* Orbit clockwise � outer ring (99px radius) */
+/* Orbit clockwise — outer ring (99px radius) */
 @keyframes drm-orbit-cw {
   from { transform: rotate(0deg)   translateX(-99px) rotate(0deg); }
   to   { transform: rotate(360deg) translateX(-99px) rotate(-360deg); }
 }
 
-/* Orbit counter-clockwise � inner ring (62px radius) */
+/* Orbit counter-clockwise — inner ring (62px radius) */
 @keyframes drm-orbit-ccw {
   from { transform: rotate(0deg)    translateX(-62px) rotate(0deg); }
   to   { transform: rotate(-360deg) translateX(-62px) rotate(360deg); }
 }
 
-/* Orbit mid � offset starting angle, mid ring (80px radius) */
+/* Orbit mid — offset starting angle, mid ring (80px radius) */
 @keyframes drm-orbit-mid {
   from { transform: rotate(40deg)  translateX(-80px) rotate(-40deg); }
   to   { transform: rotate(400deg) translateX(-80px) rotate(-400deg); }
@@ -343,7 +343,7 @@
    12. HERO ORBITAL SATELLITE ANIMATIONS (reference-image style)
    -------------------------------------------------------------------------- */
 
-/* Arm rotates CW � badge at left:170px; top:-20px orbits at ~190px radius */
+/* Arm rotates CW — badge at left:170px; top:-20px orbits at ~190px radius */
 @keyframes hero-orbit-arm-cw {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
