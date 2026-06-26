@@ -13,6 +13,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verify Internship | Dremora IT – Pune, India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="description" content="Officially verify your Dremora IT internship certificate. Enter your Internship ID and Full Name to access your verified record and certificate instantly.">
   <meta name="keywords" content="Dremora internship verification, IT internship certificate Pune, verify internship record">
   <meta name="robots" content="index, follow">
@@ -197,7 +199,7 @@
       border-radius: var(--radius-lg);
       color: var(--text-primary);
       font-family: var(--font-sans);
-      font-size: var(--text-sm);
+      font-size: 16px; /* prevent iOS zoom */
       outline: none;
       transition: border-color var(--duration-base) var(--ease-out),
                   box-shadow var(--duration-base) var(--ease-out),
@@ -966,7 +968,7 @@
                     <span style="font-size:var(--text-sm)">Certificate not uploaded yet</span>
                     <span style="font-size:var(--text-xs);color:var(--text-muted)">Contact admin to upload your certificate</span>
                   </div>
-                  <img id="certImg" src="" alt="Internship Certificate" style="display:none">
+                  <img loading="lazy" id="certImg" src="" alt="Internship Certificate" style="display:none">
                   <iframe id="certPdf" src="" title="Internship Certificate PDF" style="display:none;width:100%;height:100%;border:none;"></iframe>
                   <div class="cert-preview-overlay" id="certOverlay" style="display:none">
                     <button class="btn btn-primary btn-sm" onclick="openCertModal()">
@@ -1075,7 +1077,7 @@
     </div>
 
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-top:var(--space-12);margin-bottom:calc(var(--space-8) * -1);opacity:0.85;">
-      <img src="assets/images/ganesha.jpg" alt="Lord Ganesha" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(250,204,21,0.3);box-shadow:0 0 15px rgba(250,204,21,0.1);">
+      <img loading="lazy" src="assets/images/ganesha.jpg" alt="Lord Ganesha" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(250,204,21,0.3);box-shadow:0 0 15px rgba(250,204,21,0.1);">
       <span style="font-size:0.65rem;color:var(--text-muted);letter-spacing:0.1em;font-weight:500;">ॐ गं गणपतये नमः</span>
     </div>
 
@@ -1100,7 +1102,7 @@
   <button class="modal-close" onclick="closeCertModal()" aria-label="Close">
     <i class="fa-solid fa-xmark"></i>
   </button>
-  <img id="certModalImg" src="" alt="Certificate" style="display:none">
+  <img loading="lazy" id="certModalImg" src="" alt="Certificate" style="display:none">
   <iframe id="certModalPdf" src="" title="Certificate PDF" style="display:none;width:90vw;height:90vh;border:none;border-radius:var(--radius-xl);"></iframe>
 </div>
 
@@ -1345,7 +1347,7 @@
       const resolvedPhoto = intern.photo.startsWith('http')
         ? intern.photo
         : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
-      avatarEl.innerHTML = `<img src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<i class=\\"fa-solid fa-user\\"></i>'">`;
+      avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<i class=\\"fa-solid fa-user\\"></i>'">`;
     }
 
     // Details rows
