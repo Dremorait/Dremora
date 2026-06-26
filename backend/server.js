@@ -65,11 +65,9 @@ try {
 app.use('/uploads', express.static(uploadsDir));
 
 // Routes
-const verifyRoutes = require('./api/verify');
 const adminRoutes = require('./api/admin');
 const authRoutes = require('./api/auth');
 
-app.use('/api/verify', verifyLimiter, verifyRoutes);
 app.use('/api/auth', loginLimiter, authRoutes);
 app.use('/api/admin/login', loginLimiter); // Keep for backwards compatibility if needed
 app.use('/api/admin', adminLimiter, adminRoutes);

@@ -251,7 +251,14 @@
     <symbol id="fa-user" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></symbol>
   </svg>
 
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  
   <script>
+    const SUPABASE_URL = 'https://vtutbqzkegkgujrdkxmj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_H3CvN9upPS-sZmDYqUuCsQ_7SV1HBgu';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('verifyForm');
       const btn = document.getElementById('btnVerify');
@@ -269,28 +276,23 @@
         btn.disabled = true;
 
         try {
-          const res = await fetch('/api/verify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ intern_id, full_name })
-          });
-          
-          const contentType = res.headers.get('content-type');
-          let data = {};
-          
-          if (contentType && contentType.includes('application/json')) {
-            data = await res.json();
-          } else if (!res.ok) {
-            throw new Error('Internal server error.');
+          // Query Supabase directly
+          const { data, error } = await sb
+            .from('interns')
+            .select('intern_id, status')
+            .eq('intern_id', intern_id)
+            .ilike('full_name', full_name)
+            .single();
+
+          if (error || !data) {
+            throw new Error('Intern record not found. Please verify your details.');
           }
 
-          if (res.ok && data.success) {
-            window.location.href = `/intern-dashboard.html?id=${encodeURIComponent(data.intern_id)}`;
-          } else {
-            throw new Error(data.message || 'Invalid verification details');
-          }
+          // Success - Redirect to dashboard
+          window.location.href = `/intern-dashboard.html?id=${encodeURIComponent(data.intern_id)}`;
+          
         } catch (error) {
-          errText.textContent = error.message;
+          errText.textContent = error.message || 'An error occurred connecting to the database.';
           errBox.classList.add('show');
           btn.classList.remove('loading');
           btn.disabled = false;

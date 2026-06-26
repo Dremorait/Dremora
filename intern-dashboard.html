@@ -1203,23 +1203,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      const res = await fetch(`/api/verify/data/${encodeURIComponent(internId)}`);
-      
-      const contentType = res.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-         throw new Error('Server returned invalid format');
-      }
+      // Query Supabase directly
+      const { data, error } = await sb
+        .from('interns')
+        .select('*')
+        .eq('intern_id', internId)
+        .single();
 
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
+      if (error || !data) {
         showScreen('error');
-        if (errorMsg) errorMsg.textContent = data.message || 'Intern record not found.';
+        if (errorMsg) errorMsg.textContent = 'Intern record not found. Please verify your identity first.';
         setTimeout(() => window.location.href = '/internship.html', 3000);
         return;
       }
 
-      currentIntern = data.data;
+      currentIntern = data;
       renderDashboard(currentIntern);
       showScreen('success');
 
