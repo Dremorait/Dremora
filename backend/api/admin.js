@@ -72,8 +72,8 @@ router.post('/login', async (req, res) => {
       redirect: '/admin-dashboard.html'
     });
   } catch (err) {
-    console.error('Admin DB Login Error:', err);
-    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    console.error('Admin DB Login Error:', err.stack || err);
+    res.status(500).json({ success: false, message: err.message || String(err), code: 'SERVER_ERROR', stack: err.stack });
   }
 });
 
