@@ -1,163 +1,1587 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGCG2F6PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGCG2F6PK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7BGCG2F6PK');
+  </script>
 
-  gtag('config', 'G-7BGCG2F6PK');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="144x144" href="assets/images/logo.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
-  <title>IT Internship Program 2026 | Apply at Dremora IT Consultants – Pune, India</title>
-  <meta name="description" content="Apply for Dremora IT's elite internship program in Pune 2026. Work on live commercial projects, get mentorship from senior engineers, and earn an industry-recognised certification. Top 5% selected.">
-  <meta name="keywords" content="IT internship Pune 2026, software internship India, Dremora internship, web development internship Pune, AI internship India, tech internship Pune">
+  <title>Verify Internship | Dremora IT – Pune, India</title>
+  <meta name="description" content="Officially verify your Dremora IT internship certificate. Enter your Internship ID and Full Name to access your verified record and certificate instantly.">
+  <meta name="keywords" content="Dremora internship verification, IT internship certificate Pune, verify internship record">
   <meta name="robots" content="index, follow">
-  <meta name="author" content="Dremora IT Consultants &amp; Services">
-  <link rel="canonical" href="https://dremora-sigma.vercel.app/internship.html">
+  <meta name="author" content="Dremora IT">
+  <link rel="canonical" href="https://dremora-it.vercel.app/internship.html">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dremora-sigma.vercel.app/internship.html">
-  <meta property="og:title" content="IT Internship Program 2026 | Dremora IT Consultants – Pune">
-  <meta property="og:description" content="Join Dremora's elite IT internship in Pune 2026. Build real software, get mentorship, and earn certification. Apply now.">
-  <meta property="og:image" content="https://dremora-sigma.vercel.app/assets/images/logo.png">
-  <meta property="og:site_name" content="Dremora IT Consultants &amp; Services">
+  <meta property="og:url" content="https://dremora-it.vercel.app/internship.html">
+  <meta property="og:title" content="Verify Internship | Dremora IT – Pune">
+  <meta property="og:description" content="Officially verify your Dremora IT internship record and access your certificate.">
+  <meta property="og:image" content="https://dremora-it.vercel.app/assets/images/logo.png">
+  <meta property="og:site_name" content="Dremora IT">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IT Internship 2026 | Dremora IT – Pune, India">
-  <meta name="twitter:description" content="Apply for Dremora IT's elite internship program. Work on live projects, get certified. Pune, India 2026.">
-  <meta name="twitter:image" content="https://dremora-sigma.vercel.app/assets/images/logo.png">
+  <meta name="theme-color" content="#090909">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Dremora Design System -->
   <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/neobrutalism.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mobile.css">
-  <link rel="icon" href="assets/images/logo.png">
-  <!-- Supabase JS SDK for direct browser → DB submissions -->
+
+  <!-- QR Code library (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <style>
+    /* =========================================================
+       INTERNSHIP PORTAL — PAGE-SPECIFIC STYLES
+       Built to match Dremora design system exactly
+    ========================================================= */
+
+    /* Page wrapper */
+    .portal-page { min-height: 100vh; padding-top: var(--nav-height); }
+
+    /* ── Hero ── */
+    .portal-hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: clamp(4rem, 10vw, 7rem) var(--space-6) clamp(3rem, 6vw, 5rem);
+      overflow: hidden;
+    }
+
+    .portal-hero-bg {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    }
+    /* Floating blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -120px; right: -100px; animation-delay: 0s; }
+    .blob-2 { width: 400px; height: 400px; background: #7c3aed; bottom: -80px; left: -80px; animation-delay: -3s; }
+    .blob-3 { width: 300px; height: 300px; background: #0ea5e9; top: 40%; right: 10%; animation-delay: -5s; opacity: 0.12; }
+
+    /* Animated grid overlay */
+    .portal-hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(20px, -20px) scale(1.04); }
+      66%       { transform: translate(-10px, 15px) scale(0.97); }
+    }
+
+    .portal-hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .portal-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: var(--space-5);
+      color: var(--text-primary);
+    }
+
+    .portal-hero p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto var(--space-10);
+    }
+
+    /* Gradient text — same as main site */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-bright), #a855f7, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200%;
+      animation: gradient-shift 5s ease infinite;
+    }
+
+    /* ── Verification Card ── */
+    .verify-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(2rem, 4vw, 3rem);
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-xl), 0 0 0 1px var(--border);
+      animation: fade-in-scale 0.5s var(--ease-out) both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .verify-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), #7c3aed, var(--accent));
+      background-size: 200%;
+      animation: gradient-shift 4s linear infinite;
+    }
+
+    .verify-card-icon {
+      width: 56px; height: 56px;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-xl);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--space-5);
+      font-size: 1.4rem;
+      color: var(--accent-bright);
+    }
+
+    .verify-card h2 {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      text-align: center;
+    }
+
+    .verify-card > p {
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-8);
+    }
+
+    /* Form inputs */
+    .input-group { margin-bottom: var(--space-4); }
+    .input-label {
+      display: flex; align-items: center; gap: var(--space-2);
+      font-size: var(--text-sm); font-weight: 500;
+      color: var(--text-secondary); margin-bottom: var(--space-2);
+    }
+    .input-label i { color: var(--accent-bright); font-size: 0.75rem; }
+
+    .input-wrapper { position: relative; }
+    .input-wrapper i {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--text-muted); font-size: 0.85rem; pointer-events: none;
+      transition: color var(--duration-base) var(--ease-out);
+    }
+
+    .form-input-portal {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      outline: none;
+      transition: border-color var(--duration-base) var(--ease-out),
+                  box-shadow var(--duration-base) var(--ease-out),
+                  background var(--duration-base) var(--ease-out);
+    }
+    .form-input-portal::placeholder { color: var(--text-muted); }
+    .form-input-portal:focus {
+      border-color: var(--accent);
+      background: var(--bg-card);
+      box-shadow: 0 0 0 3px var(--accent-subtle);
+    }
+    .form-input-portal:focus + i,
+    .input-wrapper:focus-within i { color: var(--accent-bright); }
+
+    /* Error message */
+    .input-error {
+      font-size: var(--text-xs); color: #f87171;
+      margin-top: var(--space-1); display: none;
+    }
+    .input-error.visible { display: block; }
+
+    /* Verify button */
+    .btn-verify {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+      transition: background var(--duration-base) var(--ease-out),
+                  transform var(--duration-base) var(--ease-out),
+                  box-shadow var(--duration-base) var(--ease-out);
+      margin-top: var(--space-6);
+      position: relative; overflow: hidden;
+    }
+    .btn-verify:hover:not(:disabled) {
+      background: var(--accent-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .btn-verify:active:not(:disabled) { transform: translateY(0); }
+    .btn-verify:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Ripple */
+    .btn-verify::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.15);
+      border-radius: inherit;
+      transform: scaleX(0);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .btn-verify:active::after { transform: scaleX(1); }
+
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    /* ── Screens ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── Error Screen ── */
+    .error-screen {
+      max-width: 480px; margin: 0 auto;
+      animation: fade-in-scale 0.4s var(--ease-out) both;
+    }
+
+    .error-icon-wrap {
+      width: 80px; height: 80px;
+      background: rgba(220,38,38,0.1);
+      border: 1px solid rgba(220,38,38,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--space-6);
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    .error-icon-wrap i { font-size: 2rem; color: #f87171; }
+
+    .error-screen h2 { font-size: var(--text-2xl); margin-bottom: var(--space-3); }
+    .error-screen p { font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-8); }
+
+    .error-detail {
+      background: var(--bg-card);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 3px solid #dc2626;
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-6);
+      text-align: left;
+    }
+    .error-detail p { font-size: var(--text-sm); color: var(--text-secondary); margin: 0; }
+
+    /* ── Success / Dashboard ── */
+    .dashboard { animation: fade-up 0.5s var(--ease-out) both; }
+
+    /* Verified header */
+    .verified-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .verified-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #16a34a, #4ade80, #16a34a);
+      background-size: 200%;
+      animation: gradient-shift 3s linear infinite;
+    }
+
+    .verified-badge {
+      width: 72px; height: 72px; flex-shrink: 0;
+      background: var(--success-subtle);
+      border: 2px solid rgba(74,222,128,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: pulse-ring 2.5s ease-in-out infinite;
+    }
+    .verified-badge i { font-size: 1.8rem; color: #4ade80; }
+
+    .verified-info h2 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 700; margin-bottom: var(--space-1); }
+    .verified-status {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      background: var(--success-subtle);
+      border: 1px solid rgba(74,222,128,0.25);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs); font-weight: 600;
+      color: #4ade80; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+      animation: pulse-ring 1.5s ease-in-out infinite;
+    }
+    .verified-timestamp {
+      margin-left: auto;
+      text-align: right;
+      font-size: var(--text-xs); color: var(--text-muted);
+      font-family: var(--font-mono, monospace);
+    }
+
+    /* Dashboard grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-6);
+    }
+    @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+    /* Info card */
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      animation: fade-up 0.5s var(--ease-out) both;
+    }
+    .info-card-title {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-5);
+      display: flex; align-items: center; gap: var(--space-2);
+    }
+    .info-card-title i { color: var(--accent-bright); }
+
+    /* Profile block */
+    .profile-block {
+      display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-6);
+      padding-bottom: var(--space-5); border-bottom: 1px solid var(--border);
+    }
+    .profile-avatar {
+      width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border-accent);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      color: var(--text-muted); font-size: 1.5rem;
+    }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-name { font-size: var(--text-lg); font-weight: 700; margin-bottom: 2px; }
+    .profile-id { font-size: var(--text-xs); color: var(--accent-bright); font-family: var(--font-mono, monospace); }
+
+    /* Detail rows */
+    .detail-row {
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-bright); font-size: 0.75rem;
+    }
+    .detail-label { font-size: var(--text-xs); color: var(--text-muted); }
+    .detail-value { font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); }
+
+    /* Status badge */
+    .status-active { color: #4ade80; background: var(--success-subtle); border-color: rgba(74,222,128,0.25); }
+    .status-completed { color: #60a5fa; background: var(--accent-subtle); border-color: var(--border-accent); }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 2px 10px; border-radius: var(--radius-full);
+      font-size: var(--text-xs); font-weight: 600; border: 1px solid;
+    }
+
+    /* ── Certificate Section ── */
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      animation: fade-up 0.5s var(--ease-out) 0.1s both;
+    }
+
+    .cert-preview {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      aspect-ratio: 1.414 / 1;
+      overflow: hidden; position: relative;
+      margin-bottom: var(--space-4);
+      cursor: pointer;
+      transition: border-color var(--duration-slow) var(--ease-out);
+    }
+    .cert-preview:hover { border-color: var(--border-accent); }
+    .cert-preview img, .cert-preview iframe {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s var(--ease-out);
+    }
+    .cert-preview:hover img { transform: scale(1.03); }
+    .cert-preview-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity var(--duration-slow) var(--ease-out);
+    }
+    .cert-preview:hover .cert-preview-overlay { opacity: 1; }
+    .cert-no-file {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--text-muted);
+      gap: var(--space-3); text-align: center; padding: var(--space-6);
+    }
+    .cert-no-file i { font-size: 2.5rem; opacity: 0.4; }
+
+    /* Skeleton loader */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card-hover) 50%, var(--bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease infinite;
+      border-radius: var(--radius-md);
+    }
+    .skeleton-text { height: 14px; width: 100%; margin-bottom: 8px; }
+    .skeleton-text.w-60 { width: 60%; }
+    .skeleton-text.w-80 { width: 80%; }
+    .skeleton-cert { width: 100%; aspect-ratio: 1.414/1; }
+
+    /* Cert action buttons */
+    .cert-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    .cert-btn {
+      display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+      padding: 0.65rem var(--space-3);
+      border-radius: var(--radius-md);
+      font-size: var(--text-xs); font-weight: 600;
+      cursor: pointer; border: 1px solid;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+    .cert-btn-primary {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+    .cert-btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+    .cert-btn-secondary {
+      background: transparent; color: var(--text-secondary);
+      border-color: var(--border-hover);
+    }
+    .cert-btn-secondary:hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+    /* ── QR Code ── */
+    .qr-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      animation: fade-up 0.5s var(--ease-out) 0.15s both;
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+    }
+
+    #qr-container {
+      background: #fff; padding: 12px; border-radius: var(--radius-lg);
+      display: inline-flex;
+    }
+    #qr-container canvas, #qr-container img { display: block; }
+
+    /* ── Timeline ── */
+    .timeline-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      animation: fade-up 0.5s var(--ease-out) 0.2s both;
+    }
+
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+    }
+
+    .timeline-item { position: relative; padding-bottom: var(--space-6); }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute; left: -2rem; top: 2px;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg-card);
+      transition: all var(--duration-slow) var(--ease-out);
+    }
+    .timeline-dot.done {
+      background: var(--accent); border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-subtle);
+    }
+    .timeline-dot.current {
+      background: #4ade80; border-color: #4ade80;
+      box-shadow: 0 0 0 4px var(--success-subtle);
+      animation: pulse-ring 1.5s ease-in-out infinite;
+    }
+
+    .timeline-label {
+      font-size: var(--text-sm); font-weight: 600; color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .timeline-desc { font-size: var(--text-xs); color: var(--text-muted); }
+
+    /* ── Digital Verification Seal ── */
+    .digital-seal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      animation: fade-up 0.5s var(--ease-out) 0.25s both;
+    }
+
+    .seal-items { display: flex; flex-direction: column; gap: var(--space-3); }
+    .seal-item {
+      display: flex; align-items: center; gap: var(--space-3);
+      font-size: var(--text-sm);
+    }
+    .seal-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+    }
+    .seal-icon.green { background: var(--success-subtle); color: #4ade80; }
+    .seal-icon.blue  { background: var(--accent-subtle); color: var(--accent-bright); }
+    .seal-icon.purple { background: rgba(139,92,246,0.12); color: #a78bfa; }
+
+    /* ── Try Again button ── */
+    .btn-try-again {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: 0.75rem var(--space-6);
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-hover);
+      color: var(--text-primary);
+      font-size: var(--text-sm); font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+    .btn-try-again:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* ── Rate limit notice ── */
+    .rate-notice {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-xs); color: var(--text-muted);
+      margin-top: var(--space-4);
+    }
+
+    /* ── Fullscreen modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.9);
+      display: none; align-items: center; justify-content: center;
+      padding: var(--space-6);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-overlay img, .modal-overlay iframe {
+      max-width: 100%; max-height: 90vh;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+    }
+    .modal-close {
+      position: absolute; top: var(--space-6); right: var(--space-6);
+      width: 40px; height: 40px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); cursor: pointer;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+    .modal-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+
+    /* Section heading */
+    .section-heading {
+      font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-6);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .section-heading .sh-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
+    .section-heading .sh-label {
+      font-size: var(--text-xs); text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-muted);
+    }
+
+    /* Reveal animation reuse */
+    .reveal-portal {
+      opacity: 0; transform: translateY(20px);
+      animation: fade-up 0.5s var(--ease-out) forwards;
+    }
+
+    /* Divider in cards */
+    .card-divider { height: 1px; background: var(--border); margin: var(--space-5) 0; }
+
+    /* Responsive hero pill */
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-1) var(--space-4);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-full);
+      background: var(--accent-subtle);
+      color: var(--accent-bright);
+      font-size: var(--text-xs); font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: var(--space-6);
+    }
+    .hero-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse-ring 1.5s ease-in-out infinite; }
+
+    /* Mobile compact layouts */
+    @media (max-width: 480px) {
+      .cert-actions { grid-template-columns: 1fr; }
+      .verified-timestamp { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <!-- Navbar -->
-  <header class="navbar scrolled" id="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.png" alt="Dremora" style="height:42px;width:42px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);">
-      </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="projects.html">Projects</a>
-        <a href="internship.html" class="active">Internship</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Dremora IT – Home">
+      <img src="assets/images/logo.png" alt="Dremora IT" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="nav-logo-mark" style="display:none">D</div>
+      <div>
+        <div class="nav-logo-text">Dremora IT</div>
+        <div class="nav-logo-tagline">Technology Studio</div>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Work</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="internship.html" class="nav-link active">Internship</a>
+    </nav>
+
+    <a href="contact.html" class="nav-cta" id="navCta">Book A Call</a>
+
+    <button class="nav-mobile-btn" id="navMobileBtn" aria-label="Open menu" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Nav Drawer -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="services.html" class="nav-link">Services</a>
+  <a href="projects.html" class="nav-link">Work</a>
+  <a href="about.html" class="nav-link">About</a>
+  <a href="contact.html" class="nav-link">Contact</a>
+  <a href="internship.html" class="nav-link active">Internship</a>
+  <a href="contact.html" class="btn btn-primary nav-cta" style="margin-top:12px">Book A Discovery Call</a>
+</div>
+
+<main class="portal-page">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="portal-hero">
+    <div class="portal-hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
     </div>
-  </header>
+    <div class="portal-hero-content">
+      <div class="hero-pill">
+        <span class="dot"></span>
+        Official Verification Portal
+      </div>
+      <h1>
+        Verify Your <span class="gradient-text">Dremora</span><br>Internship Record
+      </h1>
+      <p>
+        Enter your Internship ID and Full Name to instantly verify your internship record and access your official certificate — secured by Dremora's cryptographic system.
+      </p>
+    </div>
+  </section>
 
-  <main style="padding-top:6rem;">
+  <!-- ===================== CONTENT ===================== -->
+  <section style="padding: 0 var(--space-6) var(--space-24); position: relative; z-index: 1;">
+    <div class="container" style="max-width: 900px;">
 
-    <!-- React Application Mount Point -->
-    <div id="internship-app"></div>
-    <script type="module" src="/dist/assets/internship.js"></script>
+      <!-- ── SCREEN: Search ── -->
+      <div id="screen-search" class="screen active">
+        <div class="verify-card">
+          <div class="verify-card-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h2>Verify Internship</h2>
+          <p>Both fields are required for verification</p>
 
-  </main>
+          <form id="verifyForm" novalidate>
+            <div class="input-group">
+              <label class="input-label" for="internIdInput">
+                <i class="fa-solid fa-id-badge"></i>
+                Internship ID
+              </label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="internIdInput"
+                  class="form-input-portal"
+                  placeholder="e.g. DRM-INT-2026-001"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="60"
+                  aria-describedby="internIdError"
+                >
+                <i class="fa-solid fa-fingerprint" style="right:14px;left:auto"></i>
+              </div>
+              <span class="input-error" id="internIdError" role="alert"></span>
+            </div>
 
-  <!-- FOOTER -->
-  <footer class="site-footer" style="border-top:3px solid #ffffff;background:#06080F;padding-top:4rem;">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html">
-            <img src="assets/images/logo.png" alt="Dremora"
-              style="height:60px;width:60px;object-fit:contain;background:#ffffff;padding:5px;border-radius:50%;border:3px solid #00d2ff;margin-bottom:1rem;transform:rotate(-5deg);">
-          </a>
-          <p class="font-handwritten" style="font-size:1.1rem;color:rgba(255,255,255,0.8);">Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
-          <div class="footer-social" style="display:flex;gap:1rem;">
-            <a href="https://www.linkedin.com/company/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank"
-              rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://twitter.com/dremoraitservices" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/dremora.it/" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/Dremorait" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;" target="_blank" rel="noopener"
-              aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="mailto:dremora.itservices@gmail.com" class="neo-border" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#00d2ff;color:#06080F;text-decoration:none;"
-              aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <div class="input-group">
+              <label class="input-label" for="fullNameInput">
+                <i class="fa-solid fa-user"></i>
+                Full Name
+              </label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="fullNameInput"
+                  class="form-input-portal"
+                  placeholder="As on your joining letter"
+                  autocomplete="name"
+                  spellcheck="false"
+                  maxlength="150"
+                  aria-describedby="fullNameError"
+                >
+                <i class="fa-solid fa-user" style="right:14px;left:auto"></i>
+              </div>
+              <span class="input-error" id="fullNameError" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn-verify" id="verifyBtn" aria-label="Verify internship record">
+              <span id="btnText">Verify Internship</span>
+              <i class="fa-solid fa-arrow-right" id="btnIcon"></i>
+              <div class="spinner" id="btnSpinner" role="status" aria-label="Verifying…"></div>
+            </button>
+          </form>
+
+          <div class="rate-notice">
+            <i class="fa-solid fa-shield-halved" style="color:var(--accent-bright)"></i>
+            Secured · Rate-Limited · Tamper-Proof
           </div>
         </div>
+      </div>
 
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Navigation</p>
-          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
-            <li><a href="about.html" style="color:#ffffff;text-decoration:none;">About Us</a></li>
-            <li><a href="services.html" style="color:#ffffff;text-decoration:none;">Our Services</a></li>
-            <li><a href="projects.html" style="color:#ffffff;text-decoration:none;">Projects</a></li>
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">Internship</a></li>
-            <li><a href="contact.html" style="color:#ffffff;text-decoration:none;">Contact</a></li>
-          </ul>
+      <!-- ── SCREEN: Loading ── -->
+      <div id="screen-loading" class="screen">
+        <div class="verify-card" style="max-width:480px;margin:0 auto;">
+          <div style="margin-bottom:var(--space-6)">
+            <div class="skeleton skeleton-text w-60" style="height:20px;margin:0 auto var(--space-4);"></div>
+            <div class="skeleton skeleton-cert" style="border-radius:var(--radius-xl);"></div>
+          </div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text w-80"></div>
+          <div class="skeleton skeleton-text w-60"></div>
         </div>
+      </div>
 
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Internship</p>
-          <ul class="footer-links font-handwritten" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.8rem;font-size:1.1rem;">
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">Frontend Track</a></li>
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">Backend Track</a></li>
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">AI/Data Track</a></li>
-            <li><a href="internship.html" style="color:#ffffff;text-decoration:none;">UI/UX Track</a></li>
-          </ul>
-        </div>
+      <!-- ── SCREEN: Error ── -->
+      <div id="screen-error" class="screen text-center">
+        <div class="error-screen">
+          <div class="error-icon-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h2>Verification Failed</h2>
+          <p>We couldn't find an internship record matching the provided details.</p>
 
-        <div>
-          <p class="font-handwritten" style="font-size:1.5rem;font-weight:700;color:#fbbf24;margin-bottom:1rem;">Get In Touch</p>
-          <div style="display:flex;flex-direction:column;gap:1rem;">
-            <a href="tel:+919309795878"
-              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
-              <i class="fa-solid fa-phone" style="color:#00d2ff;width:16px;"></i> +91 9309795878
-            </a>
-            <a href="mailto:dremora.itservices@gmail.com"
-              class="font-handwritten" style="display:flex;align-items:center;gap:0.8rem;color:#ffffff;font-size:1.1rem;text-decoration:none;">
-              <i class="fa-solid fa-envelope" style="color:#00d2ff;width:16px;"></i>
-              dremora.itservices@gmail.com
-            </a>
-            <p class="font-handwritten" style="display:flex;align-items:flex-start;gap:0.8rem;color:#ffffff;font-size:1.1rem;">
-              <i class="fa-solid fa-location-dot" style="color:#00d2ff;width:16px;margin-top:3px;"></i>
-              Pune, Maharashtra 411032, India
+          <div class="error-detail">
+            <p id="errorMsg">Please ensure your Internship ID and Full Name are entered exactly as provided in your joining letter.</p>
+          </div>
+
+          <button class="btn-try-again" id="tryAgainBtn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Try Again
+          </button>
+
+          <div style="margin-top:var(--space-8);padding-top:var(--space-6);border-top:1px solid var(--border);">
+            <p style="font-size:var(--text-xs);color:var(--text-muted);">
+              If you believe this is an error, contact
+              <a href="mailto:dremora.itservices@gmail.com" style="color:var(--accent-bright)">dremora.itservices@gmail.com</a>
             </p>
           </div>
-          <a href="contact.html" class="neo-btn font-handwritten"
-            style="margin-top:1.5rem;font-size:1rem;padding:0.6rem 1.4rem;display:inline-block;transform:rotate(-2deg);">Contact Us</a>
         </div>
       </div>
 
-      <div class="footer-bottom font-handwritten" style="border-top:3px solid #ffffff;margin-top:3rem;padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;color:#ffffff;font-size:1.1rem;">
-        <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
-        <div style="display:flex;gap:1.5rem;">
-          <a href="privacy-policy.html" style="color:#ffffff;text-decoration:none;">Privacy</a>
-          <a href="terms-of-service.html" style="color:#ffffff;text-decoration:none;">Terms</a>
+      <!-- ── SCREEN: Success / Dashboard ── -->
+      <div id="screen-success" class="screen">
+        <div class="dashboard">
+
+          <!-- Verified header -->
+          <div class="verified-header">
+            <div class="verified-badge">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="verified-info" style="flex:1">
+              <h2 id="dashName">—</h2>
+              <div style="display:flex;align-items:center;gap:var(--space-3);margin-top:var(--space-2);flex-wrap:wrap;">
+                <div class="verified-status">
+                  <span class="status-dot"></span>
+                  Internship Verified
+                </div>
+                <span style="font-size:var(--text-xs);color:var(--text-muted)" id="dashDomain"></span>
+              </div>
+            </div>
+            <div class="verified-timestamp">
+              <div style="color:var(--text-muted);font-size:0.7rem;">VERIFIED AT</div>
+              <div id="dashTimestamp" style="color:var(--text-primary);font-size:0.7rem;margin-top:2px;"></div>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="verifyAnotherBtn" style="margin-left:var(--space-4)">
+              <i class="fa-solid fa-rotate-left"></i> New
+            </button>
+          </div>
+
+          <!-- Main dashboard grid -->
+          <div class="dashboard-grid">
+
+            <!-- Left column: Profile + Timeline + Seal -->
+            <div style="display:flex;flex-direction:column;gap:var(--space-6);">
+
+              <!-- Profile & Details -->
+              <div class="info-card">
+                <div class="info-card-title"><i class="fa-solid fa-id-card"></i> Intern Profile</div>
+
+                <div class="profile-block">
+                  <div class="profile-avatar" id="dashAvatar">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <div>
+                    <div class="profile-name" id="dashProfileName">—</div>
+                    <div class="profile-id" id="dashInternId">—</div>
+                  </div>
+                </div>
+
+                <div id="dashDetails">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- Internship Timeline -->
+              <div class="timeline-section">
+                <div class="info-card-title" style="margin-bottom:var(--space-5);">
+                  <i class="fa-solid fa-timeline"></i> Journey Timeline
+                </div>
+                <div class="timeline" id="dashTimeline">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- Digital Verification Seal -->
+              <div class="digital-seal">
+                <div class="info-card-title" style="margin-bottom:var(--space-5);">
+                  <i class="fa-solid fa-lock"></i> Digital Seal
+                </div>
+                <div class="seal-items">
+                  <div class="seal-item">
+                    <div class="seal-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                      <div style="font-weight:600;font-size:var(--text-sm)">Verified by Dremora IT</div>
+                      <div style="font-size:var(--text-xs);color:var(--text-muted)">Official verification authority</div>
+                    </div>
+                  </div>
+                  <div class="seal-item">
+                    <div class="seal-icon blue"><i class="fa-solid fa-fingerprint"></i></div>
+                    <div>
+                      <div style="font-weight:600;font-size:var(--text-sm)">Tamper-Protected Record</div>
+                      <div style="font-size:var(--text-xs);color:var(--text-muted)">Cryptographically secured</div>
+                    </div>
+                  </div>
+                  <div class="seal-item">
+                    <div class="seal-icon purple"><i class="fa-solid fa-certificate"></i></div>
+                    <div>
+                      <div style="font-weight:600;font-size:var(--text-sm)">Certificate No: <span id="dashCertNo" style="color:var(--accent-bright);font-family:monospace;font-size:var(--text-xs)"></span></div>
+                      <div style="font-size:var(--text-xs);color:var(--text-muted)">Unique identifier</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right column: Certificate + QR -->
+            <div style="display:flex;flex-direction:column;gap:var(--space-6);">
+
+              <!-- Certificate -->
+              <div class="cert-card">
+                <div class="info-card-title" style="margin-bottom:var(--space-4);">
+                  <i class="fa-solid fa-file-certificate"></i> Official Certificate
+                </div>
+
+                <div class="cert-preview" id="certPreviewWrapper">
+                  <div class="cert-no-file" id="certPlaceholder">
+                    <i class="fa-regular fa-file-image"></i>
+                    <span style="font-size:var(--text-sm)">Certificate not uploaded yet</span>
+                    <span style="font-size:var(--text-xs);color:var(--text-muted)">Contact admin to upload your certificate</span>
+                  </div>
+                  <img id="certImg" src="" alt="Internship Certificate" style="display:none">
+                  <iframe id="certPdf" src="" title="Internship Certificate PDF" style="display:none;width:100%;height:100%;border:none;"></iframe>
+                  <div class="cert-preview-overlay" id="certOverlay" style="display:none">
+                    <button class="btn btn-primary btn-sm" onclick="openCertModal()">
+                      <i class="fa-solid fa-expand"></i> View Fullscreen
+                    </button>
+                  </div>
+                </div>
+
+                <div class="cert-actions" id="certActions" style="display:none">
+                  <button class="cert-btn cert-btn-primary" onclick="downloadCert()">
+                    <i class="fa-solid fa-download"></i> Download
+                  </button>
+                  <button class="cert-btn cert-btn-secondary" onclick="openCertModal()">
+                    <i class="fa-solid fa-expand"></i> Fullscreen
+                  </button>
+                  <button class="cert-btn cert-btn-secondary" onclick="printCert()">
+                    <i class="fa-solid fa-print"></i> Print
+                  </button>
+                  <button class="cert-btn cert-btn-secondary" onclick="shareCert()">
+                    <i class="fa-solid fa-share-nodes"></i> Share
+                  </button>
+                </div>
+              </div>
+
+              <!-- QR Code -->
+              <div class="qr-section">
+                <div class="info-card-title" style="margin-bottom:0">
+                  <i class="fa-solid fa-qrcode"></i> Scan to Verify
+                </div>
+                <div id="qr-container"></div>
+                <div style="text-align:center">
+                  <div style="font-size:var(--text-xs);font-weight:600;color:var(--text-primary);">Scan this QR code</div>
+                  <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">Opens verification page automatically</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:var(--space-4);">
+          <img src="assets/images/logo.png" alt="Dremora IT" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'">
+          <div class="nav-logo-mark" style="width:32px;height:32px;font-size:0.9rem;">D</div>
+          <div style="margin-left:var(--space-3);">
+            <div class="nav-logo-text" style="font-size:var(--text-sm);">Dremora IT</div>
+          </div>
+        </a>
+        <p>A technology studio building websites, web applications, and AI automation systems for businesses. Based in Pune, India.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/dremoraitservices" class="footer-social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://twitter.com/dremoraitservices" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/dremora.it/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://github.com/Dremorait" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-heading">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="projects.html" class="footer-link">Work</a></li>
+          <li><a href="about.html" class="footer-link">About</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+          <li><a href="internship.html" class="footer-link">Internship</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-heading">Internship</p>
+        <ul class="footer-links">
+          <li><a href="internship.html" class="footer-link">Verify Certificate</a></li>
+          <li><a href="contact.html" class="footer-link">Apply Now</a></li>
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-heading">Contact</p>
+        <div class="footer-links">
+          <a href="tel:+919309795878" class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);">
+            <i class="fa-solid fa-phone" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"></i>
+            +91 9309795878
+          </a>
+          <a href="mailto:dremora.itservices@gmail.com" class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);">
+            <i class="fa-solid fa-envelope" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"></i>
+            dremora.itservices@gmail.com
+          </a>
+          <p class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);cursor:default;">
+            <i class="fa-solid fa-location-dot" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"></i>
+            Pune, Maharashtra 411032, India
+          </p>
         </div>
       </div>
     </div>
-  </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/sam-assistant.js"></script>
-  <script src="js/forms.js"></script>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-top:var(--space-12);margin-bottom:calc(var(--space-8) * -1);opacity:0.85;">
+      <img src="assets/images/ganesha.jpg" alt="Lord Ganesha" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(250,204,21,0.3);box-shadow:0 0 15px rgba(250,204,21,0.1);">
+      <span style="font-size:0.65rem;color:var(--text-muted);letter-spacing:0.1em;font-weight:500;">ॐ गं गणपतये नमः</span>
+    </div>
+
+    <div class="footer-bottom" style="margin-top:var(--space-12);">
+      <p>© 2025 Dremora IT. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="refund-policy.html">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<!-- Fullscreen Certificate Modal -->
+<div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-label="Certificate fullscreen">
+  <button class="modal-close" onclick="closeCertModal()" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <img id="certModalImg" src="" alt="Certificate" style="display:none">
+  <iframe id="certModalPdf" src="" title="Certificate PDF" style="display:none;width:90vw;height:90vh;border:none;border-radius:var(--radius-xl);"></iframe>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="js/main.js" defer></script>
+
+<script>
+// =========================================================
+// DREMORA INTERNSHIP VERIFICATION PORTAL
+// Pure vanilla JS — no build step, works on Vercel directly
+// =========================================================
+
+(function() {
+  'use strict';
+
+  // ── Config ──
+  const SUPABASE_URL  = 'https://vtutbqzkegkgujrdkxmj.supabase.co';
+  const SUPABASE_KEY  = 'sb_publishable_H3CvN9upPS-sZmDYqUuCsQ_7SV1HBgu';
+  const TABLE_NAME    = 'interns';
+  const STORAGE_BUCKET = 'intern-portal-uploads';
+
+  // Rate limiting (client side, defence in depth)
+  let requestCount = 0;
+  let lastReset = Date.now();
+  const MAX_REQUESTS = 8;
+  const RESET_WINDOW = 15 * 60 * 1000; // 15 min
+
+  // Debounce state
+  let verifyTimeout = null;
+  let isVerifying = false;
+
+  // Currently displayed intern data
+  let currentIntern = null;
+  let certUrl = null;
+
+  // ── Supabase client ──
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // ── DOM refs ──
+  const form         = document.getElementById('verifyForm');
+  const internIdEl   = document.getElementById('internIdInput');
+  const fullNameEl   = document.getElementById('fullNameInput');
+  const verifyBtn    = document.getElementById('verifyBtn');
+  const btnText      = document.getElementById('btnText');
+  const btnIcon      = document.getElementById('btnIcon');
+  const btnSpinner   = document.getElementById('btnSpinner');
+  const tryAgainBtn  = document.getElementById('tryAgainBtn');
+  const verifyAnotherBtn = document.getElementById('verifyAnotherBtn');
+  const errorMsg     = document.getElementById('errorMsg');
+
+  // ── Utility: sanitize ──
+  function sanitize(str) {
+    if (!str || typeof str !== 'string') return '';
+    return str.trim().replace(/\s+/g, ' ').slice(0, 200);
+  }
+
+  // ── Utility: format date ──
+  function formatDate(d) {
+    if (!d) return '—';
+    try {
+      return new Date(d).toLocaleDateString('en-IN', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+    } catch { return d; }
+  }
+
+  // ── Utility: show screen ──
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('screen-' + id);
+    if (el) el.classList.add('active');
+    // scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Validation ──
+  function validateInputs() {
+    let valid = true;
+    const id   = sanitize(internIdEl.value);
+    const name = sanitize(fullNameEl.value);
+
+    clearError('internIdError');
+    clearError('fullNameError');
+
+    if (!id) {
+      showFieldError('internIdError', 'Internship ID is required.');
+      valid = false;
+    } else if (id.length < 4 || id.length > 60) {
+      showFieldError('internIdError', 'Internship ID must be between 4–60 characters.');
+      valid = false;
+    } else if (!/^[a-zA-Z0-9\-_\s]+$/.test(id)) {
+      showFieldError('internIdError', 'Internship ID contains invalid characters.');
+      valid = false;
+    }
+
+    if (!name) {
+      showFieldError('fullNameError', 'Full Name is required.');
+      valid = false;
+    } else if (name.length < 2 || name.length > 150) {
+      showFieldError('fullNameError', 'Full Name must be between 2–150 characters.');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  function showFieldError(id, msg) {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = msg; el.classList.add('visible'); }
+  }
+  function clearError(id) {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = ''; el.classList.remove('visible'); }
+  }
+
+  // ── Rate limiting ──
+  function checkRateLimit() {
+    const now = Date.now();
+    if (now - lastReset > RESET_WINDOW) {
+      requestCount = 0;
+      lastReset = now;
+    }
+    if (requestCount >= MAX_REQUESTS) {
+      return false;
+    }
+    requestCount++;
+    return true;
+  }
+
+  // ── Set loading state ──
+  function setLoading(state) {
+    isVerifying = state;
+    verifyBtn.disabled = state;
+    if (state) {
+      btnText.textContent = 'Verifying…';
+      btnIcon.style.display = 'none';
+      btnSpinner.style.display = 'block';
+    } else {
+      btnText.textContent = 'Verify Internship';
+      btnIcon.style.display = '';
+      btnSpinner.style.display = 'none';
+    }
+  }
+
+  // ── Main verify function ──
+  async function doVerify() {
+    if (isVerifying) return;
+
+    if (!validateInputs()) return;
+
+    if (!checkRateLimit()) {
+      showScreen('error');
+      errorMsg.textContent = 'Too many requests. Please wait 15 minutes before trying again.';
+      return;
+    }
+
+    const internId = sanitize(internIdEl.value).toUpperCase();
+    const fullName = sanitize(fullNameEl.value);
+
+    setLoading(true);
+    showScreen('loading');
+
+    try {
+      // Query Supabase — case-insensitive match on both fields
+      const { data, error } = await sb
+        .from(TABLE_NAME)
+        .select('*')
+        .ilike('intern_id', internId)
+        .ilike('full_name', fullName)
+        .limit(1)
+        .single();
+
+      if (error || !data) {
+        showScreen('error');
+        errorMsg.textContent =
+          'No internship record found matching your Internship ID and Full Name. ' +
+          'Please check your details and try again.';
+        return;
+      }
+
+      currentIntern = data;
+      renderDashboard(data);
+      showScreen('success');
+
+    } catch (err) {
+      console.error('Verification error:', err);
+      showScreen('error');
+      errorMsg.textContent = 'A system error occurred. Please try again later.';
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // ── Render Dashboard ──
+  function renderDashboard(intern) {
+    // Header
+    document.getElementById('dashName').textContent     = intern.full_name || '—';
+    document.getElementById('dashDomain').textContent   = intern.domain ? '· ' + intern.domain : '';
+    document.getElementById('dashTimestamp').textContent = new Date().toLocaleString('en-IN');
+    document.getElementById('dashCertNo').textContent   = intern.certificate_number || '—';
+
+    // Profile block
+    document.getElementById('dashProfileName').textContent = intern.full_name || '—';
+    document.getElementById('dashInternId').textContent    = intern.intern_id || '—';
+
+    // Avatar
+    const avatarEl = document.getElementById('dashAvatar');
+    if (intern.photo) {
+      const resolvedPhoto = intern.photo.startsWith('http')
+        ? intern.photo
+        : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
+      avatarEl.innerHTML = `<img src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<i class=\\"fa-solid fa-user\\"></i>'">`;
+    }
+
+    // Details rows
+    const details = [
+      { icon: 'fa-id-card',    label: 'Internship ID',       value: intern.intern_id },
+      { icon: 'fa-certificate', label: 'Certificate No.',    value: intern.certificate_number },
+      { icon: 'fa-code',       label: 'Domain',              value: intern.domain },
+      { icon: 'fa-layer-group', label: 'Batch',              value: intern.batch ? 'Class of ' + intern.batch : null },
+      { icon: 'fa-calendar-plus', label: 'Start Date',       value: formatDate(intern.start_date) },
+      { icon: 'fa-calendar-check', label: 'End Date',        value: formatDate(intern.end_date) },
+      { icon: 'fa-envelope',   label: 'Email',               value: intern.email },
+    ];
+
+    const statusBadgeClass = intern.status === 'Active'     ? 'status-active'
+                           : intern.status === 'Completed'  ? 'status-completed'
+                           : '';
+
+    let detailsHTML = details.filter(d => d.value && d.value !== '—').map(d => `
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid ${d.icon}"></i></div>
+        <div>
+          <div class="detail-label">${escHtml(d.label)}</div>
+          <div class="detail-value">${escHtml(String(d.value))}</div>
+        </div>
+      </div>
+    `).join('');
+
+    // Status row
+    detailsHTML += `
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+          <div class="detail-label">Status</div>
+          <div class="detail-value">
+            <span class="status-badge ${statusBadgeClass}">
+              ${escHtml(intern.status || 'Active')}
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('dashDetails').innerHTML = detailsHTML;
+
+    // Timeline
+    renderTimeline(intern);
+
+    // Certificate
+    renderCertificate(intern);
+
+    // QR code
+    renderQR(intern.intern_id);
+  }
+
+  function renderTimeline(intern) {
+    const isCompleted = intern.status === 'Completed';
+
+    const steps = [
+      { label: 'Application Received',   desc: 'Your application was submitted and reviewed.', done: true },
+      { label: 'Selected for Internship', desc: 'You were selected from the applicant pool.',   done: true },
+      { label: 'Internship Started',     desc: formatDate(intern.start_date) || 'Internship commenced.', done: true },
+      { label: isCompleted ? 'Internship Completed' : 'In Progress',
+        desc: isCompleted
+          ? `Successfully completed on ${formatDate(intern.end_date)}.`
+          : 'Currently working on live commercial projects.',
+        done: isCompleted, current: !isCompleted },
+      { label: 'Certificate Issued',     desc: 'Official certificate generated and signed.',   done: isCompleted },
+      { label: 'Digitally Verified',     desc: 'Record verified via Dremora portal.', done: true, current: !isCompleted },
+    ];
+
+    document.getElementById('dashTimeline').innerHTML = steps.map(s => `
+      <div class="timeline-item">
+        <div class="timeline-dot ${s.done ? 'done' : ''} ${s.current ? 'current' : ''}"></div>
+        <div class="timeline-label">${escHtml(s.label)}</div>
+        <div class="timeline-desc">${escHtml(s.desc)}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderCertificate(intern) {
+    const certPlaceholder = document.getElementById('certPlaceholder');
+    const certImg         = document.getElementById('certImg');
+    const certPdf         = document.getElementById('certPdf');
+    const certOverlay     = document.getElementById('certOverlay');
+    const certActions     = document.getElementById('certActions');
+
+    if (!intern.certificate_url) return;
+
+    certUrl = intern.certificate_url.startsWith('http')
+      ? intern.certificate_url
+      : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
+
+    const isPdf = certUrl.toLowerCase().endsWith('.pdf');
+
+    certPlaceholder.style.display = 'none';
+    certOverlay.style.display = '';
+    certActions.style.display = '';
+
+    if (isPdf) {
+      certPdf.src = certUrl;
+      certPdf.style.display = '';
+    } else {
+      certImg.src = certUrl;
+      certImg.style.display = '';
+      certImg.onerror = function() {
+        this.style.display = 'none';
+        certPlaceholder.style.display = '';
+        certOverlay.style.display = 'none';
+        certActions.style.display = 'none';
+      };
+    }
+  }
+
+  function renderQR(internId) {
+    const qrContainer = document.getElementById('qr-container');
+    qrContainer.innerHTML = ''; // clear previous
+
+    const verifyUrl = `${window.location.origin}${window.location.pathname}?verify=${encodeURIComponent(internId)}`;
+
+    if (window.QRCode) {
+      new QRCode(qrContainer, {
+        text: verifyUrl,
+        width: 140, height: 140,
+        colorDark: '#000000', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    } else {
+      qrContainer.innerHTML = `<div style="width:140px;height:140px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;"><i class="fa-solid fa-qrcode" style="font-size:3rem;color:#333"></i></div>`;
+    }
+  }
+
+  // ── XSS escape ──
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  // ── Certificate actions ──
+  window.openCertModal = function() {
+    if (!certUrl) return;
+    const modal    = document.getElementById('certModal');
+    const modalImg = document.getElementById('certModalImg');
+    const modalPdf = document.getElementById('certModalPdf');
+    const isPdf    = certUrl.toLowerCase().endsWith('.pdf');
+
+    modalImg.style.display = isPdf ? 'none' : '';
+    modalPdf.style.display = isPdf ? '' : 'none';
+
+    if (isPdf) { modalPdf.src = certUrl; }
+    else        { modalImg.src = certUrl; }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeCertModal = function() {
+    document.getElementById('certModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.downloadCert = function() {
+    if (!certUrl || !currentIntern) return;
+    const a = document.createElement('a');
+    a.href = certUrl;
+    a.download = `${currentIntern.full_name}_Certificate.pdf`;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.click();
+  };
+
+  window.printCert = function() {
+    if (!certUrl) return;
+    const win = window.open(certUrl, '_blank');
+    if (win) win.print();
+  };
+
+  window.shareCert = async function() {
+    if (!currentIntern) return;
+    const shareUrl = `${window.location.origin}${window.location.pathname}?verify=${encodeURIComponent(currentIntern.intern_id)}`;
+    const shareData = {
+      title: `Dremora IT Internship Certificate – ${currentIntern.full_name}`,
+      text: `Verify ${currentIntern.full_name}'s internship at Dremora IT Consultants.`,
+      url: shareUrl
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch {}
+    } else {
+      await navigator.clipboard.writeText(shareUrl);
+      alert('Verification link copied to clipboard!');
+    }
+  };
+
+  // ── Event listeners ──
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearTimeout(verifyTimeout);
+    verifyTimeout = setTimeout(doVerify, 50); // tiny debounce
+  });
+
+  // Keyboard Enter support
+  [internIdEl, fullNameEl].forEach(el => {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        form.dispatchEvent(new Event('submit'));
+      }
+    });
+  });
+
+  tryAgainBtn.addEventListener('click', function() {
+    showScreen('search');
+    // Clear inputs
+    internIdEl.value = '';
+    fullNameEl.value = '';
+    clearError('internIdError');
+    clearError('fullNameError');
+  });
+
+  verifyAnotherBtn.addEventListener('click', function() {
+    currentIntern = null;
+    certUrl = null;
+    internIdEl.value = '';
+    fullNameEl.value = '';
+    clearError('internIdError');
+    clearError('fullNameError');
+    showScreen('search');
+  });
+
+  // Close modal on overlay click
+  document.getElementById('certModal').addEventListener('click', function(e) {
+    if (e.target === this) window.closeCertModal();
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') window.closeCertModal();
+  });
+
+  // ── URL param: pre-verify from QR code ──
+  (function checkUrlParam() {
+    const params = new URLSearchParams(window.location.search);
+    const verifyId = params.get('verify');
+    if (verifyId && verifyId.length >= 4) {
+      internIdEl.value = sanitize(decodeURIComponent(verifyId));
+      // Focus the name field
+      setTimeout(() => fullNameEl.focus(), 300);
+    }
+  })();
+
+  // ── Mouse parallax on hero blobs ──
+  const blobs = document.querySelectorAll('.blob');
+  document.addEventListener('mousemove', function(e) {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    const dx = (e.clientX - cx) / cx;
+    const dy = (e.clientY - cy) / cy;
+    blobs.forEach((blob, i) => {
+      const factor = (i + 1) * 10;
+      blob.style.transform = `translate(${dx * factor}px, ${dy * factor}px)`;
+    });
+  });
+
+})();
+</script>
+
 </body>
 </html>
-
-
