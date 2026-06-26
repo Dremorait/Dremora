@@ -50,8 +50,12 @@ app.use(cookieParser());
 
 // Static folder for uploads
 const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+  }
+} catch (err) {
+  console.warn('Skipping uploads directory creation (read-only filesystem detected).');
 }
 app.use('/uploads', express.static(uploadsDir));
 
@@ -72,13 +76,13 @@ app.get('/api/health', (req, res) => {
 
 // 404 Handler
 app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint not found' });
+  res.status(404).json({ success: false, message: 'Endpoint not found', code: 'NOT_FOUND' });
 });
 
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error' });
+  res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
 });
 
 if (process.env.NODE_ENV !== 'production') {
