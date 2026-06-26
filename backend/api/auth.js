@@ -17,9 +17,11 @@ const setCookie = (res, name, token) => {
 // @route   POST /api/auth/intern/login
 router.post('/intern/login', async (req, res) => {
   try {
-    const supabase = getSupabaseClient();
-    if (!supabase) {
-      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    let supabase;
+    try {
+      supabase = getSupabaseClient();
+    } catch (envError) {
+      return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
     }
 
     const intern_id = sanitize(req.body.intern_id);
@@ -67,17 +69,19 @@ router.post('/intern/login', async (req, res) => {
       redirect: '/intern-dashboard.html'
     });
   } catch (err) {
-    console.error('Intern Login Error:', err);
-    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    console.error('Intern Login Error:', err.stack || err);
+    res.status(500).json({ success: false, message: err.message || 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
 // @route   POST /api/auth/admin/login
 router.post('/admin/login', async (req, res) => {
   try {
-    const supabase = getSupabaseClient();
-    if (!supabase) {
-      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    let supabase;
+    try {
+      supabase = getSupabaseClient();
+    } catch (envError) {
+      return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
     }
 
     const admin_id = sanitize(req.body.admin_id);
@@ -128,8 +132,8 @@ router.post('/admin/login', async (req, res) => {
       redirect: '/admin-dashboard.html'
     });
   } catch (err) {
-    console.error('Admin Login Error:', err);
-    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    console.error('Admin Login Error:', err.stack || err);
+    res.status(500).json({ success: false, message: err.message || 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
