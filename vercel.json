@@ -2,7 +2,6 @@
   "version": 2,
   "buildCommand": "",
   "outputDirectory": ".",
-  "installCommand": "echo skip",
   "headers": [
     {
       "source": "/(.*)",
@@ -33,7 +32,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "backend/server.js"
+      "destination": "/api/index.js"
     }
   ]
 }
