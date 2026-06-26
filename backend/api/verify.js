@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     const rawFullName = req.body.full_name;
 
     if (!rawInternId || !rawFullName) {
-      return res.status(400).json({ error: 'Intern ID and Full Name are required.' });
+      return res.status(400).json({ success: false, message: 'Intern ID and Full Name are required.', code: 'INVALID_CREDENTIALS' });
     }
 
     const internId = sanitize(rawInternId);
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
     );
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: 'Internship record not found. Please check your credentials.' });
+      return res.status(404).json({ success: false, message: 'Internship record not found. Please check your credentials.', code: 'NOT_FOUND' });
     }
 
     const intern = rows[0];
@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
 
   } catch (error) {
     console.error('Verification Error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
@@ -58,12 +58,12 @@ router.get('/certificate/:id', async (req, res) => {
     );
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: 'Certificate not found.' });
+      return res.status(404).json({ success: false, message: 'Certificate not found.', code: 'NOT_FOUND' });
     }
 
     res.json({ success: true, data: rows[0] });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 

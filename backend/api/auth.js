@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { createClient } = require('@supabase/supabase-js');
+const { getSupabaseClient } = require('../utils/supabase');
 const { comparePassword, sanitize } = require('../utils/security');
-const { adminRequired, internRequired } = require('../middleware/auth');
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Helper to set cookies securely
 const setCookie = (res, name, token) => {
@@ -22,11 +17,16 @@ const setCookie = (res, name, token) => {
 // @route   POST /api/auth/intern/login
 router.post('/intern/login', async (req, res) => {
   try {
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    }
+
     const intern_id = sanitize(req.body.intern_id);
     const full_name = sanitize(req.body.full_name);
 
     if (!intern_id || !full_name) {
-      return res.status(400).json({ error: 'Internship ID and Full Name are required.' });
+      return res.status(400).json({ success: false, message: 'Internship ID and Full Name are required.', code: 'INVALID_CREDENTIALS' });
     }
 
     // Query Supabase
@@ -38,10 +38,14 @@ router.post('/intern/login', async (req, res) => {
       .limit(1);
 
     if (error || !interns || interns.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials. We could not find a matching record.' });
+      return res.status(401).json({ success: false, message: 'Invalid credentials. We could not find a matching record.', code: 'INVALID_CREDENTIALS' });
     }
 
     const intern = interns[0];
+
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    }
 
     const token = jwt.sign(
       { role: 'intern', id: intern.id, intern_id: intern.intern_id, full_name: intern.full_name },
@@ -50,21 +54,37 @@ router.post('/intern/login', async (req, res) => {
     );
 
     setCookie(res, 'intern_token', token);
-    res.json({ success: true, message: 'Welcome back!' });
+    res.json({ 
+      success: true, 
+      message: 'Login successful',
+      user: {
+        id: intern.id,
+        intern_id: intern.intern_id,
+        full_name: intern.full_name,
+        role: 'intern'
+      },
+      session: token,
+      redirect: '/intern-dashboard.html'
+    });
   } catch (err) {
     console.error('Intern Login Error:', err);
-    res.status(500).json({ error: 'Server error during login.' });
+    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
 // @route   POST /api/auth/admin/login
 router.post('/admin/login', async (req, res) => {
   try {
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    }
+
     const admin_id = sanitize(req.body.admin_id);
     const password = req.body.password;
 
     if (!admin_id || !password) {
-      return res.status(400).json({ error: 'Admin ID and Password are required.' });
+      return res.status(400).json({ success: false, message: 'Admin ID and Password are required.', code: 'INVALID_CREDENTIALS' });
     }
 
     const { data: admins, error } = await supabase
@@ -82,7 +102,11 @@ router.post('/admin/login', async (req, res) => {
     }
 
     if (!validPassword) {
-      return res.status(401).json({ error: 'Invalid admin credentials.' });
+      return res.status(401).json({ success: false, message: 'Invalid Admin ID or Password', code: 'INVALID_CREDENTIALS' });
+    }
+
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
     }
 
     const token = jwt.sign(
@@ -92,10 +116,20 @@ router.post('/admin/login', async (req, res) => {
     );
 
     setCookie(res, 'admin_token', token);
-    res.json({ success: true, message: 'Admin authenticated.' });
+    res.json({ 
+      success: true, 
+      message: 'Login successful',
+      user: {
+        id: admin.id,
+        admin_id: admin.admin_id,
+        role: 'admin'
+      },
+      session: token,
+      redirect: '/admin-dashboard.html'
+    });
   } catch (err) {
     console.error('Admin Login Error:', err);
-    res.status(500).json({ error: 'Server error during login.' });
+    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
@@ -118,14 +152,14 @@ router.get('/me', (req, res) => {
   }
 
   if (!token) {
-    return res.status(401).json({ error: 'Not authenticated' });
+    return res.status(401).json({ success: false, message: 'Not authenticated', code: 'UNAUTHORIZED' });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     res.json({ success: true, user: decoded });
   } catch (err) {
-    return res.status(401).json({ error: 'Invalid or expired token' });
+    return res.status(401).json({ success: false, message: 'Invalid or expired token', code: 'UNAUTHORIZED' });
   }
 });
 

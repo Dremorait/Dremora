@@ -621,19 +621,29 @@
           body: JSON.stringify({ intern_id, full_name })
         });
         
-        const data = await res.json();
+        const contentType = res.headers.get('content-type');
+        let data = {};
         
-        if (res.ok) {
-          // Success animation before redirect
+        if (contentType && contentType.includes('application/json')) {
+          data = await res.json();
+        } else if (!res.ok) {
+          throw new Error('Internal authentication error. Server returned invalid format.');
+        }
+
+        if (res.ok && data.success) {
           btn.classList.remove('loading');
           btn.innerHTML = 'Success! Redirecting...';
           btn.style.background = 'var(--success)';
-          setTimeout(() => window.location.href = '/intern-dashboard.html', 1000);
+          setTimeout(() => window.location.href = data.redirect || '/intern-dashboard.html', 1000);
         } else {
-          throw new Error(data.error || 'Invalid credentials');
+          throw new Error(data.message || 'Invalid credentials');
         }
       } catch (error) {
-        errText.textContent = error.message;
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          errText.textContent = 'Unable to connect to the authentication server.';
+        } else {
+          errText.textContent = error.message;
+        }
         errBox.classList.add('show');
         btn.classList.remove('loading');
         btn.disabled = false;
@@ -660,18 +670,29 @@
           body: JSON.stringify({ admin_id, password })
         });
         
-        const data = await res.json();
+        const contentType = res.headers.get('content-type');
+        let data = {};
         
-        if (res.ok) {
+        if (contentType && contentType.includes('application/json')) {
+          data = await res.json();
+        } else if (!res.ok) {
+          throw new Error('Internal authentication error. Server returned invalid format.');
+        }
+
+        if (res.ok && data.success) {
           btn.classList.remove('loading');
           btn.innerHTML = 'Verified! Entering Dashboard...';
           btn.style.background = 'var(--success)';
-          setTimeout(() => window.location.href = '/admin-dashboard.html', 1000);
+          setTimeout(() => window.location.href = data.redirect || '/admin-dashboard.html', 1000);
         } else {
-          throw new Error(data.error || 'Invalid admin credentials');
+          throw new Error(data.message || 'Invalid admin credentials');
         }
       } catch (error) {
-        errText.textContent = error.message;
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          errText.textContent = 'Unable to connect to the authentication server.';
+        } else {
+          errText.textContent = error.message;
+        }
         errBox.classList.add('show');
         btn.classList.remove('loading');
         btn.disabled = false;

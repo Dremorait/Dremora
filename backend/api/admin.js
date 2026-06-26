@@ -6,12 +6,7 @@ const path = require('path');
 const db = require('../config/db');
 const { adminRequired } = require('../middleware/auth');
 const { hashPassword, comparePassword, sanitize } = require('../utils/security');
-const { createClient } = require('@supabase/supabase-js');
-
-// Initialize Supabase Client for Storage
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+const { getSupabaseClient } = require('../utils/supabase');
 
 // Setup Multer to keep files in memory (Serverless friendly)
 const storage = multer.memoryStorage();
@@ -47,7 +42,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (!validPassword) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ success: false, message: 'Invalid Admin ID or Password', code: 'INVALID_CREDENTIALS' });
     }
 
     // Create JWT
@@ -65,10 +60,20 @@ router.post('/login', async (req, res) => {
       maxAge: 8 * 60 * 60 * 1000 // 8 hours
     });
 
-    res.json({ success: true, token });
+    res.json({ 
+      success: true, 
+      message: 'Login successful',
+      user: {
+        id: admins.length > 0 ? admins[0].id : 'bootstrap',
+        admin_id: admins.length > 0 ? admins[0].admin_id : 'admin@dremora.com',
+        role: 'admin'
+      },
+      session: token,
+      redirect: '/admin-dashboard.html'
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Admin DB Login Error:', err);
+    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
   }
 });
 
@@ -146,8 +151,9 @@ router.post('/upload', adminRequired, upload.single('file'), async (req, res) =>
       return res.status(400).json({ error: 'No file uploaded' });
     }
     
+    const supabase = getSupabaseClient();
     if (!supabase) {
-      return res.status(500).json({ error: 'Supabase credentials not configured on the server.' });
+      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
     }
 
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
