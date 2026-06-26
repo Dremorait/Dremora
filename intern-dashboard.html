@@ -46,8 +46,9 @@
 
   <!-- QR Code library (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <!-- Supabase CDN -->
+  <!-- Supabase SDK & Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabaseClient.js"></script>
 
   <style>
     /* =========================================================
@@ -1057,11 +1058,9 @@ document.addEventListener('DOMContentLoaded', function() {
   'use strict';
   'use strict';
 
-  // ── Config ──
-  const SUPABASE_URL  = 'https://vtutbqzkegkgujrdkxmj.supabase.co';
-  const SUPABASE_KEY  = 'sb_publishable_H3CvN9upPS-sZmDYqUuCsQ_7SV1HBgu';
+  // ── Global Configuration ──
+  const STORAGE_BUCKET = 'intern_documents';
   const TABLE_NAME    = 'interns';
-  const STORAGE_BUCKET = 'intern-portal-uploads';
 
   // Rate limiting (client side, defence in depth)
   let requestCount = 0;
@@ -1076,9 +1075,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Currently displayed intern data
   let currentIntern = null;
   let certUrl = null;
-
-  // ── Supabase client ──
-  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   // ── DOM refs ──
   const form         = document.getElementById('verifyForm');
@@ -1193,18 +1189,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMsg = document.getElementById('errorText');
 
     try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const internId = urlParams.get('id');
+      // Phase 4: Use sessionStorage instead of URL params to prevent re-fetching
+      const internId = sessionStorage.getItem('internId');
 
       if (!internId) {
-        showScreen('error');
-        if (errorMsg) errorMsg.textContent = 'No Internship ID provided in URL. Please verify your identity first.';
-        setTimeout(() => window.location.href = '/internship.html', 3000);
+        window.location.href = '/internship.html';
         return;
       }
 
-      // Query Supabase directly
-      const { data, error } = await sb
+      // Query Supabase directly with the global client
+      const { data, error } = await window.supabaseClient
         .from('interns')
         .select('*')
         .eq('intern_id', internId)
@@ -1213,7 +1207,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (error || !data) {
         showScreen('error');
         if (errorMsg) errorMsg.textContent = 'Intern record not found. Please verify your identity first.';
-        setTimeout(() => window.location.href = '/internship.html', 3000);
+        sessionStorage.removeItem('internId');
+        window.location.href = '/internship.html';
         return;
       }
 
@@ -1247,7 +1242,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (intern.photo) {
       const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
         ? intern.photo
-        : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
+        : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
       avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
     }
 
@@ -1339,7 +1334,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     certUrl = intern.certificate_url.startsWith('http')
       ? intern.certificate_url
-      : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
+      : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
 
     const isPdf = certUrl.toLowerCase().endsWith('.pdf');
 
@@ -1442,7 +1437,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (intern.photo) {
       const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
         ? intern.photo
-        : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
+        : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
       avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
     }
 
@@ -1534,7 +1529,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     certUrl = intern.certificate_url.startsWith('http')
       ? intern.certificate_url
-      : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
+      : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
 
     const isPdf = certUrl.toLowerCase().endsWith('.pdf');
 

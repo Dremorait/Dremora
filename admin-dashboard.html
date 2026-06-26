@@ -443,20 +443,26 @@
     </div>
   </div>
 
+  <!-- Supabase SDK & Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabaseClient.js"></script>
+
   <script>
     let allInterns = [];
 
     document.addEventListener('DOMContentLoaded', async () => {
-      // Authenticate
+      // Authenticate via Supabase Auth
       try {
-        const res = await fetch('/api/auth/me');
-        if (!res.ok) throw new Error('Unauth');
-        const data = await res.json();
-        if (data.user.role !== 'admin') throw new Error('Forbidden');
-        document.getElementById('adminName').textContent = data.user.full_name || 'Administrator';
+        const { data: { session }, error } = await window.supabaseClient.auth.getSession();
         
+        if (error || !session) {
+          throw new Error('Unauth');
+        }
+        
+        document.getElementById('adminName').textContent = session.user.email || 'Administrator';
+        
+        await loadInterns();
         loadAnalytics();
-        loadInterns();
       } catch (err) {
         window.location.href = '/admin-login.html';
       }
@@ -485,19 +491,21 @@
         };
 
         try {
-          const url = id ? `/api/admin/interns/${id}` : '/api/admin/interns';
-          const method = id ? 'PUT' : 'POST';
+          let resError = null;
+          if (id) {
+            const { error } = await window.supabaseClient.from('interns').update(payload).eq('id', id);
+            resError = error;
+          } else {
+            const { error } = await window.supabaseClient.from('interns').insert([payload]);
+            resError = error;
+          }
           
-          const res = await fetch(url, {
-            method, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)
-          });
-          
-          if(res.ok) {
+          if (!resError) {
             closeModal();
-            loadInterns();
+            await loadInterns();
             loadAnalytics();
           } else {
-            alert('Error saving intern.');
+            alert('Error saving intern: ' + resError.message);
           }
         } catch(err) {
           console.error(err);
@@ -509,26 +517,26 @@
     });
 
     async function loadAnalytics() {
-      try {
-        const res = await fetch('/api/admin/analytics');
-        const data = await res.json();
-        if(data.success) {
-          document.getElementById('statTotal').textContent = data.data.total;
-          document.getElementById('statActive').textContent = data.data.active;
-          document.getElementById('statCompleted').textContent = data.data.completed;
-        }
-      } catch(e) {}
+      if (!allInterns) return;
+      const total = allInterns.length;
+      const active = allInterns.filter(i => i.status === 'Active').length;
+      const completed = allInterns.filter(i => i.status === 'Completed').length;
+      
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statActive').textContent = active;
+      document.getElementById('statCompleted').textContent = completed;
     }
 
     async function loadInterns() {
       try {
-        const res = await fetch('/api/admin/interns');
-        const data = await res.json();
-        if(data.success) {
-          allInterns = data.data;
+        const { data, error } = await window.supabaseClient.from('interns').select('*').order('created_at', { ascending: false });
+        if(!error && data) {
+          allInterns = data;
           renderTable();
         }
-      } catch(e) {}
+      } catch(e) {
+        console.error("Error loading interns", e);
+      }
     }
 
     function renderTable(filter = '') {
@@ -612,14 +620,18 @@
     async function deleteIntern(id) {
       if(!confirm('Are you sure you want to delete this intern?')) return;
       try {
-        await fetch(`/api/admin/interns/${id}`, { method: 'DELETE' });
-        loadInterns();
+        const { error } = await window.supabaseClient.from('interns').delete().eq('id', id);
+        if (error) throw error;
+        await loadInterns();
         loadAnalytics();
-      } catch(e) { console.error(e); }
+      } catch(e) { 
+        console.error(e);
+        alert('Error deleting intern: ' + e.message);
+      }
     }
 
     async function logout() {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await window.supabaseClient.auth.signOut();
       window.location.href = '/admin-login.html';
     }
   </script>

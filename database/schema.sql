@@ -107,7 +107,8 @@ CREATE POLICY "Deny anon admins" ON public.admins FOR ALL TO anon USING (false);
 -- Interns: Anon can SELECT only via backend (Or if we allow public access via anon key for search)
 -- Since the user said "Never expose database errors... Search Supabase for a matching record",
 -- The backend uses service_role key to bypass RLS, so anon can be fully restricted!
-CREATE POLICY "Deny anon interns" ON public.interns FOR ALL TO anon USING (false);
+CREATE POLICY "Allow anon select interns" ON public.interns FOR SELECT TO anon USING (true);
+CREATE POLICY "Allow auth all interns" ON public.interns FOR ALL TO authenticated USING (true);
 
 -- Announcements: Anon can read
 CREATE POLICY "Allow anon select announcements" ON public.announcements FOR SELECT TO anon USING (true);

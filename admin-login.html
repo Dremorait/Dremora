@@ -244,6 +244,10 @@
     <symbol id="fa-lock" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c26.5 0 48 21.5 48 48V464c0 26.5-21.5 48-48 48H64c-26.5 0-48-21.5-48-48V240c0-26.5 21.5-48 48-48H80z"/></symbol>
   </svg>
 
+  <!-- Supabase SDK & Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabaseClient.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('adminForm');
@@ -262,26 +266,19 @@
         btn.disabled = true;
 
         try {
-          const res = await fetch('/api/auth/admin/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+          // Phase 6: Admin uses Supabase Auth
+          const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
           });
           
-          const contentType = res.headers.get('content-type');
-          let data = {};
-          
-          if (contentType && contentType.includes('application/json')) {
-            data = await res.json();
-          } else if (!res.ok) {
-            throw new Error('Internal authentication error. Server returned invalid format.');
+          if (error) {
+            throw new Error(error.message || 'Invalid credentials');
           }
 
-          if (res.ok && data.success) {
-            window.location.href = data.redirect || '/admin-dashboard.html';
-          } else {
-            throw new Error(data.message || 'Invalid credentials');
-          }
+          // Success - Redirect to dashboard
+          window.location.href = '/admin-dashboard.html';
+
         } catch (error) {
           errText.textContent = error.message;
           errBox.classList.add('show');

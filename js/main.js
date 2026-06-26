@@ -289,30 +289,9 @@
       const formData = new FormData(contactForm);
       const dataObj = Object.fromEntries(formData.entries());
 
-      const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:5000'
-        : 'https://dremora.onrender.com';
-
       try {
-        const res = await fetch(`${API_BASE}/api/contact`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dataObj),
-        });
-        const result = await res.json();
-
-        if (res.ok) {
-          const successEl = document.getElementById('formSuccessState');
-          if (successEl) {
-            contactForm.style.display = 'none';
-            successEl.style.display = 'flex';
-          } else {
-            showToast('Message sent! We\'ll be in touch within a few hours.', 'success');
-            contactForm.reset();
-          }
-        } else {
-          showToast(result.message || 'Something went wrong. Please try again.', 'error');
-        }
+        // Obsolete fetch removed.
+        showToast('This feature is currently disabled. Please contact us directly via email.', 'error');
       } catch (err) {
         console.error(err);
         showToast('Connection error. Please email us directly.', 'error');
@@ -336,27 +315,9 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<svg class="spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg> Submitting...';
 
-      const formData = new FormData(internshipForm);
-      const dataObj = Object.fromEntries(formData.entries());
-
-      const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:5000'
-        : 'https://dremora.onrender.com';
-
       try {
-        const res = await fetch(`${API_BASE}/api/internship/apply`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dataObj),
-        });
-        const result = await res.json();
-
-        if (res.ok) {
-          showToast('Application submitted! We\'ll review it and reach out.', 'success');
-          internshipForm.reset();
-        } else {
-          showToast(result.message || 'Something went wrong.', 'error');
-        }
+        // Obsolete fetch removed.
+        showToast('Applications are currently closed.', 'error');
       } catch (err) {
         console.error(err);
         showToast('Connection error. Please try again.', 'error');

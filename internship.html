@@ -253,12 +253,10 @@
 
   <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- Centralized Supabase Client -->
+  <script src="js/supabaseClient.js"></script>
   
   <script>
-    const SUPABASE_URL = 'https://vtutbqzkegkgujrdkxmj.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_H3CvN9upPS-sZmDYqUuCsQ_7SV1HBgu';
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('verifyForm');
       const btn = document.getElementById('btnVerify');
@@ -277,7 +275,7 @@
 
         try {
           // Query Supabase directly
-          const { data, error } = await sb
+          const { data, error } = await window.supabaseClient
             .from('interns')
             .select('intern_id, status')
             .eq('intern_id', intern_id)
@@ -285,11 +283,14 @@
             .single();
 
           if (error || !data) {
-            throw new Error('Intern record not found. Please verify your details.');
+            throw new Error('Invalid Internship ID or Name');
           }
 
-          // Success - Redirect to dashboard
-          window.location.href = `/intern-dashboard.html?id=${encodeURIComponent(data.intern_id)}`;
+          // Phase 4: Store in sessionStorage
+          sessionStorage.setItem('internId', data.intern_id);
+
+          // Success - Redirect to dashboard immediately without URL params
+          window.location.href = '/intern-dashboard.html';
           
         } catch (error) {
           errText.textContent = error.message || 'An error occurred connecting to the database.';
