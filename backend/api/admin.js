@@ -6,17 +6,15 @@ const path = require('path');
 const db = require('../config/db');
 const { adminRequired } = require('../middleware/auth');
 const { hashPassword, comparePassword, sanitize } = require('../utils/security');
+const { createClient } = require('@supabase/supabase-js');
 
-// Setup Multer for file uploads (Photos & Certificates)
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../uploads/'));
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Initialize Supabase Client for Storage
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
+// Setup Multer to keep files in memory (Serverless friendly)
+const storage = multer.memoryStorage();
 const upload = multer({ 
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
@@ -38,7 +36,7 @@ router.post('/login', async (req, res) => {
     // For this demonstration, we are bypassing DB password check if they use the hardcoded admin token as password,
     // OR checking against an admins table.
     // Dremora schema has an `admins` table.
-    const [admins] = await db.execute('SELECT * FROM admins WHERE email = ? LIMIT 1', [email]);
+    const [admins] = await db.execute('SELECT * FROM admins WHERE email = $1 LIMIT 1', [email]);
     
     let validPassword = false;
     if (admins.length > 0) {
@@ -99,7 +97,7 @@ router.post('/interns', adminRequired, async (req, res) => {
     
     await db.execute(
       `INSERT INTO interns (intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, email) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
       [intern_id, certificate_number, full_name, domain, batch, status, start_date || null, end_date || null, email || null]
     );
 
@@ -118,7 +116,7 @@ router.put('/interns/:id', adminRequired, async (req, res) => {
     const { id } = req.params;
 
     await db.execute(
-      `UPDATE interns SET intern_id=?, certificate_number=?, full_name=?, domain=?, batch=?, status=?, start_date=?, end_date=?, email=? WHERE id=?`,
+      `UPDATE interns SET intern_id=$1, certificate_number=$2, full_name=$3, domain=$4, batch=$5, status=$6, start_date=$7, end_date=$8, email=$9 WHERE id=$10`,
       [intern_id, certificate_number, full_name, domain, batch, status, start_date || null, end_date || null, email || null, id]
     );
 
@@ -133,7 +131,7 @@ router.put('/interns/:id', adminRequired, async (req, res) => {
 // @desc    Delete intern
 router.delete('/interns/:id', adminRequired, async (req, res) => {
   try {
-    await db.execute('DELETE FROM interns WHERE id=?', [req.params.id]);
+    await db.execute('DELETE FROM interns WHERE id=$1', [req.params.id]);
     res.json({ success: true, message: 'Intern deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete intern' });
@@ -141,16 +139,46 @@ router.delete('/interns/:id', adminRequired, async (req, res) => {
 });
 
 // @route   POST /api/admin/upload
-// @desc    Upload certificate or photo
-router.post('/upload', adminRequired, upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+// @desc    Upload certificate or photo to Supabase Storage
+router.post('/upload', adminRequired, upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    
+    if (!supabase) {
+      return res.status(500).json({ error: 'Supabase credentials not configured on the server.' });
+    }
+
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileName = uniqueSuffix + path.extname(req.file.originalname);
+    
+    // Upload to Supabase Storage bucket named "intern-portal-uploads"
+    const { data, error } = await supabase.storage
+      .from('intern-portal-uploads')
+      .upload(fileName, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false
+      });
+
+    if (error) {
+      console.error('Supabase Storage Error:', error);
+      return res.status(500).json({ error: 'Failed to upload to Supabase Storage.' });
+    }
+
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from('intern-portal-uploads')
+      .getPublicUrl(fileName);
+
+    res.json({ 
+      success: true, 
+      url: publicUrlData.publicUrl 
+    });
+  } catch (err) {
+    console.error('Upload Error:', err);
+    res.status(500).json({ error: 'Server error during upload.' });
   }
-  // Return the path so frontend can save it to DB
-  res.json({ 
-    success: true, 
-    url: \`/uploads/\${req.file.filename}\` 
-  });
 });
 
 // @route   GET /api/admin/analytics

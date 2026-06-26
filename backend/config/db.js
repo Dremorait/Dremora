@@ -1,24 +1,28 @@
-const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
 require('dotenv').config();
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'dremora_db',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // Test connection
-pool.getConnection()
-  .then((conn) => {
-    console.log('✅ Connected to MySQL database');
-    conn.release();
-  })
-  .catch((err) => {
-    console.error('❌ Error connecting to MySQL:', err.message);
-  });
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Error connecting to Supabase PostgreSQL:', err.message);
+  } else {
+    console.log('✅ Connected to Supabase PostgreSQL');
+  }
+});
 
-module.exports = pool;
+// We wrap the pool.query to maintain compatibility with the 'db.execute' style used in routes
+module.exports = {
+  execute: async (text, params) => {
+    const res = await pool.query(text, params);
+    // return [rows, fields] to match mysql2 array destructuring used in the routes
+    return [res.rows, res.fields];
+  }
+};
+

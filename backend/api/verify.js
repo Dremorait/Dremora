@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     const [rows] = await db.execute(
       `SELECT intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, certificate_url, photo, email, created_at, updated_at 
        FROM interns 
-       WHERE LOWER(intern_id) = LOWER(?) AND LOWER(full_name) = LOWER(?)
+       WHERE LOWER(intern_id) = LOWER($1) AND LOWER(full_name) = LOWER($2)
        LIMIT 1`,
       [internId, fullName]
     );
@@ -53,7 +53,7 @@ router.get('/certificate/:id', async (req, res) => {
     const [rows] = await db.execute(
       `SELECT intern_id, certificate_number, full_name, domain, batch, status 
        FROM interns 
-       WHERE certificate_number = ? LIMIT 1`,
+       WHERE certificate_number = $1 LIMIT 1`,
       [certId]
     );
 
