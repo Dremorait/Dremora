@@ -37,18 +37,16 @@ router.post('/intern/login', async (req, res) => {
     }
 
     // Query Supabase
-    const { data: interns, error } = await supabase
+    const { data: intern, error } = await supabase
       .from('interns')
-      .select('*')
+      .select('id, intern_id, full_name, domain, batch, start_date, end_date, certificate_number, email, status, certificate_url, photo')
       .eq('intern_id', intern_id)
       .eq('full_name', full_name)
-      .limit(1);
+      .single();
 
-    if (error || !interns || interns.length === 0) {
+    if (error || !intern) {
       return res.status(401).json({ success: false, message: 'Invalid credentials. We could not find a matching record.', code: 'INVALID_CREDENTIALS' });
     }
-
-    const intern = interns[0];
 
     if (!process.env.JWT_SECRET) {
       return res.status(500).json({ success: false, message: 'Missing environment variable: JWT_SECRET', code: 'SERVER_ERROR' });
@@ -68,6 +66,15 @@ router.post('/intern/login', async (req, res) => {
         id: intern.id,
         intern_id: intern.intern_id,
         full_name: intern.full_name,
+        domain: intern.domain,
+        batch: intern.batch,
+        start_date: intern.start_date,
+        end_date: intern.end_date,
+        certificate_number: intern.certificate_number,
+        email: intern.email,
+        status: intern.status,
+        certificate_url: intern.certificate_url,
+        photo: intern.photo,
         role: 'intern'
       },
       session: token,

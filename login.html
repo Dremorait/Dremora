@@ -634,7 +634,10 @@
           btn.classList.remove('loading');
           btn.innerHTML = 'Success! Redirecting...';
           btn.style.background = 'var(--success)';
-          setTimeout(() => window.location.href = data.redirect || '/intern-dashboard.html', 1000);
+          if (data.user) {
+            sessionStorage.setItem('dremora_intern_data', JSON.stringify(data.user));
+          }
+          setTimeout(() => window.location.href = data.redirect || '/intern-dashboard.html', 50);
         } else {
           throw new Error(data.message || 'Invalid credentials');
         }

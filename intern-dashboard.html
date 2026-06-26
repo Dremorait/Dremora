@@ -28,7 +28,9 @@
   <meta property="og:site_name" content="Dremora IT">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#090909">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">  <!-- Preload Critical Assets -->
+  <link rel="preload" href="assets/images/logo.png" as="image">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1184,11 +1186,33 @@
 
   // ── Main Authentication & Load function ──
   async function loadDashboard() {
+    // 1. Instant Cache Hydration (Eliminate Waterfall & Redundant API Calls)
+    const cachedStr = sessionStorage.getItem('dremora_intern_data');
+    if (cachedStr) {
+      try {
+        const cachedData = JSON.parse(cachedStr);
+        currentIntern = cachedData;
+        renderDashboard(cachedData);
+        showScreen('success');
+        
+        // Optimistically verify session in background without blocking UI
+        fetch('/api/auth/me').then(res => {
+          if (!res.ok) {
+            sessionStorage.removeItem('dremora_intern_data');
+            window.location.href = '/login.html';
+          }
+        });
+        return;
+      } catch (e) {
+        console.error('Cache parse error, falling back to network', e);
+      }
+    }
+
     setLoading(true);
     showScreen('loading');
 
     try {
-      // 1. Authenticate with backend
+      // 2. Sequential fallback for direct navigation (without cache)
       const authRes = await fetch('/api/auth/me');
       const authData = await authRes.json();
 
@@ -1200,14 +1224,13 @@
       const internId = authData.user.intern_id;
       const fullName = authData.user.full_name;
 
-      // 2. Fetch intern data from Supabase
+      // Fetch specific optimized columns from Supabase
       const { data, error } = await sb
         .from(TABLE_NAME)
-        .select('*')
+        .select('id, intern_id, full_name, domain, batch, start_date, end_date, certificate_number, email, status, certificate_url, photo')
         .ilike('intern_id', internId)
         .ilike('full_name', fullName)
-        .limit(1)
-        .maybeSingle();
+        .single();
 
       if (error || !data) {
         showScreen('error');
@@ -1216,6 +1239,9 @@
       }
 
       currentIntern = data;
+      // Store in session for subsequent immediate loads
+      sessionStorage.setItem('dremora_intern_data', JSON.stringify(data));
+      
       renderDashboard(data);
       showScreen('success');
 
