@@ -1077,16 +1077,14 @@ document.addEventListener('DOMContentLoaded', function() {
   let certUrl = null;
 
   // ── DOM refs ──
-  const form         = document.getElementById('verifyForm');
-  const internIdEl   = document.getElementById('internIdInput');
-  const fullNameEl   = document.getElementById('fullNameInput');
-  const verifyBtn    = document.getElementById('verifyBtn');
-  const btnText      = document.getElementById('btnText');
-  const btnIcon      = document.getElementById('btnIcon');
-  const btnSpinner   = document.getElementById('btnSpinner');
   const tryAgainBtn  = document.getElementById('tryAgainBtn');
-  const verifyAnotherBtn = document.getElementById('verifyAnotherBtn');
   const errorMsg     = document.getElementById('errorMsg');
+
+  if (tryAgainBtn) {
+    tryAgainBtn.addEventListener('click', () => {
+      window.location.href = '/internship.html';
+    });
+  }
 
   // ── Utility: sanitize ──
   function sanitize(str) {
@@ -1113,80 +1111,12 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ── Validation ──
-  function validateInputs() {
-    let valid = true;
-    const id   = sanitize(internIdEl.value);
-    const name = sanitize(fullNameEl.value);
-
-    clearError('internIdError');
-    clearError('fullNameError');
-
-    if (!id) {
-      showFieldError('internIdError', 'Internship ID is required.');
-      valid = false;
-    } else if (id.length < 4 || id.length > 60) {
-      showFieldError('internIdError', 'Internship ID must be between 4–60 characters.');
-      valid = false;
-    } else if (!/^[a-zA-Z0-9\-_\s]+$/.test(id)) {
-      showFieldError('internIdError', 'Internship ID contains invalid characters.');
-      valid = false;
-    }
-
-    if (!name) {
-      showFieldError('fullNameError', 'Full Name is required.');
-      valid = false;
-    } else if (name.length < 2 || name.length > 150) {
-      showFieldError('fullNameError', 'Full Name must be between 2–150 characters.');
-      valid = false;
-    }
-
-    return valid;
-  }
-
-  function showFieldError(id, msg) {
-    const el = document.getElementById(id);
-    if (el) { el.textContent = msg; el.classList.add('visible'); }
-  }
-  function clearError(id) {
-    const el = document.getElementById(id);
-    if (el) { el.textContent = ''; el.classList.remove('visible'); }
-  }
-
-  // ── Rate limiting ──
-  function checkRateLimit() {
-    const now = Date.now();
-    if (now - lastReset > RESET_WINDOW) {
-      requestCount = 0;
-      lastReset = now;
-    }
-    if (requestCount >= MAX_REQUESTS) {
-      return false;
-    }
-    requestCount++;
-    return true;
-  }
-
-  // ── Set loading state ──
-  function setLoading(state) {
-    isVerifying = state;
-    verifyBtn.disabled = state;
-    if (state) {
-      btnText.textContent = 'Verifying…';
-      btnIcon.style.display = 'none';
-      btnSpinner.style.display = 'block';
-    } else {
-      btnText.textContent = 'Verify Internship';
-      btnIcon.style.display = '';
-      btnSpinner.style.display = 'none';
-    }
-  }
+  // Unused validation and loading functions removed
 
   // ── Main Authentication & Load function ──
   async function loadDashboard() {
-    setLoading(true);
     showScreen('loading');
-    const errorMsg = document.getElementById('errorText');
+    const errorMsg = document.getElementById('errorMsg');
 
     try {
       // Phase 4: Use sessionStorage instead of URL params to prevent re-fetching
@@ -1220,203 +1150,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Dashboard load error:', err);
       showScreen('error');
       if (errorMsg) errorMsg.textContent = 'A system error occurred. Please try again later.';
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // ── Render Dashboard ──
-  function renderDashboard(intern) {
-    // Header
-    document.getElementById('dashName').textContent     = intern.full_name || '—';
-    document.getElementById('dashDomain').textContent   = intern.domain ? '· ' + intern.domain : '';
-    document.getElementById('dashTimestamp').textContent = new Date().toLocaleString('en-IN');
-    document.getElementById('dashCertNo').textContent   = intern.certificate_number || '—';
-
-    // Profile block
-    document.getElementById('dashProfileName').textContent = intern.full_name || '—';
-    document.getElementById('dashInternId').textContent    = intern.intern_id || '—';
-
-    // Avatar
-    const avatarEl = document.getElementById('dashAvatar');
-    if (intern.photo) {
-      const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
-        ? intern.photo
-        : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
-      avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
-    }
-
-    // Details rows
-    const details = [
-      { icon: 'fa-id-card',    label: 'Internship ID',       value: intern.intern_id },
-      { icon: 'fa-certificate', label: 'Certificate No.',    value: intern.certificate_number },
-      { icon: 'fa-code',       label: 'Domain',              value: intern.domain },
-      { icon: 'fa-layer-group', label: 'Batch',              value: intern.batch ? 'Class of ' + intern.batch : null },
-      { icon: 'fa-calendar-plus', label: 'Start Date',       value: formatDate(intern.start_date) },
-      { icon: 'fa-calendar-check', label: 'End Date',        value: formatDate(intern.end_date) },
-      { icon: 'fa-envelope',   label: 'Email',               value: intern.email },
-    ];
-
-    const statusBadgeClass = intern.status === 'Active'     ? 'status-active'
-                           : intern.status === 'Completed'  ? 'status-completed'
-                           : '';
-
-    let detailsHTML = details.filter(d => d.value && d.value !== '—').map(d => `
-      <div class="detail-row">
-        <div class="detail-icon"><svg class="icon ${d.icon}" aria-hidden="true"><use href="#${d.icon}"></use></svg></div>
-        <div>
-          <div class="detail-label">${escHtml(d.label)}</div>
-          <div class="detail-value">${escHtml(String(d.value))}</div>
-        </div>
-      </div>
-    `).join('');
-
-    // Status row
-    detailsHTML += `
-      <div class="detail-row">
-        <div class="detail-icon"><svg class="icon fa-circle-check" aria-hidden="true" ><use href="#fa-circle-check"></use></svg></div>
-        <div>
-          <div class="detail-label">Status</div>
-          <div class="detail-value">
-            <span class="status-badge ${statusBadgeClass}">
-              ${escHtml(intern.status || 'Active')}
-            </span>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.getElementById('dashDetails').innerHTML = detailsHTML;
-
-    // Timeline
-    renderTimeline(intern);
-
-    // Certificate
-    renderCertificate(intern);
-
-    // QR code
-    renderQR(intern.intern_id);
-  }
-
-  function renderTimeline(intern) {
-    const isCompleted = intern.status === 'Completed';
-
-    const steps = [
-      { label: 'Application Received',   desc: 'Your application was submitted and reviewed.', done: true },
-      { label: 'Selected for Internship', desc: 'You were selected from the applicant pool.',   done: true },
-      { label: 'Internship Started',     desc: formatDate(intern.start_date) || 'Internship commenced.', done: true },
-      { label: isCompleted ? 'Internship Completed' : 'In Progress',
-        desc: isCompleted
-          ? `Successfully completed on ${formatDate(intern.end_date)}.`
-          : 'Currently working on live commercial projects.',
-        done: isCompleted, current: !isCompleted },
-      { label: 'Certificate Issued',     desc: 'Official certificate generated and signed.',   done: isCompleted },
-      { label: 'Digitally Verified',     desc: 'Record verified via Dremora portal.', done: true, current: !isCompleted },
-    ];
-
-    document.getElementById('dashTimeline').innerHTML = steps.map(s => `
-      <div class="timeline-item">
-        <div class="timeline-dot ${s.done ? 'done' : ''} ${s.current ? 'current' : ''}"></div>
-        <div class="timeline-label">${escHtml(s.label)}</div>
-        <div class="timeline-desc">${escHtml(s.desc)}</div>
-      </div>
-    `).join('');
-  }
-
-  function renderCertificate(intern) {
-    const certPlaceholder = document.getElementById('certPlaceholder');
-    const certImg         = document.getElementById('certImg');
-    const certPdf         = document.getElementById('certPdf');
-    const certOverlay     = document.getElementById('certOverlay');
-    const certActions     = document.getElementById('certActions');
-
-    if (!intern.certificate_url) return;
-
-    certUrl = intern.certificate_url.startsWith('http')
-      ? intern.certificate_url
-      : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
-
-    const isPdf = certUrl.toLowerCase().endsWith('.pdf');
-
-    certPlaceholder.style.display = 'none';
-    certOverlay.style.display = '';
-    certActions.style.display = '';
-
-    if (isPdf) {
-      certPdf.src = certUrl;
-      certPdf.style.display = '';
-    } else {
-      certImg.src = certUrl;
-      certImg.style.display = '';
-      certImg.onerror = function() {
-        this.style.display = 'none';
-        certPlaceholder.style.display = '';
-        certOverlay.style.display = 'none';
-        certActions.style.display = 'none';
-      };
-    }
-  }
-
-  function renderQR(internId) {
-    const qrContainer = document.getElementById('qr-container');
-    qrContainer.innerHTML = ''; // clear previous
-
-    const verifyUrl = `${window.location.origin}${window.location.pathname}?verify=${encodeURIComponent(internId)}`;
-
-    if (window.QRCode) {
-      new QRCode(qrContainer, {
-        text: verifyUrl,
-        width: 140, height: 140,
-        colorDark: '#000000', colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    } else {
-      qrContainer.innerHTML = `<div style="width:140px;height:140px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;"><svg class="icon fa-qrcode" aria-hidden="true" style="font-size:3rem;color:#333"><use href="#fa-qrcode"></use></svg></div>`;
-    }
-  }
-
-  // ── XSS escape ──
-  function escHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#x27;');
-  }
-
-  // ── Certificate actions ──
-  window.openCertModal = function() {
-    if (!certUrl) return;
-    const modal    = document.getElementById('certModal');
-    const modalImg = document.getElementById('certModalImg');
-    const modalPdf = document.getElementById('certModalPdf');
-    const isPdf    = certUrl.toLowerCase().endsWith('.pdf');
-
-    modalImg.style.display = isPdf ? 'none' : '';
-    modalPdf.style.display = isPdf ? '' : 'none';
-
-    if (isPdf) { modalPdf.src = certUrl; }
-    else        { modalImg.src = certUrl; }
-
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-      }
-
-      currentIntern = data;
-      // Store in session for subsequent immediate loads
-      sessionStorage.setItem('dremora_intern_data', JSON.stringify(data));
-      
-      renderDashboard(data);
-      showScreen('success');
-
-    } catch (err) {
-      console.error('Dashboard load error:', err);
-      showScreen('error');
-      errorMsg.textContent = 'A system error occurred. Please try again later.';
-    } finally {
-      setLoading(false);
     }
   }
 
