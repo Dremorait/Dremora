@@ -1,38 +1,15 @@
 {
   "name": "dremora",
   "version": "1.0.0",
-  "description": "",
-  "main": "fix_all.js",
+  "description": "Dremora IT — Static Website",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo 'Static site — no build needed'",
+    "test": "echo 'No tests'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dremorait/Dremora.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Dremorait/Dremora/issues"
-  },
-  "homepage": "https://github.com/Dremorait/Dremora#readme",
-  "dependencies": {
-    "@supabase/supabase-js": "^2.108.2",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.42.0",
-    "lucide-react": "^1.21.0",
-    "qrcode.react": "^4.2.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "tailwind-merge": "^3.6.0"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "typescript": "^6.0.3",
-    "vite": "^8.1.0"
-  }
+  "license": "ISC"
 }
