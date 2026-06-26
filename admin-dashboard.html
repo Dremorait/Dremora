@@ -434,6 +434,10 @@
               <input type="date" id="f_end">
             </div>
           </div>
+          <div class="form-group" style="margin-top: 1rem;">
+            <label>Profile Picture URL</label>
+            <input type="text" id="f_photo" placeholder="https://example.com/photo.jpg">
+          </div>
           <div style="margin-top:var(--space-6); display:flex; justify-content:flex-end; gap:var(--space-3)">
             <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
             <button type="submit" class="btn btn-primary" id="btnSaveIntern">Save Intern</button>
@@ -486,7 +490,8 @@
           status: document.getElementById('f_status').value,
           progress_percent: parseInt(document.getElementById('f_progress').value) || 0,
           start_date: document.getElementById('f_start').value || null,
-          end_date: document.getElementById('f_end').value || null
+          end_date: document.getElementById('f_end').value || null,
+          photo: document.getElementById('f_photo').value || null
         };
 
         try {
@@ -613,6 +618,7 @@
       document.getElementById('f_progress').value = intern.progress_percent || 0;
       document.getElementById('f_start').value = intern.start_date || '';
       document.getElementById('f_end').value = intern.end_date || '';
+      document.getElementById('f_photo').value = intern.photo || '';
       document.getElementById('internModal').classList.add('active');
     }
 
