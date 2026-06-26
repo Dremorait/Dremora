@@ -1,11 +1,16 @@
-require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
+
+if (fs.existsSync(path.join(__dirname, '../.env.production'))) {
+  require('dotenv').config({ path: path.join(__dirname, '../.env.production') });
+} else {
+  require('dotenv').config();
+}
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
-const path = require('path');
-const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
