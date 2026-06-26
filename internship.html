@@ -1257,27 +1257,60 @@
       return;
     }
 
-    const internId = sanitize(internIdEl.value).toUpperCase();
-    const fullName = sanitize(fullNameEl.value);
+    // Keep original casing — ilike handles case-insensitivity server-side
+    const internId = sanitize(internIdEl.value).trim();
+    const fullName = sanitize(fullNameEl.value).trim();
 
     setLoading(true);
     showScreen('loading');
 
     try {
-      // Query Supabase — case-insensitive match on both fields
-      const { data, error } = await sb
+      // Query Supabase — use maybeSingle() (returns null instead of error when 0 rows)
+      // Try exact ilike match first, then fallback to id-only match
+      let data = null;
+      let queryError = null;
+
+      // Attempt 1: match both intern_id AND full_name (case-insensitive)
+      const attempt1 = await sb
         .from(TABLE_NAME)
         .select('*')
         .ilike('intern_id', internId)
         .ilike('full_name', fullName)
         .limit(1)
-        .single();
+        .maybeSingle();
 
-      if (error || !data) {
+      console.log('[Dremora] Attempt 1 (intern_id + full_name):', attempt1);
+
+      if (attempt1.data) {
+        data = attempt1.data;
+      } else {
+        // Attempt 2: wildcard name match (in case of minor spacing differences)
+        const nameParts = fullName.split(' ').filter(p => p.length > 1);
+        if (nameParts.length >= 1) {
+          const attempt2 = await sb
+            .from(TABLE_NAME)
+            .select('*')
+            .ilike('intern_id', internId)
+            .ilike('full_name', '%' + nameParts[0] + '%')
+            .limit(1)
+            .maybeSingle();
+          console.log('[Dremora] Attempt 2 (partial name):', attempt2);
+          if (attempt2.data) data = attempt2.data;
+          else queryError = attempt1.error || attempt2.error;
+        } else {
+          queryError = attempt1.error;
+        }
+      }
+
+      if (!data) {
         showScreen('error');
-        errorMsg.textContent =
-          'No internship record found matching your Internship ID and Full Name. ' +
-          'Please check your details and try again.';
+        if (queryError && queryError.code === 'PGRST301') {
+          errorMsg.textContent = 'Access denied. Please contact dremora.itservices@gmail.com.';
+        } else {
+          errorMsg.textContent =
+            'No internship record found. Please check: \n• Internship ID (exact, e.g. DRM-INT-2026-001)\n• Full Name (as on your joining letter).';
+        }
+        console.error('[Dremora] No record found. ID:', internId, 'Name:', fullName, 'Error:', queryError);
         return;
       }
 
