@@ -1,0 +1,21 @@
+{
+  "name": "dremora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fix_all.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dremorait/Dremora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Dremorait/Dremora/issues"
+  },
+  "homepage": "https://github.com/Dremorait/Dremora#readme"
+}
