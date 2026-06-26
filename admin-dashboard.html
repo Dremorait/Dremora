@@ -307,14 +307,21 @@
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     async function loadAdminDashboard() {
+      console.log("Login Started");
       try {
         const res = await fetch('/api/auth/me');
         if (!res.ok) throw new Error('Unauthorized');
         
+        const contentType = res.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('Invalid JSON response');
+        }
+
         const data = await res.json();
-        if (data.user.role !== 'admin') throw new Error('Forbidden');
+        if (!data || !data.user || data.user.role !== 'admin') throw new Error('Forbidden');
         
-        document.getElementById('adminNameDisplay').textContent = data.user.full_name;
+        const nameDisplay = document.getElementById('adminNameDisplay');
+        if (nameDisplay) nameDisplay.textContent = data.user.full_name;
 
         // Fetch some basic stats via Supabase (since this uses anon key, RLS might block count for admins if not set correctly. 
         // We will just do a basic select. If RLS blocks, stats will just be 0, which is fine for UI placeholder).
@@ -325,25 +332,42 @@
           const active = interns.filter(i => i.status === 'Active').length;
           const completed = interns.filter(i => i.status === 'Completed').length;
           
-          document.getElementById('statTotal').textContent = total;
-          document.getElementById('statActive').textContent = active;
-          document.getElementById('statCompleted').textContent = completed;
+          const statTotal = document.getElementById('statTotal');
+          const statActive = document.getElementById('statActive');
+          const statCompleted = document.getElementById('statCompleted');
+          
+          if (statTotal) statTotal.textContent = total;
+          if (statActive) statActive.textContent = active;
+          if (statCompleted) statCompleted.textContent = completed;
         }
 
-        document.getElementById('screen-loading').classList.remove('active');
-        document.getElementById('screen-dashboard').classList.add('active');
+        const screenLoading = document.getElementById('screen-loading');
+        const screenDashboard = document.getElementById('screen-dashboard');
+        if (screenLoading) screenLoading.classList.remove('active');
+        if (screenDashboard) screenDashboard.classList.add('active');
+        
+        console.log("Rendering Dashboard");
+        console.log("Skeleton Hidden");
 
       } catch (err) {
+        console.error("Dashboard Error:", err);
         window.location.href = '/login.html';
       }
     }
 
-    document.getElementById('btnLogout').addEventListener('click', async () => {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      window.location.href = '/login.html';
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("DOM Ready");
+      const btnLogout = document.getElementById('btnLogout');
+      if (btnLogout) {
+        btnLogout.addEventListener('click', async () => {
+          try {
+            await fetch('/api/auth/logout', { method: 'POST' });
+          } catch(e) {}
+          window.location.href = '/login.html';
+        });
+      }
+      loadAdminDashboard();
     });
-
-    document.addEventListener('DOMContentLoaded', loadAdminDashboard);
   </script>
 </body>
 </html>

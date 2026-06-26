@@ -32,7 +32,7 @@ app.use(cors({
 const verifyLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 20, // Limit each IP to 20 verification requests per windowMs
-  message: 'Too many verification requests from this IP, please try again after 15 minutes.',
+  message: { success: false, message: 'Too many verification requests from this IP, please try again after 15 minutes.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -45,7 +45,7 @@ const adminLimiter = rateLimit({
 const loginLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 10, // 10 login attempts per hour (brute force protection)
-  message: 'Too many login attempts, please try again after an hour'
+  message: { success: false, message: 'Too many login attempts, please try again after an hour' }
 });
 
 // Middleware
