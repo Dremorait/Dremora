@@ -1197,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (intern.photo) {
       const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
         ? intern.photo
-        : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
+        : `${window.SUPABASE_URL}/storage/v1/object/public/intern-profile-images/${intern.photo}`;
       avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
     }
 
