@@ -82,7 +82,7 @@ app.use((req, res) => {
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+  res.status(500).json({ success: false, message: err.message || 'Internal server error', code: 'SERVER_ERROR', stack: err.stack });
 });
 
 if (process.env.NODE_ENV !== 'production') {

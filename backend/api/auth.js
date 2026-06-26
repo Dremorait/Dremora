@@ -70,7 +70,7 @@ router.post('/intern/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Intern Login Error:', err.stack || err);
-    res.status(500).json({ success: false, message: err.message || 'Internal server error', code: 'SERVER_ERROR' });
+    res.status(500).json({ success: false, message: err.message || String(err), code: 'SERVER_ERROR', stack: err.stack });
   }
 });
 
@@ -133,7 +133,7 @@ router.post('/admin/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Admin Login Error:', err.stack || err);
-    res.status(500).json({ success: false, message: err.message || 'Internal server error', code: 'SERVER_ERROR' });
+    res.status(500).json({ success: false, message: err.message || String(err), code: 'SERVER_ERROR', stack: err.stack });
   }
 });
 
