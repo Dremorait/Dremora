@@ -14,7 +14,7 @@ export default function CertificateViewer({ intern, onClose }) {
 
   // If a PDF or image URL is uploaded by admin, show it. Otherwise show a placeholder for the demo.
   const certificateSource = intern.certificate_url 
-    ? \`http://localhost:5000\${intern.certificate_url}\`
+    ? `http://localhost:5000${intern.certificate_url}`
     : 'https://cdn.pixabay.com/photo/2017/08/17/09/39/certificate-2650570_1280.jpg'; // Placeholder high-res cert image
 
   return (
@@ -33,7 +33,7 @@ export default function CertificateViewer({ intern, onClose }) {
           <button onClick={handleZoomIn} className="p-2 text-white/70 hover:text-white bg-white/5 rounded-lg transition-colors"><ZoomIn size={20} /></button>
           <div className="w-px h-8 bg-white/20 mx-2"></div>
           <button onClick={handlePrint} className="p-2 text-white/70 hover:text-white bg-white/5 rounded-lg transition-colors" title="Print"><Printer size={20} /></button>
-          <a href={certificateSource} download=\`\${intern.full_name}_Certificate.pdf\` target="_blank" rel="noreferrer" className="p-2 text-white/70 hover:text-white bg-white/5 rounded-lg transition-colors" title="Download"><Download size={20} /></a>
+          <a href={certificateSource} download={`${intern.full_name}_Certificate.pdf`} target="_blank" rel="noreferrer" className="p-2 text-white/70 hover:text-white bg-white/5 rounded-lg transition-colors" title="Download"><Download size={20} /></a>
           <button onClick={onClose} className="p-2 text-red-400 hover:text-red-300 bg-red-400/10 rounded-lg transition-colors ml-4"><X size={24} /></button>
         </div>
       </div>

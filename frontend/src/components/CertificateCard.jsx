@@ -8,13 +8,13 @@ export default function CertificateCard({ intern, onBack }) {
   const [viewerOpen, setViewerOpen] = useState(false);
 
   // Generate verification URL for QR code
-  const verifyUrl = \`\${window.location.origin}/verify?id=\${intern.certificate_number}\`;
+  const verifyUrl = `${window.location.origin}/verify?id=${intern.certificate_number}`;
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: 'Dremora Internship Certificate',
-        text: \`Verify \${intern.full_name}'s internship at Dremora IT Consultants & Services.\`,
+        text: `Verify ${intern.full_name}'s internship at Dremora IT Consultants & Services.`,
         url: verifyUrl,
       }).catch((err) => console.error('Share failed:', err));
     } else {
@@ -43,7 +43,7 @@ export default function CertificateCard({ intern, onBack }) {
           <div className="flex flex-col items-center gap-4 border-r border-white/10 pr-0 md:pr-8" style={{ minWidth: '200px' }}>
             <div className="w-32 h-32 rounded-full border-4 border-[var(--primary)] overflow-hidden shadow-lg shadow-[var(--primary)]/30">
               <img 
-                src={intern.photo ? \`http://localhost:5000\${intern.photo}\` : \`https://ui-avatars.com/api/?name=\${intern.full_name}&background=6366f1&color=fff\`} 
+                src={intern.photo ? `http://localhost:5000${intern.photo}` : `https://ui-avatars.com/api/?name=${intern.full_name}&background=6366f1&color=fff`} 
                 alt={intern.full_name} 
                 className="w-full h-full object-cover"
               />

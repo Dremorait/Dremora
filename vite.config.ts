@@ -8,6 +8,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         internship: resolve(__dirname, 'internship.html')
+      },
+      output: {
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
     }
   }

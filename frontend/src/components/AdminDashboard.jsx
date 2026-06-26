@@ -52,7 +52,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this intern?')) return;
     try {
-      await api.delete(\`/admin/interns/\${id}\`);
+      await api.delete(`/admin/interns/${id}`);
       fetchData();
     } catch (err) {
       alert('Failed to delete');
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
     e.preventDefault();
     try {
       if (formData.id) {
-        await api.put(\`/admin/interns/\${formData.id}\`, formData);
+        await api.put(`/admin/interns/${formData.id}`, formData);
       } else {
         await api.post('/admin/interns', formData);
       }
@@ -177,7 +177,7 @@ export default function AdminDashboard() {
                       <td className="font-semibold">{intern.full_name}</td>
                       <td>{intern.domain}</td>
                       <td>
-                        <span className={\`px-2 py-1 rounded text-xs \${intern.status === 'Active' ? 'bg-[var(--success)]/20 text-[var(--success)]' : 'bg-[var(--secondary)]/20 text-[var(--secondary)]'}\`}>
+                        <span className={`px-2 py-1 rounded text-xs ${intern.status === 'Active' ? 'bg-[var(--success)]/20 text-[var(--success)]' : 'bg-[var(--secondary)]/20 text-[var(--secondary)]'}`}>
                           {intern.status}
                         </span>
                       </td>
