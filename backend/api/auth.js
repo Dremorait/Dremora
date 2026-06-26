@@ -4,6 +4,11 @@ const jwt = require('jsonwebtoken');
 const { getSupabaseClient } = require('../utils/supabase');
 const { comparePassword, sanitize } = require('../utils/security');
 
+// DEBUG ENDPOINT
+router.get('/debug-env', (req, res) => {
+  res.json({ env_keys: Object.keys(process.env) });
+});
+
 // Helper to set cookies securely
 const setCookie = (res, name, token) => {
   res.cookie(name, token, {
