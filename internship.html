@@ -959,7 +959,7 @@
               <!-- Certificate -->
               <div class="cert-card">
                 <div class="info-card-title" style="margin-bottom:var(--space-4);">
-                  <i class="fa-solid fa-file-certificate"></i> Official Certificate
+                  <svg class="icon fa-certificate" aria-hidden="true" ><use href="#fa-certificate"></use></svg> Official Certificate
                 </div>
 
                 <div class="cert-preview" id="certPreviewWrapper">
@@ -1344,10 +1344,10 @@
     // Avatar
     const avatarEl = document.getElementById('dashAvatar');
     if (intern.photo) {
-      const resolvedPhoto = intern.photo.startsWith('http')
+      const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
         ? intern.photo
         : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.photo}`;
-      avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<i class=\\"fa-solid fa-user\\"></i>'">`;
+      avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
     }
 
     // Details rows
@@ -1367,7 +1367,7 @@
 
     let detailsHTML = details.filter(d => d.value && d.value !== '—').map(d => `
       <div class="detail-row">
-        <div class="detail-icon"><i class="fa-solid ${d.icon}"></i></div>
+        <div class="detail-icon"><svg class="icon ${d.icon}" aria-hidden="true"><use href="#${d.icon}"></use></svg></div>
         <div>
           <div class="detail-label">${escHtml(d.label)}</div>
           <div class="detail-value">${escHtml(String(d.value))}</div>
