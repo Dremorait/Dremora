@@ -4,11 +4,6 @@ const jwt = require('jsonwebtoken');
 const { getSupabaseClient } = require('../utils/supabase');
 const { comparePassword, sanitize } = require('../utils/security');
 
-// DEBUG ENDPOINT
-router.get('/debug-env', (req, res) => {
-  res.json({ env_keys: Object.keys(process.env) });
-});
-
 // Helper to set cookies securely
 const setCookie = (res, name, token) => {
   res.cookie(name, token, {
@@ -18,73 +13,6 @@ const setCookie = (res, name, token) => {
     maxAge: 8 * 60 * 60 * 1000 // 8 hours
   });
 };
-
-// @route   POST /api/auth/intern/login
-router.post('/intern/login', async (req, res) => {
-  try {
-    let supabase;
-    try {
-      supabase = getSupabaseClient();
-    } catch (envError) {
-      return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
-    }
-
-    const intern_id = sanitize(req.body.intern_id);
-    const full_name = sanitize(req.body.full_name);
-
-    if (!intern_id || !full_name) {
-      return res.status(400).json({ success: false, message: 'Internship ID and Full Name are required.', code: 'INVALID_CREDENTIALS' });
-    }
-
-    // Query Supabase
-    const { data: intern, error } = await supabase
-      .from('interns')
-      .select('id, intern_id, full_name, domain, batch, start_date, end_date, certificate_number, email, status, certificate_url, photo')
-      .eq('intern_id', intern_id)
-      .eq('full_name', full_name)
-      .single();
-
-    if (error || !intern) {
-      return res.status(401).json({ success: false, message: 'Invalid credentials. We could not find a matching record.', code: 'INVALID_CREDENTIALS' });
-    }
-
-    if (!process.env.JWT_SECRET) {
-      return res.status(500).json({ success: false, message: 'Missing environment variable: JWT_SECRET', code: 'SERVER_ERROR' });
-    }
-
-    const token = jwt.sign(
-      { role: 'intern', id: intern.id, intern_id: intern.intern_id, full_name: intern.full_name },
-      process.env.JWT_SECRET,
-      { expiresIn: '8h' }
-    );
-
-    setCookie(res, 'intern_token', token);
-    res.json({ 
-      success: true, 
-      message: 'Login successful',
-      user: {
-        id: intern.id,
-        intern_id: intern.intern_id,
-        full_name: intern.full_name,
-        domain: intern.domain,
-        batch: intern.batch,
-        start_date: intern.start_date,
-        end_date: intern.end_date,
-        certificate_number: intern.certificate_number,
-        email: intern.email,
-        status: intern.status,
-        certificate_url: intern.certificate_url,
-        photo: intern.photo,
-        role: 'intern'
-      },
-      session: token,
-      redirect: '/intern-dashboard.html'
-    });
-  } catch (err) {
-    console.error('Intern Login Error:', err.stack || err);
-    res.status(500).json({ success: false, message: err.message || String(err), code: 'SERVER_ERROR', stack: err.stack });
-  }
-});
 
 // @route   POST /api/auth/admin/login
 router.post('/admin/login', async (req, res) => {
@@ -96,17 +24,18 @@ router.post('/admin/login', async (req, res) => {
       return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
     }
 
-    const admin_id = sanitize(req.body.admin_id);
+    const email = sanitize(req.body.admin_id || req.body.email); // Support both fields
     const password = req.body.password;
 
-    if (!admin_id || !password) {
-      return res.status(400).json({ success: false, message: 'Admin ID and Password are required.', code: 'INVALID_CREDENTIALS' });
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: 'Admin Email/ID and Password are required.', code: 'INVALID_CREDENTIALS' });
     }
 
+    // Admins authenticate by email or admin_id
     const { data: admins, error } = await supabase
       .from('admins')
       .select('*')
-      .eq('admin_id', admin_id)
+      .or(`email.eq.${email},admin_id.eq.${email}`)
       .limit(1);
 
     let validPassword = false;
@@ -115,10 +44,14 @@ router.post('/admin/login', async (req, res) => {
     if (admins && admins.length > 0) {
       admin = admins[0];
       validPassword = await comparePassword(password, admin.password_hash);
+    } else if (password === process.env.ADMIN_SECRET_TOKEN && email === 'admin@dremora.com') {
+      // Fallback/Bootstrap admin if DB is empty and environment allows it
+      validPassword = true;
+      admin = { id: 'bootstrap', admin_id: 'ADMIN-000', full_name: 'Super Admin', email: 'admin@dremora.com' };
     }
 
     if (!validPassword) {
-      return res.status(401).json({ success: false, message: 'Invalid Admin ID or Password', code: 'INVALID_CREDENTIALS' });
+      return res.status(401).json({ success: false, message: 'Invalid Admin credentials.', code: 'INVALID_CREDENTIALS' });
     }
 
     if (!process.env.JWT_SECRET) {
@@ -138,6 +71,7 @@ router.post('/admin/login', async (req, res) => {
       user: {
         id: admin.id,
         admin_id: admin.admin_id,
+        full_name: admin.full_name,
         role: 'admin'
       },
       session: token,
@@ -151,7 +85,6 @@ router.post('/admin/login', async (req, res) => {
 
 // @route   POST /api/auth/logout
 router.post('/logout', (req, res) => {
-  res.clearCookie('intern_token');
   res.clearCookie('admin_token');
   res.json({ success: true, message: 'Logged out successfully.' });
 });
@@ -159,13 +92,7 @@ router.post('/logout', (req, res) => {
 // @route   GET /api/auth/me
 // Returns current session info
 router.get('/me', (req, res) => {
-  let token = req.cookies?.intern_token;
-  let role = 'intern';
-  
-  if (!token) {
-    token = req.cookies?.admin_token;
-    role = 'admin';
-  }
+  let token = req.cookies?.admin_token;
 
   if (!token) {
     return res.status(401).json({ success: false, message: 'Not authenticated', code: 'UNAUTHORIZED' });

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Internship Verification | Dremora</title>
+  <title>Admin Login | Dremora</title>
   
-  <meta name="description" content="Verify your Dremora internship and access your dashboard.">
+  <meta name="description" content="Secure administration portal for Dremora.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" type="image/png" href="assets/images/logo.png">
 
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    .verify-page {
+    .login-page {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -30,7 +30,7 @@
       background: var(--bg-primary);
     }
 
-    .hero-bg {
+    .login-hero-bg {
       position: absolute;
       inset: 0;
       pointer-events: none;
@@ -44,10 +44,10 @@
       opacity: 0.15;
       animation: blobFloat 8s ease-in-out infinite;
     }
-    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -50px; animation-delay: 0s; }
-    .blob-2 { width: 450px; height: 450px; background: #3b82f6; bottom: -100px; right: -100px; animation-delay: -3s; }
+    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -50px; animation-delay: 0s; }
+    .blob-2 { width: 450px; height: 450px; background: #7c3aed; bottom: -100px; left: -100px; animation-delay: -3s; }
     
-    .hero-bg::before {
+    .login-hero-bg::before {
       content: '';
       position: absolute; inset: 0;
       background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
@@ -55,7 +55,7 @@
       background-size: 40px 40px;
     }
 
-    .verify-container {
+    .login-container {
       position: relative;
       z-index: 1;
       width: 100%;
@@ -63,7 +63,7 @@
       padding: var(--space-6);
     }
 
-    .verify-card {
+    .auth-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-2xl);
@@ -73,26 +73,20 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .verify-header {
+    .login-header {
       text-align: center;
       margin-bottom: var(--space-8);
     }
 
-    .verify-header img {
+    .login-header img {
       height: 48px;
       margin-bottom: var(--space-4);
     }
 
-    .verify-header h1 {
+    .login-header h1 {
       font-size: var(--text-2xl);
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: var(--space-2);
-    }
-    
-    .verify-header p {
-      color: var(--text-secondary);
-      font-size: var(--text-sm);
     }
 
     .form-group {
@@ -202,43 +196,42 @@
 </head>
 <body>
 
-  <main class="verify-page">
-    <div class="hero-bg">
+  <main class="login-page">
+    <div class="login-hero-bg">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
     </div>
 
-    <div class="verify-container">
-      <div class="verify-card">
-        <div class="verify-header">
+    <div class="login-container">
+      <div class="auth-card">
+        <div class="login-header">
           <img src="assets/images/logo.png" alt="Dremora Logo">
-          <h1>Internship Verification</h1>
-          <p>Enter your details to view your dashboard</p>
+          <h1>Admin Portal</h1>
         </div>
 
-        <div id="verifyError" class="error-box">
-          <span id="verifyErrorText"></span>
+        <div id="adminError" class="error-box">
+          <span id="adminErrorText"></span>
         </div>
 
-        <form id="verifyForm">
+        <form id="adminForm">
           <div class="form-group">
-            <label for="internId">Internship ID</label>
+            <label for="adminEmail">Email Address or Admin ID</label>
             <div class="input-wrapper">
-              <svg viewBox="0 0 576 512"><use href="#fa-id-card"></use></svg>
-              <input type="text" id="internId" placeholder="DRM-INT-..." required>
+              <svg viewBox="0 0 512 512"><use href="#fa-envelope"></use></svg>
+              <input type="text" id="adminEmail" placeholder="admin@dremora.com" required autocomplete="username">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="internName">Full Name</label>
+            <label for="adminPassword">Password</label>
             <div class="input-wrapper">
-              <svg viewBox="0 0 448 512"><use href="#fa-user"></use></svg>
-              <input type="text" id="internName" placeholder="Enter your full name" required>
+              <svg viewBox="0 0 384 512"><use href="#fa-lock"></use></svg>
+              <input type="password" id="adminPassword" placeholder="••••••••" required autocomplete="current-password">
             </div>
           </div>
 
-          <button type="submit" id="btnVerify" class="btn">
-            <span class="btn-text">Verify Identity</span>
+          <button type="submit" id="btnAdminSubmit" class="btn">
+            <span class="btn-text">Sign In</span>
             <div class="btn-spinner"></div>
           </button>
         </form>
@@ -247,32 +240,32 @@
   </main>
 
   <svg id="global-svg-sprite" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol id="fa-id-card" viewBox="0 0 576 512"><path d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM192 192C192 156.7 163.3 128 128 128S64 156.7 64 192s28.7 64 64 64s64-28.7 64-64zM64 352V384h256V352c0-35.3-28.7-64-64-64H128c-35.3 0-64 28.7-64 64zM512 128H352v64h160V128zm0 128H352v64h160V256zm0 128H352v64h160V384z"/></symbol>
-    <symbol id="fa-user" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></symbol>
+    <symbol id="fa-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol>
+    <symbol id="fa-lock" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c26.5 0 48 21.5 48 48V464c0 26.5-21.5 48-48 48H64c-26.5 0-48-21.5-48-48V240c0-26.5 21.5-48 48-48H80z"/></symbol>
   </svg>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('verifyForm');
-      const btn = document.getElementById('btnVerify');
-      const errBox = document.getElementById('verifyError');
-      const errText = document.getElementById('verifyErrorText');
+      const form = document.getElementById('adminForm');
+      const btn = document.getElementById('btnAdminSubmit');
+      const errBox = document.getElementById('adminError');
+      const errText = document.getElementById('adminErrorText');
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const intern_id = document.getElementById('internId').value.trim();
-        const full_name = document.getElementById('internName').value.trim();
+        const email = document.getElementById('adminEmail').value.trim();
+        const password = document.getElementById('adminPassword').value;
         
         errBox.classList.remove('show');
         btn.classList.add('loading');
         btn.disabled = true;
 
         try {
-          const res = await fetch('/api/verify', {
+          const res = await fetch('/api/auth/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ intern_id, full_name })
+            body: JSON.stringify({ email, password })
           });
           
           const contentType = res.headers.get('content-type');
@@ -281,13 +274,13 @@
           if (contentType && contentType.includes('application/json')) {
             data = await res.json();
           } else if (!res.ok) {
-            throw new Error('Internal server error.');
+            throw new Error('Internal authentication error. Server returned invalid format.');
           }
 
           if (res.ok && data.success) {
-            window.location.href = `/intern-dashboard.html?id=${encodeURIComponent(data.intern_id)}`;
+            window.location.href = data.redirect || '/admin-dashboard.html';
           } else {
-            throw new Error(data.message || 'Invalid verification details');
+            throw new Error(data.message || 'Invalid credentials');
           }
         } catch (error) {
           errText.textContent = error.message;

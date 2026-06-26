@@ -1,69 +1,75 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { getSupabaseClient } = require('../utils/supabase');
 const { sanitize } = require('../utils/security');
 
 // @route   POST /api/verify
-// @desc    Verify intern by intern_id AND full_name
-// @access  Public (Rate limited in server.js)
+// @desc    Verifies an intern by Intern ID and Full Name
 router.post('/', async (req, res) => {
   try {
-    const rawInternId = req.body.intern_id;
-    const rawFullName = req.body.full_name;
-
-    if (!rawInternId || !rawFullName) {
-      return res.status(400).json({ success: false, message: 'Intern ID and Full Name are required.', code: 'INVALID_CREDENTIALS' });
+    let supabase;
+    try {
+      supabase = getSupabaseClient();
+    } catch (envError) {
+      return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
     }
 
-    const internId = sanitize(rawInternId);
-    const fullName = sanitize(rawFullName);
+    const intern_id = sanitize(req.body.intern_id);
+    const full_name = sanitize(req.body.full_name);
 
-    // Case-insensitive exact match for both (MySQL handles case insensitivity by default for VARCHAR depending on collation, but we enforce it logic-wise if needed. We'll use standard parameterized queries which are safe).
-    const [rows] = await db.execute(
-      `SELECT intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, certificate_url, photo, email, created_at, updated_at 
-       FROM interns 
-       WHERE LOWER(intern_id) = LOWER($1) AND LOWER(full_name) = LOWER($2)
-       LIMIT 1`,
-      [internId, fullName]
-    );
-
-    if (rows.length === 0) {
-      return res.status(404).json({ success: false, message: 'Internship record not found. Please check your credentials.', code: 'NOT_FOUND' });
+    if (!intern_id || !full_name) {
+      return res.status(400).json({ success: false, message: 'Internship ID and Full Name are required.' });
     }
 
-    const intern = rows[0];
-    
-    // Success - Record Found
-    res.json({
-      success: true,
-      data: intern
-    });
+    const { data: intern, error } = await supabase
+      .from('interns')
+      .select('id, intern_id, status')
+      .eq('intern_id', intern_id)
+      .ilike('full_name', full_name) // Case-insensitive matching
+      .single();
 
-  } catch (error) {
-    console.error('Verification Error:', error);
-    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    if (error || !intern) {
+      return res.status(404).json({ success: false, message: 'Intern record not found. Please verify your details.' });
+    }
+
+    res.json({ success: true, intern_id: intern.intern_id });
+  } catch (err) {
+    console.error('Verification Error:', err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
 
-// @route   GET /api/verify/certificate/:id
-// @desc    Public route to get basic cert info (used for QR code scanning)
-router.get('/certificate/:id', async (req, res) => {
+// @route   GET /api/verify/data/:intern_id
+// @desc    Fetches public dashboard data for a verified intern
+router.get('/data/:intern_id', async (req, res) => {
   try {
-    const certId = sanitize(req.params.id);
-    const [rows] = await db.execute(
-      `SELECT intern_id, certificate_number, full_name, domain, batch, status 
-       FROM interns 
-       WHERE certificate_number = $1 LIMIT 1`,
-      [certId]
-    );
-
-    if (rows.length === 0) {
-      return res.status(404).json({ success: false, message: 'Certificate not found.', code: 'NOT_FOUND' });
+    let supabase;
+    try {
+      supabase = getSupabaseClient();
+    } catch (envError) {
+      return res.status(500).json({ success: false, message: envError.message, code: 'SERVER_ERROR' });
     }
 
-    res.json({ success: true, data: rows[0] });
+    const intern_id = sanitize(req.params.intern_id);
+
+    if (!intern_id) {
+      return res.status(400).json({ success: false, message: 'Intern ID is required.' });
+    }
+
+    const { data: intern, error } = await supabase
+      .from('interns')
+      .select('intern_id, full_name, email, phone, college, course, domain, batch, mentor, start_date, end_date, progress_percent, attendance_percent, tasks_completed, github_url, linkedin_url, portfolio_url, certificate_status, certificate_number, certificate_url, photo, status')
+      .eq('intern_id', intern_id)
+      .single();
+
+    if (error || !intern) {
+      return res.status(404).json({ success: false, message: 'Intern record not found.' });
+    }
+
+    res.json({ success: true, data: intern });
   } catch (err) {
-    res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+    console.error('Fetch Data Error:', err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
 

@@ -1188,69 +1188,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── Main Authentication & Load function ──
   async function loadDashboard() {
-    // 1. Instant Cache Hydration (Eliminate Waterfall & Redundant API Calls)
-    const cachedStr = sessionStorage.getItem('dremora_intern_data');
-    if (cachedStr) {
-      try {
-        const cachedData = JSON.parse(cachedStr);
-        currentIntern = cachedData;
-        renderDashboard(cachedData);
-        showScreen('success');
-        
-        // Optimistically verify session in background without blocking UI
-        fetch('/api/auth/me').then(res => {
-          if (!res.ok) {
-            sessionStorage.removeItem('dremora_intern_data');
-            window.location.href = '/login.html';
-          }
-        });
-        return;
-      } catch (e) {
-        console.error('Cache parse error, falling back to network', e);
-      }
-    }
-
     setLoading(true);
     showScreen('loading');
+    const errorMsg = document.getElementById('errorText');
 
     try {
-      // 2. Sequential fallback for direct navigation (without cache)
-      const authRes = await fetch('/api/auth/me');
-      const authData = await authRes.json();
+      const urlParams = new URLSearchParams(window.location.search);
+      const internId = urlParams.get('id');
 
-      if (!authRes.ok || authData.user.role !== 'intern') {
-        window.location.href = '/login.html';
-        return;
-      }
-
-      const internId = authData.user.intern_id;
-      const fullName = authData.user.full_name;
-
-      // Fetch specific optimized columns from Supabase
-      const { data, error } = await sb
-        .from(TABLE_NAME)
-        .select('id, intern_id, full_name, domain, batch, start_date, end_date, certificate_number, email, status, certificate_url, photo')
-        .ilike('intern_id', internId)
-        .ilike('full_name', fullName)
-        .single();
-
-      if (error || !data) {
+      if (!internId) {
         showScreen('error');
-        errorMsg.textContent = 'Account found, but data is missing. Please contact support.';
+        if (errorMsg) errorMsg.textContent = 'No Internship ID provided in URL. Please verify your identity first.';
+        setTimeout(() => window.location.href = '/internship.html', 3000);
         return;
       }
 
-      currentIntern = data;
-      // Store in session for subsequent immediate loads
-      sessionStorage.setItem('dremora_intern_data', JSON.stringify(data));
+      const res = await fetch(`/api/verify/data/${encodeURIComponent(internId)}`);
       
-      renderDashboard(data);
+      const contentType = res.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+         throw new Error('Server returned invalid format');
+      }
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        showScreen('error');
+        if (errorMsg) errorMsg.textContent = data.message || 'Intern record not found.';
+        setTimeout(() => window.location.href = '/internship.html', 3000);
+        return;
+      }
+
+      currentIntern = data.data;
+      renderDashboard(currentIntern);
       showScreen('success');
 
     } catch (err) {
       console.error('Dashboard load error:', err);
       showScreen('error');
-      errorMsg.textContent = 'A system error occurred. Please try again later.';
+      if (errorMsg) errorMsg.textContent = 'A system error occurred. Please try again later.';
     } finally {
       setLoading(false);
     }

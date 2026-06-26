@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
-const db = require('../config/db');
-const { adminRequired } = require('../middleware/auth');
-const { hashPassword, comparePassword, sanitize } = require('../utils/security');
 const { getSupabaseClient } = require('../utils/supabase');
+const { adminRequired } = require('../middleware/auth');
+const { sanitize } = require('../utils/security');
 
 // Setup Multer to keep files in memory (Serverless friendly)
 const storage = multer.memoryStorage();
@@ -22,145 +20,158 @@ const upload = multer({
   }
 });
 
-// @route   POST /api/admin/login
-// @desc    Admin authentication
-router.post('/login', async (req, res) => {
+// Helper to get supabase client with error handling
+const getSb = (res) => {
   try {
-    const { email, password } = req.body;
-    
-    // For this demonstration, we are bypassing DB password check if they use the hardcoded admin token as password,
-    // OR checking against an admins table.
-    // Dremora schema has an `admins` table.
-    const [admins] = await db.execute('SELECT * FROM admins WHERE email = $1 LIMIT 1', [email]);
-    
-    let validPassword = false;
-    if (admins.length > 0) {
-      validPassword = await comparePassword(password, admins[0].password_hash);
-    } else if (password === process.env.ADMIN_SECRET_TOKEN && email === 'admin@dremora.com') {
-      // Fallback/Bootstrap admin if DB is empty
-      validPassword = true;
-    }
-
-    if (!validPassword) {
-      return res.status(401).json({ success: false, message: 'Invalid Admin ID or Password', code: 'INVALID_CREDENTIALS' });
-    }
-
-    // Create JWT
-    const token = jwt.sign(
-      { role: 'admin', email: email },
-      process.env.JWT_SECRET,
-      { expiresIn: '8h' }
-    );
-
-    // Set secure HttpOnly cookie
-    res.cookie('admin_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 8 * 60 * 60 * 1000 // 8 hours
-    });
-
-    res.json({ 
-      success: true, 
-      message: 'Login successful',
-      user: {
-        id: admins.length > 0 ? admins[0].id : 'bootstrap',
-        admin_id: admins.length > 0 ? admins[0].admin_id : 'admin@dremora.com',
-        role: 'admin'
-      },
-      session: token,
-      redirect: '/admin-dashboard.html'
-    });
+    return getSupabaseClient();
   } catch (err) {
-    console.error('Admin DB Login Error:', err.stack || err);
-    res.status(500).json({ success: false, message: err.message || String(err), code: 'SERVER_ERROR', stack: err.stack });
+    res.status(500).json({ success: false, message: 'Supabase configuration error' });
+    return null;
   }
-});
-
-// @route   POST /api/admin/logout
-router.post('/logout', (req, res) => {
-  res.clearCookie('admin_token');
-  res.json({ success: true });
-});
+};
 
 // @route   GET /api/admin/interns
 // @desc    List all interns (Dashboard)
 router.get('/interns', adminRequired, async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
-    const [interns] = await db.execute('SELECT * FROM interns ORDER BY created_at DESC');
+    const { data: interns, error } = await sb
+      .from('interns')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
     res.json({ success: true, data: interns });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error("GET /interns error:", err);
+    res.status(500).json({ success: false, message: 'Server error fetching interns' });
   }
 });
 
 // @route   POST /api/admin/interns
 // @desc    Add new intern
 router.post('/interns', adminRequired, async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
-    const { intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, email } = req.body;
+    const payload = {
+      intern_id: sanitize(req.body.intern_id),
+      full_name: sanitize(req.body.full_name),
+      email: sanitize(req.body.email),
+      phone: sanitize(req.body.phone),
+      college: sanitize(req.body.college),
+      course: sanitize(req.body.course),
+      domain: sanitize(req.body.domain),
+      batch: sanitize(req.body.batch),
+      mentor: sanitize(req.body.mentor),
+      start_date: req.body.start_date || null,
+      end_date: req.body.end_date || null,
+      progress_percent: req.body.progress_percent || 0,
+      attendance_percent: req.body.attendance_percent || 0,
+      tasks_completed: req.body.tasks_completed || 0,
+      github_url: sanitize(req.body.github_url),
+      linkedin_url: sanitize(req.body.linkedin_url),
+      portfolio_url: sanitize(req.body.portfolio_url),
+      certificate_status: sanitize(req.body.certificate_status) || 'Pending',
+      certificate_number: sanitize(req.body.certificate_number),
+      certificate_url: req.body.certificate_url,
+      photo: req.body.photo,
+      status: sanitize(req.body.status) || 'Active',
+      remarks: sanitize(req.body.remarks),
+      notes: sanitize(req.body.notes)
+    };
     
-    await db.execute(
-      `INSERT INTO interns (intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, email) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-      [intern_id, certificate_number, full_name, domain, batch, status, start_date || null, end_date || null, email || null]
-    );
+    const { data, error } = await sb.from('interns').insert([payload]).select();
 
-    res.json({ success: true, message: 'Intern added successfully' });
+    if (error) {
+      console.error(error);
+      return res.status(400).json({ success: false, message: 'Failed to add intern. Ensure ID and Email are unique.' });
+    }
+
+    res.json({ success: true, message: 'Intern added successfully', data: data[0] });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to add intern. Ensure ID/Cert numbers are unique.' });
+    console.error("POST /interns error:", err);
+    res.status(500).json({ success: false, message: 'Failed to add intern' });
   }
 });
 
 // @route   PUT /api/admin/interns/:id
 // @desc    Update intern
 router.put('/interns/:id', adminRequired, async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
-    const { intern_id, certificate_number, full_name, domain, batch, status, start_date, end_date, email } = req.body;
     const { id } = req.params;
+    const payload = {
+      intern_id: sanitize(req.body.intern_id),
+      full_name: sanitize(req.body.full_name),
+      email: sanitize(req.body.email),
+      phone: sanitize(req.body.phone),
+      college: sanitize(req.body.college),
+      course: sanitize(req.body.course),
+      domain: sanitize(req.body.domain),
+      batch: sanitize(req.body.batch),
+      mentor: sanitize(req.body.mentor),
+      start_date: req.body.start_date || null,
+      end_date: req.body.end_date || null,
+      progress_percent: req.body.progress_percent,
+      attendance_percent: req.body.attendance_percent,
+      tasks_completed: req.body.tasks_completed,
+      github_url: sanitize(req.body.github_url),
+      linkedin_url: sanitize(req.body.linkedin_url),
+      portfolio_url: sanitize(req.body.portfolio_url),
+      certificate_status: sanitize(req.body.certificate_status),
+      certificate_number: sanitize(req.body.certificate_number),
+      certificate_url: req.body.certificate_url,
+      photo: req.body.photo,
+      status: sanitize(req.body.status),
+      remarks: sanitize(req.body.remarks),
+      notes: sanitize(req.body.notes),
+      updated_at: new Date().toISOString()
+    };
 
-    await db.execute(
-      `UPDATE interns SET intern_id=$1, certificate_number=$2, full_name=$3, domain=$4, batch=$5, status=$6, start_date=$7, end_date=$8, email=$9 WHERE id=$10`,
-      [intern_id, certificate_number, full_name, domain, batch, status, start_date || null, end_date || null, email || null, id]
-    );
+    // Remove undefined fields
+    Object.keys(payload).forEach(key => payload[key] === undefined && delete payload[key]);
 
-    res.json({ success: true, message: 'Intern updated successfully' });
+    const { data, error } = await sb.from('interns').update(payload).eq('id', id).select();
+
+    if (error) {
+      console.error(error);
+      return res.status(400).json({ success: false, message: 'Update failed.' });
+    }
+
+    res.json({ success: true, message: 'Intern updated successfully', data: data[0] });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to update intern' });
+    console.error("PUT /interns error:", err);
+    res.status(500).json({ success: false, message: 'Failed to update intern' });
   }
 });
 
 // @route   DELETE /api/admin/interns/:id
 // @desc    Delete intern
 router.delete('/interns/:id', adminRequired, async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
-    await db.execute('DELETE FROM interns WHERE id=$1', [req.params.id]);
+    const { error } = await sb.from('interns').delete().eq('id', req.params.id);
+    if (error) throw error;
     res.json({ success: true, message: 'Intern deleted' });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to delete intern' });
+    console.error("DELETE /interns error:", err);
+    res.status(500).json({ success: false, message: 'Failed to delete intern' });
   }
 });
 
 // @route   POST /api/admin/upload
 // @desc    Upload certificate or photo to Supabase Storage
 router.post('/upload', adminRequired, upload.single('file'), async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
-    
-    const supabase = getSupabaseClient();
-    if (!supabase) {
-      return res.status(500).json({ success: false, message: 'Internal server error', code: 'SERVER_ERROR' });
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
     }
 
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const fileName = uniqueSuffix + path.extname(req.file.originalname);
     
-    // Upload to Supabase Storage bucket named "intern-portal-uploads"
-    const { data, error } = await supabase.storage
+    const { data, error } = await sb.storage
       .from('intern-portal-uploads')
       .upload(fileName, req.file.buffer, {
         contentType: req.file.mimetype,
@@ -169,42 +180,45 @@ router.post('/upload', adminRequired, upload.single('file'), async (req, res) =>
 
     if (error) {
       console.error('Supabase Storage Error:', error);
-      return res.status(500).json({ error: 'Failed to upload to Supabase Storage.' });
+      return res.status(500).json({ success: false, message: 'Failed to upload to storage.' });
     }
 
-    // Get public URL
-    const { data: publicUrlData } = supabase.storage
+    const { data: publicUrlData } = sb.storage
       .from('intern-portal-uploads')
       .getPublicUrl(fileName);
 
-    res.json({ 
-      success: true, 
-      url: publicUrlData.publicUrl 
-    });
+    res.json({ success: true, url: publicUrlData.publicUrl });
   } catch (err) {
     console.error('Upload Error:', err);
-    res.status(500).json({ error: 'Server error during upload.' });
+    res.status(500).json({ success: false, message: 'Server error during upload.' });
   }
 });
 
 // @route   GET /api/admin/analytics
 // @desc    Get dashboard stats
 router.get('/analytics', adminRequired, async (req, res) => {
+  const sb = getSb(res); if(!sb) return;
   try {
-    const [totalRows] = await db.execute('SELECT COUNT(*) as count FROM interns');
-    const [activeRows] = await db.execute('SELECT COUNT(*) as count FROM interns WHERE status="Active"');
-    const [completedRows] = await db.execute('SELECT COUNT(*) as count FROM interns WHERE status="Completed"');
-    
+    // Perform multiple counts efficiently
+    const [totalReq, activeReq, completedReq, certsReq] = await Promise.all([
+      sb.from('interns').select('id', { count: 'exact', head: true }),
+      sb.from('interns').select('id', { count: 'exact', head: true }).eq('status', 'Active'),
+      sb.from('interns').select('id', { count: 'exact', head: true }).eq('status', 'Completed'),
+      sb.from('interns').select('id', { count: 'exact', head: true }).not('certificate_url', 'is', null)
+    ]);
+
     res.json({
       success: true,
       data: {
-        total: totalRows[0].count,
-        active: activeRows[0].count,
-        completed: completedRows[0].count
+        total: totalReq.count || 0,
+        active: activeReq.count || 0,
+        completed: completedReq.count || 0,
+        certificates: certsReq.count || 0
       }
     });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error("GET /analytics error:", err);
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
