@@ -1082,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (tryAgainBtn) {
     tryAgainBtn.addEventListener('click', () => {
-      window.location.href = '/internship.html';
+      window.location.href = 'internship.html';
     });
   }
 
@@ -1115,41 +1115,68 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── Main Authentication & Load function ──
   async function loadDashboard() {
-    showScreen('loading');
+    console.log("[DEBUG] Dashboard loaded");
     const errorMsg = document.getElementById('errorMsg');
-
+    
     try {
-      // Phase 4: Use sessionStorage instead of URL params to prevent re-fetching
+      console.log("[DEBUG] showScreen('loading') called");
+      showScreen('loading');
+      
+      console.log("[DEBUG] Reading session...");
       const internId = sessionStorage.getItem('internId');
+      console.log("[DEBUG] Session ID:", internId);
 
       if (!internId) {
-        window.location.href = '/internship.html';
+        console.log("[DEBUG] No session ID found, redirecting back to internship.html");
+        window.location.href = 'internship.html';
         return;
       }
 
-      // Query Supabase directly with the global client
+      console.log("[DEBUG] Checking window.supabaseClient existence");
+      if (!window.supabaseClient) {
+        throw new Error("Supabase client is completely undefined. js/supabaseClient.js failed to initialize.");
+      }
+
+      console.log("[DEBUG] Running Supabase query for intern_id:", internId);
       const { data, error } = await window.supabaseClient
         .from('interns')
         .select('*')
         .eq('intern_id', internId)
         .single();
+        
+      console.log("[DEBUG] Query error:", error);
+      console.log("[DEBUG] Query data:", data);
 
       if (error || !data) {
+        console.log("[DEBUG] Error or missing data, showing error screen");
         showScreen('error');
-        if (errorMsg) errorMsg.textContent = 'Intern record not found. Please verify your identity first.';
-        sessionStorage.removeItem('internId');
-        window.location.href = '/internship.html';
+        if (errorMsg) {
+          errorMsg.textContent = 'Unable to load internship data. ' + (error ? error.message : 'Record not found.');
+        }
         return;
       }
 
+      console.log("[DEBUG] Rendering dashboard");
       currentIntern = data;
       renderDashboard(currentIntern);
+      
+      console.log("[DEBUG] showScreen('success') called");
       showScreen('success');
+      
+      console.log("[DEBUG] Finished successfully");
 
     } catch (err) {
-      console.error('Dashboard load error:', err);
+      console.error("[DEBUG] Dashboard load exception:", err);
       showScreen('error');
-      if (errorMsg) errorMsg.textContent = 'A system error occurred. Please try again later.';
+      if (errorMsg) {
+        errorMsg.textContent = 'A system error occurred: ' + err.message;
+      }
+    } finally {
+      console.log("[DEBUG] Finally block executed. If this was a true skeleton loader, we would hide it here.");
+      // Note: showScreen('success') or showScreen('error') effectively hide the 'loading' screen in this architecture.
+      // But just to be explicit, if 'screen-loading' is still active despite an error, we force it off.
+      const loader = document.getElementById('screen-loading');
+      if (loader) loader.classList.remove('active');
     }
   }
 

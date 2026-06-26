@@ -290,7 +290,7 @@
           sessionStorage.setItem('internId', data.intern_id);
 
           // Success - Redirect to dashboard immediately without URL params
-          window.location.href = '/intern-dashboard.html';
+          window.location.href = 'intern-dashboard.html';
           
         } catch (error) {
           errText.textContent = error.message || 'An error occurred connecting to the database.';
