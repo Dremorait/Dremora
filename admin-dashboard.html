@@ -272,6 +272,18 @@
     
     .screen { display: none; }
     .screen.active { display: block; }
+    /* Profile Picture Upload */
+    .upload-container { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4); }
+    .upload-zone { width: 120px; height: 120px; border-radius: 50%; border: 2px dashed var(--border); background: var(--bg-tertiary); position: relative; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s; }
+    .upload-zone:hover, .upload-zone.dragover { border-color: var(--accent-primary); }
+    .upload-preview { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: none; }
+    .upload-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; color: white; font-size: 0.75rem; }
+    .upload-zone:hover .upload-overlay { opacity: 1; }
+    .upload-placeholder { display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); font-size: 0.75rem; text-align: center; padding: 1rem; pointer-events: none; }
+    .upload-placeholder svg { width: 24px; height: 24px; fill: currentColor; margin-bottom: 4px; }
+    .upload-actions { display: flex; gap: var(--space-3); }
+    .upload-progress-bar { width: 100%; height: 4px; background: var(--bg-tertiary); border-radius: 2px; overflow: hidden; margin-top: 8px; display: none; }
+    .upload-progress-fill { height: 100%; background: var(--accent-primary); width: 0%; transition: width 0.3s; }
   </style>
 </head>
 <body class="dark-theme">
@@ -434,9 +446,24 @@
               <input type="date" id="f_end">
             </div>
           </div>
-          <div class="form-group" style="margin-top: 1rem;">
-            <label>Profile Picture URL</label>
-            <input type="text" id="f_photo" placeholder="https://example.com/photo.jpg">
+          <div class="upload-container" style="margin-top: 1rem;">
+            <input type="file" id="f_photo_upload" accept="image/jpeg, image/png, image/webp" style="display:none">
+            <input type="hidden" id="f_photo">
+            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('f_photo_upload').click()">
+              <img id="uploadPreview" class="upload-preview" src="" alt="Profile Preview">
+              <div class="upload-placeholder" id="uploadPlaceholder">
+                <svg viewBox="0 0 512 512"><path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+                <span>Upload</span>
+              </div>
+              <div class="upload-overlay" id="uploadOverlay">
+                <svg viewBox="0 0 512 512" style="width: 20px; height: 20px; fill: currentColor; margin-bottom: 4px;"><path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+                <span>Replace</span>
+              </div>
+            </div>
+            <div class="upload-progress-bar" id="uploadProgressBar"><div class="upload-progress-fill" id="uploadProgressFill"></div></div>
+            <div class="upload-actions">
+              <button type="button" class="btn btn-outline" style="font-size: 0.75rem; padding: 4px 8px;" onclick="removeProfileImage()" id="btnRemoveImage">Remove Image</button>
+            </div>
           </div>
           <div style="margin-top:var(--space-6); display:flex; justify-content:flex-end; gap:var(--space-3)">
             <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
@@ -599,6 +626,8 @@
     function openModal() {
       document.getElementById('internForm').reset();
       document.getElementById('editId').value = '';
+      document.getElementById('f_photo').value = '';
+      if (typeof updateProfileImagePreview === 'function') updateProfileImagePreview('');
       document.getElementById('modalTitle').textContent = 'Add New Intern';
       document.getElementById('internModal').classList.add('active');
     }
@@ -619,6 +648,7 @@
       document.getElementById('f_start').value = intern.start_date || '';
       document.getElementById('f_end').value = intern.end_date || '';
       document.getElementById('f_photo').value = intern.photo || '';
+      if (typeof updateProfileImagePreview === 'function') updateProfileImagePreview(intern.photo);
       document.getElementById('internModal').classList.add('active');
     }
 
@@ -638,6 +668,125 @@
     async function logout() {
       await window.supabaseClient.auth.signOut();
       window.location.href = 'admin-login.html';
+    }
+
+    // --- Profile Picture Upload Logic ---
+    function updateProfileImagePreview(photoUrl) {
+      const preview = document.getElementById('uploadPreview');
+      const placeholder = document.getElementById('uploadPlaceholder');
+      const overlay = document.getElementById('uploadOverlay');
+      if (photoUrl) {
+        const resolvedPhoto = (photoUrl.startsWith('http') || photoUrl.startsWith('assets') || photoUrl.startsWith('/'))
+          ? photoUrl
+          : `${window.SUPABASE_URL}/storage/v1/object/public/intern-profile-images/${photoUrl}`;
+        preview.src = resolvedPhoto;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        overlay.querySelector('span').textContent = 'Replace';
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+        placeholder.style.display = 'flex';
+        overlay.querySelector('span').textContent = 'Upload';
+      }
+    }
+
+    async function removeProfileImage() {
+      const currentUrl = document.getElementById('f_photo').value;
+      if (!currentUrl) return;
+      if (!currentUrl.startsWith('http') && !currentUrl.startsWith('assets') && !currentUrl.startsWith('/')) {
+        try {
+           await window.supabaseClient.storage.from('intern-profile-images').remove([currentUrl]);
+        } catch(e) { console.error('Failed to remove from storage', e); }
+      }
+      document.getElementById('f_photo').value = '';
+      updateProfileImagePreview('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const uploadZone = document.getElementById('uploadZone');
+      const fileInput = document.getElementById('f_photo_upload');
+      
+      if(uploadZone && fileInput) {
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          uploadZone.classList.remove('dragover');
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            handleImageUpload(e.dataTransfer.files[0]);
+          }
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) {
+            handleImageUpload(e.target.files[0]);
+          }
+        });
+      }
+    });
+
+    async function handleImageUpload(file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Invalid file format. Please upload an image.');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File is too large. Maximum size is 5MB.');
+        return;
+      }
+
+      const progressBar = document.getElementById('uploadProgressBar');
+      const progressFill = document.getElementById('uploadProgressFill');
+      progressBar.style.display = 'block';
+      progressFill.style.width = '10%';
+
+      try {
+        const bitmap = await createImageBitmap(file);
+        let width = bitmap.width;
+        let height = bitmap.height;
+        const max = 512;
+        if (width > max || height > max) {
+          if (width > height) { height = Math.round((height * max) / width); width = max; } 
+          else { width = Math.round((width * max) / height); height = max; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0, width, height);
+        
+        progressFill.style.width = '40%';
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.8));
+        
+        const internId = document.getElementById('f_internId').value || 'new-intern';
+        const timestamp = Date.now();
+        const path = `${internId}/profile_${timestamp}.webp`;
+        
+        progressFill.style.width = '60%';
+
+        const { data, error } = await window.supabaseClient.storage
+          .from('intern-profile-images')
+          .upload(path, blob, { contentType: 'image/webp', cacheControl: '3600', upsert: true });
+
+        if (error) throw error;
+        
+        progressFill.style.width = '100%';
+        
+        const oldPhoto = document.getElementById('f_photo').value;
+        if (oldPhoto && !oldPhoto.startsWith('http') && !oldPhoto.startsWith('assets') && !oldPhoto.startsWith('/')) {
+           window.supabaseClient.storage.from('intern-profile-images').remove([oldPhoto]).catch(console.error);
+        }
+
+        document.getElementById('f_photo').value = path;
+        updateProfileImagePreview(path);
+      } catch (err) {
+        console.error(err);
+        alert('Failed to upload image: ' + err.message);
+      } finally {
+        setTimeout(() => { progressBar.style.display = 'none'; progressFill.style.width = '0%'; }, 500);
+        document.getElementById('f_photo_upload').value = '';
+      }
     }
   </script>
 </body>
