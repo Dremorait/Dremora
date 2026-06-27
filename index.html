@@ -602,54 +602,30 @@
             
             <!-- iframe Container -->
             <!-- Fallback Mock Container (replaces iframe) -->
-            <div class="roi-fallback-container" style="position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #0a0a0f; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+            <div class="roi-fallback-container">
               <!-- Mock hero background -->
-              <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%);"></div>
+              <div class="roi-mock-bg"></div>
               
               <!-- Mock content -->
-              <div style="position:relative; z-index:2; max-width:80%;">
-                <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; font-size:0.75rem; color:var(--text-secondary); margin-bottom:1rem;">
-                  <span style="width:6px; height:6px; background:#a78bfa; border-radius:50%; box-shadow:0 0 5px #a78bfa;"></span> Live Interactive Demo
+              <div class="roi-mock-content">
+                <div class="roi-mock-badge">
+                  <span class="roi-mock-badge-dot"></span> Live Interactive Demo
                 </div>
-                <h3 style="font-size:clamp(1.5rem, 2.5vw, 2.2rem); font-weight:700; margin-bottom:1rem; line-height:1.2; color:#fff;">
-                  Experience the <span style="color:#a78bfa;">Dremora</span> Difference
+                <h3 class="roi-mock-title">
+                  Experience the <span class="roi-text-accent">Dremora</span> Difference
                 </h3>
-                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem; line-height:1.5;">
+                <p class="roi-mock-desc">
                   A complete ecosystem built to scale your business. Explore our CRM, automation, and enterprise solutions.
                 </p>
-                <div style="display:flex; gap:1rem; justify-content:center;">
-                  <div style="padding:8px 16px; background:#8b5cf6; color:#fff; border-radius:6px; font-size:0.85rem; font-weight:600;">Explore Features</div>
-                  <div style="padding:8px 16px; background:rgba(255,255,255,0.1); color:#fff; border-radius:6px; font-size:0.85rem; font-weight:600;">View Dashboard</div>
+                <div class="roi-mock-actions">
+                  <div class="roi-mock-btn primary">Explore Features</div>
+                  <div class="roi-mock-btn secondary">View Dashboard</div>
                 </div>
               </div>
 
               <!-- Glass overlay for interaction/clickability -->
-              <div class="roi-glass-overlay" style="
-                position: absolute; 
-                inset: 0; 
-                z-index: 3; 
-                background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                backdrop-filter: blur(2px);
-              ">
-                <div style="
-                  background: rgba(139,92,246,0.9);
-                  color: white;
-                  padding: 10px 24px;
-                  border-radius: 30px;
-                  font-weight: 600;
-                  font-size: 0.9rem;
-                  box-shadow: 0 10px 25px rgba(139,92,246,0.4);
-                  display: flex;
-                  align-items: center;
-                  gap: 8px;
-                  transform: translateY(10px);
-                  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-                " class="roi-overlay-btn">
+              <div class="roi-glass-overlay">
+                <div class="roi-overlay-btn">
                   Open Interactive App
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </div>
@@ -657,13 +633,13 @@
             </div>
             
             <!-- Glow Border -->
-            <div style="position:absolute; inset:0; border: 1px solid rgba(139,92,246,0); border-radius: var(--radius-xl); pointer-events: none; transition: border-color 0.5s ease;" class="roi-glow-border"></div>
+            <div class="roi-glow-border" aria-hidden="true"></div>
           </div>
           
           <!-- Decorative Particles -->
-          <div class="roi-particle" style="position:absolute; top:-20px; right:40px; width:6px; height:6px; background:#a78bfa; border-radius:50%; box-shadow:0 0 10px #a78bfa; animation: floatParticle 4s ease-in-out infinite;"></div>
-          <div class="roi-particle" style="position:absolute; bottom:30px; left:-10px; width:4px; height:4px; background:#3b82f6; border-radius:50%; box-shadow:0 0 10px #3b82f6; animation: floatParticle 5s ease-in-out infinite alternate;"></div>
-          <div class="roi-particle" style="position:absolute; bottom:-10px; right:20%; width:8px; height:8px; background:#f472b6; border-radius:50%; box-shadow:0 0 15px #f472b6; animation: floatParticle 6s ease-in-out infinite 1s;"></div>
+          <div class="roi-particle p1"></div>
+          <div class="roi-particle p2"></div>
+          <div class="roi-particle p3"></div>
         </div>
         
       </div>
@@ -687,18 +663,6 @@
       box-shadow: 0 40px 80px -15px rgba(0,0,0,0.9), 0 0 60px rgba(139,92,246,0.3) !important;
     }
     
-    .roi-browser-mockup:hover .roi-glass-overlay {
-      opacity: 1 !important;
-    }
-    
-    .roi-browser-mockup:hover .roi-overlay-btn {
-      transform: translateY(0) !important;
-    }
-    
-    .roi-browser-mockup:hover .roi-glow-border {
-      border-color: rgba(139,92,246,0.4) !important;
-    }
-    
     /* Reveal overrides for this section */
     .roi-content.reveal.revealed {
       opacity: 1 !important;
@@ -710,28 +674,247 @@
       transform: translateX(0) perspective(1000px) rotateY(-5deg) !important;
     }
     
-    @media (max-width: 991px) {
-      .roi-showcase-grid {
-        grid-template-columns: 1fr !important;
-      }
-      .roi-highlights {
-        grid-template-columns: 1fr !important;
-      }
-      .roi-highlights li {
-        grid-column: span 1 !important;
-      }
-      .roi-preview-wrapper {
-        margin-top: var(--space-8);
-      }
-      .roi-preview-wrapper.reveal.revealed {
-        transform: translateX(0) perspective(1000px) rotateY(0) !important;
-      }
-      .roi-browser-mockup {
-        transform: rotateY(0) !important;
-      }
-      .roi-browser-mockup:hover {
-        transform: translateY(-5px) scale(1.02) !important;
-      }
+    /* --- NEW RESPONSIVE MOCKUP STYLES --- */
+    .roi-fallback-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background: #0a0a0f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: clamp(1.5rem, 5vw, 4rem);
+        aspect-ratio: 16/10;
+        min-height: 250px;
+    }
+    
+    .roi-mock-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    
+    .roi-mock-content {
+        position: relative;
+        z-index: 2;
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .roi-mock-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px;
+        font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+        color: var(--text-secondary);
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
+        white-space: nowrap;
+    }
+    
+    .roi-mock-badge-dot {
+        width: 6px;
+        height: 6px;
+        background: #a78bfa;
+        border-radius: 50%;
+        box-shadow: 0 0 5px #a78bfa;
+    }
+    
+    .roi-mock-title {
+        font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        line-height: 1.25;
+        color: #fff;
+        letter-spacing: -0.02em;
+    }
+    
+    .roi-text-accent {
+        color: #a78bfa;
+    }
+    
+    .roi-mock-desc {
+        font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+        color: var(--text-muted);
+        margin-bottom: clamp(1rem, 3vw, 2rem);
+        line-height: 1.6;
+        max-width: 450px;
+    }
+    
+    .roi-mock-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .roi-mock-btn {
+        padding: clamp(8px, 2vw, 10px) clamp(16px, 3vw, 20px);
+        border-radius: 8px;
+        font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+        font-weight: 600;
+        white-space: nowrap;
+        transition: transform 0.2s ease, filter 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .roi-mock-btn.primary {
+        background: #8b5cf6;
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(139,92,246,0.3);
+    }
+    
+    .roi-mock-btn.secondary {
+        background: rgba(255,255,255,0.05);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Glass Overlay fix - initially invisible so blur doesn't affect rendering */
+    .roi-glass-overlay {
+        position: absolute; 
+        inset: 0; 
+        z-index: 3; 
+        background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    
+    .roi-overlay-btn {
+        background: rgba(139,92,246,0.95);
+        color: white;
+        padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 28px);
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+        box-shadow: 0 10px 25px rgba(139,92,246,0.4);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transform: translateY(15px);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .roi-browser-mockup:hover .roi-glass-overlay {
+        opacity: 1 !important;
+        visibility: visible !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px) !important;
+    }
+    
+    .roi-browser-mockup:hover .roi-overlay-btn {
+        transform: translateY(0);
+    }
+    
+    .roi-glow-border {
+        position: absolute; 
+        inset: 0; 
+        border: 1px solid rgba(139,92,246,0); 
+        border-radius: var(--radius-xl); 
+        pointer-events: none; 
+        transition: border-color 0.5s ease;
+    }
+    
+    .roi-browser-mockup:hover .roi-glow-border {
+        border-color: rgba(139,92,246,0.4) !important;
+    }
+    
+    .roi-particle {
+        position: absolute;
+        border-radius: 50%;
+    }
+    .roi-particle.p1 {
+        top: -20px; right: 40px; width: 6px; height: 6px; background: #a78bfa; box-shadow: 0 0 10px #a78bfa; animation: floatParticle 4s ease-in-out infinite;
+    }
+    .roi-particle.p2 {
+        bottom: 30px; left: -10px; width: 4px; height: 4px; background: #3b82f6; box-shadow: 0 0 10px #3b82f6; animation: floatParticle 5s ease-in-out infinite alternate;
+    }
+    .roi-particle.p3 {
+        bottom: -10px; right: 20%; width: 8px; height: 8px; background: #f472b6; box-shadow: 0 0 15px #f472b6; animation: floatParticle 6s ease-in-out infinite 1s;
+    }
+    
+    /* --- MEDIA QUERIES FOR ALL DEVICES --- */
+    
+    /* Ultra-Wide & TV Screens */
+    @media (min-width: 1440px) {
+        .roi-fallback-container {
+            aspect-ratio: 16/9; /* Wider ratio */
+        }
+        .roi-mock-title { font-size: 3rem; }
+        .roi-mock-desc { font-size: 1.15rem; max-width: 550px; }
+    }
+    
+    /* Tablets (iPads, Android Tabs) - mostly portrait or smaller landscape */
+    @media (max-width: 1024px) {
+        .roi-showcase-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+        }
+        .roi-preview-wrapper.reveal.revealed {
+            transform: translateX(0) perspective(1000px) rotateY(0) !important;
+        }
+        .roi-browser-mockup {
+            transform: rotateY(0) !important;
+        }
+        .roi-browser-mockup:hover {
+            transform: translateY(-5px) scale(1.02) !important;
+        }
+        .roi-fallback-container {
+            aspect-ratio: 16/10; /* Keep it relatively wide for tablets */
+        }
+    }
+    
+    /* Large Phones and Small Tablets */
+    @media (max-width: 768px) {
+        .roi-highlights {
+            grid-template-columns: 1fr !important;
+        }
+        .roi-highlights li {
+            grid-column: span 1 !important;
+        }
+        .roi-fallback-container {
+            aspect-ratio: 4/3; /* Taller ratio for narrower screens */
+        }
+        .roi-mock-desc { max-width: 90%; }
+    }
+    
+    /* Mobile Phones (iPhone, Android) */
+    @media (max-width: 480px) {
+        .roi-fallback-container {
+            aspect-ratio: auto; /* Allow height to flex based on content */
+            padding: 2.5rem 1.2rem;
+            min-height: 320px;
+        }
+        .roi-mock-title {
+            font-size: 1.8rem;
+        }
+        .roi-mock-actions {
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .roi-mock-btn {
+            width: 100%; /* Full width buttons on small mobile */
+        }
+        .roi-browser-mockup:hover {
+            transform: translateY(-2px) scale(1.01) !important; /* Less scale on mobile to prevent overflow */
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), 0 0 30px rgba(139,92,246,0.2) !important;
+        }
     }
   </style>
 \n
