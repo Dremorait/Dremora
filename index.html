@@ -601,23 +601,28 @@
             </div>
             
             <!-- iframe Container -->
-            <div class="roi-iframe-container" style="position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #000;">
-              <!-- Loader -->
-              <div class="roi-loader" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; z-index:1; background:#050505;">
-                <div class="spinner" style="width:24px; height:24px; border:2px solid rgba(139,92,246,0.2); border-top-color:#8b5cf6; border-radius:50%; animation:spin 1s linear infinite;"></div>
-                <span style="color:var(--text-muted); font-size:0.85rem; letter-spacing:1px;">Loading Experience...</span>
+            <!-- Fallback Mock Container (replaces iframe) -->
+            <div class="roi-fallback-container" style="position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #0a0a0f; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+              <!-- Mock hero background -->
+              <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%);"></div>
+              
+              <!-- Mock content -->
+              <div style="position:relative; z-index:2; max-width:80%;">
+                <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; font-size:0.75rem; color:var(--text-secondary); margin-bottom:1rem;">
+                  <span style="width:6px; height:6px; background:#a78bfa; border-radius:50%; box-shadow:0 0 5px #a78bfa;"></span> Live Interactive Demo
+                </div>
+                <h3 style="font-size:clamp(1.5rem, 2.5vw, 2.2rem); font-weight:700; margin-bottom:1rem; line-height:1.2; color:#fff;">
+                  Experience the <span style="color:#a78bfa;">Dremora</span> Difference
+                </h3>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem; line-height:1.5;">
+                  A complete ecosystem built to scale your business. Explore our CRM, automation, and enterprise solutions.
+                </p>
+                <div style="display:flex; gap:1rem; justify-content:center;">
+                  <div style="padding:8px 16px; background:#8b5cf6; color:#fff; border-radius:6px; font-size:0.85rem; font-weight:600;">Explore Features</div>
+                  <div style="padding:8px 16px; background:rgba(255,255,255,0.1); color:#fff; border-radius:6px; font-size:0.85rem; font-weight:600;">View Dashboard</div>
+                </div>
               </div>
-              
-              <!-- Iframe -->
-              <iframe 
-                src="https://drmroi.netlify.app/" 
-                style="width: 100%; height: 100%; border: none; position: absolute; z-index: 2; opacity: 0; transition: opacity 0.5s ease; pointer-events: none;" 
-                title="Dremora IT Transformation Experience"
-                onload="this.style.opacity='1'; this.previousElementSibling.style.opacity='0';"
-                id="roiIframe"
-                loading="lazy"
-              ></iframe>
-              
+
               <!-- Glass overlay for interaction/clickability -->
               <div class="roi-glass-overlay" style="
                 position: absolute; 
