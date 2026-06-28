@@ -1300,3 +1300,37 @@
   letter-spacing: 0.05em;
   font-weight: 600;
 }
+
+/* -- PROTOTYPE CAFE MOCKUP ANIMATIONS -- */
+.portfolio-card-link:hover .browser-mockup {
+  transform: translateY(-10px) scale(1.02) rotateX(2deg);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.15);
+  border-color: rgba(212,175,55,0.3) !important;
+}
+
+.portfolio-card-link .hero-inner {
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card-link:hover .hero-inner {
+  transform: scale(1.03);
+}
+
+.portfolio-card-link:hover .live-indicator {
+  animation: pulse-live 1.5s infinite;
+}
+
+@keyframes pulse-live {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.portfolio-card-link .project-title {
+  transition: text-shadow 0.3s ease;
+}
+
+.portfolio-card-link:hover + div .project-title,
+.portfolio-card-link:hover ~ div .project-title {
+  text-shadow: 0 0 20px rgba(212,175,55,0.4);
+}

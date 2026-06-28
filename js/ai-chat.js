@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Quick chips -->
         <div id="ai-chat-chips">
           <button class="chat-chip" data-msg="What services does Dremora offer?">Our Services</button>
-          <button class="chat-chip" data-msg="Tell me about NagarSeva">NagarSeva</button>
+          <button class="chat-chip" data-msg="Tell me about Prototype Cafe">Prototype Cafe</button>
           <button class="chat-chip" data-msg="How can I apply for internship?">Internship</button>
           <button class="chat-chip" data-msg="How do I contact Dremora?">Contact</button>
         </div>
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="msg-bubble ai">
               👋 Hi! I'm <strong>Dremora AI</strong> — your smart assistant.<br><br>
-              Ask me about our services, <strong>NagarSeva</strong>, internship programs, or anything about Dremora IT!
+              Ask me about our services, <strong>Prototype Cafe</strong>, internship programs, or anything about Dremora IT!
             </div>
           </div>
         </div>

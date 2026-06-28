@@ -322,7 +322,7 @@ img, video, iframe, svg {
     height: 100px !important;
   }
 
-  /* ── INDEX: Featured Work card (NagarSeva) ── */
+  /* ── INDEX: Featured Work card (Prototype Cafe) ── */
   div[style*="display:flex;flex-wrap:wrap"] > div[style*="aspect-ratio:4/3"] {
     aspect-ratio: 16/9 !important;
     min-width: 0 !important;
@@ -543,7 +543,7 @@ img, video, iframe, svg {
     grid-template-columns: 1fr !important;
   }
 
-  /* ── Featured Work card (NagarSeva) ── */
+  /* ── Featured Work card (Prototype Cafe) ── */
   div[style*="flex:1;min-width:280px;padding:var(--space-10)"] {
     padding: var(--space-6) !important;
     min-width: 0 !important;

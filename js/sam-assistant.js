@@ -19,16 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
              Explore our full stack on the <a href="services.html" style="color:#00d2ff">Services page →</a>`
     },
     {
-      icon: '🌐',
-      label: 'NagarSeva',
-      title: 'NagarSeva Platform',
-      body: `NagarSeva is our flagship civic-tech platform connecting citizens with municipal services.<br><br>
+      icon: '🍽️',
+      label: 'Prototype Cafe',
+      title: 'Prototype Cafe & Restaurant',
+      body: `Prototype Cafe is our premium restaurant website mockup showcasing immersive digital dining experiences.<br><br>
              <strong>Key features:</strong><br>
-             • Real-time grievance tracking<br>
-             • Geo-tagged complaint submissions<br>
-             • Automated status updates via SMS &amp; email<br>
-             • Admin dashboard with analytics<br><br>
-             <a href="projects.html" style="color:#00d2ff">See the case study →</a>`
+             • Modern glassmorphism UI<br>
+             • CSS-only hero animations<br>
+             • Responsive component design<br>
+             • Premium aesthetic aesthetic<br><br>
+             <a href="projects.html" class="btn btn-sm btn-outline mt-2">View in Portfolio</a>`
     },
     {
       icon: '🎓',
@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
       label: 'Projects',
       title: 'Our Portfolio',
       body: `We've shipped products across multiple industries:<br><br>
-             • <strong>NagarSeva</strong> — Civic tech &amp; e-governance<br>
-             • <strong>CRM Pipeline</strong> — Sales automation system<br>
-             • <strong>Café Manager</strong> — Restaurant management suite<br>
-             • <strong>AgriTrack</strong> — Agro-monitoring platform<br>
-             • <strong>EduCoach</strong> — EdTech coaching platform<br>
-             • <strong>IT AI Agent</strong> — Productivity automation<br><br>
+             • <strong>Prototype Cafe</strong> - Premium web design<br>
+             • <strong>CRM Pipeline</strong> - Sales automation system<br>
+             • <strong>Cafe Manager</strong> - Restaurant management suite<br>
+             • <strong>AgriTrack</strong> - Agro-monitoring platform<br>
+             • <strong>EduCoach</strong> - EdTech coaching platform<br>
+             • <strong>IT AI Agent</strong> - Productivity automation<br><br>
              <a href="projects.html" style="color:#00d2ff">View all projects →</a>`
     }
   ];

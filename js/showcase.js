@@ -9,25 +9,25 @@
   /* ── Project Data ────────────────────────────────────────────────────── */
   const PROJECTS = [
     {
-      id: 'nagarseva',
-      category: 'Prototype Build',
-      badge: 'Civic Tech',
-      title: 'NagarSeva Platform',
-      desc: 'A civic management platform prototype demonstrating citizen complaint tracking, AI-powered categorization, and administrative dashboards for government-facing systems.',
+      id: 'prototypecafe',
+      category: 'Featured Project',
+      badge: 'Web Design',
+      title: 'Prototype Cafe & Restaurant',
+      desc: 'A premium restaurant and cafe website prototype featuring modern UI, elegant food presentation, responsive layouts, immersive animations, and an optimized customer experience.',
       metrics: [
-        { val: '10K+', key: 'Citizens Served'   },
-        { val: '92%',  key: 'Resolution Rate'   },
-        { val: '40%',  key: 'Faster Processing' }
+        { val: '4.9', key: 'Google Rating'   },
+        { val: '150+',  key: 'Menu Items'   },
+        { val: '250',  key: 'Seating Capacity' }
       ],
       outcomes: [
-        'Complaint tracking with multi-role access',
-        'AI categorization using Gemini integration',
-        'Analytics dashboard for administrators',
-        'Real-time status notifications'
+        'Immersive digital dining experience',
+        'High-conversion reservation flows',
+        'Optimized for mobile viewing',
+        'Bespoke micro-interactions'
       ],
-      tech: ['Python', 'Flask', 'PostgreSQL', 'Gemini AI', 'HTML/CSS/JS'],
-      accentRgb: '37,99,235',
-      dbName: 'NagarSeva'
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'Glassmorphism', 'CSS Animations'],
+      accentRgb: '212,175,55',
+      dbName: 'PrototypeCafe'
     },
     {
       id: 'crm',
