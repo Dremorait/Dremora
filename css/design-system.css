@@ -143,6 +143,11 @@ html {
   tab-size: 4;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -152,8 +157,6 @@ body {
   line-height: var(--leading-relaxed);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  max-width: 100vw;
 }
 
 img, video, iframe, svg {

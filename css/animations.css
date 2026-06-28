@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    DREMORA IT â€” ANIMATIONS
    ========================================================================== */
 
@@ -108,7 +108,8 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(28px) translateZ(0);
+  will-change: transform, opacity;
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.7s var(--ease-out);
@@ -116,13 +117,14 @@
 
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 /* Staggered children â€” JS adds delay via CSS variable */
 .stagger-children > * {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(24px) translateZ(0);
+  will-change: transform, opacity;
   transition:
     opacity 0.6s var(--ease-out),
     transform 0.6s var(--ease-out);
@@ -131,46 +133,49 @@
 
 .stagger-children.revealed > * {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 /* From left */
 .reveal-left {
   opacity: 0;
-  transform: translateX(-28px);
+  transform: translateX(-28px) translateZ(0);
+  will-change: transform, opacity;
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.7s var(--ease-out);
 }
 .reveal-left.revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
 /* From right */
 .reveal-right {
   opacity: 0;
-  transform: translateX(28px);
+  transform: translateX(28px) translateZ(0);
+  will-change: transform, opacity;
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.7s var(--ease-out);
 }
 .reveal-right.revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
 /* Scale in */
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.95) translateZ(0);
+  will-change: transform, opacity;
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.7s var(--ease-out);
 }
 .reveal-scale.revealed {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateZ(0);
 }
 
 /* --------------------------------------------------------------------------
