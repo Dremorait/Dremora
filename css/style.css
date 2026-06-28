@@ -1334,3 +1334,15 @@
 .portfolio-card-link:hover ~ div .project-title {
   text-shadow: 0 0 20px rgba(212,175,55,0.4);
 }
+
+/* -- PROTOTYPE HEALTHCARE MOCKUP ANIMATIONS -- */
+.portfolio-card-link.healthcare-link:hover .browser-mockup {
+  transform: translateY(-10px) scale(1.02) rotateX(2deg);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(14, 165, 233, 0.15);
+  border-color: rgba(14, 165, 233, 0.3) !important;
+}
+
+.portfolio-card-link.healthcare-link:hover + div .project-title,
+.portfolio-card-link.healthcare-link:hover ~ div .project-title {
+  text-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+}
