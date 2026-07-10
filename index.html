@@ -193,19 +193,20 @@
             <!-- Featured Project -->
             <div class="featured-project" id="featuredProject">
               <div class="featured-img-wrapper">
-                <img src="assets/images/dashboard_mockup.png" alt="Featured Project" id="featuredImage" />
+                <img src="assets/images/eduro.png?v=2" alt="EDURO - Premium Coaching Platform" id="featuredImage" />
                 <div class="img-overlay"></div>
               </div>
               <div class="featured-content">
                 <div class="featured-meta">
-                  <span class="featured-category" id="featuredCategory">Web Application</span>
+                  <span class="featured-category" id="featuredCategory">Enterprise Platform</span>
                 </div>
-                <h3 class="featured-title" id="featuredTitle">Premium Dashboard</h3>
-                <p class="featured-desc" id="featuredDesc">Modern responsive web application with elegant UI and robust features.</p>
+                <h3 class="featured-title" id="featuredTitle">EDURO - Premium Coaching Platform</h3>
+                <p class="featured-desc" id="featuredDesc">A premium enterprise-grade digital platform for a coaching institute featuring a cinematic UI, AI-ready architecture, admissions CRM, student & parent portals, and analytics.</p>
                 <div class="featured-tech" id="featuredTech">
+                  <span class="tech-tag">Next.js</span>
                   <span class="tech-tag">React</span>
-                  <span class="tech-tag">Node.js</span>
                   <span class="tech-tag">Tailwind</span>
+                  <span class="tech-tag">Prisma</span>
                 </div>
               </div>
             </div>
@@ -1088,6 +1089,14 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const projects = [
+      {
+        id: 'eduro',
+        title: "EDURO - Premium Coaching Platform",
+        category: "Enterprise Platform",
+        desc: "A premium enterprise-grade digital platform for a coaching institute featuring a cinematic UI, AI-ready architecture, admissions CRM, student & parent portals, and analytics.",
+        image: "assets/images/eduro.png?v=2",
+        tech: ["Next.js", "React", "Tailwind", "Prisma"]
+      },
       {
         id: 0,
         title: "Prototype Cafe & Restaurant",
