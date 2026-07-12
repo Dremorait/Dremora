@@ -414,6 +414,16 @@
           </div>
           <div class="grid-2">
             <div class="form-group">
+              <label>Certificate Number *</label>
+              <input type="text" id="f_certNumber" placeholder="e.g. DRM-CERT-2026-WD-009" required>
+            </div>
+            <div class="form-group">
+              <label>Batch *</label>
+              <input type="text" id="f_batch" placeholder="e.g. 2026" required>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
               <label>Email *</label>
               <input type="email" id="f_email" required>
             </div>
@@ -511,10 +521,13 @@
         const id = document.getElementById('editId').value;
         const payload = {
           intern_id: document.getElementById('f_internId').value,
+          certificate_number: document.getElementById('f_certNumber').value,
+          batch: document.getElementById('f_batch').value,
           full_name: document.getElementById('f_fullName').value,
           email: document.getElementById('f_email').value,
           domain: document.getElementById('f_domain').value,
           status: document.getElementById('f_status').value,
+          progress_percent: parseInt(document.getElementById('f_progress').value, 10) || 0,
           start_date: document.getElementById('f_start').value || null,
           end_date: document.getElementById('f_end').value || null,
           photo: document.getElementById('f_photo').value || null
@@ -639,6 +652,8 @@
       document.getElementById('modalTitle').textContent = 'Edit Intern';
       document.getElementById('editId').value = intern.id;
       document.getElementById('f_internId').value = intern.intern_id;
+      document.getElementById('f_certNumber').value = intern.certificate_number || '';
+      document.getElementById('f_batch').value = intern.batch || '';
       document.getElementById('f_fullName').value = intern.full_name;
       document.getElementById('f_email').value = intern.email;
       document.getElementById('f_domain').value = intern.domain || '';
