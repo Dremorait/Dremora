@@ -229,6 +229,22 @@
       justify-content: center;
     }
     .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      padding: 12px 20px; border-radius: var(--radius-md);
+      font-size: 0.875rem; font-weight: 500;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { background: #10b981; color: white; }
+    #toast.error { background: #ef4444; color: white; }
+    #toast.info { background: var(--accent); color: white; }
     
     .modal {
       background: var(--bg-card);
@@ -392,6 +408,9 @@
     </main>
   </div>
 
+  <!-- Toast Notification -->
+  <div id="toast"><span id="toastMsg"></span></div>
+
   <!-- Intern Form Modal -->
   <div class="modal-overlay" id="internModal">
     <div class="modal">
@@ -484,6 +503,13 @@
     </div>
   </div>
 
+  <script>
+    // Close modal when clicking outside the modal box
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'internModal') closeModal();
+    });
+  </script>
+
   <!-- Supabase SDK & Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/supabaseClient.js"></script>
@@ -547,11 +573,20 @@
             closeModal();
             await loadInterns();
             loadAnalytics();
+            showToast(id ? 'Intern updated successfully!' : 'Intern added successfully!', 'success');
+            // Auto-switch to Interns tab so admin sees the new record
+            activateTab('interns');
           } else {
-            alert('Error saving intern: ' + resError.message);
+            // Surface friendly duplicate/constraint error messages
+            let msg = resError.message;
+            if (msg.includes('intern_id')) msg = 'This Intern ID is already taken. Please use a unique ID.';
+            else if (msg.includes('certificate_number')) msg = 'This Certificate Number is already used. Please use a unique one.';
+            else if (msg.includes('email')) msg = 'This email is already registered.';
+            showToast('Error: ' + msg, 'error');
           }
         } catch(err) {
           console.error(err);
+          showToast('An unexpected error occurred. Check console for details.', 'error');
         } finally {
           document.getElementById('btnSaveIntern').textContent = 'Save Intern';
           document.getElementById('btnSaveIntern').disabled = false;
@@ -625,14 +660,24 @@
       });
     }
 
-    function switchTab(tabId) {
+    function activateTab(tabId) {
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      
+      // Highlight matching nav item by checking its onclick attribute
+      document.querySelectorAll('.nav-item').forEach(el => {
+        if (el.getAttribute('onclick') && el.getAttribute('onclick').includes(`'${tabId}'`)) el.classList.add('active');
+      });
       document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
       document.getElementById('tab-' + tabId).classList.add('active');
-      
-      document.getElementById('pageTitle').textContent = tabId.charAt(0).toUpperCase() + tabId.slice(1);
+      const titles = { dashboard: 'Overview', interns: 'Interns' };
+      document.getElementById('pageTitle').textContent = titles[tabId] || tabId.charAt(0).toUpperCase() + tabId.slice(1);
+    }
+
+    function switchTab(tabId) {
+      if (event && event.currentTarget) {
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+      }
+      activateTab(tabId);
     }
 
     function openModal() {
@@ -641,6 +686,14 @@
       document.getElementById('f_photo').value = '';
       if (typeof updateProfileImagePreview === 'function') updateProfileImagePreview('');
       document.getElementById('modalTitle').textContent = 'Add New Intern';
+
+      // Auto-generate IDs based on highest existing number
+      const nextNum = String(allInterns.length + 1).padStart(3, '0');
+      const year = new Date().getFullYear();
+      document.getElementById('f_internId').value = `DRM-INT-${year}-${nextNum}`;
+      document.getElementById('f_certNumber').value = `DRM-CERT-${year}-WD-${nextNum}`;
+      document.getElementById('f_batch').value = String(year);
+
       document.getElementById('internModal').classList.add('active');
     }
 
@@ -673,10 +726,21 @@
         if (error) throw error;
         await loadInterns();
         loadAnalytics();
+        showToast('Intern deleted.', 'info');
       } catch(e) { 
         console.error(e);
-        alert('Error deleting intern: ' + e.message);
+        showToast('Error deleting intern: ' + e.message, 'error');
       }
+    }
+
+    // Toast helper
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      const el = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      el.className = `show ${type}`;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { el.classList.remove('show'); }, 4000);
     }
 
     async function logout() {
