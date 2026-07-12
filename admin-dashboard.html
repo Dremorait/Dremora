@@ -300,6 +300,11 @@
     .upload-actions { display: flex; gap: var(--space-3); }
     .upload-progress-bar { width: 100%; height: 4px; background: var(--bg-tertiary); border-radius: 2px; overflow: hidden; margin-top: 8px; display: none; }
     .upload-progress-fill { height: 100%; background: var(--accent-primary); width: 0%; transition: width 0.3s; }
+    /* Certificate Upload */
+    .cert-upload-zone { width: 100%; height: 140px; border-radius: var(--radius-lg); border: 2px dashed var(--border); background: var(--bg-tertiary); position: relative; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s; }
+    .cert-upload-zone:hover, .cert-upload-zone.dragover { border-color: var(--accent); }
+    .cert-preview-img { width: 100%; height: 100%; object-fit: contain; display: none; }
+    .cert-upload-zone:hover .upload-overlay { opacity: 1; }
   </style>
 </head>
 <body class="dark-theme">
@@ -475,6 +480,7 @@
               <input type="date" id="f_end">
             </div>
           </div>
+          <!-- Profile Photo Upload -->
           <div class="upload-container" style="margin-top: 1rem;">
             <input type="file" id="f_photo_upload" accept="image/jpeg, image/png, image/webp" style="display:none">
             <input type="hidden" id="f_photo">
@@ -494,6 +500,32 @@
               <button type="button" class="btn btn-outline" style="font-size: 0.75rem; padding: 4px 8px;" onclick="removeProfileImage()" id="btnRemoveImage">Remove Image</button>
             </div>
           </div>
+
+          <!-- Certificate Upload -->
+          <div style="margin-top: 1rem;">
+            <label style="font-size:0.85rem; color:var(--text-secondary); font-weight:500; display:block; margin-bottom:8px;">
+              📜 Certificate Image <span style="color:var(--text-muted); font-weight:400;">(uploaded to intern panel)</span>
+            </label>
+            <input type="file" id="f_cert_upload" accept="image/jpeg, image/png, image/webp" style="display:none">
+            <input type="hidden" id="f_certUrl">
+            <div class="cert-upload-zone" id="certUploadZone" onclick="document.getElementById('f_cert_upload').click()">
+              <img id="certPreviewImg" class="cert-preview-img" src="" alt="Certificate Preview">
+              <div class="upload-placeholder" id="certPlaceholder">
+                <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:currentColor;margin-bottom:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+                <span>Click to upload certificate image</span>
+                <span style="color:var(--text-muted); font-size:0.7rem;">JPG, PNG, WebP — max 5MB</span>
+              </div>
+              <div class="upload-overlay" id="certUploadOverlay">
+                <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;margin-bottom:4px;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                <span>Replace</span>
+              </div>
+            </div>
+            <div class="upload-progress-bar" id="certProgressBar" style="margin-top:6px;"><div class="upload-progress-fill" id="certProgressFill"></div></div>
+            <div style="margin-top:6px; display:flex; gap:8px;">
+              <button type="button" class="btn btn-outline" style="font-size:0.75rem;padding:4px 8px;" onclick="removeCertImage()">Remove Certificate</button>
+            </div>
+          </div>
+
           <div style="margin-top:var(--space-6); display:flex; justify-content:flex-end; gap:var(--space-3)">
             <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
             <button type="submit" class="btn btn-primary" id="btnSaveIntern">Save Intern</button>
@@ -555,7 +587,8 @@
           status: document.getElementById('f_status').value,
           start_date: document.getElementById('f_start').value || null,
           end_date: document.getElementById('f_end').value || null,
-          photo: document.getElementById('f_photo').value || null
+          photo: document.getElementById('f_photo').value || null,
+          certificate_url: document.getElementById('f_certUrl').value || null
         };
 
         try {
@@ -683,6 +716,8 @@
       document.getElementById('internForm').reset();
       document.getElementById('editId').value = '';
       document.getElementById('f_photo').value = '';
+      document.getElementById('f_certUrl').value = '';
+      updateCertPreview('');
       if (typeof updateProfileImagePreview === 'function') updateProfileImagePreview('');
       document.getElementById('modalTitle').textContent = 'Add New Intern';
 
@@ -714,6 +749,8 @@
       document.getElementById('f_start').value = intern.start_date || '';
       document.getElementById('f_end').value = intern.end_date || '';
       document.getElementById('f_photo').value = intern.photo || '';
+      document.getElementById('f_certUrl').value = intern.certificate_url || '';
+      updateCertPreview(intern.certificate_url || '');
       if (typeof updateProfileImagePreview === 'function') updateProfileImagePreview(intern.photo);
       document.getElementById('internModal').classList.add('active');
     }
@@ -805,11 +842,11 @@
 
     async function handleImageUpload(file) {
       if (!file.type.startsWith('image/')) {
-        alert('Invalid file format. Please upload an image.');
+        showToast('Invalid file format. Please upload an image.', 'error');
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        alert('File is too large. Maximum size is 5MB.');
+        showToast('File is too large. Maximum size is 5MB.', 'error');
         return;
       }
 
@@ -859,12 +896,97 @@
         updateProfileImagePreview(path);
       } catch (err) {
         console.error(err);
-        alert('Failed to upload image: ' + err.message);
+        showToast('Failed to upload image: ' + err.message, 'error');
       } finally {
         setTimeout(() => { progressBar.style.display = 'none'; progressFill.style.width = '0%'; }, 500);
         document.getElementById('f_photo_upload').value = '';
       }
     }
+
+    // --- Certificate Image Upload Logic ---
+    const CERT_BUCKET = 'intern_documents'; // same bucket the intern dashboard reads from
+
+    function updateCertPreview(url) {
+      const img = document.getElementById('certPreviewImg');
+      const placeholder = document.getElementById('certPlaceholder');
+      if (url) {
+        const resolved = url.startsWith('http')
+          ? url
+          : `${window.SUPABASE_URL}/storage/v1/object/public/${CERT_BUCKET}/${url}`;
+        img.src = resolved;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+      } else {
+        img.src = '';
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+      }
+    }
+
+    function removeCertImage() {
+      document.getElementById('f_certUrl').value = '';
+      updateCertPreview('');
+    }
+
+    async function handleCertUpload(file) {
+      if (!file.type.startsWith('image/')) {
+        showToast('Please upload an image file (JPG, PNG, WebP).', 'error');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('Certificate image is too large. Maximum 5MB.', 'error');
+        return;
+      }
+
+      const bar = document.getElementById('certProgressBar');
+      const fill = document.getElementById('certProgressFill');
+      bar.style.display = 'block';
+      fill.style.width = '20%';
+
+      try {
+        const internId = document.getElementById('f_internId').value || 'unknown';
+        const ext = file.name.split('.').pop().toLowerCase();
+        const path = `certificates/${internId}/cert_${Date.now()}.${ext}`;
+
+        fill.style.width = '60%';
+        const { error } = await window.supabaseClient.storage
+          .from(CERT_BUCKET)
+          .upload(path, file, { contentType: file.type, cacheControl: '3600', upsert: true });
+
+        if (error) throw error;
+
+        fill.style.width = '100%';
+        document.getElementById('f_certUrl').value = path;
+        updateCertPreview(path);
+        showToast('Certificate uploaded successfully!', 'success');
+      } catch (err) {
+        console.error(err);
+        showToast('Failed to upload certificate: ' + err.message, 'error');
+      } finally {
+        setTimeout(() => { bar.style.display = 'none'; fill.style.width = '0%'; }, 600);
+        document.getElementById('f_cert_upload').value = '';
+      }
+    }
+
+    // Wire up cert file input
+    document.addEventListener('DOMContentLoaded', () => {
+      const certInput = document.getElementById('f_cert_upload');
+      const certZone = document.getElementById('certUploadZone');
+      if (certInput) {
+        certInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) handleCertUpload(e.target.files[0]);
+        });
+      }
+      if (certZone) {
+        certZone.addEventListener('dragover', (e) => { e.preventDefault(); certZone.classList.add('dragover'); });
+        certZone.addEventListener('dragleave', () => certZone.classList.remove('dragover'));
+        certZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          certZone.classList.remove('dragover');
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) handleCertUpload(e.dataTransfer.files[0]);
+        });
+      }
+    });
   </script>
 </body>
 </html>
