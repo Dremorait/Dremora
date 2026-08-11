@@ -21,136 +21,70 @@
   <meta name="description" content="Read Dremora IT Consultants & Services' Privacy Policy. Learn how we collect, use, and protect your personal data.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Dremora IT Consultants &amp; Services">
-  <link rel="canonical" href="https://dremora-sigma.vercel.app/privacy-policy.html">
+  <link rel="canonical" href="https://dremora-it.vercel.app/privacy-policy.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css">
-  
-  <link rel="stylesheet" href="css/style.css">
+
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mobile.css">
-  <style>
-    .legal-hero {
-      padding: 8rem 0 4rem;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      border-bottom: 1px solid var(--border-glass);
-    }
-    .legal-hero::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,210,255,0.06), transparent 70%);
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-    .legal-body {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-    }
-    .legal-section {
-      margin-bottom: 3rem;
-      padding: 2.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-glass);
-      border-radius: 20px;
-      border-left: 3px solid var(--primary-cyan);
-      backdrop-filter: blur(12px);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .legal-section:hover {
-      border-left-color: var(--accent-purple);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,210,255,0.05);
-    }
-    .legal-section h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .legal-section h2 i { color: var(--primary-cyan); font-size: 1rem; }
-    .legal-section p, .legal-section li {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.85;
-      margin-bottom: 0.75rem;
-    }
-    .legal-section ul {
-      list-style: none;
-      padding: 0;
-    }
-    .legal-section ul li {
-      padding-left: 1.5rem;
-      position: relative;
-    }
-    .legal-section ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--primary-cyan);
-      font-weight: 700;
-    }
-    .legal-last-updated {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1.2rem;
-      background: rgba(0,210,255,0.07);
-      border: 1px solid rgba(0,210,255,0.2);
-      border-radius: 99px;
-      font-size: 0.8rem;
-      color: var(--primary-cyan);
-      margin-bottom: 1.5rem;
-    }
-    .legal-contact-box {
-      margin-top: 3rem;
-      padding: 2.5rem;
-      background: linear-gradient(135deg, rgba(0,210,255,0.04), rgba(138,43,226,0.04));
-      border: 1px solid rgba(0,210,255,0.15);
-      border-radius: 20px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="css/legal.css">
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <!-- Navbar -->
-  <header class="navbar scrolled" id="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.png" alt="Dremora" style="height:42px;width:42px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);">
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Dremora IT – Home">
+        <img src="assets/images/logo.png" alt="Dremora IT" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nav-logo-mark" style="display:none">D</div>
+        <div>
+          <div class="nav-logo-text">Dremora IT</div>
+          <div class="nav-logo-tagline">Technology Studio</div>
+        </div>
       </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="projects.html">Projects</a>
-        <a href="internship.html">Internship</a>
-        <a href="contact.html">Contact</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="projects.html" class="nav-link">Work</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="internship.html" class="nav-link" style="color: var(--accent-bright);"><svg class="icon fa-user" aria-hidden="true" style="margin-right:4px;"><use href="#fa-user"></use></svg>Verify</a>
       </nav>
-      <button class="mobile-menu-btn" id="mobileMenuBtn"><svg class="icon fa-bars" aria-hidden="true" ><use href="#fa-bars"></use></svg></button>
+
+      <a href="contact.html" class="nav-cta btn-magnetic" id="navCta">Book A Call</a>
+
+      <button class="nav-mobile-btn" id="navMobileBtn" aria-label="Open menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="projects.html" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="internship.html" class="nav-link" style="color: var(--accent-bright);"><svg class="icon fa-user" aria-hidden="true" style="margin-right:4px;"><use href="#fa-user"></use></svg>Verify</a>
+    <a href="contact.html" class="btn btn-primary nav-cta" style="margin-top:12px">Book A Discovery Call</a>
+  </div>
 
   <main>
     <!-- Hero -->
     <div class="legal-hero">
       <div class="container">
-        <div class="glass-pill pill-cyan float-anim" style="margin-bottom:1.5rem;">
+        <div class="section-label mx-auto" style="margin-bottom:1.5rem;">
           <svg class="icon fa-shield-halved" aria-hidden="true" ><use href="#fa-shield-halved"></use></svg> Legal
         </div>
         <h1 class="section-title" style="font-size:clamp(2rem,5vw,3.8rem);margin-bottom:1rem;">
-          Privacy <span class="text-gradient">Policy</span>
+          Privacy <span class="gradient-text">Policy</span>
         </h1>
         <p style="color:var(--text-muted);font-size:1.05rem;max-width:600px;margin:0 auto;">
           Your privacy matters to us. Here's exactly how Dremora IT handles, protects, and respects your data.
@@ -168,7 +102,7 @@
 
       <div class="legal-section reveal">
         <h2><svg class="icon fa-circle-info" aria-hidden="true" ><use href="#fa-circle-info"></use></svg> 1. Introduction</h2>
-        <p>Welcome to Dremora IT Consultants &amp; Services ("Dremora", "we", "our", or "us"). We are a technology company based in Pune, Maharashtra, India, committed to building scalable digital solutions. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong style="color:#fff;">dremora-sigma.vercel.app</strong> or engage our services.</p>
+        <p>Welcome to Dremora IT Consultants &amp; Services ("Dremora", "we", "our", or "us"). We are a technology company based in Pune, Maharashtra, India, committed to building scalable digital solutions. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong style="color:#fff;">dremora-it.vercel.app</strong> or engage our services.</p>
         <p>By accessing our website or using our services, you acknowledge that you have read and understood this Privacy Policy. If you disagree with its terms, please discontinue use of our site.</p>
       </div>
 
@@ -237,7 +171,7 @@
           <li>Right to <strong style="color:#fff;">withdraw consent</strong> at any time where processing is based on consent.</li>
           <li>Right to <strong style="color:#fff;">object</strong> to or restrict processing of your data.</li>
         </ul>
-        <p>To exercise any of these rights, contact us at <a href="mailto:dremora.itservices@gmail.com" style="color:var(--primary-cyan);">dremora.itservices@gmail.com</a>.</p>
+        <p>To exercise any of these rights, contact us at <a href="mailto:dremora.itservices@gmail.com" style="color:var(--accent-bright);">dremora.itservices@gmail.com</a>.</p>
       </div>
 
       <div class="legal-section reveal">
@@ -251,7 +185,7 @@
       </div>
 
       <div class="legal-contact-box reveal">
-        <svg class="icon fa-envelope" aria-hidden="true" style="font-size:2rem;color:var(--primary-cyan);margin-bottom:1rem;display:block;"><use href="#fa-envelope"></use></svg>
+        <svg class="icon fa-envelope" aria-hidden="true" style="font-size:2rem;color:var(--accent-bright);margin-bottom:1rem;display:block;"><use href="#fa-envelope"></use></svg>
         <h3 style="font-size:1.3rem;margin-bottom:0.75rem;">Questions About Our Privacy Policy?</h3>
         <p style="color:var(--text-muted);margin-bottom:1.5rem;max-width:500px;margin-inline:auto;">If you have any questions, concerns, or requests related to this Privacy Policy, please reach out to us directly.</p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
@@ -267,56 +201,74 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
     <div class="container">
-      <div class="footer-gradient-bar"></div>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html"><img src="assets/images/logo.png" alt="Dremora" style="height:52px;width:52px;object-fit:contain;background:rgba(255,255,255,0.92);padding:5px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.6);margin-bottom:1rem;"></a>
-          <p>Your startup's digital headquarters. Building real digital solutions for a smarter, automated future.</p>
+          <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:var(--space-4);">
+            <img src="assets/images/logo.png" alt="Dremora IT" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'">
+            <div class="nav-logo-mark" style="width:32px;height:32px;font-size:0.9rem;">D</div>
+            <div style="margin-left:var(--space-3);">
+              <div class="nav-logo-text" style="font-size:var(--text-sm);">Dremora IT</div>
+            </div>
+          </a>
+          <p>A technology studio building websites, web applications, and AI automation systems for businesses. Based in Pune, India.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/company/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon fa-linkedin" aria-hidden="true" ><use href="#fa-linkedin"></use></svg></a>
-            <a href="https://twitter.com/dremoraitservices" class="social-btn" target="_blank" rel="noopener" aria-label="Twitter"><svg class="icon fa-twitter" aria-hidden="true" ><use href="#fa-twitter"></use></svg></a>
-            <a href="https://www.instagram.com/dremora.it/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon fa-instagram" aria-hidden="true" ><use href="#fa-instagram"></use></svg></a>
-            <a href="https://github.com/Dremorait" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon fa-github" aria-hidden="true" ><use href="#fa-github"></use></svg></a>
-            <a href="mailto:dremora.itservices@gmail.com" class="social-btn" aria-label="Email"><svg class="icon fa-envelope" aria-hidden="true" ><use href="#fa-envelope"></use></svg></a>
+            <a href="https://www.linkedin.com/company/dremoraitservices" class="footer-social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon fa-linkedin-in" aria-hidden="true"><use href="#fa-linkedin-in"></use></svg></a>
+            <a href="https://twitter.com/dremoraitservices" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter"><svg class="icon fa-x-twitter" aria-hidden="true"><use href="#fa-x-twitter"></use></svg></a>
+            <a href="https://www.instagram.com/dremora.it/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon fa-instagram" aria-hidden="true"><use href="#fa-instagram"></use></svg></a>
+            <a href="https://github.com/Dremorait" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon fa-github" aria-hidden="true"><use href="#fa-github"></use></svg></a>
           </div>
         </div>
+
         <div>
           <p class="footer-heading">Navigation</p>
           <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Our Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="internship.html">Internship</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="projects.html" class="footer-link">Work</a></li>
+            <li><a href="about.html" class="footer-link">About</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="internship.html" class="footer-link">Internship</a></li>
           </ul>
         </div>
+
         <div>
           <p class="footer-heading">Legal</p>
           <ul class="footer-links">
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms-of-service.html">Terms of Service</a></li>
-            <li><a href="course-guidelines.html">Course Guidelines</a></li>
-            <li><a href="refund-policy.html">Refund Policy</a></li>
+            <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li>
+            <li><a href="refund-policy.html" class="footer-link">Refund Policy</a></li>
+            <li><a href="course-guidelines.html" class="footer-link">Course Guidelines</a></li>
           </ul>
         </div>
+
         <div>
-          <p class="footer-heading">Get In Touch</p>
-          <div style="display:flex;flex-direction:column;gap:1rem;">
-            <a href="tel:+919309795878" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><svg class="icon fa-phone" aria-hidden="true" style="color:var(--primary-cyan);width:16px;"><use href="#fa-phone"></use></svg> +91 9309795878</a>
-            <a href="mailto:dremora.itservices@gmail.com" style="display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><svg class="icon fa-envelope" aria-hidden="true" style="color:var(--primary-cyan);width:16px;"><use href="#fa-envelope"></use></svg> dremora.itservices@gmail.com</a>
-            <p style="display:flex;align-items:flex-start;gap:0.8rem;color:var(--text-muted);font-size:0.9rem;"><svg class="icon fa-location-dot" aria-hidden="true" style="color:var(--primary-cyan);width:16px;margin-top:3px;"><use href="#fa-location-dot"></use></svg> Pune, Maharashtra 411032, India</p>
+          <p class="footer-heading">Contact</p>
+          <div class="footer-links">
+            <a href="tel:+919309795878" class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);">
+              <svg class="icon fa-phone" aria-hidden="true" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"><use href="#fa-phone"></use></svg>
+              +91 9309795878
+            </a>
+            <a href="mailto:dremora.itservices@gmail.com" class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);">
+              <svg class="icon fa-envelope" aria-hidden="true" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"><use href="#fa-envelope"></use></svg>
+              dremora.itservices@gmail.com
+            </a>
+            <p class="footer-link" style="display:flex;align-items:center;gap:var(--space-2);cursor:default;">
+              <svg class="icon fa-location-dot" aria-hidden="true" style="font-size:0.75rem;color:var(--accent-bright);width:12px;"><use href="#fa-location-dot"></use></svg>
+              Pune, Maharashtra 411032, India
+            </p>
           </div>
-          <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;font-size:0.85rem;padding:0.6rem 1.4rem;">Start a Project</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 Dremora IT Consultants &amp; Services. All rights reserved.</span>
-        <div style="display:flex;gap:1.5rem;">
-          <a href="privacy-policy.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Privacy</a>
-          <a href="terms-of-service.html" style="color:rgba(255,255,255,0.3);font-size:0.83rem;">Terms</a>
+
+      <div class="footer-bottom" style="margin-top:var(--space-12);">
+        <p>© 2025 Dremora IT. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="refund-policy.html">Refund Policy</a>
         </div>
       </div>
     </div>

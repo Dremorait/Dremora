@@ -218,7 +218,6 @@
       return;
     }
 
-    injectGlowCSS();
     initBodySparkles();
 
     document.querySelectorAll('[data-sparkles]').forEach(initSection);

@@ -111,8 +111,8 @@
   transform: translateY(28px) translateZ(0);
   will-change: transform, opacity;
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
 
 .reveal.revealed {
@@ -126,8 +126,8 @@
   transform: translateY(24px) translateZ(0);
   will-change: transform, opacity;
   transition:
-    opacity 0.6s var(--ease-out),
-    transform 0.6s var(--ease-out);
+    opacity var(--duration-slower) var(--ease-out),
+    transform var(--duration-slower) var(--ease-out);
   transition-delay: calc(var(--stagger-index, 0) * 80ms);
 }
 
@@ -142,8 +142,8 @@
   transform: translateX(-28px) translateZ(0);
   will-change: transform, opacity;
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
 .reveal-left.revealed {
   opacity: 1;
@@ -156,8 +156,8 @@
   transform: translateX(28px) translateZ(0);
   will-change: transform, opacity;
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
 .reveal-right.revealed {
   opacity: 1;
@@ -170,8 +170,8 @@
   transform: scale(0.95) translateZ(0);
   will-change: transform, opacity;
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
 .reveal-scale.revealed {
   opacity: 1;
@@ -245,7 +245,7 @@
    5. GRADIENT TEXT
    -------------------------------------------------------------------------- */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #3B82F6 50%, #93C5FD 100%);
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-bright) 50%, #93C5FD 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

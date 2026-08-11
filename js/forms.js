@@ -98,7 +98,6 @@ async function handleContactSubmit(e) {
   // Honeypot Trap
   const honeypot = form.querySelector('input[name="website_url"]');
   if (honeypot && honeypot.value) {
-    console.log('Bot detected. Silently rejecting.');
     // Pretend to succeed
     showFormSuccess();
     showToast('Message sent! We\'ll be in touch within 4 hours.', 'success');
@@ -163,7 +162,6 @@ async function handleInternshipSubmit(e) {
   // Honeypot Trap
   const honeypot = form.querySelector('input[name="website_url"]');
   if (honeypot && honeypot.value) {
-    console.log('Bot detected. Silently rejecting.');
     showToast('Application submitted! We\'ll review it shortly.', 'success');
     form.reset();
     return;
