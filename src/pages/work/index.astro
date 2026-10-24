@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import Fact from '../../components/Fact.astro';
+import { clientWork, concepts, serviceBySlug, known, isTodo, hasCaseStudy, workName } from '../../content/site';
+import { pages } from '../../content/pages';
+---
+<Base page={pages.work} crumbs={[{ name: 'Work', path: '/work' }]}>
+  <section class="page-head wrap">
+    <h1>Work for real clients first, then the demos we built ourselves</h1>
+    <p class="lead">Client names appear only with their written permission. Results appear only when the client agrees to publish them.</p>
+  </section>
+
+  <section class="section" aria-labelledby="client-title">
+    <div class="wrap">
+      <p class="label">Client work</p>
+      <h2 id="client-title">Projects for paying clients</h2>
+      <div class="rows">
+        {clientWork.map((w) => (
+          <article class="row row-2" id={w.slug}>
+            <div>
+              <h3>{workName(w)}</h3>
+              {known(w.sector) && <p class="muted"><Fact v={w.sector} /></p>}
+              {known(w.shipped) && <p class="mono muted">Shipped <Fact v={w.shipped} /></p>}
+            </div>
+            <div>
+              {known(w.problem) && <p><strong>Problem:</strong> <Fact v={w.problem} /></p>}
+              <p><strong>What we did:</strong> {w.built}</p>
+              {w.services.length > 0 && (
+                <p class="muted">Service: {w.services.map((s, i) => <>{i > 0 && ', '}<a href={`/services/${s}`}>{serviceBySlug(s).name}</a></>)}</p>
+              )}
+              {hasCaseStudy(w) && <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="concepts" aria-labelledby="concepts-title">
+    <div class="wrap">
+      <p class="label">Concept builds</p>
+      <h2 id="concepts-title">Concept builds</h2>
+      <p>We made these to show the kind of work we can do. Every business name, number and review in them is sample data. None of them is a client project.</p>
+      <div class="rows">
+        {concepts.map((c) => (
+          <article class="row row-2" id={c.slug}>
+            <div>
+              <h3>{c.name}</h3>
+              <p class="label" style="margin: 8px 0 0">Concept build</p>
+            </div>
+            <div>
+              <p>{c.what}</p>
+              <p class="muted">Built with {c.stack}.</p>
+              {isTodo(c.url)
+                ? import.meta.env.DEV && <p><Fact v={c.url} /></p>
+                : <a href={c.url}>Open the demo<span class="visually-hidden"> of {c.name}</span></a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Want to see code or talk through a build?</h2>
+      <p>On a 30 minute call we can walk you through how one of these was put together and what a similar build would take for your business.</p>
+      <div class="actions"><a class="btn btn-primary" href="/contact">Get a fixed quote</a></div>
+    </div>
+  </section>
+</Base>

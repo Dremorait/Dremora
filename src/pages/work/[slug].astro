@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Fact from '../../components/Fact.astro';
+import { site, clientWork, serviceBySlug, hasCaseStudy, workName, known, type ClientWork } from '../../content/site';
+import { pages } from '../../content/pages';
+import { orgId } from '../../content/schema';
+
+export function getStaticPaths() {
+  return clientWork.filter(hasCaseStudy).map((w) => ({ params: { slug: w.slug }, props: { w } }));
+}
+
+const { w } = Astro.props as { w: ClientWork };
+const page = pages[`work-${w.slug}`];
+const name = workName(w);
+const schema = {
+  '@type': 'CreativeWork',
+  name: `${name}: ${w.built}`,
+  about: w.built,
+  ...(known(w.shipped) ? { dateCreated: w.shipped } : {}),
+  creator: { '@id': orgId },
+  url: `${site.url}/work/${w.slug}`,
+  ...(w.screenshots.length ? { image: w.screenshots.map((s) => `${site.url}${s.src}`) } : {}),
+};
+---
+<Base page={page} crumbs={[{ name: 'Work', path: '/work' }, { name, path: `/work/${w.slug}` }]} schema={[schema]}>
+  <section class="page-head wrap">
+    <p class="label">Case study</p>
+    <h1>{name}</h1>
+    <dl class="facts">
+      {known(w.sector) && <><dt>Sector</dt><dd><Fact v={w.sector} /></dd></>}
+      <dt>Shipped</dt><dd class="mono"><Fact v={w.shipped} /></dd>
+      <dt>Stack</dt><dd><Fact v={w.stack} /></dd>
+      {w.services.length > 0 && <><dt>Service</dt><dd>{w.services.map((s, i) => <>{i > 0 && ', '}<a href={`/services/${s}`}>{serviceBySlug(s).name}</a></>)}</dd></>}
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>The problem</h2>
+      <p><Fact v={w.problem} /></p>
+      <h2>What we built</h2>
+      <p>{w.built}</p>
+
+      {w.screenshots.map((s) => (
+        <figure class="frame" style="margin: 32px 0">
+          <img src={s.src} alt={s.alt} loading="lazy" />
+        </figure>
+      ))}
+
+      {w.results.length > 0 && (
+        <>
+          <h2>Results the client agreed to publish</h2>
+          <ul>{w.results.map((r) => <li>{r}</li>)}</ul>
+        </>
+      )}
+
+      {w.quote && (
+        <blockquote>
+          <p>{w.quote.text}</p>
+          <footer>{w.quote.name}, {w.quote.role}</footer>
+        </blockquote>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Need something similar?</h2>
+      <div class="actions"><a class="btn btn-primary" href="/contact">Get a fixed quote</a><a href="/work">Back to all work</a></div>
+    </div>
+  </section>
+</Base>

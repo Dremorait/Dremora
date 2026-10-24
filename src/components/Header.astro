@@ -1,0 +1,57 @@
+---
+import Monogram from './Monogram.astro';
+
+const path = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
+const isHome = path === '/';
+const nav = [
+  { href: '/services', label: 'Services' },
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+const current = (href: string) => (path === href || path.startsWith(href + '/') ? 'page' : undefined);
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Dremora IT, home">
+      <Monogram />
+      <span>Dremora IT</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        {nav.map((n) => <li><a href={n.href} aria-current={current(n.href)}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
+    </button>
+
+    {/* On the home page the hero carries the one primary button, so the header uses a plain link. */}
+    {isHome
+      ? <a class="header-cta header-link-quote" href="/contact">Get a quote</a>
+      : <a class="header-cta btn btn-primary" href="/contact">Get a quote</a>}
+
+    <button class="icon-btn menu-toggle" type="button" popovertarget="mobile-menu" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" popover aria-label="Menu">
+    <div class="mobile-menu-top">
+      <a class="brand" href="/" aria-label="Dremora IT, home"><Monogram /><span>Dremora IT</span></a>
+      <button class="icon-btn" type="button" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile">
+      <ul>
+        <li><a href="/">Home</a></li>
+        {nav.map((n) => <li><a href={n.href} aria-current={current(n.href)}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="btn btn-primary" href="/contact">Get a quote</a>
+  </div>
+</header>

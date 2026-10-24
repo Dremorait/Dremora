@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import ganesha from '../assets/ganesha.jpg';
+import { site, services, verifiedSocials } from '../content/site';
+
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <nav aria-labelledby="f-site">
+        <h2 id="f-site">Site</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-services">
+        <h2 id="f-services">Services</h2>
+        <ul>
+          {services.map((s) => <li><a href={`/services/${s.slug}`}>{s.name}</a></li>)}
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-intern">
+        <h2 id="f-intern">Students</h2>
+        <ul>
+          <li><a href="/internship">Internship</a></li>
+          <li><a href="/internship#verify">Verify a certificate</a></li>
+          <li><a href="/internship/guidelines">Course guidelines</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-legal">
+        <h2 id="f-legal">Legal</h2>
+        <ul>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms and Conditions</a></li>
+          <li><a href="/refund-policy">Refund Policy</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <address>
+          <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a><br />
+          <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          <a href={site.whatsapp}>WhatsApp</a><br />
+          <span>{site.address.display}</span>
+        </address>
+        {verifiedSocials.length > 0 && (
+          <ul aria-label="Social profiles">
+            {verifiedSocials.map((s) => <li><a href={s.url} rel="me">{s.name}</a></li>)}
+          </ul>
+        )}
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <p class="blessing" lang="sa">
+        <Image src={ganesha} alt="Lord Ganesha" width={96} height={96} format="webp" loading="lazy" />
+        <span>{site.blessing}</span>
+      </p>
+      <p>&copy; {year} {site.legalName}. Pune, India. Est. {site.founded}.</p>
+    </div>
+  </div>
+</footer>

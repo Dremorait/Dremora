@@ -2,10 +2,16 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "static-site",
+      "name": "astro-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "5500", "."],
-      "port": 5500
+      "runtimeArgs": ["astro", "preview", "--port", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "astro-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "dev", "--port", "4322"],
+      "port": 4322
     }
   ]
 }

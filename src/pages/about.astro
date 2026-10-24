@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import Founder from '../components/Founder.astro';
+import { site, story, principles, internship } from '../content/site';
+import { showFounder } from '../content/founder-photo';
+import { pages } from '../content/pages';
+---
+<Base page={pages.about} crumbs={[{ name: 'About', path: '/about' }]}>
+  <section class="page-head wrap">
+    <h1>A small studio in Pune where the founder writes the code</h1>
+    <p class="lead">{site.legalName}, trading as {site.name}. Established in {site.founded}.</p>
+    <dl class="facts">
+      <dt>Based in</dt><dd>{site.address.display}</dd>
+      <dt>Founded</dt><dd class="mono">{site.founded}</dd>
+      <dt>We work in</dt><dd>{site.languages}</dd>
+      <dt>We build</dt><dd><a href="/services/websites">Websites</a>, <a href="/services/web-apps">web applications</a>, and <a href="/services/ai-automation">AI and WhatsApp automation</a></dd>
+    </dl>
+  </section>
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="wrap grid">
+      <div class="span-4"><h2 id="why-title">Why the studio exists</h2></div>
+      <div class="span-8">
+        {showFounder() ? <Founder headingId="founder-name" headingLevel={3} /> : story.map((s) => <p>{s}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap grid">
+      <div class="span-4"><h2 id="how-title">How we work</h2></div>
+      <div class="span-8">
+        <div class="rows">
+          {principles.map((p) => (
+            <div class="row row-2">
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="intern-title">
+    <div class="wrap grid">
+      <div class="span-4"><h2 id="intern-title">Internship program</h2></div>
+      <div class="span-8">
+        <p>We train {internship.audience} on real project work. Interns use Git, take part in code reviews and ship features under a mentor. The program runs {internship.duration}.</p>
+        <p>Every certificate we issue can be checked on this site by its ID.</p>
+        <p><a href="/internship">Program details and certificate check</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Have a project in mind?</h2>
+      <p>The first call is free and takes 30 minutes. You will know by the end of it whether we are the right fit.</p>
+      <div class="actions"><a class="btn btn-primary" href="/contact">Get a fixed quote</a></div>
+    </div>
+  </section>
+</Base>

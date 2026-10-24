@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Fact from '../components/Fact.astro';
+import { site, known } from '../content/site';
+import { pages } from '../content/pages';
+---
+<Base page={pages.contact} crumbs={[{ name: 'Contact', path: '/contact' }]}>
+  <section class="page-head wrap">
+    <h1>Tell us what you need and get a written fixed quote</h1>
+    <p class="lead">The first call is free and takes 30 minutes. After it you get the scope, price and timeline in writing.</p>
+    {known(site.responseTime) && <p class="mono"><Fact v={site.responseTime} /></p>}
+  </section>
+
+  <section class="section" aria-labelledby="form-title">
+    <div class="wrap grid">
+      <div class="span-8">
+        <h2 id="form-title">Send an enquiry</h2>
+        <ContactForm />
+      </div>
+      <aside class="span-4" aria-labelledby="direct-title">
+        <h2 id="direct-title">Or reach us directly</h2>
+        <dl class="facts" style="grid-template-columns: 1fr">
+          <dt>WhatsApp</dt>
+          <dd><a href={site.whatsapp}>Message us on WhatsApp</a></dd>
+          <dt>Phone</dt>
+          <dd><a href={`tel:${site.phone.e164}`}>{site.phone.display}</a></dd>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          <dt>Address</dt>
+          <dd>
+            {site.legalName}<br />
+            {site.address.display}<br />
+            <a href={site.address.maps}>Open in Google Maps</a>
+          </dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+</Base>

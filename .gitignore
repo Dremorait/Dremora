@@ -1,21 +1,18 @@
-# Byte-compiled / optimized / DLL files
+# Dependencies and build output
+node_modules/
+dist/
+.astro/
+.vercel/
+
+# Secrets: never commit. Set them in Vercel project settings.
+.env
+.env.*
+!.env.example
+
+# Python leftovers
 __pycache__/
 *.py[cod]
-*$py.class
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Database files
-*.sqlite3
-*.db
-
-# OS generated files
+# OS files
 .DS_Store
 Thumbs.db

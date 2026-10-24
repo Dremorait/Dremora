@@ -1,0 +1,93 @@
+---
+// Have a lawyer in India review before publishing.
+import Legal from '../layouts/Legal.astro';
+import { site } from '../content/site';
+import { pages } from '../content/pages';
+
+const sections: [string, string][] = [
+  ['acceptance', '1. Accepting these terms'],
+  ['about', '2. About us'],
+  ['use', '3. Using this site'],
+  ['information', '4. Information on this site'],
+  ['projects', '5. Projects'],
+  ['payments', '6. Payments and refunds'],
+  ['concepts', '7. Concept builds'],
+  ['ip', '8. Intellectual property'],
+  ['certificates', '9. Internship certificates'],
+  ['links', '10. Links to other sites'],
+  ['liability', '11. Liability and indemnity'],
+  ['law', '12. Governing law'],
+  ['changes', '13. Changes to these terms'],
+  ['contact', '14. Questions'],
+];
+---
+<Legal
+  page={pages.terms}
+  name="Terms and Conditions"
+  sections={sections}
+  summary={[
+    'By using this site you agree to these terms.',
+    'Prices on the site are starting points. A quote binds only once a written proposal or agreement is signed.',
+    'Your signed project agreement governs scope, payment, timelines and code ownership, and overrides these terms.',
+    'Concept builds use made-up businesses and sample data. They are not real companies.',
+    'Do not misuse the contact form or the certificate check. Forged certificates will be reported.',
+    'Indian law applies, and courts in Pune, Maharashtra decide any dispute.',
+  ]}
+>
+  <h2 id="acceptance">1. Accepting these terms</h2>
+  <p>These terms apply to everyone who uses {site.url.replace('https://', '')}. By using the site, you agree to them. If you do not agree, please do not use the site.</p>
+
+  <h2 id="about">2. About us</h2>
+  <p>This site is run by {site.legalName}, trading as {site.name}, {site.address.display}. Email <a href={`mailto:${site.email}`}>{site.email}</a>, phone <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>.</p>
+
+  <h2 id="use">3. Using this site</h2>
+  <p>You may read the site, contact us, and use the certificate check to confirm a certificate. You must not:</p>
+  <ul>
+    <li>copy the site's content in bulk, or scrape it with automated tools;</li>
+    <li>attack the site, try to get into systems or data you are not allowed to, or put malware or harmful code on it;</li>
+    <li>use the contact form to send spam, advertising, or anything unlawful or abusive;</li>
+    <li>use the certificate check to collect personal data, run it automatically, or guess IDs in bulk;</li>
+    <li>use the site for anything that breaks Indian law or someone else's rights.</li>
+  </ul>
+  <p>We may block access for anyone who breaks these rules.</p>
+
+  <h2 id="information">4. Information on this site</h2>
+  <p>The content here is general information about what we do. Prices are starting points and timelines are typical ranges. Neither is an offer. A price, scope and timeline bind us only once a written proposal or project agreement is signed by both sides.</p>
+
+  <h2 id="projects">5. Projects</h2>
+  <p>Each project is governed by its own signed agreement, which sets the scope, deliverables, payment schedule, timelines, ownership of code and handover. If that agreement differs from these terms, the agreement wins.</p>
+  <p>Unless an agreement says otherwise: 50% of the fee is due before work starts and the rest on delivery or by milestone; invoices are payable within 7 business days; late payments may attract interest of 2% a month on the amount outstanding; and prices are in Indian Rupees. Once the project is fully paid, you own the code, designs and assets made for it, and we keep ownership of our own pre-existing tools and libraries. Either side may end a project agreement with 14 days' written notice, and work completed up to that date is paid for and handed over.</p>
+
+  <h2 id="payments">6. Payments and refunds</h2>
+  <p>Refunds are covered by our <a href="/refund-policy">Refund Policy</a>.</p>
+
+  <h2 id="concepts">7. Concept builds</h2>
+  <p>The concept builds on our <a href="/work#concepts">Work page</a> are demos we made ourselves. Every business name, person, number, review and rating in them is sample data. They are not real businesses, and you cannot buy anything or book anything through them.</p>
+
+  <h2 id="ip">8. Intellectual property</h2>
+  <p>The text, design, logo and code of this site belong to {site.name}. You may link to any page, but you may not copy the content or logo without our written permission. Client names, logos and work appear on this site only with that client's permission, and remain theirs.</p>
+
+  <h2 id="certificates">9. Internship certificates</h2>
+  <p>The certificate check confirms whether we issued a certificate with a given Internship ID, and shows its details. A certificate that does not appear in the check was not issued by us. Using, making or changing a certificate to claim an internship you did not complete is forgery, and we will report it to the institution or employer concerned and, where appropriate, to the police.</p>
+
+  <h2 id="links">10. Links to other sites</h2>
+  <p>We link to other sites, such as WhatsApp and our social profiles. We do not control them and are not responsible for their content or how they handle your data.</p>
+
+  <h2 id="liability">11. Liability and indemnity</h2>
+  <p>We work hard to keep this site correct and available, but we provide it "as is" and cannot promise it will always be error-free or online. To the extent the law allows:</p>
+  <ul>
+    <li>we are not liable for indirect or consequential loss, such as lost profit or lost data, from using this site;</li>
+    <li>we are not liable for delays caused by things outside our control, such as hosting, domain, payment or other third-party outages;</li>
+    <li>for project work, our total liability is limited to the fees you paid us for that project.</li>
+  </ul>
+  <p>Nothing in these terms limits liability that cannot be limited under Indian law. If you break these terms and that causes us a loss or a claim from someone else, you agree to cover that loss.</p>
+
+  <h2 id="law">12. Governing law</h2>
+  <p>These terms are governed by the laws of India. The courts in Pune, Maharashtra have exclusive jurisdiction over any dispute about them.</p>
+
+  <h2 id="changes">13. Changes to these terms</h2>
+  <p>We may change these terms. The new version applies from the effective date shown at the top of this page. Signed project agreements are not changed by updates to these terms.</p>
+
+  <h2 id="contact">14. Questions</h2>
+  <p>Write to <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>.</p>
+</Legal>

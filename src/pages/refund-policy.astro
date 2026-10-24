@@ -1,0 +1,102 @@
+---
+// Wording kept from the previous Refund Policy (May 2026), with dashes removed and small plain-language edits.
+import Legal from '../layouts/Legal.astro';
+import { site } from '../content/site';
+import { pages } from '../content/pages';
+
+const sections: [string, string][] = [
+  ['introduction', '1. Introduction'],
+  ['development', '2. Software and web development services'],
+  ['design', '3. Design and branding services'],
+  ['internship', '4. Internship program fees'],
+  ['eligible', '5. Eligible refund scenarios'],
+  ['non-refundable', '6. Non-refundable items'],
+  ['timeline', '7. Refund processing timeline'],
+  ['disputes', '8. Dispute resolution'],
+  ['changes', '9. Changes to this policy'],
+];
+---
+<Legal
+  page={pages.refund}
+  name="Refund Policy"
+  sections={sections}
+  summary={[
+    'Cancel within 48 hours of paying and before work starts: full refund.',
+    'After work starts, the refund depends on how much of the project is done. Past 50%, there is no refund.',
+    'Domain, hosting and third-party costs paid for you are never refundable.',
+    'If we miss agreed deliverables or cannot finish for our own reasons, you can get a full or partial refund.',
+    `Ask for a refund in writing at ${site.email}. Approved refunds are processed in 7 to 14 business days.`,
+  ]}
+>
+  <h2 id="introduction">1. Introduction</h2>
+  <p>At {site.legalName}, we are committed to delivering high-quality work and maintaining client trust. This Refund Policy explains when refunds may be requested and processed for our software development services, design services and internship programs.</p>
+  <p>Please read this policy carefully before engaging our services. By making a payment to {site.name}, you acknowledge and agree to the terms described here.</p>
+  <p>All refund requests must be sent in writing by email to <a href={`mailto:${site.email}`}>{site.email}</a> with the subject line: "Refund Request: [Your Name or Company]".</p>
+
+  <h2 id="development">2. Software and web development services</h2>
+  <table>
+    <thead><tr><th scope="col">When you cancel</th><th scope="col">Refund</th></tr></thead>
+    <tbody>
+      <tr><td>Before the project starts (within 48 hours of payment)</td><td class="mono">100%</td></tr>
+      <tr><td>After the project starts, before 25% completion</td><td class="mono">50%</td></tr>
+      <tr><td>Between 25% and 50% completion</td><td class="mono">25%</td></tr>
+      <tr><td>After 50% or more completion</td><td class="mono">No refund</td></tr>
+      <tr><td>After delivery and client sign-off</td><td class="mono">No refund</td></tr>
+    </tbody>
+  </table>
+  <p>Project completion is measured by our internal milestone tracking. We give you written evidence of it on request.</p>
+
+  <h2 id="design">3. Design and branding services</h2>
+  <ul>
+    <li>If no design concepts have been shared: 75% refund of the amount paid.</li>
+    <li>If initial design concepts have been delivered: no refund, as creative work and time cannot be recovered.</li>
+    <li>Revisions are included as per the agreed package. Extra revision requests beyond scope are billed separately and are non-refundable once approved.</li>
+  </ul>
+
+  <h2 id="internship">4. Internship program fees</h2>
+  <ul>
+    <li>Refund requests made before the program start date: 100% refund (minus any processing fees).</li>
+    <li>Refund requests made within the first 3 days of the program: 50% refund.</li>
+    <li>Refund requests made after the 3rd program day: no refund, as access to resources, mentorship and project systems has been granted.</li>
+  </ul>
+  <p>Termination from the program for breaking the <a href="/internship/guidelines#conduct">code of conduct</a> does not qualify for any refund.</p>
+
+  <h2 id="eligible">5. Eligible refund scenarios</h2>
+  <p>Regardless of completion status, you may be eligible for a full or partial refund if:</p>
+  <ul>
+    <li>{site.name} fails to deliver agreed deliverables within the specified deadline (beyond a 30 day grace period, unless extended by mutual agreement).</li>
+    <li>The delivered work fundamentally fails to meet the specifications documented in the project brief or contract.</li>
+    <li>{site.name} is unable to complete the project for internal reasons beyond the client's control.</li>
+  </ul>
+  <p>In such cases, we will work in good faith to resolve the issue, first through revision and, if that is not possible, through a proportionate refund.</p>
+
+  <h2 id="non-refundable">6. Non-refundable items</h2>
+  <p>The following are non-refundable in all cases:</p>
+  <ul>
+    <li>Domain registration fees, hosting fees, or third-party API or licence costs paid on the client's behalf.</li>
+    <li>Rush or expedited delivery surcharges.</li>
+    <li>Consultation fees for discovery sessions or technical assessments.</li>
+    <li>Payments for work already delivered and approved by the client.</li>
+    <li>Bank transfer fees, payment gateway charges or currency conversion fees.</li>
+  </ul>
+
+  <h2 id="timeline">7. Refund processing timeline</h2>
+  <p>Once a refund request is approved:</p>
+  <ul>
+    <li>Refunds are usually processed within 7 to 14 business days.</li>
+    <li>The refund is issued to the original payment method.</li>
+    <li>Bank processing times vary (usually 3 to 7 more business days, depending on your bank).</li>
+    <li>You receive an email confirmation once the refund has been started.</li>
+  </ul>
+
+  <h2 id="disputes">8. Dispute resolution</h2>
+  <p>If you are not satisfied with a refund decision:</p>
+  <ul>
+    <li>Contact us at <a href={`mailto:${site.email}`}>{site.email}</a> with full details of your concern.</li>
+    <li>We will respond within 48 business hours and aim to resolve all disputes amicably.</li>
+    <li>If an agreement cannot be reached, disputes are resolved under the jurisdiction of the courts in Pune, Maharashtra, India, as set out in our <a href="/terms">Terms and Conditions</a>.</li>
+  </ul>
+
+  <h2 id="changes">9. Changes to this policy</h2>
+  <p>{site.name} may update this Refund Policy at any time. Changes are posted on this page with a new "Last updated" date. Please review this policy before making any payment.</p>
+</Legal>

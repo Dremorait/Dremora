@@ -1,0 +1,19 @@
+---
+// Founder block. Callers render it only when showFounder() is true.
+import { Image } from 'astro:assets';
+import Fact from './Fact.astro';
+import { founder, story, isTodo } from '../content/site';
+import { founderPhoto as photo } from '../content/founder-photo';
+const { headingId = 'founder-title', headingLevel = 2 } = Astro.props as { headingId?: string; headingLevel?: 2 | 3 };
+const H = `h${headingLevel}`;
+---
+<div class="founder">
+  {photo
+    ? <Image src={photo} alt={`${founder.name}, ${founder.role} of Dremora IT`} width={400} height={400} format="webp" />
+    : <p class="todo"><Fact v={founder.photo} /></p>}
+  <div>
+    <H id={headingId}><Fact v={founder.name} />, <Fact v={founder.role} /></H>
+    {story.map((s) => <p>{s}</p>)}
+    {isTodo(founder.linkedin) ? <p><Fact v={founder.linkedin} /></p> : <a href={founder.linkedin}>LinkedIn profile</a>}
+  </div>
+</div>

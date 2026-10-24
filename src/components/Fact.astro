@@ -1,0 +1,7 @@
+---
+// Renders a fact. A {{TODO}} shows as a yellow marker in dev and never in production
+// (callers wrap TODO-dependent parts in known(), so production never reaches here with one).
+import { isTodo } from '../content/site';
+const { v } = Astro.props as { v: string };
+---
+{isTodo(v) ? <span class="todo">{v}</span> : v}

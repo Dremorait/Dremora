@@ -1,0 +1,102 @@
+---
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-ext-400.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-sans/latin-ext-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-sans-devanagari/devanagari-400.css';
+import '@fontsource/ibm-plex-sans-devanagari/devanagari-600.css';
+import '../styles/global.css';
+import bodyFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import headingFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, analyticsEnabled } from '../content/site';
+import type { PageMeta } from '../content/pages';
+
+type Crumb = { name: string; path: string };
+interface Props {
+  page: PageMeta;
+  crumbs?: Crumb[]; // trail after Home, last item is the current page
+  schema?: Record<string, unknown>[];
+}
+
+const { page, crumbs = [], schema = [] } = Astro.props;
+const canonical = site.url + (page.path === '/' ? '/' : page.path);
+const ogImage = `${site.url}/og/${page.og}.png`;
+const indexable = page.index !== false;
+
+const graph = [...schema];
+if (crumbs.length) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: site.url + (c.path === '/' ? '/' : c.path),
+    })),
+  });
+}
+const jsonld = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c') : null;
+---
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title}</title>
+    <meta name="description" content={page.description} />
+    {indexable ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+
+    {/* Body and heading weights load before first paint, so the hero does not shift when fonts swap in. */}
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+    <script is:inline src="/theme.js"></script>
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A1530" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content={page.path === '/' ? 'website' : 'article'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={page.ogTitle} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={page.title} />
+    <meta name="twitter:description" content={page.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonld && <script is:inline type="application/ld+json" set:html={jsonld} />}
+    <slot name="head" />
+    {analyticsEnabled && import.meta.env.PROD && <script is:inline defer src="/_vercel/insights/script.js"></script>}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      {crumbs.length > 0 && (
+        <nav class="crumbs wrap" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            {crumbs.map((c, i) => (
+              <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.path}>{c.name}</a>}</li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Fact from '../components/Fact.astro';
+import Founder from '../components/Founder.astro';
+import { showFounder } from '../content/founder-photo';
+import { site, services, clientWork, concepts, process, known, hasCaseStudy, workName } from '../content/site';
+import { pages } from '../content/pages';
+import { organization, website } from '../content/schema';
+
+const featured = clientWork.slice(0, 1);
+// 'Admin panels and CRMs' -> 'admin panels and CRMs'; leaves 'AI chatbots' and 'WhatsApp automation' alone.
+const sentenceCase = (t: string) => (/^[A-Z][a-z]+\b/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
+// 'EDURO, coaching institute platform' -> 'Coaching institute platform'
+const shortConcept = (n: string) => { const t = n.split(', ')[1] ?? n; return t[0].toUpperCase() + t.slice(1); };
+---
+<Base page={pages.home} schema={[organization(), website()]}>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <h1 id="hero-title">Websites and WhatsApp automation for Pune businesses, built and supported by the founder.</h1>
+    <p class="lead">Websites go live in 2 to 4 weeks. Fixed price, agreed in writing before we start.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
+      <a class="arrow-link" href={site.whatsapp}>Message us on WhatsApp</a>
+    </div>
+    <p class="label hero-meta">Pune, India. Est. {site.founded}.</p>
+  </section>
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="wrap">
+      <p class="label">Real work</p>
+      <h2 id="work-title">Built for real clients</h2>
+      <div class="rows">
+        {featured.map((w) => (
+          <article class="row row-2">
+            <div>
+              <h3>{workName(w)}</h3>
+              <p class="muted">{w.permission ? w.sector : 'Client name withheld until they agree to be named.'}</p>
+            </div>
+            <div>
+              {known(w.problem) && <p><strong>Problem:</strong> <Fact v={w.problem} /></p>}
+              <p><strong>What we built:</strong> {w.built}</p>
+              {hasCaseStudy(w)
+                ? <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a>
+                : <a class="arrow-link" href="/work">See all client work</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="services-title">
+    <div class="wrap">
+      <p class="label">What we build</p>
+      <h2 id="services-title">Three services, each with a fixed price and timeline</h2>
+      <div class="rows">
+        {services.map((s) => (
+          <article class="row">
+            <h3><a href={`/services/${s.slug}`}>{s.name}</a></h3>
+            <div>
+              <p><strong>For:</strong> {s.forWhom}</p>
+              <p><strong>Includes:</strong> {s.kinds.map((k) => sentenceCase(k.name)).join(', ')}.</p>
+            </div>
+            <dl>
+              <dt>Timeline</dt><dd class="mono">{s.timeline}</dd>
+              {known(s.price) && <><dt>Starting at</dt><dd class="price"><Fact v={s.price} /></dd></>}
+              <dt class="visually-hidden">Details</dt>
+              <dd><a href={`/services/${s.slug}`}>What is included<span class="visually-hidden"> in {s.name.toLowerCase()}</span></a></dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="process-title">
+    <div class="wrap">
+      <p class="label">How a project runs</p>
+      <h2 id="process-title">A call, a written quote, then a demo every week</h2>
+      <ol class="steps">
+        {process.map((p) => (
+          <li>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {showFounder() && (
+    <section class="section" aria-labelledby="founder-title">
+      <div class="wrap">
+        <p class="label">Who you will work with</p>
+        <Founder />
+      </div>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="concepts-title">
+    <div class="wrap">
+      <p class="label">Concept builds</p>
+      <h2 id="concepts-title">Sample sites we built to show what is possible</h2>
+      <p class="muted">These are demos with made-up businesses and sample data, not client projects.</p>
+      <ul class="concept-list">
+        {concepts.map((c) => <li><a href={`/work#${c.slug}`}>{shortConcept(c.name)}</a></li>)}
+      </ul>
+      <a class="arrow-link" href="/work#concepts">See all concept builds</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contact-title">
+    <div class="wrap grid">
+      <div class="span-4">
+        <p class="label">Contact</p>
+        <h2 id="contact-title">Tell us what you need</h2>
+        <p>We reply with questions or a time for a call, then send a written fixed quote.</p>
+        <p>
+          Prefer to talk?<br />
+          <a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a><br />
+          <a href={site.whatsapp}>Message us on WhatsApp</a>
+        </p>
+      </div>
+      <div class="span-8">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,232 @@
+---
+import Base from '../../layouts/Base.astro';
+import Fact from '../../components/Fact.astro';
+import { site, internship, known } from '../../content/site';
+import { pages } from '../../content/pages';
+---
+<Base page={pages.internship} crumbs={[{ name: 'Internship', path: '/internship' }]}>
+  <section class="page-head wrap">
+    <h1>An internship where students ship real features, and certificates anyone can check</h1>
+    <p class="lead">For {internship.audience}. You work on live project code with a mentor, and finish with a certificate that employers can verify on this page.</p>
+    <div class="actions">
+      <a class="btn btn-secondary" href="#verify">Check a certificate</a>
+      <a href="/internship/guidelines">Read the course guidelines</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="program-title">
+    <div class="wrap grid">
+      <div class="span-4"><h2 id="program-title">The program</h2></div>
+      <div class="span-8">
+        <dl class="facts">
+          <dt>Who</dt><dd>{internship.audience[0].toUpperCase() + internship.audience.slice(1)}</dd>
+          <dt>Length</dt><dd>{internship.duration}</dd>
+          <dt>Mode</dt><dd>{internship.mode}</dd>
+          <dt>Time</dt><dd>{internship.hours}</dd>
+          <dt>Stipend</dt><dd>{internship.stipend}</dd>
+          <dt>Certificate</dt><dd>{internship.certificate}</dd>
+          {known(internship.fee) && <><dt>Fee</dt><dd><Fact v={internship.fee} /></dd></>}
+        </dl>
+        <h3 style="margin-top: 32px">How it runs</h3>
+        <ol>
+          <li>Week 1: onboarding on our tools, workflow and project code.</li>
+          <li>Weeks 2 to 8: features and fixes on assigned projects, with weekly reviews and code walkthroughs.</li>
+          <li>Final 2 weeks: a capstone module, peer reviews and a presentation of your work.</li>
+        </ol>
+        <h3>To ask about the next batch</h3>
+        <p>
+          <a href={site.whatsapp}>Message us on WhatsApp</a> or email <a href={`mailto:${site.email}`}>{site.email}</a> with your name, college, branch and year. Selection includes a short technical task or portfolio review.
+        </p>
+        {known(internship.under18) && <p><Fact v={internship.under18} /></p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verify" aria-labelledby="verify-title">
+    <div class="wrap grid">
+      <div class="span-4">
+        <h2 id="verify-title">Check a certificate</h2>
+        <p>Enter the Internship ID printed on the certificate, for example DRM-INT-2026-001. Scanning the QR code on a certificate opens this check directly.</p>
+      </div>
+      <div class="span-8">
+        <form class="form" id="verify-form" action="/internship" method="get" data-verify-form>
+          <div class="field">
+            <label for="vf-id">Internship ID</label>
+            <input id="vf-id" name="verify" type="text" required minlength="5" maxlength="50" pattern="[A-Za-z0-9\-]+" autocomplete="off" spellcheck="false" aria-describedby="vf-id-err" />
+            <p class="error" id="vf-id-err" hidden></p>
+          </div>
+          <div class="actions" style="margin-top: 0"><button class="btn btn-primary" type="submit">Check certificate</button></div>
+        </form>
+        <div id="verify-result" aria-live="polite" style="margin-top: 24px"></div>
+        <noscript><p class="notice">The certificate check needs JavaScript. You can also email {site.email} with the certificate ID.</p></noscript>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="dashboard" aria-labelledby="login-title">
+    <div class="wrap grid">
+      <div class="span-4">
+        <h2 id="login-title">Interns: open your dashboard</h2>
+        <p>Use your Internship ID and your full name as registered with us.</p>
+      </div>
+      <div class="span-8">
+        <form class="form" id="login-form" data-login-form>
+          <div class="notice error" id="lf-error" role="alert" tabindex="-1" hidden></div>
+          <div class="form-2">
+            <div class="field">
+              <label for="lf-id">Internship ID</label>
+              <input id="lf-id" name="id" type="text" required maxlength="50" autocomplete="username" spellcheck="false" />
+            </div>
+            <div class="field">
+              <label for="lf-name">Full name</label>
+              <input id="lf-name" name="name" type="text" required maxlength="150" autocomplete="name" />
+            </div>
+          </div>
+          <div class="actions" style="margin-top: 0"><button class="btn btn-secondary" type="submit">Open dashboard</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { verifyMessage } from '../../../api/_lib/verify-rules.js';
+
+  type Record = {
+    intern_id: string;
+    full_name: string;
+    domain: string | null;
+    batch: string | null;
+    status: string | null;
+    start_date: string | null;
+    end_date: string | null;
+    certificate_number: string | null;
+  };
+
+  const fmt = (d: string | null) =>
+    d ? new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : null;
+
+  const vForm = document.querySelector<HTMLFormElement>('[data-verify-form]');
+  const result = document.getElementById('verify-result')!;
+  const vInput = document.getElementById('vf-id') as HTMLInputElement;
+  const vErr = document.getElementById('vf-id-err')!;
+
+  function render(r: Record) {
+    const rows: [string, string | null][] = [
+      ['Name', r.full_name],
+      ['Internship ID', r.intern_id],
+      ['Certificate number', r.certificate_number],
+      ['Domain', r.domain],
+      ['Batch', r.batch],
+      ['From', fmt(r.start_date)],
+      ['To', fmt(r.end_date)],
+      ['Status', r.status],
+    ];
+    result.innerHTML = '';
+    const box = document.createElement('div');
+    box.className = 'notice';
+    const h = document.createElement('h3');
+    h.textContent = 'Record found: issued by Dremora IT';
+    const dl = document.createElement('dl');
+    dl.className = 'facts';
+    for (const [k, v] of rows) {
+      if (!v) continue;
+      const dt = document.createElement('dt');
+      dt.textContent = k;
+      const dd = document.createElement('dd');
+      dd.textContent = v;
+      dl.append(dt, dd);
+    }
+    box.append(h, dl);
+    result.append(box);
+  }
+
+  function fail(text: string) {
+    result.innerHTML = '';
+    const box = document.createElement('div');
+    box.className = 'notice error';
+    const p = document.createElement('p');
+    p.textContent = text;
+    box.append(p);
+    result.append(box);
+  }
+
+  async function check(id: string) {
+    const msg = verifyMessage(id);
+    if (msg) {
+      vInput.setAttribute('aria-invalid', 'true');
+      vErr.textContent = msg;
+      vErr.hidden = false;
+      vInput.focus();
+      return;
+    }
+    vInput.removeAttribute('aria-invalid');
+    vErr.hidden = true;
+    result.textContent = 'Checking...';
+    try {
+      const res = await fetch(`/api/verify?id=${encodeURIComponent(id.trim())}`, { headers: { Accept: 'application/json' } });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok && body.ok) render(body.record);
+      // Only the API's own "not_found" means "not issued". Any other 404 is a server problem,
+      // and must never tell a visitor that a genuine certificate is fake.
+      else if (res.status === 404 && body.error === 'not_found') fail('No certificate with this ID was issued by Dremora IT. Check the ID for typing mistakes. If it still fails, the certificate is not genuine.');
+      else if (res.status === 429) fail('Too many checks from this connection. Please wait a few minutes.');
+      else fail('The check could not run right now. Please try again later.');
+    } catch {
+      fail('The check could not run. Check your internet connection and try again.');
+    }
+  }
+
+  if (vForm) {
+    vForm.noValidate = true;
+    vForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = vInput.value.trim();
+      history.replaceState(null, '', `/internship?verify=${encodeURIComponent(id)}#verify`);
+      check(id);
+    });
+    const fromUrl = new URLSearchParams(location.search).get('verify');
+    if (fromUrl) {
+      vInput.value = fromUrl;
+      document.getElementById('verify')!.scrollIntoView();
+      check(fromUrl);
+    }
+  }
+
+  const lForm = document.querySelector<HTMLFormElement>('[data-login-form]');
+  if (lForm) {
+    const err = document.getElementById('lf-error')!;
+    lForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = (lForm.elements.namedItem('id') as HTMLInputElement).value.trim();
+      const name = (lForm.elements.namedItem('name') as HTMLInputElement).value.trim();
+      const button = lForm.querySelector('button')!;
+      err.hidden = true;
+      button.disabled = true;
+      try {
+        const res = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ id, name }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.ok && body.ok) {
+          // The existing dashboard reads the ID from sessionStorage.
+          sessionStorage.setItem('internId', body.intern_id);
+          location.assign('/intern-dashboard');
+          return;
+        }
+        err.textContent = res.status === 429
+          ? 'Too many attempts. Please wait a few minutes.'
+          : body.error === 'not_found'
+            ? 'The ID and name do not match our records. Use your name exactly as registered.'
+            : body.message || 'Sign-in is not working right now. Please try again later.';
+      } catch {
+        err.textContent = 'Could not reach the server. Check your connection and try again.';
+      }
+      err.hidden = false;
+      err.focus();
+      button.disabled = false;
+    });
+  }
+</script>
