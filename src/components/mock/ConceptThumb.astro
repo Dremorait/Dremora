@@ -13,7 +13,7 @@ const name = concepts.find((c) => c.slug === kind)?.name.split(',')[0] ?? 'conce
 <div class:list={['thumb', `thumb-${kind}`, { 'thumb-shot': shot }]} aria-hidden={shot ? undefined : 'true'}>
   <div class="thumb-frame">
     <div class="thumb-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-    {shot ? <Image class="thumb-img" src={shot} alt={`Screenshot of the ${name} concept demo, with sample content`} widths={[480, 960]} sizes="(min-width: 900px) 480px, 100vw" format="webp" loading="lazy" /> : (
+    {shot ? <Image class="thumb-img" src={shot} alt={`Screenshot of the ${name} concept demo, with sample content`} widths={[360, 560, 840, 1024]} sizes="(min-width: 1240px) 340px, (min-width: 900px) calc(33vw - 80px), (min-width: 600px) calc(50vw - 84px), calc(100vw - 84px)" format="webp" loading="lazy" /> : (
     <div class="thumb-page">
       {kind === 'eduro' && (<>
         <div class="t-row"><span class="t-side"></span><span class="t-stack"><span class="t-chart"><b style="height:40%"></b><b style="height:70%"></b><b style="height:55%"></b><b style="height:85%"></b><b style="height:60%"></b></span><span class="t-line w60"></span></span></div>

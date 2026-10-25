@@ -10,7 +10,7 @@ const H = `h${headingLevel}`;
 ---
 <div class="founder">
   {photo
-    ? <Image class="founder-photo" src={photo} alt={`${founder.name}, ${founder.role} of Dremora IT`} width={440} height={440} format="webp" />
+    ? <Image class="founder-photo" src={photo} alt={`${founder.name}, ${founder.role} of Dremora IT`} width={220} height={220} densities={[1, 2, 3]} format="webp" />
     : <p class="todo"><Fact v={founder.photo} /></p>}
   <div>
     <H id={headingId}><Fact v={founder.name} /><span class="founder-role"><Fact v={founder.role} /></span></H>

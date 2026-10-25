@@ -21,14 +21,18 @@ const page = pages[`service-${s.slug}`];
 const work = clientWork.filter((w) => s.relatedWork.includes(w.slug));
 const demos = concepts.filter((c) => s.relatedConcepts.includes(c.slug));
 const others = services.filter((o) => o.slug !== s.slug);
+// 'Web applications' -> 'web applications', but 'AI and WhatsApp automation' and 'CRM' keep their capitals.
+const inSentence = (name: string) => name.replace(/^[A-Z][a-z]/, (m) => m.toLowerCase());
 const icons: Record<Service['slug'], string[]> = {
   websites: ['globe', 'page', 'cart', 'user'],
   'web-apps': ['grid', 'lock', 'box', 'wrench'],
+  'custom-software': ['user', 'box', 'clock', 'link'],
   'ai-automation': ['chat', 'bell', 'filter', 'link'],
 };
 const ctaTitle: Record<Service['slug'], string> = {
   websites: 'Ready to start your website?',
   'web-apps': 'Ready to plan your web app?',
+  'custom-software': 'Ready to plan your CRM or ERP?',
   'ai-automation': 'Ready to put WhatsApp on autopilot?',
 };
 const crumbs = [{ name: 'Services', path: '/services' }, { name: s.name, path: `/services/${s.slug}` }];
@@ -145,7 +149,7 @@ const faqSchema = {
         ))}
       </div>
       <p class="contact-alt">
-        Also see {others.map((o, i) => <>{i > 0 && ' and '}<a href={`/services/${o.slug}`}>{o.name.toLowerCase()}</a></>)}.
+        Also see {others.map((o, i) => <>{i > 0 && (i < others.length - 1 ? ', ' : others.length > 2 ? ', and ' : ' and ')}<a href={`/services/${o.slug}`}>{inSentence(o.name)}</a></>)}.
       </p>
     </div>
   </section>

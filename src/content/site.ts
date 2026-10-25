@@ -59,7 +59,7 @@ export const founder = {
 
 // The founder's own words from the old About page, lightly edited.
 export const story = [
-  'Dremora started with a plain observation: most small businesses in India either cannot afford good software, or end up with something that looks impressive and does not solve their problem.',
+  'Dremora started with a plain observation: most small businesses either cannot afford good software, or end up with something that looks impressive and does not solve their problem.',
   'So we ask what you need before we quote anything, explain what we are building before we build it, and write code your next developer can read.',
   'When the project ships, we stay reachable. You talk to the person who wrote the code.',
 ];
@@ -90,7 +90,7 @@ export const process = [
 // ---------------------------------------------------------------------------
 
 export type Service = {
-  slug: 'websites' | 'web-apps' | 'ai-automation';
+  slug: 'websites' | 'web-apps' | 'custom-software' | 'ai-automation';
   name: string;
   short: string;
   title: string;
@@ -120,7 +120,7 @@ const sharedFaq = {
   },
   payments: {
     q: 'How do payments work?',
-    a: 'Fixed price, quoted in INR. 50% before work starts and 50% on delivery, unless your project agreement sets other milestones. Invoices are due within 7 business days. We do not bill by the hour.',
+    a: 'Fixed price, quoted in INR or USD, whichever suits you. 50% before work starts and 50% on delivery, unless your project agreement sets other milestones. Invoices are due within 7 business days. We do not bill by the hour.',
   },
   ownership: {
     q: 'Who owns the code?',
@@ -137,8 +137,8 @@ export const services: Service[] = [
     slug: 'websites',
     name: 'Websites',
     short: 'Business websites, landing pages, online stores and portfolio sites.',
-    title: 'Website Development in Pune, Fixed Price | Dremora IT',
-    description: 'Business websites, landing pages and online stores for Pune businesses. Fixed price, 2 to 4 weeks, built and supported by the founder.',
+    title: 'Website Development, Fixed Price | Dremora IT',
+    description: 'Business websites, landing pages and online stores for businesses worldwide. Fixed price, 2 to 4 weeks, built and supported by the founder.',
     h1: 'A website that tells customers what you do and how to reach you',
     intro: [
       'Most people find a local business on their phone, look at it for a few seconds, and then either call, send a WhatsApp message, or go back to the search results. Your website has one job in those seconds: say what you do, where you are, and how to reach you.',
@@ -184,9 +184,9 @@ export const services: Service[] = [
   {
     slug: 'web-apps',
     name: 'Web applications',
-    short: 'Admin panels, CRMs, client portals and booking or inventory systems.',
-    title: 'Custom Web App Development in Pune | Dremora IT',
-    description: 'Admin panels, CRMs, portals and booking or inventory systems built around how your business already works. Fixed scope quote, 4 to 10 weeks.',
+    short: 'Admin panels, client portals, dashboards and booking systems.',
+    title: 'Custom Web App Development | Dremora IT',
+    description: 'Admin panels, client portals, dashboards and booking systems built around how your business already works. Fixed scope quote, 4 to 10 weeks.',
     h1: 'Software built around the way your business already runs',
     intro: [
       'When your orders, leads, students or stock live across notebooks, spreadsheets and WhatsApp chats, things get missed. A web application puts that work in one place, with logins for the people who need it and nothing extra.',
@@ -194,7 +194,7 @@ export const services: Service[] = [
     ],
     forWhom: 'Businesses with a process that has outgrown spreadsheets: coaching institutes, clinics, distributors, agencies and service teams with more than a few people entering data.',
     kinds: [
-      { name: 'Admin panels and CRMs', body: 'Dashboards for managing customers, orders, leads or internal operations, with separate roles.' },
+      { name: 'Admin panels and dashboards', body: 'Screens for managing customers, orders or internal operations, with separate roles.' },
       { name: 'Client and staff portals', body: 'Secure logins where your clients or team can view their data and take action.' },
       { name: 'Management systems', body: 'Inventory, scheduling, booking and reporting systems that follow your business rules.' },
       { name: 'Custom platforms', body: 'For a business problem no off-the-shelf software fits, built from scratch.' },
@@ -227,11 +227,61 @@ export const services: Service[] = [
     relatedConcepts: ['eduro'],
   },
   {
+    slug: 'custom-software',
+    name: 'Custom software, CRM and ERP',
+    short: 'CRM, ERP and business software for sales, stock, purchase, billing and staff.',
+    title: 'Custom Software, CRM and ERP Development | Dremora IT',
+    description: 'Custom CRM, ERP and business software built around how your company works: sales, stock, billing and staff in one system. Fixed quote per phase.',
+    h1: 'One system for your sales, stock, accounts and team',
+    intro: [
+      'Most growing businesses run on a mix of spreadsheets, an accounting package, WhatsApp groups and a few apps that do not talk to each other. Numbers get typed twice, nobody trusts the report, and the owner spends evenings reconciling. Custom software brings that work into one system that follows your rules.',
+      'We build it in phases. The first phase covers the process that hurts most, usually leads and sales or stock and orders, and goes live in weeks. Each later phase adds a module, with its own fixed quote, once the last one is in daily use. Every week you get a working link to try.',
+    ],
+    forWhom: 'Distributors, manufacturers, retailers with several branches, institutes, agencies and service companies where ten or more people work from the same data.',
+    kinds: [
+      { name: 'CRM', body: 'Leads, follow-ups, quotes and customer history in one place, with reminders and a sales pipeline your team updates from their phones.' },
+      { name: 'ERP', body: 'Stock, purchase, sales orders, billing and reports across branches or warehouses, following how your business already works.' },
+      { name: 'Staff and operations tools', body: 'Attendance, leave, tasks, field visits and approvals, with each role seeing only what it should.' },
+      { name: 'Integrations and data migration', body: 'Connections to your accounting software, payment gateway, WhatsApp or existing apps, and a clean move of your old spreadsheet data.' },
+    ],
+    included: [
+      'A written fixed scope for each phase before we start',
+      'Role-based logins, so each person sees only what they should',
+      'Import of your existing spreadsheet data',
+      'A working demo link every week, with your own sample data',
+      'Deployment to your hosting account or server',
+      '30 day bug fix warranty after launch',
+      'Full ownership of the code once the project is paid',
+    ],
+    notIncluded: [
+      'Hosting, database and third-party service costs (listed separately in the quote)',
+      'Licences for software you already use, such as your accounting package',
+      'Modules outside the agreed phase (quoted separately before any work)',
+      'Maintenance after the 30 day warranty (available as a monthly retainer)',
+    ],
+    timeline: '8 to 16 weeks',
+    price: todo('Starting price for custom software, CRM and ERP in INR'),
+    stack: 'Python, React and PostgreSQL',
+    faq: [
+      {
+        q: 'Why custom instead of an off-the-shelf CRM or ERP?',
+        a: 'If a ready-made product fits your process, we will say so on the first call. Custom software makes sense when your process is what sets you apart, when you pay for many seats nobody uses, or when your team keeps working around the tool in spreadsheets.',
+      },
+      { q: 'Can it work with the software we already use?', a: 'Usually, yes. Most accounting, payment and messaging tools have an API or an export we can work with. We check this on the first call and write what is possible into the quote.' },
+      { q: 'Can we start small?', a: 'Yes, and we recommend it. The first phase covers one process, goes live and gets used daily before we quote the next module. You are never committed to the whole system up front.' },
+      sharedFaq.payments,
+      sharedFaq.ownership,
+      sharedFaq.support,
+    ],
+    relatedWork: [],
+    relatedConcepts: ['eduro'],
+  },
+  {
     slug: 'ai-automation',
     name: 'AI and WhatsApp automation',
     short: 'WhatsApp bots, website chatbots, reminders and lead follow-up.',
-    title: 'AI Chatbots and WhatsApp Automation in Pune | Dremora IT',
-    description: 'WhatsApp automation, AI chatbots and follow-up flows for Pune businesses. Order confirmations, reminders and lead replies. 2 to 6 weeks.',
+    title: 'AI Chatbots and WhatsApp Automation | Dremora IT',
+    description: 'WhatsApp automation, AI chatbots and follow-up flows for businesses worldwide. Order confirmations, reminders and lead replies. 2 to 6 weeks.',
     h1: 'WhatsApp replies, reminders and follow-ups that run without you',
     intro: [
       'If your phone is full of the same five questions every day, or leads go cold because nobody replied after hours, automation can take that load. We use AI only where it earns its cost, and keep a person in the loop for anything that needs judgement.',

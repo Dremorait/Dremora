@@ -9,12 +9,12 @@ import { pages } from '../../content/pages';
 const crumbs = [{ name: 'Services', path: '/services' }];
 ---
 <Base page={pages.services} crumbs={crumbs}>
-  <PageHero title="Three things we build, and nothing we would have to learn on your money" lead="Each one has a written scope, a fixed price and a timeline before any work starts." crumbs={crumbs} />
+  <PageHero title="Four things we build, and nothing we would have to learn on your money" lead="Each one has a written scope, a fixed price and a timeline before any work starts." crumbs={crumbs} />
 
   <section class="section" aria-labelledby="list-title">
     <div class="wrap">
       <h2 id="list-title" class="visually-hidden">Services</h2>
-      <div class="cards cards-3 plans">
+      <div class="cards cards-4 plans">
         {services.map((s) => (
           <article class="card plan" id={s.slug === 'web-apps' ? 'webapps' : s.slug === 'ai-automation' ? 'ai' : s.slug}>
             <h3>{s.name}</h3>

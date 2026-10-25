@@ -5,15 +5,18 @@
 export const NEEDS = {
   website: 'Website',
   'web-app': 'Web app',
+  'custom-software': 'Custom software, CRM or ERP',
   automation: 'Automation',
   'not-sure': 'Not sure',
 };
 
 export const BUDGETS = {
-  'under-25k': 'Under ₹25,000',
-  '25k-75k': '₹25,000 to ₹75,000',
-  '75k-2l': '₹75,000 to ₹2,00,000',
-  'over-2l': 'Above ₹2,00,000',
+  // US dollar figures are rounded guides for clients abroad, not exact conversions.
+  // Kept short so the chosen option fits a phone-width select.
+  'under-25k': 'Under ₹25k (about US$300)',
+  '25k-75k': '₹25k to ₹75k (US$300 to 900)',
+  '75k-2l': '₹75k to ₹2L (US$900 to 2,300)',
+  'over-2l': 'Above ₹2L (over US$2,300)',
   'not-sure': 'Not sure yet',
 };
 

@@ -32,7 +32,7 @@ export async function GET({ props }: { props: { title: string } }) {
     el('div', { width: 1040, height: 486, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#0D0D0D', color: '#FFFFFF', padding: '72px 80px', fontFamily: 'Plex' }, [
       el('div', { display: 'flex', alignItems: 'center', gap: 20, fontSize: 32, fontWeight: 600 }, [monogram, 'Dremora IT']),
       el('div', { fontSize: props.title.length > 40 ? 64 : 76, fontWeight: 600, lineHeight: 1.08, letterSpacing: '-0.03em', maxWidth: 1000 }, props.title),
-      el('div', { display: 'flex', fontSize: 28, color: '#AFAFAF', borderTop: '1px solid #3A3A3A', paddingTop: 24 }, `${site.city}, India. Est. ${site.founded}. www.dremorait.in`),
+      el('div', { display: 'flex', fontSize: 28, color: '#AFAFAF', borderTop: '1px solid #3A3A3A', paddingTop: 24 }, `Based in ${site.city}, India. Clients worldwide. www.dremorait.in`),
     ]) as any,
     {
       width: 1200,

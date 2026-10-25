@@ -22,7 +22,7 @@ export const organization = () => ({
   telephone: site.phone.e164,
   email: site.email,
   address,
-  areaServed: { '@type': 'City', name: 'Pune' },
+  areaServed: 'Worldwide',
   foundingDate: site.founded,
   ...(verifiedSocials.length ? { sameAs: verifiedSocials.map((s) => s.url) } : {}),
 });
@@ -44,7 +44,7 @@ export const serviceNode = (s: Service) => ({
   serviceType: s.name,
   description: s.description,
   url: `${site.url}/services/${s.slug}`,
-  areaServed: { '@type': 'City', name: 'Pune' },
+  areaServed: 'Worldwide',
   provider: { '@type': 'ProfessionalService', '@id': orgId, name: site.name, url: `${site.url}/`, telephone: site.phone.e164, address },
   // Offers only when a price is published.
   ...(isTodo(s.price)

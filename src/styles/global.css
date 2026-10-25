@@ -640,7 +640,7 @@ textarea { min-height: 160px; resize: vertical; }
 [aria-invalid="true"] { border-color: var(--error); border-width: 2px; }
 
 .check { display: flex; gap: 12px; align-items: flex-start; }
-.check input { width: 22px; height: 22px; margin: 1px 0 0; flex: none; accent-color: var(--ink); }
+.check input { width: 24px; height: 24px; margin: 0; flex: none; accent-color: var(--ink); }
 .check label { font-weight: 400; min-height: var(--tap); }
 
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
@@ -676,6 +676,8 @@ textarea { min-height: 160px; resize: vertical; }
 
 table { border-collapse: collapse; width: 100%; max-width: var(--measure); margin-bottom: 16px; }
 th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+/* Small phones: long words like "Professionalism" may hyphenate, so a three-column table fits 320px. */
+@media (max-width: 479px) { th, td { padding-right: 8px; hyphens: auto; overflow-wrap: anywhere; } }
 th { font-weight: 500; }
 
 /* ---------- Codex-style home layout ---------- */
@@ -825,7 +827,11 @@ th { font-weight: 500; }
 /* Cards (the Codex pricing and product cards) */
 .cards { display: grid; gap: 16px; }
 @media (min-width: 900px) { .cards-3 { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 700px) and (max-width: 899px) { .cards-3 { grid-template-columns: repeat(2, 1fr); } }
+/* Two columns from 600px, so large phones held sideways and small tablets do not stretch one card across the screen. */
+@media (min-width: 600px) and (max-width: 899px) { .cards-3 { grid-template-columns: repeat(2, 1fr); } }
+/* Four cards: two by two on tablets and laptops, one row on wide screens. */
+@media (min-width: 700px) { .cards-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1140px) { .cards-4 { grid-template-columns: repeat(4, 1fr); } }
 .card {
   display: flex;
   flex-direction: column;
@@ -1445,7 +1451,9 @@ main:has(> .cta-band:last-child) + .site-footer, main:has(> .wash:last-child) + 
 
 /* ---------- Legal and long pages: contents on the side ---------- */
 
-.doc-layout { display: grid; gap: 40px; }
+/* minmax(0, 1fr): the single column may shrink below its longest word, so a 320px phone does not scroll sideways. */
+.doc-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.doc-layout .prose { overflow-wrap: break-word; }
 @media (min-width: 1000px) { .doc-layout { grid-template-columns: 260px minmax(0, 1fr); gap: 72px; } }
 .doc-toc { align-self: start; }
 @media (min-width: 1000px) { .doc-toc { position: sticky; top: 88px; } }

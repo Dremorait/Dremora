@@ -36,7 +36,7 @@ import { NEEDS, BUDGETS } from '../../api/_lib/contact-rules.js';
   </div>
 
   <div class="field">
-    <label for="cf-budget">Budget in INR <span class="muted">(optional)</span></label>
+    <label for="cf-budget">Budget <span class="muted">(optional)</span></label>
     <select id="cf-budget" name="budget" aria-describedby="cf-budget-err">
       <option value="">Prefer not to say</option>
       {Object.entries(BUDGETS).map(([v, l]) => <option value={v}>{l}</option>)}
