@@ -1,0 +1,63 @@
+---
+// Hero "product window": an example WhatsApp inbox with an automated reminder flow.
+// Illustration only (aria-hidden); the figcaption says what it shows. Names are made up.
+const chats = [
+  { i: 'PS', c: '#5B4BD6', name: 'Priya S.', last: '0', time: '10:42', active: true },
+  { i: 'RM', c: '#2F6FD0', name: 'Rahul M.', last: 'Can I come on Saturday?', time: '10:31', unread: 2 },
+  { i: 'AK', c: '#C2407E', name: 'Anita K.', last: 'Thank you, see you then', time: '09:58' },
+  { i: 'MF', c: '#1F7A53', name: 'Mehta family', last: 'Reminder sent', time: '09:30' },
+  { i: 'VP', c: '#B35A00', name: 'Vikram P.', last: 'What are your timings?', time: 'Yesterday', unread: 1 },
+  { i: 'ND', c: '#4A5873', name: 'Neha D.', last: 'Confirmed for 4:30 pm', time: 'Yesterday' },
+];
+const steps = [
+  ['Trigger', '24 hours before the appointment'],
+  ['Send', 'Reminder with reply options'],
+  ['Reply 1', 'Mark the slot as confirmed'],
+  ['Reply 2', 'Offer the next free slots'],
+  ['Reply 0', 'Hand over to the front desk'],
+];
+---
+<figure class="window mock-window" aria-labelledby="inbox-caption">
+  <div class="window-bar" aria-hidden="true">
+    <span class="window-dots"><i></i><i></i><i></i></span>
+    <span>Sample Dental Clinic, WhatsApp inbox</span>
+  </div>
+  <div class="inbox" aria-hidden="true">
+    <aside class="inbox-list">
+      <div class="inbox-search">Search chats</div>
+      <div class="inbox-tabs"><span class="on">All</span><span>Unread</span><span>Bookings</span></div>
+      {chats.map((ch) => (
+        <div class:list={['chat-row', { on: ch.active }]}>
+          <span class="avatar" style={`background:${ch.c}`}>{ch.i}</span>
+          <span class="chat-text"><b>{ch.name}</b><span>{ch.last}</span></span>
+          <span class="chat-meta"><span>{ch.time}</span>{ch.unread && <em>{ch.unread}</em>}</span>
+        </div>
+      ))}
+    </aside>
+
+    <section class="inbox-thread">
+      <header class="thread-head">
+        <span class="avatar" style="background:#5B4BD6">PS</span>
+        <span><b>Priya S.</b><small>Automated reminder flow</small></span>
+        <span class="thread-pill">Automation on</span>
+      </header>
+      <div class="thread-body">
+        <span class="day">Today</span>
+        <p class="bubble out">Hello Priya, a reminder from Sample Dental Clinic: your appointment is tomorrow at 11:00 am. Reply 1 to confirm or 2 to choose another time.<small>10:00 <i class="ticks2"></i></small></p>
+        <p class="bubble">1<small>10:41</small></p>
+        <p class="bubble out">Thank you, you are confirmed for 11:00 am. To talk to the front desk, reply 0.<small>10:41 <i class="ticks2"></i></small></p>
+        <p class="bubble">0<small>10:42</small></p>
+        <p class="flow-note">Handed to the front desk</p>
+      </div>
+      <div class="thread-input"><span>Reply as front desk</span><span class="send"></span></div>
+    </section>
+
+    <aside class="inbox-flow">
+      <div class="flow-head"><b>Appointment reminder</b><span class="switch"></span></div>
+      <ol>
+        {steps.map(([k, v]) => <li><b>{k}</b><span>{v}</span></li>)}
+      </ol>
+    </aside>
+  </div>
+  <figcaption id="inbox-caption" class="window-caption">Example of a WhatsApp automation we build: reminders, replies and a hand-over to staff. The clinic, patients and times are made up.</figcaption>
+</figure>

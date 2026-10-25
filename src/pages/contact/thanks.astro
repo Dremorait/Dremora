@@ -1,16 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import { site } from '../../content/site';
 import { pages } from '../../content/pages';
 ---
 <Base page={pages.contactThanks}>
-  <section class="page-head wrap">
-    <h1>Your enquiry reached us</h1>
-    <p class="lead">We read every message ourselves. We will reply on the phone number or email you gave, with questions or a time for a call.</p>
-    <p>Anything urgent? <a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a> or <a href={site.whatsapp}>message us on WhatsApp</a>.</p>
+  <PageHero tall label="Message received" title="Your enquiry reached us" lead="We read every message ourselves. We will reply on the phone number or email you gave, with questions or a time for a call.">
     <div class="actions">
-      <a class="btn btn-secondary" href="/work">See our work</a>
-      <a href="/">Back to the home page</a>
+      <a class="btn btn-primary" href="/work">See our work</a>
+      <a class="btn btn-secondary" href="/">Back to the home page</a>
     </div>
-  </section>
+    <p class="contact-alt" style="color: var(--ink)">Anything urgent? <a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a> or <a href={site.whatsapp}>message us on WhatsApp</a>.</p>
+  </PageHero>
 </Base>

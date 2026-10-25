@@ -46,10 +46,15 @@ export const socials = [
 export const verifiedSocials = socials.filter((s) => s.verified);
 
 export const founder = {
-  name: todo('Founder name (the old About page said Aniket Wable)'),
-  role: todo('Founder role, for example "Founder and developer"'),
-  photo: todo('Real photo of the founder, at least 800px wide, saved as src/assets/founder.jpg'),
+  name: 'Aniket Wable',
+  role: 'Founder and CEO',
+  photo: 'src/assets/founder.jpg',
   linkedin: todo('Founder LinkedIn URL'),
+  // Shown as a signed quote beside the photo on the home and About pages.
+  message: [
+    'I started Dremora because I kept meeting business owners who had paid for software that looked good and did not help them.',
+    'So every project gets the same promise from me: a fixed price in writing before we start, a working demo every week, and code your next developer can read. When you work with Dremora, you work with me.',
+  ],
 };
 
 // The founder's own words from the old About page, lightly edited.
@@ -328,7 +333,7 @@ export const workName = (w: ClientWork) => (w.permission ? w.publicName : w.anon
 export const hasCaseStudy = (w: ClientWork) => known(w.problem) && known(w.shipped) && known(w.stack);
 
 // Concept builds: demos made by Dremora, not client projects.
-// Links and screenshots stay hidden until each demo has the "Concept demo" strip,
+// Links stay hidden until each demo has the "Concept demo" strip,
 // no fake stats, a fictional brand name and its own subdomain.
 export type Concept = {
   slug: string;
@@ -346,7 +351,7 @@ export const concepts: Concept[] = [
     what: 'Admissions CRM, student and parent portals, faculty management and reports for a coaching institute.',
     stack: 'Next.js, React, TypeScript, Prisma, PostgreSQL',
     url: todo('EDURO demo cleaned up (strip, no fake stats) and moved to eduro.dremorait.in'),
-    image: todo('EDURO screenshot taken after the demo cleanup'),
+    image: todo('EDURO: fresh screenshot after the demo cleanup (a cropped older one shows for now)'),
   },
   {
     slug: 'dre-chain',
@@ -354,7 +359,7 @@ export const concepts: Concept[] = [
     what: 'An interactive walk-through of an automated lead flow: email in, AI intent check, CRM update, WhatsApp follow-up.',
     stack: 'Next.js, React, TypeScript, React Flow',
     url: todo('DRE-CHAIN demo cleaned up (strip, no fake revenue figures) and moved to a dremorait.in subdomain'),
-    image: todo('DRE-CHAIN screenshot taken after the demo cleanup'),
+    image: todo('DRE-CHAIN: fresh screenshot after the demo cleanup (a cropped older one shows for now)'),
   },
   {
     slug: 'hotel',
@@ -370,7 +375,7 @@ export const concepts: Concept[] = [
     what: 'Menu, gallery and table booking pages for a restaurant.',
     stack: 'HTML, CSS, JavaScript',
     url: todo('Restaurant demo: encoding bug fixed, fake rating removed, moved to a subdomain'),
-    image: todo('Restaurant demo screenshot taken after the fix'),
+    image: todo('Restaurant: fresh screenshot after the fix (a cropped older one shows for now)'),
   },
   {
     slug: 'clinic',
@@ -378,7 +383,7 @@ export const concepts: Concept[] = [
     what: 'Departments, doctor profiles and appointment booking for a clinic.',
     stack: 'HTML, CSS, JavaScript',
     url: todo('Healthcare demo (currently "DREMORA Healthcare") renamed to a fictional brand and moved to a subdomain'),
-    image: todo('Healthcare demo screenshot taken after the rename'),
+    image: todo('Healthcare: fresh screenshot after the rename (a cropped older one shows for now)'),
   },
   {
     slug: 'online-store',
@@ -386,7 +391,7 @@ export const concepts: Concept[] = [
     what: 'Product listing, search, cart and checkout pages for a retail store.',
     stack: 'HTML, CSS, JavaScript',
     url: todo('E-commerce demo (currently the "Dremora" store) renamed, "Trusted by" line removed, moved to a subdomain'),
-    image: todo('E-commerce demo screenshot taken after the cleanup'),
+    image: todo('E-commerce: fresh screenshot after the cleanup (a cropped older one shows for now)'),
   },
 ];
 

@@ -1,9 +1,11 @@
 // Certificate check and intern dashboard sign-in, served from the existing Supabase `interns` table.
 //   GET  /api/verify?id=DRM-INT-2026-001  -> public certificate fields only
-//   POST /api/verify {id, name}           -> { ok, intern_id } when ID and full name match
-// Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (server only, never sent to the browser).
+//   POST /api/verify {id, name}           -> { ok, intern_id } plus the dashboard session cookie
+//                                            when ID and full name match
+// Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, INTERN_SESSION_SECRET (server only, never sent to the browser).
 import { ID_PATTERN, NAME_PATTERN, normaliseName, verifyMessage } from './_lib/verify-rules.js';
 import { json, clientIp, rateLimiter, readBody } from './_lib/http.js';
+import { createToken, sessionCookie } from './_lib/session.js';
 
 // Fields a stranger holding the certificate may see. No email, phone, college or remarks.
 export const PUBLIC_FIELDS = ['intern_id', 'full_name', 'certificate_number', 'domain', 'batch', 'status', 'start_date', 'end_date'];
@@ -51,7 +53,9 @@ export async function POST(request) {
   }
   try {
     const row = await findIntern(id, name);
-    return row ? json(200, { ok: true, intern_id: row.intern_id }) : json(404, { ok: false, error: 'not_found' });
+    if (!row) return json(404, { ok: false, error: 'not_found' });
+    // Proof of sign-in for /api/intern. Signed with the stored ID, not the typed one.
+    return json(200, { ok: true, intern_id: row.intern_id }, { 'Set-Cookie': sessionCookie(createToken(row.intern_id)) });
   } catch (err) {
     console.error('verify:', err);
     return json(500, { ok: false, error: 'server_error' });

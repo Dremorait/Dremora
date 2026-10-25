@@ -1,58 +1,69 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Fact from '../../components/Fact.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
 import { site, internship, known } from '../../content/site';
 import { pages } from '../../content/pages';
+
+const crumbs = [{ name: 'Internship', path: '/internship' }];
+const facts = [
+  { icon: 'user', k: 'Who', v: internship.audience[0].toUpperCase() + internship.audience.slice(1) },
+  { icon: 'calendar', k: 'Length', v: internship.duration },
+  { icon: 'laptop', k: 'Mode', v: internship.mode },
+  { icon: 'clock', k: 'Time', v: internship.hours },
+  { icon: 'coins', k: 'Stipend', v: internship.stipend },
+  { icon: 'award', k: 'Certificate', v: internship.certificate },
+];
 ---
-<Base page={pages.internship} crumbs={[{ name: 'Internship', path: '/internship' }]}>
-  <section class="page-head wrap">
-    <h1>An internship where students ship real features, and certificates anyone can check</h1>
-    <p class="lead">For {internship.audience}. You work on live project code with a mentor, and finish with a certificate that employers can verify on this page.</p>
+<Base page={pages.internship} crumbs={crumbs}>
+  <PageHero title="An internship where students ship real features, and certificates anyone can check" lead={`For ${internship.audience}. You work on live project code with a mentor, and finish with a certificate that employers can verify on this page.`} crumbs={crumbs}>
     <div class="actions">
-      <a class="btn btn-secondary" href="#verify">Check a certificate</a>
-      <a href="/internship/guidelines">Read the course guidelines</a>
+      <a class="btn btn-primary" href="#verify">Check a certificate</a>
+      <a class="btn btn-secondary" href="/internship/guidelines">Read the course guidelines</a>
     </div>
-  </section>
+  </PageHero>
 
   <section class="section" aria-labelledby="program-title">
-    <div class="wrap grid">
-      <div class="span-4"><h2 id="program-title">The program</h2></div>
-      <div class="span-8">
-        <dl class="facts">
-          <dt>Who</dt><dd>{internship.audience[0].toUpperCase() + internship.audience.slice(1)}</dd>
-          <dt>Length</dt><dd>{internship.duration}</dd>
-          <dt>Mode</dt><dd>{internship.mode}</dd>
-          <dt>Time</dt><dd>{internship.hours}</dd>
-          <dt>Stipend</dt><dd>{internship.stipend}</dd>
-          <dt>Certificate</dt><dd>{internship.certificate}</dd>
-          {known(internship.fee) && <><dt>Fee</dt><dd><Fact v={internship.fee} /></dd></>}
-        </dl>
-        <h3 style="margin-top: 32px">How it runs</h3>
-        <ol>
-          <li>Week 1: onboarding on our tools, workflow and project code.</li>
-          <li>Weeks 2 to 8: features and fixes on assigned projects, with weekly reviews and code walkthroughs.</li>
-          <li>Final 2 weeks: a capstone module, peer reviews and a presentation of your work.</li>
-        </ol>
-        <h3>To ask about the next batch</h3>
-        <p>
-          <a href={site.whatsapp}>Message us on WhatsApp</a> or email <a href={`mailto:${site.email}`}>{site.email}</a> with your name, college, branch and year. Selection includes a short technical task or portfolio review.
-        </p>
-        {known(internship.under18) && <p><Fact v={internship.under18} /></p>}
+    <div class="wrap">
+      <div class="section-head"><h2 id="program-title">The program</h2></div>
+      <div class="icon-cards three">
+        {facts.map((f) => (
+          <div class="icon-card">
+            <Icon name={f.icon} />
+            <h3>{f.k}</h3>
+            <p>{f.v}</p>
+          </div>
+        ))}
+        {known(internship.fee) && <div class="icon-card"><Icon name="coins" /><h3>Fee</h3><p><Fact v={internship.fee} /></p></div>}
       </div>
     </div>
   </section>
 
-  <section class="section" id="verify" aria-labelledby="verify-title">
+  <section class="section" aria-labelledby="runs-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="runs-title">How it runs</h2></div>
+      <ol class="step-cards">
+        <li><h3>Week 1: onboarding</h3><p>Our tools, workflow and project code. You set up your machine and finish orientation tasks.</p></li>
+        <li><h3>Weeks 2 to 8: real work</h3><p>Features and fixes on assigned projects, with weekly reviews and code walkthroughs.</p></li>
+        <li><h3>Final 2 weeks: capstone</h3><p>A capstone module, peer reviews and a presentation of your work to the team.</p></li>
+      </ol>
+      <p class="contact-alt">
+        To ask about the next batch, <a href={site.whatsapp}>message us on WhatsApp</a> or email <a href={`mailto:${site.email}`}>{site.email}</a> with your name, college, branch and year. Selection includes a short technical task or portfolio review.
+      </p>
+      {known(internship.under18) && <p class="contact-alt"><Fact v={internship.under18} /></p>}
+    </div>
+  </section>
+
+  <section class="wash" id="verify" aria-labelledby="verify-title">
     <div class="wrap grid">
-      <div class="span-4">
+      <div class="span-6 glass-card">
         <h2 id="verify-title">Check a certificate</h2>
-        <p>Enter the Internship ID printed on the certificate, for example DRM-INT-2026-001. Scanning the QR code on a certificate opens this check directly.</p>
-      </div>
-      <div class="span-8">
+        <p class="muted">Enter the Internship ID printed on the certificate, for example DRM-INT-2026-001. Scanning the QR code on a certificate opens this check directly.</p>
         <form class="form" id="verify-form" action="/internship" method="get" data-verify-form>
           <div class="field">
             <label for="vf-id">Internship ID</label>
-            <input id="vf-id" name="verify" type="text" required minlength="5" maxlength="50" pattern="[A-Za-z0-9\-]+" autocomplete="off" spellcheck="false" aria-describedby="vf-id-err" />
+            <input id="vf-id" name="verify" type="text" required minlength="5" maxlength="50" pattern="[A-Za-z0-9-]+" autocomplete="off" spellcheck="false" aria-describedby="vf-id-err" />
             <p class="error" id="vf-id-err" hidden></p>
           </div>
           <div class="actions" style="margin-top: 0"><button class="btn btn-primary" type="submit">Check certificate</button></div>
@@ -60,27 +71,19 @@ import { pages } from '../../content/pages';
         <div id="verify-result" aria-live="polite" style="margin-top: 24px"></div>
         <noscript><p class="notice">The certificate check needs JavaScript. You can also email {site.email} with the certificate ID.</p></noscript>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="dashboard" aria-labelledby="login-title">
-    <div class="wrap grid">
-      <div class="span-4">
+      <div class="span-6 glass-card" id="dashboard">
         <h2 id="login-title">Interns: open your dashboard</h2>
-        <p>Use your Internship ID and your full name as registered with us.</p>
-      </div>
-      <div class="span-8">
-        <form class="form" id="login-form" data-login-form>
+        <p class="muted">Use your Internship ID and your full name as registered with us.</p>
+        <form class="form" id="login-form" data-login-form aria-labelledby="login-title">
           <div class="notice error" id="lf-error" role="alert" tabindex="-1" hidden></div>
-          <div class="form-2">
-            <div class="field">
-              <label for="lf-id">Internship ID</label>
-              <input id="lf-id" name="id" type="text" required maxlength="50" autocomplete="username" spellcheck="false" />
-            </div>
-            <div class="field">
-              <label for="lf-name">Full name</label>
-              <input id="lf-name" name="name" type="text" required maxlength="150" autocomplete="name" />
-            </div>
+          <div class="field">
+            <label for="lf-id">Internship ID</label>
+            <input id="lf-id" name="id" type="text" required maxlength="50" autocomplete="username" spellcheck="false" />
+          </div>
+          <div class="field">
+            <label for="lf-name">Full name</label>
+            <input id="lf-name" name="name" type="text" required maxlength="150" autocomplete="name" />
           </div>
           <div class="actions" style="margin-top: 0"><button class="btn btn-secondary" type="submit">Open dashboard</button></div>
         </form>
@@ -211,8 +214,7 @@ import { pages } from '../../content/pages';
         });
         const body = await res.json().catch(() => ({}));
         if (res.ok && body.ok) {
-          // The existing dashboard reads the ID from sessionStorage.
-          sessionStorage.setItem('internId', body.intern_id);
+          // The response set an HttpOnly session cookie; the dashboard loads its data from /api/intern.
           location.assign('/intern-dashboard');
           return;
         }

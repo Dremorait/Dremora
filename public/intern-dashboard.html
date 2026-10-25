@@ -19,8 +19,10 @@
   <meta property="og:site_name" content="Dremora IT">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#090909">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">  <!-- Preload Critical Assets -->
-  <link rel="preload" href="assets/images/logo.png" as="image">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">  <!-- Preload Critical Assets -->
+  <link rel="preload" href="assets/images/logo-mark-dark.webp" as="image">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
 
   <!-- Fonts -->
@@ -37,9 +39,6 @@
 
   <!-- QR Code library (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <!-- Supabase SDK & Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="js/supabaseClient.js"></script>
 
   <style>
     /* =========================================================
@@ -681,7 +680,7 @@
 <header class="navbar" id="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Dremora IT – Home">
-      <img src="assets/images/logo.png" alt="Dremora IT" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <img src="assets/images/logo-mark-dark.webp" alt="Dremora IT" style="border-radius:0" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <div class="nav-logo-mark" style="display:none">D</div>
       <div>
         <div class="nav-logo-text">Dremora IT</div>
@@ -950,8 +949,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:var(--space-4);">
-          <img src="assets/images/logo.png" alt="Dremora IT" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'">
-          <div class="nav-logo-mark" style="width:32px;height:32px;font-size:0.9rem;">D</div>
+          <img src="assets/images/logo-mark-dark.webp" alt="Dremora IT" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="nav-logo-mark" style="display:none;width:32px;height:32px;font-size:0.9rem;">D</div>
           <div style="margin-left:var(--space-3);">
             <div class="nav-logo-text" style="font-size:var(--text-sm);">Dremora IT</div>
           </div>
@@ -1050,8 +1049,9 @@ document.addEventListener('DOMContentLoaded', function() {
   'use strict';
 
   // ── Global Configuration ──
+  // Public storage buckets only. Intern records come from /api/intern, never from Supabase directly.
+  const SUPABASE_URL   = 'https://vtutbqzkegkgujrdkxmj.supabase.co';
   const STORAGE_BUCKET = 'intern_documents';
-  const TABLE_NAME    = 'interns';
 
   // Rate limiting (client side, defence in depth)
   let requestCount = 0;
@@ -1113,42 +1113,26 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("[DEBUG] showScreen('loading') called");
       showScreen('loading');
       
-      console.log("[DEBUG] Reading session...");
-      const internId = sessionStorage.getItem('internId');
-      console.log("[DEBUG] Session ID:", internId);
+      // The session is an HttpOnly cookie set at sign-in on /internship; the page cannot read it.
+      const res = await fetch('/api/intern', { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
+      const body = await res.json().catch(() => ({}));
 
-      if (!internId) {
-        console.log("[DEBUG] No session ID found, redirecting back to internship.html");
-        window.location.href = 'internship.html';
+      if (res.status === 401) {
+        window.location.href = '/internship#login-form';
         return;
       }
 
-      console.log("[DEBUG] Checking window.supabaseClient existence");
-      if (!window.supabaseClient) {
-        throw new Error("Supabase client is completely undefined. js/supabaseClient.js failed to initialize.");
-      }
-
-      console.log("[DEBUG] Running Supabase query for intern_id:", internId);
-      const { data, error } = await window.supabaseClient
-        .from('interns')
-        .select('*')
-        .eq('intern_id', internId)
-        .single();
-        
-      console.log("[DEBUG] Query error:", error);
-      console.log("[DEBUG] Query data:", data);
-
-      if (error || !data) {
-        console.log("[DEBUG] Error or missing data, showing error screen");
+      if (!res.ok || !body.ok || !body.intern) {
         showScreen('error');
         if (errorMsg) {
-          errorMsg.textContent = 'Unable to load internship data. ' + (error ? error.message : 'Record not found.');
+          errorMsg.textContent = res.status === 404 ? 'Unable to load internship data. Record not found.'
+            : res.status === 429 ? 'Too many requests. Please wait a few minutes and try again.'
+            : 'Unable to load internship data. Please try again later.';
         }
         return;
       }
 
-      console.log("[DEBUG] Rendering dashboard");
-      currentIntern = data;
+      currentIntern = body.intern;
       renderDashboard(currentIntern);
       
       console.log("[DEBUG] showScreen('success') called");
@@ -1188,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (intern.photo) {
       const resolvedPhoto = (intern.photo.startsWith('http') || intern.photo.startsWith('assets') || intern.photo.startsWith('/'))
         ? intern.photo
-        : `${window.SUPABASE_URL}/storage/v1/object/public/intern-profile-images/${intern.photo}`;
+        : `${SUPABASE_URL}/storage/v1/object/public/intern-profile-images/${intern.photo}`;
       avatarEl.innerHTML = `<img loading="lazy" src="${resolvedPhoto}" alt="${escHtml(intern.full_name)}" onerror="this.parentElement.innerHTML='<svg class=\\'icon fa-user\\' aria-hidden=\\'true\\'><use href=\\'#fa-user\\'></use></svg>'">`;
     }
 
@@ -1280,7 +1264,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     certUrl = intern.certificate_url.startsWith('http')
       ? intern.certificate_url
-      : `${window.SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
+      : `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${intern.certificate_url}`;
 
     const isPdf = certUrl.toLowerCase().endsWith('.pdf');
 

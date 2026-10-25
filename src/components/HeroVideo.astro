@@ -1,0 +1,33 @@
+---
+// Home hero media: a large rounded frame with the poster, and a glass play/pause button
+// that starts the muted video in place. Nothing loads until the visitor presses play.
+import { heroVideo } from '../content/hero-video';
+---
+<figure class="media-frame" data-hero-video>
+  <video src={heroVideo.src} poster={heroVideo.poster} preload="none" muted playsinline aria-label={heroVideo.label}></video>
+  <button class="media-play" type="button" aria-label="Play video" data-video-toggle>
+    <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11-6.86a1 1 0 0 0 0-1.7l-11-6.86A1 1 0 0 0 8 5.14Z" /></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+  </button>
+</figure>
+
+<script>
+  for (const frame of document.querySelectorAll<HTMLElement>('[data-hero-video]')) {
+    const video = frame.querySelector('video')!;
+    const button = frame.querySelector<HTMLButtonElement>('[data-video-toggle]')!;
+    const sync = () => {
+      const playing = !video.paused && !video.ended;
+      frame.classList.toggle('is-playing', playing);
+      button.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+    };
+    button.addEventListener('click', () => {
+      if (video.paused || video.ended) video.play().catch(sync);
+      else video.pause();
+    });
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    // load() resets the element, so the poster shows again after the last frame.
+    video.addEventListener('ended', () => { video.load(); sync(); });
+    video.addEventListener('error', sync);
+  }
+</script>

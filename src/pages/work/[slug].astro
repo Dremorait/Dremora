@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Fact from '../../components/Fact.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { site, clientWork, serviceBySlug, hasCaseStudy, workName, known, type ClientWork } from '../../content/site';
 import { pages } from '../../content/pages';
 import { orgId } from '../../content/schema';
@@ -12,6 +14,7 @@ export function getStaticPaths() {
 const { w } = Astro.props as { w: ClientWork };
 const page = pages[`work-${w.slug}`];
 const name = workName(w);
+const crumbs = [{ name: 'Work', path: '/work' }, { name, path: `/work/${w.slug}` }];
 const schema = {
   '@type': 'CreativeWork',
   name: `${name}: ${w.built}`,
@@ -22,16 +25,17 @@ const schema = {
   ...(w.screenshots.length ? { image: w.screenshots.map((s) => `${site.url}${s.src}`) } : {}),
 };
 ---
-<Base page={page} crumbs={[{ name: 'Work', path: '/work' }, { name, path: `/work/${w.slug}` }]} schema={[schema]}>
-  <section class="page-head wrap">
-    <p class="label">Case study</p>
-    <h1>{name}</h1>
+<Base page={page} crumbs={crumbs} schema={[schema]}>
+  <PageHero label="Case study" title={name} lead={w.built} crumbs={crumbs} />
+  <section class="section">
+    <div class="wrap">
     <dl class="facts">
       {known(w.sector) && <><dt>Sector</dt><dd><Fact v={w.sector} /></dd></>}
       <dt>Shipped</dt><dd class="mono"><Fact v={w.shipped} /></dd>
       <dt>Stack</dt><dd><Fact v={w.stack} /></dd>
       {w.services.length > 0 && <><dt>Service</dt><dd>{w.services.map((s, i) => <>{i > 0 && ', '}<a href={`/services/${s}`}>{serviceBySlug(s).name}</a></>)}</dd></>}
     </dl>
+    </div>
   </section>
 
   <section class="section">
@@ -63,10 +67,5 @@ const schema = {
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Need something similar?</h2>
-      <div class="actions"><a class="btn btn-primary" href="/contact">Get a fixed quote</a><a href="/work">Back to all work</a></div>
-    </div>
-  </section>
+  <CtaBand title="Need something similar?" />
 </Base>

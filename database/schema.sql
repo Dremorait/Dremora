@@ -104,17 +104,15 @@ ALTER TABLE public.activity_logs ENABLE ROW LEVEL SECURITY;
 -- Admins: No public access
 CREATE POLICY "Deny anon admins" ON public.admins FOR ALL TO anon USING (false);
 
--- Interns: Anon can SELECT only via backend (Or if we allow public access via anon key for search)
--- Since the user said "Never expose database errors... Search Supabase for a matching record",
--- The backend uses service_role key to bypass RLS, so anon can be fully restricted!
-CREATE POLICY "Allow anon select interns" ON public.interns FOR SELECT TO anon USING (true);
+-- Interns: no anon access. api/verify.js and api/intern.js read with the service role key,
+-- which bypasses RLS; admins use Supabase auth (authenticated).
+-- See 2026-10-25_drop_anon_read_interns.sql for the live database.
 CREATE POLICY "Allow auth all interns" ON public.interns FOR ALL TO authenticated USING (true);
 
 -- Announcements: Anon can read
 CREATE POLICY "Allow anon select announcements" ON public.announcements FOR SELECT TO anon USING (true);
 
--- Certificates: Anon can read
-CREATE POLICY "Allow anon select certificates" ON public.certificates FOR SELECT TO anon USING (true);
+-- Certificates: no anon access (nothing public reads this table).
 
 -- Activity Logs: No public access
 CREATE POLICY "Deny anon logs" ON public.activity_logs FOR ALL TO anon USING (false);

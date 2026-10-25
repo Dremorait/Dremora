@@ -1,14 +1,13 @@
 ---
 import '@fontsource/ibm-plex-sans/latin-400.css';
 import '@fontsource/ibm-plex-sans/latin-ext-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-ext-500.css';
 import '@fontsource/ibm-plex-sans/latin-600.css';
-import '@fontsource/ibm-plex-sans/latin-ext-600.css';
-import '@fontsource/ibm-plex-mono/latin-400.css';
-import '@fontsource/ibm-plex-sans-devanagari/devanagari-400.css';
-import '@fontsource/ibm-plex-sans-devanagari/devanagari-600.css';
 import '../styles/global.css';
+import themeInit from '../theme-init.js?raw';
 import bodyFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
-import headingFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
+import headingFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2?url';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -53,14 +52,16 @@ const jsonld = graph.length ? JSON.stringify({ '@context': 'https://schema.org',
     {/* Body and heading weights load before first paint, so the hero does not shift when fonts swap in. */}
     <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
-    <script is:inline src="/theme.js"></script>
+    {/* Sets the saved theme before first paint. Inline so it does not block rendering; its sha256 is allowed in the CSP (vercel.json). */}
+    <script is:inline set:html={themeInit}></script>
+    <script is:inline defer src="/theme.js"></script>
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0A1530" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content={page.path === '/' ? 'website' : 'article'} />
     <meta property="og:site_name" content={site.name} />
@@ -85,16 +86,7 @@ const jsonld = graph.length ? JSON.stringify({ '@context': 'https://schema.org',
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">
-      {crumbs.length > 0 && (
-        <nav class="crumbs wrap" aria-label="Breadcrumb">
-          <ol>
-            <li><a href="/">Home</a></li>
-            {crumbs.map((c, i) => (
-              <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.path}>{c.name}</a>}</li>
-            ))}
-          </ol>
-        </nav>
-      )}
+      {/* The visible breadcrumb is drawn by PageHero; `crumbs` here feeds the BreadcrumbList schema. */}
       <slot />
     </main>
     <Footer />

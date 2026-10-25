@@ -35,6 +35,7 @@ beforeEach(() => {
   calls = [];
   process.env.SUPABASE_URL = 'https://example.supabase.co';
   process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  process.env.INTERN_SESSION_SECRET = 'test-session-secret-0123456789abcdef';
 });
 afterEach(() => {
   globalThis.fetch = realFetch;

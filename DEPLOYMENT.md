@@ -7,7 +7,7 @@ npm install
 npm run dev          # http://localhost:4321, shows {{TODO}} markers in yellow
 npm run build        # production build + check:banned + open TODO list
 npm run preview      # serve dist/ (the /api functions do not run locally)
-npm test             # contact form and certificate check tests
+npm test             # contact form, certificate check and intern dashboard session tests
 ```
 
 `npm run build` fails if anything from the brief's banned list appears (dashes,
@@ -23,9 +23,11 @@ emoji, gradients, pill shapes, scroll effects, banned words, `{{TODO}}`, bad met
 3. **Intern data is readable with the public key.** The live policy
    `"Allow anon select interns" ... USING (true)` lets anyone holding the anon key (it is in
    `public/js/supabaseClient.js`) read every intern's email, phone, college and remarks.
-   The new certificate check no longer needs it (it uses the service role key on the server),
-   but the old intern dashboard still reads `interns` from the browser. Fixing this means
-   moving the dashboard's reads to a server function, then dropping that policy.
+   Nothing on the site needs it any more: the certificate check and the intern dashboard both
+   read through server functions (`/api/verify`, `/api/intern`) with the service role key.
+   **After this version is live and `INTERN_SESSION_SECRET` is set**, run
+   `database/2026-10-25_drop_anon_read_interns.sql` in the Supabase SQL editor, then sign in
+   to the intern dashboard and the admin dashboard once to check both still load.
 
 ## 2. Vercel project settings
 
@@ -42,9 +44,11 @@ emoji, gradients, pill shapes, scroll effects, banned words, `{{TODO}}`, bad met
   | `CONTACT_FROM` | `Dremora IT website <website@dremorait.in>` |
   | `SUPABASE_URL` | `https://vtutbqzkegkgujrdkxmj.supabase.co` |
   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase, Project settings, API (server only) |
+  | `INTERN_SESSION_SECRET` | random, 32+ characters: `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`. Signs the intern dashboard cookie; changing it signs everyone out |
   | `PUBLIC_VERCEL_ANALYTICS` | `1` once Web Analytics is enabled, else leave empty |
 - **Firewall:** add a rate limit rule for `/api/contact` (5 requests per 10 minutes per IP)
-  and `/api/verify` (30 per 10 minutes). The functions also limit per instance as a backstop.
+  `/api/verify` (30 per 10 minutes) and `/api/intern` (60 per 10 minutes). The functions also
+  limit per instance as a backstop.
 - **Web Analytics:** enable it in the dashboard, then set `PUBLIC_VERCEL_ANALYTICS=1`.
   The Privacy Policy names it automatically when the variable is set.
 

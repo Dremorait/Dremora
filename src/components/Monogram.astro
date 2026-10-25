@@ -1,9 +1,0 @@
----
-// The "D" monogram, same geometry as /icon.svg.
-const { title } = Astro.props as { title?: string };
----
-<svg viewBox="0 0 32 32" aria-hidden={title ? undefined : 'true'} role={title ? 'img' : undefined}>
-  {title && <title>{title}</title>}
-  <rect width="32" height="32" rx="4" fill="#0D1B3E" />
-  <path fill="#E8790C" fill-rule="evenodd" d="M6 6h8a10 10 0 0 1 0 20H6zm6 4v12h2a6 6 0 0 0 0-12z" />
-</svg>

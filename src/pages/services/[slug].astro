@@ -1,7 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Fact from '../../components/Fact.astro';
-import { services, clientWork, concepts, known, hasCaseStudy, workName, type Service } from '../../content/site';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import Inbox from '../../components/mock/Inbox.astro';
+import DemoReview from '../../components/mock/DemoReview.astro';
+import Dashboard from '../../components/mock/Dashboard.astro';
+import ConceptThumb from '../../components/mock/ConceptThumb.astro';
+import { site, services, clientWork, concepts, known, hasCaseStudy, workName, type Service } from '../../content/site';
 import { pages } from '../../content/pages';
 import { serviceNode } from '../../content/schema';
 
@@ -14,84 +21,110 @@ const page = pages[`service-${s.slug}`];
 const work = clientWork.filter((w) => s.relatedWork.includes(w.slug));
 const demos = concepts.filter((c) => s.relatedConcepts.includes(c.slug));
 const others = services.filter((o) => o.slug !== s.slug);
+const icons: Record<Service['slug'], string[]> = {
+  websites: ['globe', 'page', 'cart', 'user'],
+  'web-apps': ['grid', 'lock', 'box', 'wrench'],
+  'ai-automation': ['chat', 'bell', 'filter', 'link'],
+};
+const ctaTitle: Record<Service['slug'], string> = {
+  websites: 'Ready to start your website?',
+  'web-apps': 'Ready to plan your web app?',
+  'ai-automation': 'Ready to put WhatsApp on autopilot?',
+};
+const crumbs = [{ name: 'Services', path: '/services' }, { name: s.name, path: `/services/${s.slug}` }];
 const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 ---
-<Base page={page} crumbs={[{ name: 'Services', path: '/services' }, { name: s.name, path: `/services/${s.slug}` }]} schema={[serviceNode(s), faqSchema]}>
-  <section class="page-head wrap">
-    <p class="label">{s.name}</p>
-    <h1>{s.h1}</h1>
-    {s.intro.map((p) => <p>{p}</p>)}
-    <dl class="facts">
-      <dt>Timeline</dt><dd class="mono">{s.timeline}</dd>
-      {known(s.price) && <><dt>Starting at</dt><dd class="price"><Fact v={s.price} /></dd></>}
-      <dt>Built with</dt><dd>{s.stack}</dd>
-    </dl>
+<Base page={page} crumbs={crumbs} schema={[serviceNode(s), faqSchema]}>
+  <PageHero label={s.name} title={s.h1} lead={s.intro[0]} crumbs={crumbs}>
     <div class="actions">
       <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
+      <a class="btn btn-secondary" href={site.whatsapp}>Message us on WhatsApp</a>
     </div>
+    <ul class="chips">
+      <li><b>Timeline</b> {s.timeline}</li>
+      {known(s.price) && <li><b>Starting at</b> <Fact v={s.price} /></li>}
+      <li><b>Built with</b> {s.stack}</li>
+    </ul>
+  </PageHero>
+
+  <div class="wrap stage">
+    {s.slug === 'ai-automation'
+      ? <Inbox />
+      : (
+        <figure class="panel" aria-labelledby="stage-caption">
+          {s.slug === 'websites' ? <DemoReview /> : <Dashboard />}
+          <figcaption id="stage-caption" class="visually-hidden">
+            {s.slug === 'websites' ? 'Example: a weekly website demo with the client comments pinned on the page.' : 'Example: an admin panel for a coaching class, with made-up students.'}
+          </figcaption>
+        </figure>
+      )}
+  </div>
+
+  <section class="section">
+    <div class="wrap statement"><p>{s.intro[1]}</p></div>
   </section>
 
   <section class="section" aria-labelledby="for-title">
-    <div class="wrap grid">
-      <div class="span-4">
+    <div class="wrap">
+      <div class="section-head">
         <h2 id="for-title">Who this is for</h2>
-      </div>
-      <div class="span-8">
         <p>{s.forWhom}</p>
-        <div class="rows">
-          {s.kinds.map((k) => (
-            <div class="row row-2">
-              <h3>{k.name}</h3>
-              <p>{k.body}</p>
-            </div>
-          ))}
-        </div>
+      </div>
+      <div class="icon-cards four">
+        {s.kinds.map((k, i) => (
+          <div class="icon-card">
+            <Icon name={icons[s.slug][i]} />
+            <h3>{k.name}</h3>
+            <p>{k.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section" aria-labelledby="inc-title">
-    <div class="wrap grid">
-      <div class="span-6">
-        <h2 id="inc-title">What is included</h2>
-        <ul class="ticks">{s.included.map((i) => <li>{i}</li>)}</ul>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="inc-title">Exactly what you get</h2>
+        <p>Written into your quote, so nothing is a surprise later.</p>
       </div>
-      <div class="span-6">
-        <h2>What is not included</h2>
-        <ul class="ticks not">{s.notIncluded.map((i) => <li>{i}</li>)}</ul>
+      <div class="compare">
+        <div class="compare-card compare-in">
+          <h2 style="font-size: 1.5rem">Included</h2>
+          <ul class="ticks">{s.included.map((i) => <li>{i}</li>)}</ul>
+        </div>
+        <div class="compare-card compare-out">
+          <h2 style="font-size: 1.5rem">Not included</h2>
+          <ul class="ticks not">{s.notIncluded.map((i) => <li>{i}</li>)}</ul>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section" aria-labelledby="example-title">
     <div class="wrap">
-      <h2 id="example-title">{work.length ? 'Real example' : 'Example'}</h2>
-      <div class="rows">
+      <div class="section-head">
+        <h2 id="example-title">{work.length ? 'Real work, and what we can show' : 'What we can show you'}</h2>
+      </div>
+      <div class="cards cards-3">
         {work.map((w) => (
-          <article class="row row-2">
-            <div>
-              <h3>{workName(w)}</h3>
-              <p class="label" style="margin: 8px 0 0">Client work</p>
-            </div>
-            <div>
-              <p>{w.built}</p>
-              {hasCaseStudy(w) ? <a href={`/work/${w.slug}`}>Read the case study</a> : <a href="/work">See all client work</a>}
-            </div>
+          <article class="card">
+            <p class="label" style="margin: 0">Client work</p>
+            <h3 style="font-size: 1.25rem">{workName(w)}</h3>
+            <p class="muted">{w.built}</p>
+            {hasCaseStudy(w) ? <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a> : <a class="arrow-link" href="/work">See all client work</a>}
           </article>
         ))}
         {demos.map((c) => (
-          <article class="row row-2">
-            <div>
-              <h3>{c.name}</h3>
-              <p class="label" style="margin: 8px 0 0">Concept build, sample data</p>
-            </div>
-            <div>
-              <p>{c.what}</p>
-              <a href={`/work#${c.slug}`}>About this concept build</a>
-            </div>
+          <article class="card">
+            <ConceptThumb kind={c.slug} />
+            <p class="label" style="margin: 0">Concept build, sample data</p>
+            <h3 style="font-size: 1.125rem">{c.name}</h3>
+            <p class="muted">{c.what}</p>
+            <a class="arrow-link" href={`/work#${c.slug}`}>About this concept<span class="visually-hidden"> build</span></a>
           </article>
         ))}
       </div>
@@ -99,11 +132,11 @@ const faqSchema = {
   </section>
 
   <section class="section" aria-labelledby="faq-title">
-    <div class="wrap grid">
-      <div class="span-4">
+    <div class="wrap">
+      <div class="section-head">
         <h2 id="faq-title">Questions people ask before starting</h2>
       </div>
-      <div class="span-8 faq">
+      <div class="faq-cards">
         {s.faq.map((f) => (
           <details>
             <summary>{f.q}</summary>
@@ -111,19 +144,11 @@ const faqSchema = {
           </details>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="next-title">
-    <div class="wrap">
-      <h2 id="next-title">Ready for a number?</h2>
-      <p>Send a short description of the business and what you need. We reply with questions or a call time, then a written fixed quote.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
-      </div>
-      <p class="muted" style="margin-top: 32px">
-        Also see: {others.map((o, i) => <>{i > 0 && ' and '}<a href={`/services/${o.slug}`}>{o.name.toLowerCase()}</a></>)}.
+      <p class="contact-alt">
+        Also see {others.map((o, i) => <>{i > 0 && ' and '}<a href={`/services/${o.slug}`}>{o.name.toLowerCase()}</a></>)}.
       </p>
     </div>
   </section>
+
+  <CtaBand title={ctaTitle[s.slug]} />
 </Base>

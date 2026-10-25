@@ -5,6 +5,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join, relative, extname, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
+import { createHash } from 'node:crypto';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const ORIGIN = 'https://www.dremorait.in';
@@ -35,6 +36,7 @@ const BANNED_WORDS = [
 const wordRe = new RegExp(`(?<![\\w-])(${BANNED_WORDS.map((w) => w.replace(/[-']/g, (c) => `\\${c}`)).join('|')})(?![\\w-])`, 'i');
 
 const problems = [];
+const cspConfig = await readFile(join(ROOT, 'vercel.json'), 'utf8');
 const report = (file, msg) => problems.push(`${file}: ${msg}`);
 
 async function walk(dir) {
@@ -71,14 +73,9 @@ function checkCommon(file, src, ext) {
   if (/[–—]|&[mn]dash;|\\u201[34]/i.test(src)) report(file, 'em or en dash (use commas, colons, parentheses or "to")');
   const emoji = src.match(/(?![©®™↔-↙↩↪])\p{Extended_Pictographic}/u);
   if (emoji) report(file, `emoji character ${JSON.stringify(emoji[0])}`);
-  if (/gradient\(/i.test(src)) report(file, 'gradient( is not allowed');
-  for (const m of src.matchAll(/border-radius\s*:\s*([^;}"]+)/gi)) {
-    const v = m[1].trim();
-    if (/var\(--radius\)/.test(v) && !/\d/.test(v.replace(/var\(--radius\)/g, ''))) continue;
-    const nums = [...v.matchAll(/([\d.]+)(px|%|em|rem)?/g)];
-    if (nums.some(([, n, u]) => (u === 'px' || !u ? Number(n) > 4 : Number(n) > 0))) report(file, `border-radius ${v} is above 4px`);
-  }
-  if (/rounded-full|9999px/.test(src)) report(file, 'fully rounded (pill) shape');
+  // Gradients, pill buttons and rounded boxes are not checked: the owner approved the
+  // Codex-style skin (gradient wash, pills, glass) in writing on 25 Oct 2026, as the
+  // brief's section 10 allows. Every other section 2 rule below still applies.
   if (/\bAOS\b|ScrollTrigger|whileInView|\blenis\b|IntersectionObserver|<marquee|scroll-?progress/i.test(src)) {
     report(file, 'scroll-triggered animation code (AOS, ScrollTrigger, whileInView, Lenis, IntersectionObserver, marquee, progress bar)');
   }
@@ -137,10 +134,12 @@ function checkPage(file, html, seen) {
     if (src && !/\.(webp|avif|svg)(\?|$)/.test(src)) report(file, `image is not WebP or AVIF: ${src}`);
   }
 
-  // CSP is script-src 'self': no inline executable scripts.
+  // CSP is script-src 'self' plus listed hashes: an inline script runs only if its sha256 is in vercel.json.
   for (const m of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
     if (/type="application\/ld\+json"/.test(m[1])) continue;
-    if (!/\ssrc=/.test(m[1]) && m[2].trim()) report(file, 'inline <script> would be blocked by the CSP');
+    if (/\ssrc=/.test(m[1]) || !m[2].trim()) continue;
+    const hash = `'sha256-${createHash('sha256').update(m[2]).digest('base64')}'`;
+    if (!cspConfig.includes(hash)) report(file, `inline <script> would be blocked by the CSP (add ${hash} to vercel.json)`);
   }
 }
 

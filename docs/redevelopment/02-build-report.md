@@ -80,7 +80,7 @@ Correct them in `src/content/site.ts` if any have changed.
 ## Security issues found (not part of the brief)
 
 1. `.env.production` with the database password, JWT secret and admin token was in git. Now untracked and ignored. **Rotate all three.**
-2. Supabase RLS lets the public key read every column of `interns`. The new certificate check does not depend on it; the old dashboard does. Fixing it means moving the dashboard's reads to a server function.
+2. Supabase RLS lets the public key read every column of `interns`. Fixed in code: the dashboard now signs in through `POST /api/verify`, which sets a signed HttpOnly cookie, and loads certificate-level fields from `/api/intern`. **Still open on the live database** until the owner runs `database/2026-10-25_drop_anon_read_interns.sql` after deploy (see DEPLOYMENT.md).
 3. `database/schema.sql` seeds an admin with password `admin`. `database/dremora_schema.sql` contains real intern names. Both are in the public repo history.
 4. `node_modules` (root and backend) was committed. Now untracked.
 

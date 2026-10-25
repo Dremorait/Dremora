@@ -1,39 +1,48 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Fact from '../../components/Fact.astro';
-import { services, known } from '../../content/site';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, process, known } from '../../content/site';
 import { pages } from '../../content/pages';
+
+const crumbs = [{ name: 'Services', path: '/services' }];
 ---
-<Base page={pages.services} crumbs={[{ name: 'Services', path: '/services' }]}>
-  <section class="page-head wrap">
-    <h1>Three things we build, and nothing we would have to learn on your money</h1>
-    <p class="lead">Each one has a written scope, a fixed price and a timeline before any work starts.</p>
-  </section>
+<Base page={pages.services} crumbs={crumbs}>
+  <PageHero title="Three things we build, and nothing we would have to learn on your money" lead="Each one has a written scope, a fixed price and a timeline before any work starts." crumbs={crumbs} />
 
   <section class="section" aria-labelledby="list-title">
     <div class="wrap">
       <h2 id="list-title" class="visually-hidden">Services</h2>
-      <div class="rows">
+      <div class="cards cards-3 plans">
         {services.map((s) => (
-          <article class="row" id={s.slug === 'web-apps' ? 'webapps' : s.slug === 'ai-automation' ? 'ai' : s.slug}>
-            <h3><a href={`/services/${s.slug}`}>{s.name}</a></h3>
-            <div>
-              <p>{s.short}</p>
-              <p class="muted">For: {s.forWhom}</p>
-            </div>
-            <dl>
-              <dt>Timeline</dt><dd class="mono">{s.timeline}</dd>
-              {known(s.price) && <><dt>Starting at</dt><dd class="price"><Fact v={s.price} /></dd></>}
-            </dl>
+          <article class="card plan" id={s.slug === 'web-apps' ? 'webapps' : s.slug === 'ai-automation' ? 'ai' : s.slug}>
+            <h3>{s.name}</h3>
+            <p class="muted">{s.short}</p>
+            {known(s.price)
+              ? <p class="card-figure"><small>Starting at</small><Fact v={s.price} /></p>
+              : <p class="card-figure"><small>Live in</small>{s.timeline}</p>}
+            <a class="btn btn-primary" href={`/services/${s.slug}`}>See what is included<span class="visually-hidden"> in {s.name.toLowerCase()}</span></a>
+            <ul class="ticks">{s.included.slice(0, 4).map((i) => <li>{i}</li>)}</ul>
           </article>
         ))}
       </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
-        <span class="muted">Not sure which one you need? Choose "Not sure" in the form.</span>
-      </div>
+      <p class="contact-alt">Not sure which one you need? Choose "Not sure" in the <a href="/contact">enquiry form</a>.</p>
     </div>
   </section>
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="how-title">The same three steps for every service</h2>
+      </div>
+      <ol class="step-cards">
+        {process.map((p) => <li><h3>{p.title}</h3><p>{p.body}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <CtaBand />
 
   {/* Old links like /services.html#webapps now point at their own pages. */}
   <script is:inline src="/services-hash.js" slot="head"></script>

@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { pages } from '../content/pages';
 ---
 <Base page={pages.notFound}>
-  <section class="page-head wrap">
-    <p class="label">Error 404</p>
-    <h1>This page does not exist</h1>
-    <p class="lead">The link may be old, or the address may have a typing mistake. These pages will get you back on track:</p>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/work">Work</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </section>
+  <PageHero tall label="Error 404" title="This page does not exist" lead="The link may be old, or the address may have a typing mistake. These pages will get you back on track.">
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Home</a>
+      <a class="btn btn-secondary" href="/work">Work</a>
+      <a class="btn btn-secondary" href="/contact">Contact</a>
+    </div>
+  </PageHero>
 </Base>

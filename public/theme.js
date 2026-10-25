@@ -1,11 +1,7 @@
-// Theme: follows prefers-color-scheme until the visitor picks one with the toggle.
-// Loaded as a tiny blocking script in <head> so the page never flashes the wrong theme.
+// Theme toggle. The saved theme is applied before first paint by the inline
+// script in src/layouts/Base.astro (src/theme-init.js); this file is deferred.
 (function () {
   var root = document.documentElement;
-  try {
-    var saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
-  } catch (e) {}
 
   function isDark() {
     return root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
@@ -16,7 +12,7 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', sync);
+  sync();
   document.addEventListener('click', function (e) {
     if (!e.target.closest || !e.target.closest('[data-theme-toggle]')) return;
     var next = isDark() ? 'light' : 'dark';

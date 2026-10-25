@@ -1,0 +1,20 @@
+---
+// Closing call to action on the wash, the Codex "Start building" band.
+import { site } from '../content/site';
+
+interface Props { title?: string; text?: string }
+const {
+  title = 'Ready for a fixed quote?',
+  text = 'Send a short note about the business and what you need. We reply with questions or a call time, then a written quote.',
+} = Astro.props;
+---
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="wrap center">
+    <h2 id="cta-title">{title}</h2>
+    <p>{text}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
+      <a class="btn btn-secondary" href={site.whatsapp}>Message us on WhatsApp</a>
+    </div>
+  </div>
+</section>

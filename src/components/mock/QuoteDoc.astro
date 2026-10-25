@@ -1,0 +1,29 @@
+---
+// Step 2 illustration: what a written fixed quote looks like. Sample client, no amounts.
+const lines = [
+  ['Design and build of the agreed pages', 'Included'],
+  ['Appointment booking form', 'Included'],
+  ['SEO setup and sitemap', 'Included'],
+  ['Up to 3 rounds of revisions', 'Included'],
+  ['30 days of bug fixes after launch', 'Included'],
+  ['Domain and hosting', 'Billed separately'],
+];
+import BrandMark from '../BrandMark.astro';
+---
+<div class="mock-card mock-doc" aria-hidden="true">
+  <div class="doc-head">
+    <BrandMark />
+    <span><b>Fixed quote</b><small>For Sample Dental Clinic</small></span>
+    <span class="doc-tag">Draft</span>
+  </div>
+  <table class="doc-table">
+    <tbody>
+      {lines.map(([k, v]) => <tr><td>{k}</td><td class:list={{ muted: v !== 'Included' }}>{v}</td></tr>)}
+    </tbody>
+  </table>
+  <div class="doc-foot">
+    <span><small>Timeline</small>3 weeks</span>
+    <span><small>Payment</small>50% now, 50% on delivery</span>
+  </div>
+  <div class="doc-sign"><span>Accepted by</span><i></i></div>
+</div>

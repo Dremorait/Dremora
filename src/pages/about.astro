@@ -1,63 +1,82 @@
 ---
 import Base from '../layouts/Base.astro';
 import Founder from '../components/Founder.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import BrandMark from '../components/BrandMark.astro';
 import { site, story, principles, internship } from '../content/site';
 import { showFounder } from '../content/founder-photo';
 import { pages } from '../content/pages';
----
-<Base page={pages.about} crumbs={[{ name: 'About', path: '/about' }]}>
-  <section class="page-head wrap">
-    <h1>A small studio in Pune where the founder writes the code</h1>
-    <p class="lead">{site.legalName}, trading as {site.name}. Established in {site.founded}.</p>
-    <dl class="facts">
-      <dt>Based in</dt><dd>{site.address.display}</dd>
-      <dt>Founded</dt><dd class="mono">{site.founded}</dd>
-      <dt>We work in</dt><dd>{site.languages}</dd>
-      <dt>We build</dt><dd><a href="/services/websites">Websites</a>, <a href="/services/web-apps">web applications</a>, and <a href="/services/ai-automation">AI and WhatsApp automation</a></dd>
-    </dl>
-  </section>
 
-  <section class="section" aria-labelledby="why-title">
-    <div class="wrap grid">
-      <div class="span-4"><h2 id="why-title">Why the studio exists</h2></div>
-      <div class="span-8">
-        {showFounder() ? <Founder headingId="founder-name" headingLevel={3} /> : story.map((s) => <p>{s}</p>)}
+const crumbs = [{ name: 'About', path: '/about' }];
+const facts = [
+  { icon: 'pin', k: 'Based in', v: `${site.city}, ${site.address.region}` },
+  { icon: 'calendar', k: 'Founded', v: site.founded },
+  { icon: 'chat', k: 'We work in', v: site.languages },
+  { icon: 'code', k: 'We build', v: 'Websites, web apps and automation' },
+];
+const principleIcons = ['heart', 'eye', 'code'];
+---
+<Base page={pages.about} crumbs={crumbs}>
+  <PageHero title="A small studio in Pune where the founder writes the code" lead={`${site.legalName}, trading as ${site.name}. Established in ${site.founded}.`} crumbs={crumbs}>
+    <div class="app-icon" style="margin: 32px auto 0"><BrandMark size="lg" /></div>
+  </PageHero>
+
+  <section class="section" aria-labelledby="facts-title">
+    <div class="wrap">
+      <h2 id="facts-title" class="visually-hidden">Quick facts</h2>
+      <div class="icon-cards four">
+        {facts.map((f) => (
+          <div class="icon-card">
+            <Icon name={f.icon} />
+            <p>{f.k}</p>
+            <p class="big">{f.v}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
+  <section class="section" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="why-title">Why the studio exists</h2></div>
+      {showFounder()
+        ? <div class="wide-card" style="display: block"><Founder headingId="founder-name" headingLevel={3} withStory /></div>
+        : <div class="statement">{story.map((s) => <p>{s}</p>)}</div>}
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="how-title">
-    <div class="wrap grid">
-      <div class="span-4"><h2 id="how-title">How we work</h2></div>
-      <div class="span-8">
-        <div class="rows">
-          {principles.map((p) => (
-            <div class="row row-2">
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </div>
-          ))}
-        </div>
+    <div class="wrap">
+      <div class="section-head"><h2 id="how-title">How we work</h2></div>
+      <div class="icon-cards three">
+        {principles.map((p, i) => (
+          <div class="icon-card">
+            <Icon name={principleIcons[i]} />
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section" aria-labelledby="intern-title">
-    <div class="wrap grid">
-      <div class="span-4"><h2 id="intern-title">Internship program</h2></div>
-      <div class="span-8">
-        <p>We train {internship.audience} on real project work. Interns use Git, take part in code reviews and ship features under a mentor. The program runs {internship.duration}.</p>
-        <p>Every certificate we issue can be checked on this site by its ID.</p>
-        <p><a href="/internship">Program details and certificate check</a></p>
+    <div class="wrap">
+      <div class="wide-card">
+        <div>
+          <p class="label" style="margin: 0 0 8px">For students</p>
+          <h2 id="intern-title" style="font-size: 1.75rem">Internship program</h2>
+        </div>
+        <div>
+          <p>We train {internship.audience} on real project work. Interns use Git, take part in code reviews and ship features under a mentor. The program runs {internship.duration}.</p>
+          <p class="muted">Every certificate we issue can be checked on this site by its ID.</p>
+          <a class="arrow-link" href="/internship">Program details and certificate check</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Have a project in mind?</h2>
-      <p>The first call is free and takes 30 minutes. You will know by the end of it whether we are the right fit.</p>
-      <div class="actions"><a class="btn btn-primary" href="/contact">Get a fixed quote</a></div>
-    </div>
-  </section>
+  <CtaBand title="Have a project in mind?" text="The first call is free and takes 30 minutes. You will know by the end of it whether we are the right fit." />
 </Base>

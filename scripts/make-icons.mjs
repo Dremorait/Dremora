@@ -1,29 +1,30 @@
-// Generates the favicon set in public/ from one "D" monogram. Run once after
+// Generates the favicon set in public/ from the Dremora logo mark
+// (src/assets/brand/dremora-mark.png, transparent). Run from the project root after
 // changing the mark: `node scripts/make-icons.mjs`. Outputs are committed.
+//
+// Also writes src/assets/brand/dremora-mark-dark.png, the dark-mode mark (navy turned
+// white, see src/lib/mark.mjs) that BrandMark.astro shows on dark backgrounds.
+//
+// Browser and Android icons are the bare D on transparency. The SVG favicon switches to
+// the white-D version on dark browser themes. Only the iPhone and maskable icons need an
+// opaque background; they get a plain white square that the phone crops to its own shape.
 import sharp from 'sharp';
-import { writeFile, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, copyFile } from 'node:fs/promises';
+import { darkMark, markSquare, MARK_PATH as MARK, MARK_DARK_PATH } from '../src/lib/mark.mjs';
 
+const WHITE = '#FFFFFF';
 const NAVY = '#0D1B3E';
-const ORANGE = '#E8790C';
-// Heavy D on a 32 unit grid. Edges sit on even units, so at 16px every edge lands on a whole pixel.
-const D = 'M6 6h8a10 10 0 0 1 0 20H6zm6 4v12h2a6 6 0 0 0 0-12z';
 
-// Browser tab icon. On dark tabs the colours swap so the square stays visible.
-const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-<style>.bg{fill:${NAVY}}.d{fill:${ORANGE}}@media (prefers-color-scheme:dark){.bg{fill:${ORANGE}}.d{fill:${NAVY}}}</style>
-<rect class="bg" width="32" height="32" rx="4"/><path class="d" fill-rule="evenodd" d="${D}"/>
-</svg>
-`;
-
-// scale: share of the canvas the D's 32 unit box takes; radius in px of output.
-const png = (size, { scale = 1, radius = size / 8 } = {}) => {
-  const box = 32 / scale;
-  const off = (box - 32) / 2;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="${-off} ${-off} ${box} ${box}">
-<rect x="${-off}" y="${-off}" width="${box}" height="${box}" rx="${(radius / size) * box}" fill="${NAVY}"/>
-<path fill="${ORANGE}" fill-rule="evenodd" d="${D}"/></svg>`;
-  return sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
-};
+/** The mark centred on a white square. fill = share of the square the mark's longer side takes. */
+async function tile(size, { fill = 0.8, radius = Math.round(size * 0.22) } = {}) {
+  const inner = Math.round(size * fill);
+  const mark = await sharp(MARK).resize(inner, inner, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
+  const shape = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${radius}" fill="${WHITE}"/></svg>`);
+  return sharp(shape)
+    .composite([{ input: mark, left: Math.round((size - inner) / 2), top: Math.round((size - inner) / 2) }])
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+}
 
 // ICO with embedded PNGs (supported by every current browser).
 const ico = (images) => {
@@ -47,15 +48,31 @@ const ico = (images) => {
 
 const out = (f) => new URL(`../public/${f}`, import.meta.url);
 
-await writeFile(out('icon.svg'), iconSvg);
-const small = await Promise.all([16, 32, 48].map(async (size) => ({ size, data: await png(size, { radius: size / 8 }) })));
+const dark = await darkMark();
+await writeFile(MARK_DARK_PATH, dark);
+
+// Small sizes give the mark most of the square so the D still reads at 16px.
+const small = await Promise.all([16, 32, 48].map(async (size) => ({ size, data: await markSquare(MARK, size, { fill: 1 }) })));
 await writeFile(out('favicon.ico'), ico(small));
-// iPhone: solid navy, no transparency, about 20px inner padding (iOS rounds the corners itself).
-await writeFile(out('apple-touch-icon.png'), await png(180, { scale: 1.25, radius: 0 }));
-await writeFile(out('icon-192.png'), await png(192, { radius: 24 }));
-await writeFile(out('icon-512.png'), await png(512, { radius: 64 }));
-// Maskable: full-bleed navy, the D inside the central 80% safe zone.
-await writeFile(out('icon-512-maskable.png'), await png(512, { scale: 1.1, radius: 0 }));
+
+// SVG favicon: navy D on light browser themes, white D on dark ones.
+const svgLight = (await markSquare(MARK, 96, { fill: 1 })).toString('base64');
+const svgDark = (await markSquare(dark, 96, { fill: 1 })).toString('base64');
+await writeFile(
+  out('icon.svg'),
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><style>.d{display:none}@media (prefers-color-scheme:dark){.l{display:none}.d{display:inline}}</style>` +
+    `<image class="l" width="96" height="96" href="data:image/png;base64,${svgLight}"/><image class="d" width="96" height="96" href="data:image/png;base64,${svgDark}"/></svg>\n`,
+);
+
+// iPhone: must be opaque (iOS fills transparency with black) and iOS rounds the corners itself.
+await writeFile(out('apple-touch-icon.png'), await tile(180, { fill: 0.76, radius: 0 }));
+await writeFile(out('icon-192.png'), await markSquare(MARK, 192, { fill: 0.86 }));
+await writeFile(out('icon-512.png'), await markSquare(MARK, 512, { fill: 0.86 }));
+// Maskable: must be full-bleed; the mark sits inside the central 80% safe zone.
+await writeFile(out('icon-512-maskable.png'), await tile(512, { fill: 0.62, radius: 0 }));
+
+// White-D mark for the old intern and admin pages, which are always dark.
+await writeFile(out('assets/images/logo-mark-dark.webp'), await sharp(dark).resize(256).webp({ quality: 90 }).toBuffer());
 
 await writeFile(
   out('site.webmanifest'),
@@ -66,7 +83,7 @@ await writeFile(
       start_url: '/',
       display: 'browser',
       theme_color: NAVY,
-      background_color: '#FAF8F4',
+      background_color: '#FCFCFC',
       icons: [
         { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
         { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
@@ -84,4 +101,5 @@ try {
 } catch {
   console.warn('Run `npm run build` first to create og-default.png');
 }
+await readFile(MARK); // fail loudly if the mark is missing
 console.log('Icons written to public/');

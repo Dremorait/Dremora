@@ -1,0 +1,19 @@
+---
+// Step 1 illustration: picking a slot for the free 30 minute call. Dates are examples.
+const days = [['Mon', 3], ['Tue', 4], ['Wed', 5], ['Thu', 6], ['Fri', 7]];
+const slots = ['10:00 am', '11:00 am', '12:30 pm', '3:00 pm', '4:30 pm', '6:00 pm'];
+import BrandMark from '../BrandMark.astro';
+---
+<div class="mock-card mock-cal" aria-hidden="true">
+  <div class="mock-top">
+    <BrandMark />
+    <span><b>Free 30 minute call</b><small>Dremora IT, Google Meet or phone</small></span>
+  </div>
+  <div class="cal-days">
+    {days.map(([d, n], i) => <span class:list={{ on: i === 2 }}><small>{d}</small>{n}</span>)}
+  </div>
+  <div class="cal-slots">
+    {slots.map((s, i) => <span class:list={{ on: i === 1, off: i === 3 }}>{s}</span>)}
+  </div>
+  <div class="mock-cta">Confirm Wednesday, 11:00 am</div>
+</div>

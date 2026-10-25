@@ -1,72 +1,98 @@
 ---
+// Home: Codex-style layout. Hero with a product window, tools strip, real work,
+// pricing-style service cards, feature rows with example screens, concept builds,
+// promise tiles and a closing form on the wash. Every example screen is labelled.
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Fact from '../components/Fact.astro';
 import Founder from '../components/Founder.astro';
+import BrandMark from '../components/BrandMark.astro';
+import Inbox from '../components/mock/Inbox.astro';
+import HeroVideo from '../components/HeroVideo.astro';
+import { hasHeroVideo } from '../content/hero-video';
+import Calendar from '../components/mock/Calendar.astro';
+import QuoteDoc from '../components/mock/QuoteDoc.astro';
+import DemoReview from '../components/mock/DemoReview.astro';
+import ConceptThumb from '../components/mock/ConceptThumb.astro';
 import { showFounder } from '../content/founder-photo';
 import { site, services, clientWork, concepts, process, known, hasCaseStudy, workName } from '../content/site';
 import { pages } from '../content/pages';
 import { organization, website } from '../content/schema';
 
 const featured = clientWork.slice(0, 1);
-// 'Admin panels and CRMs' -> 'admin panels and CRMs'; leaves 'AI chatbots' and 'WhatsApp automation' alone.
-const sentenceCase = (t: string) => (/^[A-Z][a-z]+\b/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
 // 'EDURO, coaching institute platform' -> 'Coaching institute platform'
 const shortConcept = (n: string) => { const t = n.split(', ')[1] ?? n; return t[0].toUpperCase() + t.slice(1); };
+const tools = ['WhatsApp Business API', 'Google Gemini', 'React', 'Python', 'PostgreSQL', 'Razorpay', 'Stripe', 'Supabase'];
+const promises = [
+  { t: 'Fixed price, in writing', d: 'Scope, price and timeline are agreed on paper before any work starts.', icon: 'M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4' },
+  { t: 'A demo link every week', d: 'You see the real thing while it is built, and change course early.', icon: 'M3 5h18v11H3zM8 21h8M12 16v5' },
+  { t: '30 days of bug fixes', d: 'Every project includes a 30 day bug fix warranty after launch.', icon: 'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6zM9 12l2 2 4-4' },
+  { t: 'You own the code', d: 'Once the project is paid, the code, designs and assets are yours.', icon: 'M15 7a4 4 0 1 1-3.9 4.9L4 19v2h3v-2h2v-2h2l1.1-1.1A4 4 0 0 1 15 7zM16 9h.01' },
+];
 ---
 <Base page={pages.home} schema={[organization(), website()]}>
-  <section class="hero wrap" aria-labelledby="hero-title">
-    <h1 id="hero-title">Websites and WhatsApp automation for Pune businesses, built and supported by the founder.</h1>
-    <p class="lead">Websites go live in 2 to 4 weeks. Fixed price, agreed in writing before we start.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
-      <a class="arrow-link" href={site.whatsapp}>Message us on WhatsApp</a>
+  <section class="hero-c" aria-labelledby="hero-title">
+    <div class="wrap center">
+      <div class="app-icon"><BrandMark size="lg" /></div>
+      <h1 id="hero-title">Websites and WhatsApp automation for Pune businesses</h1>
+      <p class="lead">Built and supported by the founder. Websites go live in 2 to 4 weeks, at a fixed price agreed in writing.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/contact">Get a fixed quote<svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+        <a class="btn btn-secondary" href={site.whatsapp}>Message us on WhatsApp</a>
+      </div>
+      <p class="label hero-meta">Pune, India. Est. {site.founded}.</p>
     </div>
-    <p class="label hero-meta">Pune, India. Est. {site.founded}.</p>
+    <div class="wrap">
+      {/* Video frame once public/media/hero.mp4 and hero-poster.webp exist (see src/content/hero-video.ts). */}
+      {hasHeroVideo() ? <HeroVideo /> : <Inbox />}
+    </div>
+    <div class="wrap tools">
+      <p>Tools we build with</p>
+      <ul>{tools.map((t) => <li>{t}</li>)}</ul>
+    </div>
   </section>
 
   <section class="section" aria-labelledby="work-title">
     <div class="wrap">
-      <p class="label">Real work</p>
-      <h2 id="work-title">Built for real clients</h2>
-      <div class="rows">
-        {featured.map((w) => (
-          <article class="row row-2">
-            <div>
-              <h3>{workName(w)}</h3>
-              <p class="muted">{w.permission ? w.sector : 'Client name withheld until they agree to be named.'}</p>
-            </div>
-            <div>
-              {known(w.problem) && <p><strong>Problem:</strong> <Fact v={w.problem} /></p>}
-              <p><strong>What we built:</strong> {w.built}</p>
-              {hasCaseStudy(w)
-                ? <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a>
-                : <a class="arrow-link" href="/work">See all client work</a>}
-            </div>
-          </article>
-        ))}
+      <div class="section-head">
+        <p class="label">Real work</p>
+        <h2 id="work-title">Built for paying clients, not for a portfolio</h2>
+        <p>Client names appear only with their written permission.</p>
       </div>
+      {featured.map((w) => (
+        <article class="wide-card">
+          <div>
+            <h3>{workName(w)}</h3>
+            <p class="muted">{w.permission ? w.sector : 'Client name withheld until they agree to be named.'}</p>
+          </div>
+          <div>
+            {known(w.problem) && <p><strong>Problem:</strong> <Fact v={w.problem} /></p>}
+            <p><strong>What we built:</strong> {w.built}</p>
+            {hasCaseStudy(w)
+              ? <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a>
+              : <a class="arrow-link" href="/work">See all client work</a>}
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
   <section class="section" aria-labelledby="services-title">
     <div class="wrap">
-      <p class="label">What we build</p>
-      <h2 id="services-title">Three services, each with a fixed price and timeline</h2>
-      <div class="rows">
+      <div class="section-head">
+        <h2 id="services-title">Get started</h2>
+        <p>Three services. Each one has a written scope, a fixed price and a timeline before work starts.</p>
+      </div>
+      <div class="cards cards-3 plans">
         {services.map((s) => (
-          <article class="row">
-            <h3><a href={`/services/${s.slug}`}>{s.name}</a></h3>
-            <div>
-              <p><strong>For:</strong> {s.forWhom}</p>
-              <p><strong>Includes:</strong> {s.kinds.map((k) => sentenceCase(k.name)).join(', ')}.</p>
-            </div>
-            <dl>
-              <dt>Timeline</dt><dd class="mono">{s.timeline}</dd>
-              {known(s.price) && <><dt>Starting at</dt><dd class="price"><Fact v={s.price} /></dd></>}
-              <dt class="visually-hidden">Details</dt>
-              <dd><a href={`/services/${s.slug}`}>What is included<span class="visually-hidden"> in {s.name.toLowerCase()}</span></a></dd>
-            </dl>
+          <article class="card plan">
+            <h3>{s.name}</h3>
+            <p class="muted">{s.short}</p>
+            {known(s.price)
+              ? <p class="card-figure"><small>Starting at</small><Fact v={s.price} /></p>
+              : <p class="card-figure"><small>Live in</small>{s.timeline}</p>}
+            <a class="btn btn-primary" href={`/services/${s.slug}`}>See what is included<span class="visually-hidden"> in {s.name.toLowerCase()}</span></a>
+            <ul class="ticks">{s.included.slice(0, 3).map((i) => <li>{i}</li>)}</ul>
           </article>
         ))}
       </div>
@@ -75,22 +101,46 @@ const shortConcept = (n: string) => { const t = n.split(', ')[1] ?? n; return t[
 
   <section class="section" aria-labelledby="process-title">
     <div class="wrap">
-      <p class="label">How a project runs</p>
-      <h2 id="process-title">A call, a written quote, then a demo every week</h2>
-      <ol class="steps">
-        {process.map((p) => (
-          <li>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-          </li>
-        ))}
-      </ol>
+      <div class="section-head">
+        <h2 id="process-title">How a project runs</h2>
+        <p>A call, a written quote, then a demo every week until launch.</p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-text">
+            <h3>{process[0].title}</h3>
+            <p>{process[0].body}</p>
+          </div>
+          <figure class="panel" aria-label="Example: booking the free call">
+            <Calendar />
+          </figure>
+        </div>
+        <div class="feature">
+          <div class="feature-text">
+            <h3>{process[1].title}</h3>
+            <p>{process[1].body}</p>
+          </div>
+          <figure class="panel" aria-label="Example: a written fixed quote">
+            <QuoteDoc />
+          </figure>
+        </div>
+        <div class="feature">
+          <div class="feature-text">
+            <h3>{process[2].title}</h3>
+            <p>{process[2].body}</p>
+          </div>
+          <figure class="panel" aria-label="Example: a weekly demo with your comments">
+            <DemoReview />
+          </figure>
+        </div>
+      </div>
+      <p class="contact-alt">Screens above are examples with a made-up clinic.</p>
     </div>
   </section>
 
   {showFounder() && (
     <section class="section" aria-labelledby="founder-title">
-      <div class="wrap">
+      <div class="wrap founder-wrap">
         <p class="label">Who you will work with</p>
         <Founder />
       </div>
@@ -99,30 +149,51 @@ const shortConcept = (n: string) => { const t = n.split(', ')[1] ?? n; return t[
 
   <section class="section" aria-labelledby="concepts-title">
     <div class="wrap">
-      <p class="label">Concept builds</p>
-      <h2 id="concepts-title">Sample sites we built to show what is possible</h2>
-      <p class="muted">These are demos with made-up businesses and sample data, not client projects.</p>
-      <ul class="concept-list">
-        {concepts.map((c) => <li><a href={`/work#${c.slug}`}>{shortConcept(c.name)}</a></li>)}
-      </ul>
-      <a class="arrow-link" href="/work#concepts">See all concept builds</a>
+      <div class="section-head">
+        <h2 id="concepts-title">Concept builds</h2>
+        <p>Sample sites we built to show what is possible. Every business in them is made up.</p>
+      </div>
+      <div class="cards cards-3">
+        {concepts.map((c) => (
+          <article class="card">
+            <ConceptThumb kind={c.slug} />
+            <h3 style="font-size: 1.125rem">{shortConcept(c.name)}</h3>
+            <p class="muted">{c.what}</p>
+            <a class="arrow-link" href={`/work#${c.slug}`}>Details<span class="visually-hidden"> of the {shortConcept(c.name).toLowerCase()} concept</span></a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="contact-title">
-    <div class="wrap grid">
-      <div class="span-4">
-        <p class="label">Contact</p>
+  <section class="section" aria-labelledby="promise-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="promise-title">What every project includes</h2>
+      </div>
+      <div class="tiles">
+        {promises.map((p) => (
+          <div class="tile">
+            <span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={p.icon} /></svg></span>
+            <b>{p.t}</b>
+            <p>{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="section-head">
         <h2 id="contact-title">Tell us what you need</h2>
         <p>We reply with questions or a time for a call, then send a written fixed quote.</p>
-        <p>
-          Prefer to talk?<br />
-          <a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a><br />
-          <a href={site.whatsapp}>Message us on WhatsApp</a>
-        </p>
       </div>
-      <div class="span-8">
+      <div class="form-center">
         <ContactForm />
+        <p class="contact-alt">
+          Prefer to talk? <a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a> or <a href={site.whatsapp}>message us on WhatsApp</a>.
+        </p>
       </div>
     </div>
   </section>

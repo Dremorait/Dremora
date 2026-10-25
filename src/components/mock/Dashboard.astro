@@ -1,0 +1,34 @@
+---
+// Web apps illustration: an example admin panel for a coaching class. Made-up data.
+const rows = [
+  { n: 'Aarav Joshi', c: 'JEE batch A', s: 'Fees paid', k: 'ok' },
+  { n: 'Isha Kulkarni', c: 'NEET batch B', s: 'Due 5 Nov', k: 'due' },
+  { n: 'Kabir Shah', c: 'JEE batch A', s: 'Fees paid', k: 'ok' },
+  { n: 'Meera Patil', c: 'Foundation', s: 'New lead', k: 'new' },
+  { n: 'Rohan Desai', c: 'NEET batch B', s: 'Due 12 Nov', k: 'due' },
+];
+const nav = ['Students', 'Batches', 'Fees', 'Leads', 'Reports'];
+---
+<div class="mock-browser mock-dash" aria-hidden="true">
+  <div class="mb-bar">
+    <span class="window-dots"><i></i><i></i><i></i></span>
+    <span class="mb-url">sample-classes admin</span>
+  </div>
+  <div class="dash">
+    <aside class="dash-nav">
+      <b>Sample Classes</b>
+      {nav.map((n, i) => <span class:list={{ on: i === 0 }}>{n}</span>)}
+    </aside>
+    <div class="dash-main">
+      <div class="dash-head"><b>Students</b><span class="dash-btn">Add student</span></div>
+      <div class="dash-filters"><span class="on">All batches</span><span>Fees due</span><span>New leads</span></div>
+      <table class="dash-table">
+        <tbody>
+          {rows.map((r) => (
+            <tr><td><b>{r.n}</b></td><td>{r.c}</td><td><span class:list={['st', r.k]}>{r.s}</span></td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
