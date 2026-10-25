@@ -23,19 +23,19 @@ const page = pages[`service-${s.slug}`];
 const work = clientWork.filter((w) => s.relatedWork.includes(w.slug));
 const demos = concepts.filter((c) => s.relatedConcepts.includes(c.slug));
 const others = services.filter((o) => o.slug !== s.slug);
-// 'Web applications' -> 'web applications', but 'AI and WhatsApp automation' and 'CRM' keep their capitals.
+// 'Web applications' -> 'web applications', but 'AI automation and agents' and 'CRM' keep their capitals.
 const inSentence = (name: string) => name.replace(/^[A-Z][a-z]/, (m) => m.toLowerCase());
 const icons: Record<Service['slug'], string[]> = {
   websites: ['globe', 'page', 'cart', 'user'],
   'web-apps': ['grid', 'lock', 'box', 'wrench'],
   'custom-software': ['user', 'box', 'clock', 'link'],
-  'ai-automation': ['chat', 'bell', 'filter', 'link'],
+  'ai-automation': ['laptop', 'chat', 'bell', 'link'],
 };
 const ctaTitle: Record<Service['slug'], string> = {
   websites: 'Ready to start your website?',
   'web-apps': 'Ready to plan your web app?',
   'custom-software': 'Ready to plan your CRM or ERP?',
-  'ai-automation': 'Ready to put WhatsApp on autopilot?',
+  'ai-automation': 'Ready to automate the routine work?',
 };
 const crumbs = [{ name: 'Services', path: '/services' }, { name: s.name, path: `/services/${s.slug}` }];
 const faqSchema = {
@@ -44,7 +44,7 @@ const faqSchema = {
 };
 ---
 <Base page={page} crumbs={crumbs} schema={[serviceNode(s), faqSchema]}>
-  <PageHero label={s.name} title={s.h1} lead={s.intro[0]} crumbs={crumbs}>
+  <PageHero label={s.name} title={s.h1} lead={s.lead} crumbs={crumbs}>
     <div class="actions">
       <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
       <a class="btn btn-secondary" href={site.whatsapp}>Message us on WhatsApp</a>
@@ -72,7 +72,7 @@ const faqSchema = {
   </div>
 
   <section class="section">
-    <div class="wrap statement"><p>{s.intro[1]}</p></div>
+    <div class="wrap statement">{s.intro.map((p) => <p>{p}</p>)}</div>
   </section>
 
   <section class="section" aria-labelledby="for-title">

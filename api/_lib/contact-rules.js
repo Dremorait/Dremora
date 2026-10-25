@@ -6,7 +6,7 @@ export const NEEDS = {
   website: 'Website',
   'web-app': 'Web app',
   'custom-software': 'Custom software, CRM or ERP',
-  automation: 'Automation',
+  automation: 'AI automation or agents',
   'not-sure': 'Not sure',
 };
 

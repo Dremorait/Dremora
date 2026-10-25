@@ -96,6 +96,7 @@ export type Service = {
   title: string;
   description: string;
   h1: string;
+  lead: string; // one sentence under the headline at the top of the service page
   intro: string[];
   forWhom: string;
   kinds: { name: string; body: string }[];
@@ -139,7 +140,8 @@ export const services: Service[] = [
     short: 'Business websites, landing pages, online stores and portfolio sites.',
     title: 'Website Development, Fixed Price | Dremora IT',
     description: 'Business websites, landing pages and online stores for businesses worldwide. Fixed price, 2 to 4 weeks, built and supported by the founder.',
-    h1: 'A website that tells customers what you do and how to reach you',
+    h1: 'A website customers understand in seconds',
+    lead: 'Fast, mobile-first sites with a clear next step, live in 2 to 4 weeks at a fixed price.',
     intro: [
       'Most people find a local business on their phone, look at it for a few seconds, and then either call, send a WhatsApp message, or go back to the search results. Your website has one job in those seconds: say what you do, where you are, and how to reach you.',
       'We build sites that load fast on a mid-range Android phone, are readable without zooming, and are set up so Google can understand them. No page builder lock-in and no theme with a hundred unused features. The code is written for your site and handed over to you.',
@@ -187,7 +189,8 @@ export const services: Service[] = [
     short: 'Admin panels, client portals, dashboards and booking systems.',
     title: 'Custom Web App Development | Dremora IT',
     description: 'Admin panels, client portals, dashboards and booking systems built around how your business already works. Fixed scope quote, 4 to 10 weeks.',
-    h1: 'Software built around the way your business already runs',
+    h1: 'Software built around how you already work',
+    lead: 'Admin panels, portals and booking systems that replace your spreadsheets, in 4 to 10 weeks.',
     intro: [
       'When your orders, leads, students or stock live across notebooks, spreadsheets and WhatsApp chats, things get missed. A web application puts that work in one place, with logins for the people who need it and nothing extra.',
       'We start from your current process, not from a template. On the first call we ask who uses the system, what they enter, and what they need to see at the end of the day. The quote describes those screens. Every week you get a working link to try with your own data.',
@@ -232,7 +235,8 @@ export const services: Service[] = [
     short: 'CRM, ERP and business software for sales, stock, purchase, billing and staff.',
     title: 'Custom Software, CRM and ERP Development | Dremora IT',
     description: 'Custom CRM, ERP and business software built around how your company works: sales, stock, billing and staff in one system. Fixed quote per phase.',
-    h1: 'One system for your sales, stock, accounts and team',
+    h1: 'One system for sales, stock and your team',
+    lead: 'CRM, ERP and staff tools in one place, built in phases with a fixed quote for each.',
     intro: [
       'Most growing businesses run on a mix of spreadsheets, an accounting package, WhatsApp groups and a few apps that do not talk to each other. Numbers get typed twice, nobody trusts the report, and the owner spends evenings reconciling. Custom software brings that work into one system that follows your rules.',
       'We build it in phases. The first phase covers the process that hurts most, usually leads and sales or stock and orders, and goes live in weeks. Each later phase adds a module, with its own fixed quote, once the last one is in daily use. Every week you get a working link to try.',
@@ -278,39 +282,45 @@ export const services: Service[] = [
   },
   {
     slug: 'ai-automation',
-    name: 'AI and WhatsApp automation',
-    short: 'WhatsApp bots, website chatbots, reminders and lead follow-up.',
-    title: 'AI Chatbots and WhatsApp Automation | Dremora IT',
-    description: 'WhatsApp automation, AI chatbots and follow-up flows for businesses worldwide. Order confirmations, reminders and lead replies. 2 to 6 weeks.',
-    h1: 'WhatsApp replies, reminders and follow-ups that run without you',
+    name: 'AI automation and agents',
+    short: 'AI agents, chatbots, WhatsApp automation and workflows that run without you.',
+    title: 'AI Automation and AI Agents | Dremora IT',
+    description: 'AI agents, chatbots, WhatsApp and workflow automation for businesses worldwide. Replies, follow-ups and routine tasks handled for you. 2 to 6 weeks.',
+    h1: 'AI agents that handle the routine work',
+    lead: 'Agents, chatbots and workflows that reply, follow up and update your tools, with a person in the loop.',
     intro: [
-      'If your phone is full of the same five questions every day, or leads go cold because nobody replied after hours, automation can take that load. We use AI only where it earns its cost, and keep a person in the loop for anything that needs judgement.',
-      'Most automation projects start small: confirm an order on WhatsApp, remind a patient about an appointment, or answer common questions and pass the rest to you. We build one flow, measure whether it helps, and then decide together what comes next.',
+      'If your team spends hours answering the same questions, copying data between tools or chasing leads who went quiet, automation can take that load. We use AI only where it earns its cost, and keep a person in the loop for anything that needs judgement.',
+      'Most projects start small: an agent that replies to enquiries and books calls, a reminder flow on WhatsApp, or a workflow that moves data from one tool to another. We build one, measure whether it helps, and then decide together what comes next.',
     ],
-    forWhom: 'Businesses that get many repeat questions or bookings on WhatsApp or their website: clinics, coaching classes, shops, agri businesses and service providers.',
+    forWhom: 'Businesses where repeat questions, bookings or data entry eat staff time: clinics, coaching classes, shops, agencies, agri businesses and service providers.',
     kinds: [
-      { name: 'AI chatbots', body: 'Website and WhatsApp bots, built on Google Gemini, that answer common questions, collect lead details and hand over to a person when needed.' },
+      { name: 'AI agents', body: 'Agents built on models such as Google Gemini that carry out multi-step tasks: read an enquiry, look up your data, draft a reply or quote, update your CRM, and ask a person before anything important.' },
+      { name: 'AI chatbots', body: 'Website and WhatsApp bots that answer common questions, collect lead details and hand over to a person when needed.' },
       { name: 'WhatsApp automation', body: 'Order confirmations, appointment reminders and follow-up messages through the WhatsApp Business API.' },
-      { name: 'Lead qualification', body: 'Forms and chat flows that ask the right questions before a lead reaches you.' },
-      { name: 'Connecting your tools', body: 'Email, Google Sheets, forms and databases connected so data is entered once.' },
+      { name: 'Workflow automation', body: 'Email, Google Sheets, forms, CRMs and databases connected, so data is entered once and routine steps run on their own.' },
     ],
     included: [
-      'Mapping the messages and steps you want automated, in writing, before we build',
-      'Setup of the bot or automation flow and its message templates',
+      'Mapping the tasks and messages you want automated, in writing, before we build',
+      'Setup of the agent, bot or workflow, with its prompts and message templates',
+      'Limits on what an agent can do on its own, and approval steps for the rest',
       'A way for a person to take over any conversation',
       'A working demo every week while we build',
       '30 day bug fix warranty after launch',
     ],
     notIncluded: [
-      'WhatsApp Business API message charges and AI usage fees (third-party costs, listed separately)',
+      'WhatsApp Business API message charges and AI model usage fees (third-party costs, listed separately)',
       'Changes to flows outside the agreed scope (quoted separately)',
       'Maintenance after the 30 day warranty (available as a monthly retainer)',
     ],
     timeline: '2 to 6 weeks',
-    price: todo('Starting price for AI and WhatsApp automation in INR (old site said ₹40,000)'),
-    stack: 'Google Gemini, WhatsApp Business API, email and Google Sheets integrations',
+    price: todo('Starting price for AI automation and agents in INR (old site said ₹40,000)'),
+    stack: 'Google Gemini, WhatsApp Business API, email, Google Sheets and API integrations',
     faq: [
-      { q: 'Will the bot give wrong answers to my customers?', a: 'The bot answers only from information you approve, and hands the conversation to a person when it cannot answer.' },
+      {
+        q: 'What is an AI agent, and how is it different from a chatbot?',
+        a: 'A chatbot answers questions. An agent can also act: look up an order, update a record, draft a quote or send a follow-up, within limits you set. Anything risky, such as refunds or deleting data, waits for a person to approve it.',
+      },
+      { q: 'Will the bot or agent give wrong answers to my customers?', a: 'It answers only from information you approve, and hands the conversation to a person when it cannot answer.' },
       sharedFaq.payments,
       { q: 'Are there running costs after launch?', a: 'Yes. WhatsApp Business API messages and AI usage are billed by those providers. We estimate them for your expected volume in the quote, separately from our price.' },
       sharedFaq.hosting,

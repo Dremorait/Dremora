@@ -18,18 +18,18 @@ const updated = '2026-10-24';
 export const pages: Record<string, PageMeta> = {
   home: {
     path: '/',
-    title: 'Dremora IT: Websites, Web Apps and WhatsApp Automation',
-    description: 'Websites, web apps and WhatsApp automation for businesses worldwide. Fixed price, fixed timeline, built and supported by the founder.',
+    title: 'Dremora IT: Websites, Software and AI Automation',
+    description: 'Websites, custom software, AI automation and AI agents for businesses worldwide. Fixed price, fixed timeline, built and supported by the founder.',
     og: 'home',
-    ogTitle: 'Websites and WhatsApp automation for businesses worldwide',
+    ogTitle: 'Websites, software, AI automation and agents',
     updated,
   },
   services: {
     path: '/services',
     title: 'Services: Websites, Web Apps and Automation | Dremora IT',
-    description: 'Websites, web apps, custom CRM and ERP software, and AI and WhatsApp automation for businesses worldwide. What each includes and how long it takes.',
+    description: 'Websites, web apps, custom CRM and ERP software, and AI automation and agents for businesses worldwide. What each includes and how long it takes.',
     og: 'services',
-    ogTitle: 'Websites, web apps and WhatsApp automation',
+    ogTitle: 'Websites, web apps, software and AI agents',
     updated,
   },
   ...Object.fromEntries(
