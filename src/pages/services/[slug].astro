@@ -8,6 +8,8 @@ import Inbox from '../../components/mock/Inbox.astro';
 import DemoReview from '../../components/mock/DemoReview.astro';
 import Dashboard from '../../components/mock/Dashboard.astro';
 import ConceptThumb from '../../components/mock/ConceptThumb.astro';
+import VideoFrame from '../../components/VideoFrame.astro';
+import { crmPromo } from '../../content/videos';
 import { site, services, clientWork, concepts, known, hasCaseStudy, workName, type Service } from '../../content/site';
 import { pages } from '../../content/pages';
 import { serviceNode } from '../../content/schema';
@@ -57,6 +59,8 @@ const faqSchema = {
   <div class="wrap stage">
     {s.slug === 'ai-automation'
       ? <Inbox />
+      : s.slug === 'custom-software'
+      ? <VideoFrame {...crmPromo} />
       : (
         <figure class="panel" aria-labelledby="stage-caption">
           {s.slug === 'websites' ? <DemoReview /> : <Dashboard />}

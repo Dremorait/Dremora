@@ -8,8 +8,8 @@ import Fact from '../components/Fact.astro';
 import Founder from '../components/Founder.astro';
 import BrandMark from '../components/BrandMark.astro';
 import Inbox from '../components/mock/Inbox.astro';
-import HeroVideo from '../components/HeroVideo.astro';
-import { hasHeroVideo } from '../content/hero-video';
+import VideoFrame from '../components/VideoFrame.astro';
+import { heroVideo, hasHeroVideo } from '../content/videos';
 import Calendar from '../components/mock/Calendar.astro';
 import QuoteDoc from '../components/mock/QuoteDoc.astro';
 import DemoReview from '../components/mock/DemoReview.astro';
@@ -43,8 +43,8 @@ const promises = [
       <p class="label hero-meta">Based in Pune, India. Working with clients worldwide. Est. {site.founded}.</p>
     </div>
     <div class="wrap">
-      {/* Video frame once public/media/hero.mp4 and hero-poster.webp exist (see src/content/hero-video.ts). */}
-      {hasHeroVideo() ? <HeroVideo /> : <Inbox />}
+      {/* Video frame once public/media/hero.mp4 and hero-poster.webp exist (see src/content/videos.ts). */}
+      {hasHeroVideo() ? <VideoFrame sources={[{ src: heroVideo.src }]} poster={heroVideo.poster} label={heroVideo.label} /> : <Inbox />}
     </div>
     <div class="wrap tools">
       <p>Tools we build with</p>

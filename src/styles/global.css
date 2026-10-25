@@ -719,11 +719,12 @@ th { font-weight: 500; }
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
-/* Hero video: large rounded frame, glass play/pause button bottom right */
+/* Video frame (VideoFrame.astro): large rounded frame, glass play/pause button bottom right */
+.video-figure { margin: 72px auto 0; max-width: 1080px; }
+.stage .video-figure { margin-top: 0; }
+.video-caption { margin: 12px 0 0; text-align: center; font-size: 0.875rem; color: var(--muted); }
 .media-frame {
   position: relative;
-  margin: 72px auto 0;
-  max-width: 1080px;
   aspect-ratio: 16 / 9;
   border-radius: 24px;
   overflow: hidden;
@@ -754,10 +755,12 @@ th { font-weight: 500; }
 .media-play:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
 .media-play svg { width: 26px; height: 26px; }
 .media-play .icon-play { margin-left: 3px; }
-.media-play .icon-pause, .media-frame.is-playing .media-play .icon-play { display: none; }
-.media-frame.is-playing .media-play .icon-pause { display: block; }
+.media-play .icon-pause, .is-playing .media-play .icon-play { display: none; }
+.is-playing .media-play .icon-pause { display: block; }
 @media (max-width: 599px) {
-  .media-frame { margin-top: 48px; border-radius: 16px; }
+  .video-figure { margin-top: 48px; }
+  .stage .video-figure { margin-top: 0; }
+  .media-frame { border-radius: 16px; }
   .media-play { right: 12px; bottom: 12px; width: 48px; height: 48px; }
 }
 
