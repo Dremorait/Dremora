@@ -1,0 +1,49 @@
+---
+// Home hero logo: plays the logo intro once (white logo on transparency) and rests on its
+// final frame.
+// - Chrome, Edge, Firefox: the VP9 WebM with its alpha channel (302 KB).
+// - Safari draws VP9 without transparency, so after a one-pixel check it gets an animated
+//   WebP of the same intro, which keeps transparency everywhere (687 KB, Safari only).
+// - Reduced motion, no JavaScript, or before playback: the final frame as a still image.
+const media = {
+  video: '/media/logo-intro.webm',
+  animated: '/media/logo-intro.webp',
+  still: '/media/logo-intro-still.webp',
+};
+---
+<div class="logo-intro" data-logo-intro data-video={media.video} data-animated={media.animated}>
+  <div class="intro-dark">
+    <img class="intro-still" src={media.still} width="960" height="384" alt="Dremora, IT consultants and services" />
+    <video class="intro-video" muted playsinline preload="none" width="1600" height="640" aria-hidden="true"></video>
+  </div>
+</div>
+
+<script>
+  const box = document.querySelector<HTMLElement>('[data-logo-intro]');
+  if (box && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const still = box.querySelector<HTMLImageElement>('.intro-still')!;
+    const video = box.querySelector('video')!;
+    const animated = () => { still.src = box.dataset.animated!; };
+
+    if (!video.canPlayType('video/webm; codecs="vp09.00.10.08"')) {
+      animated();
+    } else {
+      video.addEventListener('loadeddata', () => {
+        // The bottom-left corner of the first frame is empty. If it comes back see-through,
+        // this browser keeps the video's transparency; if it comes back black, it does not.
+        const c = document.createElement('canvas');
+        c.width = c.height = 1;
+        const g = c.getContext('2d')!;
+        g.drawImage(video, 0, 600, 40, 40, 0, 0, 1, 1);
+        if (g.getImageData(0, 0, 1, 1).data[3] < 20) {
+          video.play().then(() => box.classList.add('is-playing')).catch(() => {});
+        } else {
+          animated();
+        }
+      }, { once: true });
+      video.preload = 'auto';
+      video.src = box.dataset.video!;
+      video.load();
+    }
+  }
+</script>

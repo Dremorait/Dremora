@@ -4,7 +4,7 @@ import Founder from '../components/Founder.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import BrandMark from '../components/BrandMark.astro';
+import Logo from '../components/Logo.astro';
 import { site, story, principles, internship } from '../content/site';
 import { showFounder } from '../content/founder-photo';
 import { pages } from '../content/pages';
@@ -20,7 +20,7 @@ const principleIcons = ['heart', 'eye', 'code'];
 ---
 <Base page={pages.about} crumbs={crumbs}>
   <PageHero title="A founder-led studio from Pune, working with clients worldwide" lead={`${site.legalName}, trading as ${site.name}. Established in ${site.founded}.`} crumbs={crumbs}>
-    <div class="app-icon" style="margin: 32px auto 0"><BrandMark size="lg" /></div>
+    <div class="app-icon" style="margin: 32px auto 0"><Logo variant="mark" label="Dremora" /></div>
   </PageHero>
 
   <section class="section" aria-labelledby="facts-title">

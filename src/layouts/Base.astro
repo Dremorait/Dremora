@@ -5,7 +5,6 @@ import '@fontsource/ibm-plex-sans/latin-500.css';
 import '@fontsource/ibm-plex-sans/latin-ext-500.css';
 import '@fontsource/ibm-plex-sans/latin-600.css';
 import '../styles/global.css';
-import themeInit from '../theme-init.js?raw';
 import bodyFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
 import headingFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2?url';
 
@@ -52,16 +51,14 @@ const jsonld = graph.length ? JSON.stringify({ '@context': 'https://schema.org',
     {/* Body and heading weights load before first paint, so the hero does not shift when fonts swap in. */}
     <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
-    {/* Sets the saved theme before first paint. Inline so it does not block rendering; its sha256 is allowed in the CSP (vercel.json). */}
-    <script is:inline set:html={themeInit}></script>
-    <script is:inline defer src="/theme.js"></script>
+    {/* The site is dark only: browser controls, scrollbars and the mobile address bar match. */}
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content={page.path === '/' ? 'website' : 'article'} />
     <meta property="og:site_name" content={site.name} />

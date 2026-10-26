@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import Logo from '../components/Logo.astro';
 import { pages } from '../content/pages';
 ---
 <Base page={pages.notFound}>
-  <PageHero tall label="Error 404" title="This page does not exist" lead="The link may be old, or the address may have a typing mistake. These pages will get you back on track.">
+  <PageHero tall smile label="Error 404" title="This page does not exist" lead="The link may be old, or the address may have a typing mistake. These pages will get you back on track.">
     <div class="actions">
       <a class="btn btn-primary" href="/">Home</a>
       <a class="btn btn-secondary" href="/work">Work</a>

@@ -1,6 +1,7 @@
 ---
 // Top of every inner page: breadcrumb, centred title and intro on the soft wash.
-// Put buttons or fact chips in the default slot.
+// Put buttons or fact chips in the default slot. `smile` shows the brand smile above the title.
+import Logo from './Logo.astro';
 type Crumb = { name: string; path: string };
 interface Props {
   title: string;
@@ -8,8 +9,9 @@ interface Props {
   label?: string;
   crumbs?: Crumb[];
   tall?: boolean;
+  smile?: boolean;
 }
-const { title, lead, label, crumbs = [], tall = false } = Astro.props;
+const { title, lead, label, crumbs = [], tall = false, smile = false } = Astro.props;
 ---
 <section class:list={['page-hero', { 'page-hero-tall': tall }]} aria-labelledby="page-title">
   <div class="wrap">
@@ -24,6 +26,7 @@ const { title, lead, label, crumbs = [], tall = false } = Astro.props;
       </nav>
     )}
     <div class="page-hero-inner center">
+      {smile && <Logo variant="smile" class="hero-smile" label="" />}
       {label && <p class="label">{label}</p>}
       <h1 id="page-title">{title}</h1>
       {lead && <p class="lead">{lead}</p>}

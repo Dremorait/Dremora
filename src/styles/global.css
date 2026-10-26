@@ -18,39 +18,40 @@
 }
 
 :root {
-  --bg: #FCFCFC;
-  --surface: #FFFFFF;
-  --card: rgba(237, 237, 237, 0.75);
-  --card-solid: #E8E8E8;
-  --ink: #0D0D0D;
-  --muted: #5D5D5D;
-  --rule: rgba(13, 13, 13, 0.1);
-  --line: rgba(13, 13, 13, 0.15);
-  --btn-bg: #0D0D0D;
-  --btn-fg: #FFFFFF;
-  --btn-hover: #333333;
-  --btn2-bg: #FFFFFF;
-  --btn2-fg: #0D0D0D;
-  --focus: #0D0D0D;
-  --error: #C62828;
+  /* The site is dark only. */
+  --bg: #000000;
+  --surface: #171717;
+  --card: rgba(48, 48, 48, 0.75);
+  --card-solid: #303030;
+  --ink: #FFFFFF;
+  --muted: #AFAFAF;
+  --rule: rgba(255, 255, 255, 0.1);
+  --line: rgba(255, 255, 255, 0.18);
+  --btn-bg: #F9F9F9;
+  --btn-fg: #0D0D0D;
+  --btn-hover: #DADADA;
+  --btn2-bg: #171717;
+  --btn2-fg: #FFFFFF;
+  --focus: #FFFFFF;
+  --error: #FF8A80;
 
   /* The hero and panel wash, standing in for Codex's video background */
   --aurora:
-    radial-gradient(55% 60% at 18% 8%, #CBC3FF 0%, rgba(203, 195, 255, 0) 70%),
-    radial-gradient(45% 55% at 85% 12%, #B8D2FF 0%, rgba(184, 210, 255, 0) 70%),
-    radial-gradient(60% 50% at 55% 70%, #F1D7F6 0%, rgba(241, 215, 246, 0) 70%),
-    linear-gradient(180deg, #E6E2FB 0%, #F4F2FD 55%, #FCFCFC 100%);
+    radial-gradient(55% 60% at 18% 8%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
+    radial-gradient(45% 55% at 85% 12%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
+    radial-gradient(60% 50% at 55% 70%, #4A2456 0%, rgba(74, 36, 86, 0) 70%),
+    linear-gradient(180deg, #120F2A 0%, #07060F 60%, #000000 100%);
   --panel-wash:
-    radial-gradient(70% 80% at 15% 15%, #C9C1FF 0%, rgba(201, 193, 255, 0) 70%),
-    radial-gradient(60% 70% at 90% 90%, #B5CFFF 0%, rgba(181, 207, 255, 0) 70%),
-    linear-gradient(135deg, #E3DEFB 0%, #EEF1FD 100%);
+    radial-gradient(70% 80% at 15% 15%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
+    radial-gradient(60% 70% at 90% 90%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
+    linear-gradient(135deg, #141128 0%, #0B1226 100%);
 
   /* Liquid glass */
-  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.52));
-  --glass-border: rgba(255, 255, 255, 0.7);
-  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(255, 255, 255, 0.25), 0 10px 40px rgba(40, 36, 90, 0.12);
+  --glass-bg: linear-gradient(180deg, rgba(40, 40, 46, 0.72), rgba(24, 24, 28, 0.55));
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 10px 40px rgba(0, 0, 0, 0.5);
   --glass-blur: blur(24px) saturate(180%);
-  --header-glass: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.6));
+  --header-glass: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.6));
 
   --font-sans: "IBM Plex Sans", "IBM Plex Sans Devanagari", -apple-system, system-ui, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
@@ -72,77 +73,13 @@
   --tap: 44px;
   --motion: 120ms;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 @media (min-width: 768px) {
   :root { --gutter: 32px; --section-gap: 128px; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #000000;
-    --surface: #171717;
-    --card: rgba(48, 48, 48, 0.75);
-    --card-solid: #303030;
-    --ink: #FFFFFF;
-    --muted: #AFAFAF;
-    --rule: rgba(255, 255, 255, 0.1);
-    --line: rgba(255, 255, 255, 0.18);
-    --btn-bg: #F9F9F9;
-    --btn-fg: #0D0D0D;
-    --btn-hover: #DADADA;
-    --btn2-bg: #171717;
-    --btn2-fg: #FFFFFF;
-    --focus: #FFFFFF;
-    --error: #FF8A80;
-    --aurora:
-      radial-gradient(55% 60% at 18% 8%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
-      radial-gradient(45% 55% at 85% 12%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
-      radial-gradient(60% 50% at 55% 70%, #4A2456 0%, rgba(74, 36, 86, 0) 70%),
-      linear-gradient(180deg, #120F2A 0%, #07060F 60%, #000000 100%);
-    --panel-wash:
-      radial-gradient(70% 80% at 15% 15%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
-      radial-gradient(60% 70% at 90% 90%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
-      linear-gradient(135deg, #141128 0%, #0B1226 100%);
-    --glass-bg: linear-gradient(180deg, rgba(40, 40, 46, 0.72), rgba(24, 24, 28, 0.55));
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 10px 40px rgba(0, 0, 0, 0.5);
-    --header-glass: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.6));
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #000000;
-  --surface: #171717;
-  --card: rgba(48, 48, 48, 0.75);
-  --card-solid: #303030;
-  --ink: #FFFFFF;
-  --muted: #AFAFAF;
-  --rule: rgba(255, 255, 255, 0.1);
-  --line: rgba(255, 255, 255, 0.18);
-  --btn-bg: #F9F9F9;
-  --btn-fg: #0D0D0D;
-  --btn-hover: #DADADA;
-  --btn2-bg: #171717;
-  --btn2-fg: #FFFFFF;
-  --focus: #FFFFFF;
-  --error: #FF8A80;
-  --aurora:
-    radial-gradient(55% 60% at 18% 8%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
-    radial-gradient(45% 55% at 85% 12%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
-    radial-gradient(60% 50% at 55% 70%, #4A2456 0%, rgba(74, 36, 86, 0) 70%),
-    linear-gradient(180deg, #120F2A 0%, #07060F 60%, #000000 100%);
-  --panel-wash:
-    radial-gradient(70% 80% at 15% 15%, #3A2C8C 0%, rgba(58, 44, 140, 0) 70%),
-    radial-gradient(60% 70% at 90% 90%, #1F3A7A 0%, rgba(31, 58, 122, 0) 70%),
-    linear-gradient(135deg, #141128 0%, #0B1226 100%);
-  --glass-bg: linear-gradient(180deg, rgba(40, 40, 46, 0.72), rgba(24, 24, 28, 0.55));
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 10px 40px rgba(0, 0, 0, 0.5);
-  --header-glass: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.6));
-  color-scheme: dark;
-}
 
 @media (prefers-reduced-motion: reduce) {
   :root { --motion: 0ms; }
@@ -413,14 +350,6 @@ main > .section:last-child, main > .section:last-of-type { padding-bottom: var(-
 }
 .icon-btn svg { width: 18px; height: 18px; }
 .icon-btn:hover { border-color: var(--ink); }
-
-.theme-toggle .icon-sun { display: none; }
-:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
-  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
-}
 
 .menu-toggle { display: none; }
 .header-link-quote {
@@ -981,8 +910,7 @@ th { font-weight: 500; }
 .thread-head b { font-weight: 500; }
 .thread-head small { color: var(--muted); font-size: 0.75rem; }
 .thread-pill { font-size: 0.75rem; padding: 3px 10px; border-radius: var(--r-pill); background: rgba(43, 164, 113, 0.14); color: #1F7A53; }
-:root[data-theme="dark"] .thread-pill { color: #6FE0AE; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .thread-pill { color: #6FE0AE; } }
+.thread-pill { color: #6FE0AE; }
 .thread-body { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; }
 .day { align-self: center; font-size: 0.6875rem; color: var(--muted); background: var(--card); padding: 2px 10px; border-radius: var(--r-pill); }
 .bubble small { display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
@@ -1187,8 +1115,7 @@ th { font-weight: 500; }
 .t-cards span { height: 34px; border-radius: 5px; background: var(--card); }
 .t-grid span { height: 44px; border-radius: 5px; background: var(--card); }
 .t-grid span:nth-child(odd) { background: #E8DCCB; }
-:root[data-theme="dark"] .t-grid span:nth-child(odd) { background: #3A3328; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .t-grid span:nth-child(odd) { background: #3A3328; } }
+.t-grid span:nth-child(odd) { background: #3A3328; }
 
 /* Codex pricing-style service cards */
 .plan { gap: 0; padding: 24px; }
@@ -1250,23 +1177,31 @@ main:has(> .closing:last-child) + .site-footer { margin-top: 0; }
 .feature > * { min-width: 0; }
 @media (max-width: 599px) { .panel { padding: 20px 12px; min-height: 0; } .mock-card { padding: 16px; } }
 
-/* ---------- Brand mark ---------- */
+/* ---------- Logo (Logo.astro, colours from the brand sheet) ---------- */
 
-/* The bare D mark everywhere: no tile, border or shadow. */
-.brand-tile { display: inline-grid; place-items: center; flex: none; width: 34px; height: 34px; }
-.brand-tile img { width: 34px; height: auto; }
-.brand-tile-lg { width: 64px; height: 64px; }
-.brand-tile-lg img { width: 56px; }
-.app-icon .brand-tile-lg { width: 96px; height: 96px; }
-.app-icon .brand-tile-lg img { width: 88px; }
-/* Navy on black is nearly invisible, so dark mode shows the version with a white D. */
-.brand-tile .mark-dark { display: none; }
-:root[data-theme="dark"] .brand-tile .mark-light { display: none; }
-:root[data-theme="dark"] .brand-tile .mark-dark { display: block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand-tile .mark-light { display: none; }
-  :root:not([data-theme="light"]) .brand-tile .mark-dark { display: block; }
-}
+:root { --logo-ink: #FFFFFF; --logo-accent: #C8CCD2; }
+.logo { display: block; flex: none; height: auto; color: var(--logo-ink); }
+.logo-wordmark { aspect-ratio: 920 / 124; }
+.logo-mark { aspect-ratio: 161 / 126; }
+.logo-smile { aspect-ratio: 126 / 161; }
+/* Wordmark only in the header and menu ("for headers and small widths"). */
+.brand .logo-wordmark { width: auto; height: 20px; }
+/* Footer: the primary logo, wordmark over the spaced-out tagline. */
+.brand-primary { flex-direction: column; align-items: flex-start; gap: 8px; }
+.brand-primary .logo-wordmark { height: 24px; }
+.logo-tagline { font-size: 0.625rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+/* :D mark ("for icons"): hero icon and the example screens. */
+.app-icon .logo-mark { width: auto; height: 64px; }
+.logo-mini { width: auto; height: 22px; }
+/* Home hero logo intro (LogoIntro.astro). */
+.logo-intro { display: grid; justify-items: center; margin: 0 auto 20px; }
+.intro-dark { display: grid; width: min(440px, 82vw); aspect-ratio: 1600 / 640; }
+.intro-dark > * { grid-area: 1 / 1; width: 100%; height: auto; }
+.intro-video { opacity: 0; }
+.logo-intro.is-playing .intro-video { opacity: 1; }
+.logo-intro.is-playing .intro-still { visibility: hidden; }
+/* Smile ("for fun moments"): the 404 page. */
+.hero-smile { width: auto; height: 96px; margin: 0 auto 24px; }
 
 /* ---------- Page hero on inner pages ---------- */
 
@@ -1501,12 +1436,7 @@ main:has(> .cta-band:last-child) + .site-footer, main:has(> .wash:last-child) + 
 .st.ok { background: rgba(43, 164, 113, 0.15); color: #1F7A53; }
 .st.due { background: rgba(240, 138, 36, 0.16); color: #9A4F00; }
 .st.new { background: rgba(62, 142, 247, 0.15); color: #1F5FB8; }
-:root[data-theme="dark"] .st.ok { color: #6FE0AE; } :root[data-theme="dark"] .st.due { color: #FFB866; } :root[data-theme="dark"] .st.new { color: #8CC0FF; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .st.ok { color: #6FE0AE; }
-  :root:not([data-theme="light"]) .st.due { color: #FFB866; }
-  :root:not([data-theme="light"]) .st.new { color: #8CC0FF; }
-}
+.st.ok { color: #6FE0AE; } .st.due { color: #FFB866; } .st.new { color: #8CC0FF; }
 
 @media (min-width: 1000px) { .footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr); gap: 24px; } }
 .site-footer address a, .site-footer address span { overflow-wrap: anywhere; }

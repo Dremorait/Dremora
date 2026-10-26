@@ -6,7 +6,7 @@ import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Fact from '../components/Fact.astro';
 import Founder from '../components/Founder.astro';
-import BrandMark from '../components/BrandMark.astro';
+import LogoIntro from '../components/LogoIntro.astro';
 import Inbox from '../components/mock/Inbox.astro';
 import VideoFrame from '../components/VideoFrame.astro';
 import { heroVideo, hasHeroVideo } from '../content/videos';
@@ -33,7 +33,7 @@ const promises = [
 <Base page={pages.home} schema={[organization(), website()]}>
   <section class="hero-c" aria-labelledby="hero-title">
     <div class="wrap center">
-      <div class="app-icon"><BrandMark size="lg" /></div>
+      <LogoIntro />
       <h1 id="hero-title">Websites, software, AI automation and agents for businesses worldwide</h1>
       <p class="lead">Built and supported by the founder. Websites go live in 2 to 4 weeks, at a fixed price agreed in writing.</p>
       <div class="actions">

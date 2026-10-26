@@ -1,0 +1,15 @@
+---
+// A Dremora logo from the shared sprite (public/brand/logo.svg, made by scripts/make-icons.mjs).
+// Letters take the text colour and the squares take --logo-accent, so light and dark mode
+// both follow the brand sheet without a second image. Size it with CSS height.
+// Pass label="" inside a link that already has its own aria-label.
+import logoData from '../assets/brand/logo.json';
+
+type Variant = 'wordmark' | 'mark' | 'smile';
+const { variant = 'wordmark', label = 'Dremora', class: className } = Astro.props as { variant?: Variant; label?: string; class?: string };
+const [w, h] = logoData[variant].viewBox;
+const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' };
+---
+<svg class:list={['logo', `logo-${variant}`, className]} viewBox={`0 0 ${w} ${h}`} {...a11y}>
+  <use href={`/brand/logo.svg#${variant}`} />
+</svg>

@@ -3,8 +3,8 @@
   "short_name": "Dremora",
   "start_url": "/",
   "display": "browser",
-  "theme_color": "#0D1B3E",
-  "background_color": "#FCFCFC",
+  "theme_color": "#0B0B0C",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "/icon-192.png",

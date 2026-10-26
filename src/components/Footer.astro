@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import ganesha from '../assets/ganesha.jpg';
-import BrandMark from './BrandMark.astro';
+import Logo from './Logo.astro';
 import { site, services, verifiedSocials } from '../content/site';
 
 const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="brand" href="/" aria-label="Dremora IT, home"><BrandMark /><span>Dremora IT</span></a>
+        <a class="brand brand-primary" href="/" aria-label="Dremora IT, home"><Logo variant="wordmark" label="" /><span class="logo-tagline" aria-hidden="true">IT Consultants &amp; Services</span></a>
         <p>A founder-led studio in {site.city} building websites, software, AI automation and agents.</p>
         <a class="btn btn-primary" href="/contact">Get a fixed quote</a>
       </div>
