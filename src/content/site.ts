@@ -107,7 +107,7 @@ export type Service = {
   stack: string;
   faq: { q: string; a: string }[];
   relatedWork: string[]; // client work slugs
-  relatedConcepts: string[]; // concept slugs
+  relatedPortfolio: string[]; // portfolio slugs
 };
 
 const sharedFaq = {
@@ -181,7 +181,7 @@ export const services: Service[] = [
       sharedFaq.support,
     ],
     relatedWork: ['agri-tech-maharashtra'],
-    relatedConcepts: ['restaurant', 'clinic', 'online-store', 'hotel'],
+    relatedPortfolio: ['dremora-edu', 'dremora-dining', 'dremora-properties'],
   },
   {
     slug: 'web-apps',
@@ -227,7 +227,7 @@ export const services: Service[] = [
       { q: 'Do I need a domain?', a: sharedFaq.domain.a },
     ],
     relatedWork: [],
-    relatedConcepts: ['eduro'],
+    relatedPortfolio: [],
   },
   {
     slug: 'custom-software',
@@ -278,7 +278,7 @@ export const services: Service[] = [
       sharedFaq.support,
     ],
     relatedWork: [],
-    relatedConcepts: ['eduro'],
+    relatedPortfolio: [],
   },
   {
     slug: 'ai-automation',
@@ -328,7 +328,7 @@ export const services: Service[] = [
       sharedFaq.support,
     ],
     relatedWork: ['agri-tech-maharashtra'],
-    relatedConcepts: ['dre-chain'],
+    relatedPortfolio: [],
   },
 ];
 
@@ -392,68 +392,71 @@ export const workName = (w: ClientWork) => (w.permission ? w.publicName : w.anon
 /** A case study page exists only when the basic facts are known. */
 export const hasCaseStudy = (w: ClientWork) => known(w.problem) && known(w.shipped) && known(w.stack);
 
-// Concept builds: demos made by Dremora, not client projects.
-// Links stay hidden until each demo has the "Concept demo" strip,
-// no fake stats, a fictional brand name and its own subdomain.
-export type Concept = {
+// Portfolio: complete websites Dremora designed and built as live demos, one per industry.
+// They use sample names, figures and reviews, so every page about them says they are demos.
+// Hero screenshots live in src/assets/portfolio/<slug>-desktop.webp and -phone.webp.
+export type PortfolioItem = {
   slug: string;
   name: string;
-  what: string;
+  sector: string; // who the site is for
+  short: string; // e.g. 'School website', for titles
+  url: string; // the live demo
+  summary: string;
+  highlights: string[];
   stack: string;
-  url: string | Todo;
-  image: string | Todo;
 };
 
-export const concepts: Concept[] = [
+export const portfolio: PortfolioItem[] = [
   {
-    slug: 'eduro',
-    name: 'EDURO, coaching institute platform',
-    what: 'Admissions CRM, student and parent portals, faculty management and reports for a coaching institute.',
-    stack: 'Next.js, React, TypeScript, Prisma, PostgreSQL',
-    url: todo('EDURO demo cleaned up (strip, no fake stats) and moved to eduro.dremorait.in'),
-    image: todo('EDURO: fresh screenshot after the demo cleanup (a cropped older one shows for now)'),
+    slug: 'dremora-edu',
+    name: 'Dremora Edu',
+    sector: 'Website for schools and education institutions',
+    short: 'School website',
+    url: 'https://dremoraedu.netlify.app/',
+    summary: 'A complete school website: programmes from early years to diploma, a five-step admissions journey, campus life, news and events, and a link into the parent and student portal.',
+    highlights: [
+      'Illustrated campus scene in the hero, with admissions calls to action',
+      'Programme sections for each age group, from early years to diploma',
+      'Admissions in five clear steps: enquire, visit, apply, assess, welcome',
+      'Graduate destinations, student success stories and a photo gallery',
+      'News and events, parent testimonials and a student portal link',
+    ],
+    stack: 'HTML, CSS, JavaScript, GSAP animation and Three.js',
   },
   {
-    slug: 'dre-chain',
-    name: 'DRE-CHAIN, automation workflow simulator',
-    what: 'An interactive walk-through of an automated lead flow: email in, AI intent check, CRM update, WhatsApp follow-up.',
-    stack: 'Next.js, React, TypeScript, React Flow',
-    url: todo('DRE-CHAIN demo cleaned up (strip, no fake revenue figures) and moved to a dremorait.in subdomain'),
-    image: todo('DRE-CHAIN: fresh screenshot after the demo cleanup (a cropped older one shows for now)'),
+    slug: 'dremora-dining',
+    name: 'Dremora Dining',
+    sector: 'Website for restaurants and cafés',
+    short: 'Restaurant website',
+    url: 'https://dremoradining.netlify.app/',
+    summary: 'A restaurant website for a five-cuisine kitchen: menus by cuisine, signature dishes, guest reviews, an order button in the header and a newsletter for new dishes.',
+    highlights: [
+      'Food-first hero with a clear call to explore the menu',
+      'Menu tabs for five cuisines: Indian, Thai, Chinese, Japanese and European',
+      'Dish cards with a short description for every plate',
+      'Guest reviews and a newsletter sign-up for new dishes',
+      'Order Now and Login in the header, ready to connect to online ordering',
+    ],
+    stack: 'HTML, CSS, JavaScript and GSAP animation',
   },
   {
-    slug: 'hotel',
-    name: 'Hotel and villa website',
-    what: 'Villa, dining and reservation pages for a boutique hotel.',
-    stack: 'Next.js, React, TypeScript',
-    url: todo('Hotel demo (currently "Dremora House") renamed to a fictional brand, cleaned up and moved to a subdomain'),
-    image: todo('Hotel demo screenshot taken after the rename'),
-  },
-  {
-    slug: 'restaurant',
-    name: 'Restaurant and bar website',
-    what: 'Menu, gallery and table booking pages for a restaurant.',
-    stack: 'HTML, CSS, JavaScript',
-    url: todo('Restaurant demo: encoding bug fixed, fake rating removed, moved to a subdomain'),
-    image: todo('Restaurant: fresh screenshot after the fix (a cropped older one shows for now)'),
-  },
-  {
-    slug: 'clinic',
-    name: 'Clinic and hospital website',
-    what: 'Departments, doctor profiles and appointment booking for a clinic.',
-    stack: 'HTML, CSS, JavaScript',
-    url: todo('Healthcare demo (currently "DREMORA Healthcare") renamed to a fictional brand and moved to a subdomain'),
-    image: todo('Healthcare: fresh screenshot after the rename (a cropped older one shows for now)'),
-  },
-  {
-    slug: 'online-store',
-    name: 'Online store',
-    what: 'Product listing, search, cart and checkout pages for a retail store.',
-    stack: 'HTML, CSS, JavaScript',
-    url: todo('E-commerce demo (currently the "Dremora" store) renamed, "Trusted by" line removed, moved to a subdomain'),
-    image: todo('E-commerce: fresh screenshot after the cleanup (a cropped older one shows for now)'),
+    slug: 'dremora-properties',
+    name: 'Dremora Properties',
+    sector: 'Website for real estate agencies',
+    short: 'Real estate website',
+    url: 'https://dremoraproperties.netlify.app/',
+    summary: 'A property website that brings homes, loans, agents and tours together: listing cards, buy, rent and sell sections, property types and a room-by-room smart-home showcase.',
+    highlights: [
+      'Full-bleed property photo hero with the brand set large across it',
+      'Listing cards with price, location, beds, baths and floor area',
+      'Buy and rent, sell, and find an agent sections',
+      'Property types such as apartments and residences, each with an availability check',
+      'Smart-home features shown room by room',
+    ],
+    stack: 'HTML, CSS, JavaScript and GSAP animation',
   },
 ];
+export const portfolioBySlug = (slug: string) => portfolio.find((p) => p.slug === slug)!;
 
 // ---------------------------------------------------------------------------
 // Internship

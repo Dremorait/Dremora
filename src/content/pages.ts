@@ -1,7 +1,7 @@
 // Meta for every page: one place so titles, descriptions, OG images and the
 // sitemap stay unique and in sync. Titles under 60 characters, descriptions
 // under 155 (enforced by scripts/check-banned.mjs on the built HTML).
-import { services, clientWork, hasCaseStudy, workName } from './site';
+import { services, clientWork, portfolio, hasCaseStudy, workName } from './site';
 
 export type PageMeta = {
   path: string;
@@ -41,9 +41,9 @@ export const pages: Record<string, PageMeta> = {
   work: {
     path: '/work',
     title: 'Client Work and Case Studies | Dremora IT',
-    description: 'Real client projects from Dremora IT, followed by concept builds we made to show what we can do. Each one is labelled.',
+    description: 'Real client projects from Dremora IT, and our portfolio of complete websites for schools, restaurants and real estate. Each one is labelled.',
     og: 'work',
-    ogTitle: 'Client work and concept builds',
+    ogTitle: 'Client work and portfolio',
     updated,
   },
   ...Object.fromEntries(
@@ -55,6 +55,19 @@ export const pages: Record<string, PageMeta> = {
         description: `${w.built} What the problem was, what we built and the stack we used.`,
         og: `work-${w.slug}`,
         ogTitle: workName(w),
+        updated,
+      },
+    ]),
+  ),
+  ...Object.fromEntries(
+    portfolio.map((p) => [
+      `portfolio-${p.slug}`,
+      {
+        path: `/portfolio/${p.slug}`,
+        title: `${p.name}: ${p.short.split(' ').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ')} Demo | Dremora IT`,
+        description: `${p.name}, a ${p.short.toLowerCase()} demo built by Dremora IT. See its hero on desktop and phone, what it includes, and open the live site.`,
+        og: `portfolio-${p.slug}`,
+        ogTitle: `${p.name}: ${p.short.toLowerCase()} demo`,
         updated,
       },
     ]),

@@ -3,16 +3,16 @@ import Base from '../../layouts/Base.astro';
 import Fact from '../../components/Fact.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import ConceptThumb from '../../components/mock/ConceptThumb.astro';
-import { clientWork, concepts, serviceBySlug, known, isTodo, hasCaseStudy, workName } from '../../content/site';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import { clientWork, portfolio, serviceBySlug, known, hasCaseStudy, workName } from '../../content/site';
 import { pages } from '../../content/pages';
 
 const crumbs = [{ name: 'Work', path: '/work' }];
 ---
 <Base page={pages.work} crumbs={crumbs}>
-  <PageHero title="Work for real clients first, then the demos we built ourselves" lead="Client names appear only with their written permission. Results appear only when the client agrees to publish them." crumbs={crumbs}>
+  <PageHero title="Work for real clients, and complete websites we built" lead="Client names appear only with their written permission. Results appear only when the client agrees to publish them." crumbs={crumbs}>
     <div class="actions">
-      <a class="btn btn-secondary" href="#concepts">See the concept builds</a>
+      <a class="btn btn-secondary" href="#portfolio">See the portfolio</a>
     </div>
   </PageHero>
 
@@ -44,28 +44,17 @@ const crumbs = [{ name: 'Work', path: '/work' }];
     </div>
   </section>
 
-  <section class="section" id="concepts" aria-labelledby="concepts-title">
+  <section class="section" id="portfolio" aria-labelledby="portfolio-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="concepts-title">Concept builds</h2>
-        <p>We made these to show the kind of work we can do. Every business name, number and review in them is sample data. None of them is a client project.</p>
+        <h2 id="portfolio-title">Portfolio</h2>
+        <p>Complete websites we designed and built, one for each kind of business. They are live demos: every name, figure and review in them is sample content, and none of them is a client project.</p>
       </div>
-      <div class="cards cards-3">
-        {concepts.map((c) => (
-          <article class="card" id={c.slug}>
-            <ConceptThumb kind={c.slug} />
-            <p class="label" style="margin: 0">Concept build</p>
-            <h3 style="font-size: 1.125rem">{c.name}</h3>
-            <p class="muted">{c.what}</p>
-            <p class="muted" style="font-size: 0.875rem">Built with {c.stack}.</p>
-            {isTodo(c.url)
-              ? import.meta.env.DEV && <p><Fact v={c.url} /></p>
-              : <a class="arrow-link" href={c.url}>Open the demo<span class="visually-hidden"> of {c.name}</span></a>}
-          </article>
-        ))}
+      <div class="work-rows">
+        {portfolio.map((p) => <PortfolioCard item={p} layout="row" />)}
       </div>
     </div>
   </section>
 
-  <CtaBand title="Want to see code or talk through a build?" text="On a 30 minute call we can walk you through how one of these was put together, and what a similar build would take for your business." />
+  <CtaBand title="Want a site like one of these?" text="On a 30 minute call we can walk you through how one of these was put together, and what a similar build would take for your business." />
 </Base>

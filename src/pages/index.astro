@@ -1,6 +1,6 @@
 ---
 // Home: Codex-style layout. Hero with a product window, tools strip, real work,
-// pricing-style service cards, feature rows with example screens, concept builds,
+// pricing-style service cards, feature rows with example screens, portfolio,
 // promise tiles and a closing form on the wash. Every example screen is labelled.
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -13,15 +13,13 @@ import { heroVideo, hasHeroVideo } from '../content/videos';
 import Calendar from '../components/mock/Calendar.astro';
 import QuoteDoc from '../components/mock/QuoteDoc.astro';
 import DemoReview from '../components/mock/DemoReview.astro';
-import ConceptThumb from '../components/mock/ConceptThumb.astro';
+import PortfolioCard from '../components/PortfolioCard.astro';
 import { showFounder } from '../content/founder-photo';
-import { site, services, clientWork, concepts, process, known, hasCaseStudy, workName } from '../content/site';
+import { site, services, clientWork, portfolio, process, known, hasCaseStudy, workName } from '../content/site';
 import { pages } from '../content/pages';
 import { organization, website } from '../content/schema';
 
 const featured = clientWork.slice(0, 1);
-// 'EDURO, coaching institute platform' -> 'Coaching institute platform'
-const shortConcept = (n: string) => { const t = n.split(', ')[1] ?? n; return t[0].toUpperCase() + t.slice(1); };
 const tools = ['WhatsApp Business API', 'Google Gemini', 'React', 'Python', 'PostgreSQL', 'Razorpay', 'Stripe', 'Supabase'];
 const promises = [
   { t: 'Fixed price, in writing', d: 'Scope, price and timeline are agreed on paper before any work starts.', icon: 'M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4' },
@@ -147,21 +145,15 @@ const promises = [
     </section>
   )}
 
-  <section class="section" aria-labelledby="concepts-title">
+  <section class="section" aria-labelledby="portfolio-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="concepts-title">Concept builds</h2>
-        <p>Sample sites we built to show what is possible. Every business in them is made up.</p>
+        <p class="label">Portfolio</p>
+        <h2 id="portfolio-title">Complete websites we designed and built</h2>
+        <p>One for schools, one for restaurants, one for real estate. Each is live, so you can try it on your own phone. Names and figures in them are sample content.</p>
       </div>
       <div class="cards cards-3">
-        {concepts.map((c) => (
-          <article class="card">
-            <ConceptThumb kind={c.slug} />
-            <h3 style="font-size: 1.125rem">{shortConcept(c.name)}</h3>
-            <p class="muted">{c.what}</p>
-            <a class="arrow-link" href={`/work#${c.slug}`}>Details<span class="visually-hidden"> of the {shortConcept(c.name).toLowerCase()} concept</span></a>
-          </article>
-        ))}
+        {portfolio.map((p) => <PortfolioCard item={p} />)}
       </div>
     </div>
   </section>

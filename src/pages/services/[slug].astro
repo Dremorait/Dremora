@@ -7,10 +7,10 @@ import Icon from '../../components/Icon.astro';
 import Inbox from '../../components/mock/Inbox.astro';
 import DemoReview from '../../components/mock/DemoReview.astro';
 import Dashboard from '../../components/mock/Dashboard.astro';
-import ConceptThumb from '../../components/mock/ConceptThumb.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
 import VideoFrame from '../../components/VideoFrame.astro';
 import { crmPromo } from '../../content/videos';
-import { site, services, clientWork, concepts, known, hasCaseStudy, workName, type Service } from '../../content/site';
+import { site, services, clientWork, portfolio, known, hasCaseStudy, workName, type Service } from '../../content/site';
 import { pages } from '../../content/pages';
 import { serviceNode } from '../../content/schema';
 
@@ -21,7 +21,7 @@ export function getStaticPaths() {
 const { s } = Astro.props as { s: Service };
 const page = pages[`service-${s.slug}`];
 const work = clientWork.filter((w) => s.relatedWork.includes(w.slug));
-const demos = concepts.filter((c) => s.relatedConcepts.includes(c.slug));
+const demos = portfolio.filter((p) => s.relatedPortfolio.includes(p.slug));
 const others = services.filter((o) => o.slug !== s.slug);
 // 'Web applications' -> 'web applications', but 'AI automation and agents' and 'CRM' keep their capitals.
 const inSentence = (name: string) => name.replace(/^[A-Z][a-z]/, (m) => m.toLowerCase());
@@ -112,10 +112,11 @@ const faqSchema = {
     </div>
   </section>
 
+  {(work.length > 0 || demos.length > 0) && (
   <section class="section" aria-labelledby="example-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="example-title">{work.length ? 'Real work, and what we can show' : 'What we can show you'}</h2>
+        <h2 id="example-title">{work.length ? 'Real work, and what we can show' : 'Websites we built'}</h2>
       </div>
       <div class="cards cards-3">
         {work.map((w) => (
@@ -126,18 +127,11 @@ const faqSchema = {
             {hasCaseStudy(w) ? <a class="arrow-link" href={`/work/${w.slug}`}>Read the case study</a> : <a class="arrow-link" href="/work">See all client work</a>}
           </article>
         ))}
-        {demos.map((c) => (
-          <article class="card">
-            <ConceptThumb kind={c.slug} />
-            <p class="label" style="margin: 0">Concept build, sample data</p>
-            <h3 style="font-size: 1.125rem">{c.name}</h3>
-            <p class="muted">{c.what}</p>
-            <a class="arrow-link" href={`/work#${c.slug}`}>About this concept<span class="visually-hidden"> build</span></a>
-          </article>
-        ))}
+        {demos.map((p) => <PortfolioCard item={p} />)}
       </div>
     </div>
   </section>
+  )}
 
   <section class="section" aria-labelledby="faq-title">
     <div class="wrap">

@@ -1,0 +1,82 @@
+---
+// One portfolio project: its hero on desktop and phone, what it includes, how it is built,
+// and a link to the live demo. The other projects follow underneath.
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import { site, portfolio, type PortfolioItem } from '../../content/site';
+import { pages } from '../../content/pages';
+import { orgId } from '../../content/schema';
+
+export function getStaticPaths() {
+  return portfolio.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props as { p: PortfolioItem };
+const page = pages[`portfolio-${p.slug}`];
+const crumbs = [{ name: 'Work', path: '/work' }, { name: p.name, path: `/portfolio/${p.slug}` }];
+const others = portfolio.filter((o) => o.slug !== p.slug);
+const shots = import.meta.glob<{ default: ImageMetadata }>('../../assets/portfolio/*.webp', { eager: true });
+const desktop = shots[`../../assets/portfolio/${p.slug}-desktop.webp`].default;
+const phone = shots[`../../assets/portfolio/${p.slug}-phone.webp`].default;
+const domain = new URL(p.url).host;
+const schema = {
+  '@type': 'CreativeWork',
+  name: `${p.name}, ${p.short.toLowerCase()} demo`,
+  about: p.sector,
+  description: p.summary,
+  creator: { '@id': orgId },
+  url: `${site.url}/portfolio/${p.slug}`,
+  sameAs: p.url,
+};
+---
+<Base page={page} crumbs={crumbs} schema={[schema]}>
+  <PageHero label={p.sector} title={p.name} lead={p.summary} crumbs={crumbs}>
+    <div class="actions">
+      <a class="btn btn-primary" href={p.url} target="_blank" rel="noopener">Open the live site<span class="visually-hidden">, opens in a new tab</span><svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg></a>
+      <a class="btn btn-secondary" href="/contact">Get a quote for one like it</a>
+    </div>
+  </PageHero>
+
+  <div class="wrap stage">
+    <figure class="work-figure">
+      <div class="work-media work-hero">
+      <div class="work-window">
+        <div class="work-bar"><span class="work-dots"><i></i><i></i><i></i></span><span class="work-url">{domain}</span></div>
+        <Image src={desktop} alt={`${p.name} website, hero section on desktop`} widths={[720, 1080, 1440, 2160, 2880]} sizes="(min-width: 1140px) 1080px, calc(100vw - 32px)" format="webp" quality={88} loading="eager" />
+      </div>
+      <Image class="work-phone" src={phone} alt={`${p.name} website on a phone`} widths={[240, 360, 540, 720]} sizes="(min-width: 1000px) 240px, 30vw" format="webp" quality={88} loading="eager" />
+      </div>
+      <figcaption class="video-caption">Hero section on desktop and phone. A website demo: names, figures and reviews are sample content.</figcaption>
+    </figure>
+  </div>
+
+  <section class="section" aria-labelledby="includes-title">
+    <div class="wrap project-split">
+      <div>
+        <h2 id="includes-title">What the site includes</h2>
+        <ul class="ticks">{p.highlights.map((h) => <li>{h}</li>)}</ul>
+      </div>
+      <dl class="facts project-facts">
+        <dt>Made for</dt><dd>{p.sector}</dd>
+        <dt>Built with</dt><dd>{p.stack}</dd>
+        <dt>Live demo</dt><dd><a href={p.url} target="_blank" rel="noopener">{domain}</a></dd>
+        <dt>Content</dt><dd>Sample names, figures and reviews</dd>
+        <dt>Service</dt><dd><a href="/services/websites">Websites</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="more-title">More from our portfolio</h2></div>
+      <div class="cards cards-2">
+        {others.map((o) => <PortfolioCard item={o} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`Want a ${p.short.toLowerCase()} like this?`} text="Tell us about your business. We reply with questions or a call time, then a written fixed quote for a site built around your content." />
+</Base>
