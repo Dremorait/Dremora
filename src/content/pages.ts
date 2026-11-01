@@ -41,7 +41,7 @@ export const pages: Record<string, PageMeta> = {
   work: {
     path: '/work',
     title: 'Client Work and Case Studies | Dremora IT',
-    description: 'Real client projects from Dremora IT, and our portfolio of complete websites for schools, restaurants and real estate. Each one is labelled.',
+    description: 'Real client projects from Dremora IT, and our portfolio of complete websites for schools, restaurants, real estate and pizzerias.',
     og: 'work',
     ogTitle: 'Client work and portfolio',
     updated,

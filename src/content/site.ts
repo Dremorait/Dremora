@@ -181,7 +181,7 @@ export const services: Service[] = [
       sharedFaq.support,
     ],
     relatedWork: ['agri-tech-maharashtra'],
-    relatedPortfolio: ['dremora-edu', 'dremora-dining', 'dremora-properties'],
+    relatedPortfolio: ['dremora-edu', 'dremora-dining', 'dremora-properties', 'dremora-toppings'],
   },
   {
     slug: 'web-apps',
@@ -454,6 +454,22 @@ export const portfolio: PortfolioItem[] = [
       'Smart-home features shown room by room',
     ],
     stack: 'HTML, CSS, JavaScript and GSAP animation',
+  },
+  {
+    slug: 'dremora-toppings',
+    name: 'Dremora Toppings',
+    sector: 'Website for pizzerias and food delivery',
+    short: 'Pizzeria website',
+    url: 'https://dremoratoppings.netlify.app/',
+    summary: 'A pizzeria ordering website where customers build their own pizza by dropping toppings on it, pick combo meals with veg and non-veg options, and browse the full menu.',
+    highlights: [
+      'Build-your-own pizza: drag toppings onto the base and start fresh any time',
+      'Combo meals for 1, 2 and 4, with veg and non-veg choices and prices for each pizza group',
+      'Full menu in nine sections, from veg and non-veg pizzas to sides, pastas, desserts and drinks',
+      'Delivery and pickup details and opening hours right in the hero',
+      'Start your order button that stays in reach in the header',
+    ],
+    stack: 'HTML, CSS and JavaScript',
   },
 ];
 export const portfolioBySlug = (slug: string) => portfolio.find((p) => p.slug === slug)!;
