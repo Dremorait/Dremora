@@ -181,7 +181,7 @@ export const services: Service[] = [
       sharedFaq.support,
     ],
     relatedWork: ['agri-tech-maharashtra'],
-    relatedPortfolio: ['dremora-edu', 'dremora-dining', 'dremora-properties', 'dremora-toppings'],
+    relatedPortfolio: ['dremora-edu', 'dremora-dining', 'dremora-properties', 'dremora-toppings', 'dremora-smile'],
   },
   {
     slug: 'web-apps',
@@ -470,6 +470,22 @@ export const portfolio: PortfolioItem[] = [
       'Start your order button that stays in reach in the header',
     ],
     stack: 'HTML, CSS and JavaScript',
+  },
+  {
+    slug: 'dremora-smile',
+    name: 'Dremora Smile',
+    sector: 'Website for dental clinics',
+    short: 'Dental clinic website',
+    url: 'https://dremorasmile.netlify.app/',
+    summary: 'A dental clinic website with a 3D glass tooth floating over the hero, six treatments in a numbered slider, the care team, three treatment plans and an appointment request form.',
+    highlights: [
+      'Hero with a 3D glass tooth rendered live in the browser',
+      'Six treatments, from implants and whitening to clear aligners and check-ups, in a numbered slider',
+      'Care team section, with what patients can expect at every visit',
+      'Three treatment plans side by side, each with what it includes',
+      'Appointment request form with a treatment choice and preferred date',
+    ],
+    stack: 'Astro and WebGL',
   },
 ];
 export const portfolioBySlug = (slug: string) => portfolio.find((p) => p.slug === slug)!;

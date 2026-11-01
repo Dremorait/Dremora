@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dremora Toppings ad</title>
+<style>
+  @font-face { font-family: Plex; font-weight: 400; src: url(assets/ibm-plex-sans-latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family: Plex; font-weight: 500; src: url(assets/ibm-plex-sans-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: Plex; font-weight: 600; src: url(assets/ibm-plex-sans-latin-600-normal.woff2) format('woff2'); }
+  @font-face { font-family: Plex; font-weight: 700; src: url(assets/ibm-plex-sans-latin-700-normal.woff2) format('woff2'); }
+  :root { --ink: #0B0B0C; --white: #FFFFFF; --grey: #C8CCD2; --muted: #8A9099; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--ink); }
+  body { font-family: Plex, sans-serif; color: var(--white); -webkit-font-smoothing: antialiased; }
+  #stage { position: relative; width: 100%; height: 100%; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 40%, #17181B 0%, #0B0B0C 62%); }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  .a { position: absolute; will-change: transform, opacity; }
+  /* Flour specks and floating food line art */
+  .speck { position: absolute; border-radius: 50%; background: #E9EBEE; }
+  .food { position: absolute; color: var(--grey); }
+  .food svg { width: 100%; height: 100%; overflow: visible; }
+  /* Text */
+  .h { font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; white-space: nowrap; }
+  .sq { display: inline-block; background: var(--grey); }
+  #hookSq { display: inline-block; vertical-align: baseline; margin-right: 0.2em; height: 0.66em; width: 0.19em; position: relative; }
+  #hookSq .sq { position: absolute; left: 0; width: 0.19em; height: 0.19em; }
+  #hookSq .sq:first-child { top: 0.12em; } #hookSq .sq:last-child { bottom: 0; }
+  .kicker { font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey); white-space: nowrap; }
+  .grey { color: var(--grey); }
+  /* Devices */
+  .phone { background: #1A1B1E; border-radius: 9% / 4.2%; padding: 3.4%; box-shadow: 0 40px 120px rgba(0,0,0,0.65), inset 0 0 0 2px #2A2C30; }
+  .phone .screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 7% / 3.3%; background: #ddd; }
+  .phone .screen img { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+  .notch { position: absolute; left: 50%; top: 1.6%; width: 30%; height: 2.6%; transform: translateX(-50%); background: #0B0B0C; border-radius: 99px; z-index: 3; }
+  .browser { border-radius: 18px; overflow: hidden; background: #1A1B1E; box-shadow: 0 40px 120px rgba(0,0,0,0.65), inset 0 0 0 2px #2A2C30; }
+  .browser .bar { display: flex; align-items: center; gap: 14px; padding: 0 22px; color: var(--muted); font-weight: 500; }
+  .browser .dots { display: flex; gap: 9px; } .browser .dots i { width: 13px; height: 13px; border-radius: 50%; background: #3A3C41; }
+  .browser .url { flex: 1; text-align: center; margin-right: 70px; }
+  .browser .view { position: relative; overflow: hidden; }
+  .browser .view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .chip { display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; background: var(--white); color: var(--ink); font-weight: 600; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+  .chip b { width: 14px; height: 14px; background: var(--ink); display: inline-block; }
+  .total { padding: 18px 30px; border-radius: 22px; background: #141518; border: 2px solid rgba(255,255,255,0.22); box-shadow: 0 18px 50px rgba(0,0,0,0.55); white-space: nowrap; }
+  .total small { display: block; color: var(--grey); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .total strong { font-weight: 700; letter-spacing: -0.02em; }
+  .bullet { display: flex; align-items: center; gap: 26px; font-weight: 600; white-space: nowrap; }
+  .bullet .sq { flex: none; }
+  .btn { display: inline-flex; align-items: center; gap: 16px; padding: 0 44px; border-radius: 999px; background: var(--white); color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .underline { height: 6px; background: var(--grey); transform-origin: left center; }
+  #mark rect, #mark path { transform-box: fill-box; transform-origin: center; }
+  .wordmark svg { display: block; height: 100%; width: auto; }
+
+  /* ---------- Portrait 1080 x 1920 ---------- */
+  .portrait #hook1 { left: 0; right: 0; top: 590px; text-align: center; font-size: 170px; }
+  .portrait #hook2 { left: 0; right: 0; top: 770px; text-align: center; font-size: 170px; }
+  .portrait #pizza { left: 190px; top: 1060px; width: 700px; height: 700px; }
+  .portrait #b1 { left: 0; right: 0; top: 520px; text-align: center; font-size: 118px; }
+  .portrait #b2 { left: 0; right: 0; top: 680px; text-align: center; font-size: 118px; }
+  .portrait #kicker { left: 0; right: 0; top: 150px; text-align: center; font-size: 30px; }
+  .portrait #phone { left: 260px; top: 300px; width: 560px; height: 1190px; }
+  .portrait #cap { left: 0; right: 0; top: 1600px; text-align: center; font-size: 66px; }
+  .portrait #total { left: 640px; top: 1260px; font-size: 54px; } .portrait #total small { font-size: 22px; }
+  .portrait .chip { font-size: 36px; }
+  .portrait #c1 { left: 70px; top: 560px; } .portrait #c2 { left: 80px; top: 720px; } .portrait #c3 { left: 70px; top: 880px; }
+  .portrait #c4 { left: 690px; top: 470px; } .portrait #c5 { left: 700px; top: 630px; } .portrait #c6 { left: 690px; top: 790px; }
+  .portrait #browser { left: 50px; top: 470px; width: 980px; }
+  .portrait #browser .bar { height: 56px; font-size: 22px; } .portrait #browser .view { height: 612px; }
+  .portrait #cap2 { left: 0; right: 0; top: 1240px; text-align: center; font-size: 72px; }
+  .portrait #cap2b { left: 0; right: 0; top: 1340px; text-align: center; font-size: 40px; color: var(--grey); font-weight: 500; }
+  .portrait #phone2 { left: 300px; top: 160px; width: 480px; height: 1020px; }
+  .portrait .bullet { font-size: 56px; } .portrait .bullet .sq { width: 30px; height: 30px; }
+  .portrait #u1 { left: 150px; top: 1300px; } .portrait #u2 { left: 150px; top: 1420px; } .portrait #u3 { left: 150px; top: 1540px; }
+  .portrait #mark { left: 360px; top: 560px; width: 360px; height: 282px; }
+  .portrait #ask { left: 0; right: 0; top: 820px; text-align: center; font-size: 84px; line-height: 1.12; white-space: normal; padding: 0 70px; }
+  .portrait #site { left: 0; right: 0; top: 1150px; text-align: center; font-size: 150px; }
+  .portrait #siteLine { left: 190px; width: 700px; top: 1330px; }
+  .portrait #word { left: 290px; top: 1520px; height: 68px; }
+  .portrait #tag { left: 0; right: 0; top: 1610px; text-align: center; font-size: 24px; }
+  .portrait #btn { left: 290px; top: 1700px; height: 100px; width: 500px; justify-content: center; font-size: 38px; }
+
+  /* ---------- Landscape 1920 x 1080 ---------- */
+  .landscape #hook1 { left: 360px; top: 290px; font-size: 150px; }
+  .landscape #hook2 { left: 360px; top: 450px; font-size: 150px; }
+  .landscape #pizza { left: 1250px; top: 200px; width: 620px; height: 620px; }
+  .landscape #b1 { left: 160px; top: 330px; font-size: 112px; }
+  .landscape #b2 { left: 160px; top: 480px; font-size: 112px; }
+  .landscape #kicker { left: 160px; top: 140px; font-size: 26px; }
+  .landscape #phone { left: 1180px; top: 90px; width: 430px; height: 914px; }
+  .landscape #cap { left: 160px; top: 400px; font-size: 76px; white-space: normal; width: 720px; }
+  .landscape #total { left: 1500px; top: 760px; font-size: 48px; } .landscape #total small { font-size: 20px; }
+  .landscape .chip { font-size: 32px; }
+  .landscape #c1 { left: 990px; top: 330px; } .landscape #c2 { left: 960px; top: 470px; } .landscape #c3 { left: 990px; top: 610px; }
+  .landscape #c4 { left: 1560px; top: 230px; } .landscape #c5 { left: 1580px; top: 370px; } .landscape #c6 { left: 1560px; top: 510px; }
+  .landscape #browser { left: 760px; top: 170px; width: 1040px; }
+  .landscape #browser .bar { height: 56px; font-size: 22px; } .landscape #browser .view { height: 650px; }
+  .landscape #cap2 { left: 140px; top: 420px; font-size: 64px; white-space: normal; width: 560px; }
+  .landscape #cap2b { left: 140px; top: 590px; font-size: 34px; color: var(--grey); font-weight: 500; white-space: normal; width: 560px; }
+  .landscape #phone2 { left: 1180px; top: 80px; width: 430px; height: 914px; }
+  .landscape .bullet { font-size: 56px; } .landscape .bullet .sq { width: 30px; height: 30px; }
+  .landscape #u1 { left: 160px; top: 330px; } .landscape #u2 { left: 160px; top: 460px; } .landscape #u3 { left: 160px; top: 590px; }
+  .landscape #mark { left: 810px; top: 150px; width: 300px; height: 235px; }
+  .landscape #ask { left: 0; right: 0; top: 400px; text-align: center; font-size: 72px; }
+  .landscape #site { left: 0; right: 0; top: 520px; text-align: center; font-size: 132px; }
+  .landscape #siteLine { left: 630px; width: 660px; top: 690px; }
+  .landscape #word { left: 790px; top: 790px; height: 46px; }
+  .landscape #tag { left: 0; right: 0; top: 852px; text-align: center; font-size: 17px; }
+  .landscape #btn { left: 790px; top: 910px; height: 84px; width: 340px; justify-content: center; font-size: 30px; padding: 0 28px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bg"></div>
+
+  <!-- Scene A: hook -->
+  <div class="a h" id="hook1"><span class="a-in" id="hookSq"><span class="sq"></span><span class="sq"></span></span>Own a</div>
+  <div class="a h" id="hook2">pizza shop?</div>
+  <div class="a" id="pizza">
+    <svg viewBox="-110 -110 220 220" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <circle class="draw" pathLength="1" r="100" />
+      <circle class="draw" pathLength="1" r="86" stroke="#C8CCD2" />
+      <g class="draw-g" stroke="#C8CCD2">
+        <path class="draw" pathLength="1" d="M0 -86V86" /><path class="draw" pathLength="1" d="M-86 0H86" />
+        <path class="draw" pathLength="1" d="M-61 -61L61 61" /><path class="draw" pathLength="1" d="M61 -61L-61 61" />
+      </g>
+      <g id="toppings">
+        <circle class="pep" cx="-40" cy="-22" r="11" fill="#FFFFFF" stroke="none" /><circle class="pep" cx="30" cy="-48" r="11" fill="#FFFFFF" stroke="none" />
+        <circle class="pep" cx="48" cy="22" r="11" fill="#FFFFFF" stroke="none" /><circle class="pep" cx="-22" cy="44" r="11" fill="#FFFFFF" stroke="none" />
+        <circle class="pep" cx="-58" cy="30" r="9" fill="#C8CCD2" stroke="none" /><circle class="pep" cx="10" cy="62" r="9" fill="#C8CCD2" stroke="none" />
+        <circle class="pep" cx="-8" cy="-66" r="9" fill="#C8CCD2" stroke="none" /><circle class="pep" cx="64" cy="-10" r="9" fill="#C8CCD2" stroke="none" />
+        <path class="pep" d="M8 -14c10-8 22-4 24 4c-10 6-20 4-24-4z" fill="#C8CCD2" stroke="none" />
+        <path class="pep" d="M-30 8c10-8 22-4 24 4c-10 6-20 4-24-4z" fill="#C8CCD2" stroke="none" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Scene B -->
+  <div class="a h" id="b1">Your pizza is great.</div>
+  <div class="a h grey" id="b2">Is your website?</div>
+
+  <!-- Scene C: phone build -->
+  <div class="a kicker" id="kicker">Dremora Toppings &middot; built by Dremora IT</div>
+  <div class="a phone" id="phone">
+    <div class="screen">
+      <span class="notch"></span>
+      <img id="ps1" src="assets/phone-box.webp" alt="">
+      <img id="ps2" src="assets/phone-base.webp" alt="">
+      <img id="ps3" src="assets/phone-four.webp" alt="">
+      <img id="ps4" src="assets/phone-seven.webp" alt="">
+    </div>
+  </div>
+  <div class="a h" id="cap"><span id="capA">Customers build their own pizza</span></div>
+  <div class="a h" id="capB" style="visibility:hidden"></div>
+  <div class="a total" id="total"><small>Order total</small><strong id="totalVal">&#8377;333</strong></div>
+  <div class="a chip" id="c1"><b></b>+ Mozzarella</div>
+  <div class="a chip" id="c2"><b></b>+ Pepperoni</div>
+  <div class="a chip" id="c3"><b></b>+ Basil</div>
+  <div class="a chip" id="c4"><b></b>+ Mushrooms</div>
+  <div class="a chip" id="c5"><b></b>+ Olives</div>
+  <div class="a chip" id="c6"><b></b>+ Capsicum</div>
+
+  <!-- Scene D: desktop -->
+  <div class="a browser" id="browser">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">dremoratoppings.netlify.app</span></div>
+    <div class="view">
+      <img id="bs1" src="assets/desk-seven.webp" alt="">
+      <img id="bs2" src="assets/desk-combos.webp" alt="">
+      <img id="bs3" src="assets/desk-menu.webp" alt="">
+    </div>
+  </div>
+  <div class="a h" id="cap2"><span id="cap2t">Order in a few taps</span></div>
+  <div class="a" id="cap2b"><span id="cap2bt">A live receipt adds up every topping</span></div>
+
+  <!-- Scene E: phone scroll + promises -->
+  <div class="a phone" id="phone2"><div class="screen"><span class="notch"></span><img id="strip" src="assets/phone-strip.webp" alt=""></div></div>
+  <div class="a bullet" id="u1"><span class="sq"></span>Live in 2 to 4 weeks</div>
+  <div class="a bullet" id="u2"><span class="sq"></span>Fixed price, in writing</div>
+  <div class="a bullet" id="u3"><span class="sq"></span>Fast on every phone</div>
+
+  <!-- Scene F: brand and call to action -->
+  <div class="a" id="mark"><!--MARK--></div>
+  <div class="a h" id="ask">Want a website like this for your pizza shop?</div>
+  <div class="a h" id="site">dremorait.in</div>
+  <div class="a underline" id="siteLine"></div>
+  <div class="a wordmark" id="word"><!--WORDMARK--></div>
+  <div class="a kicker" id="tag">IT Consultants &amp; Services</div>
+  <div class="a btn" id="btn">Get a fixed quote <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+</div>
+
+<script>
+// ---------- Frame-accurate timeline: render(t) sets every element for time t (seconds). ----------
+const params = new URLSearchParams(location.search);
+const W = +(params.get('w') || 1080), H = +(params.get('h') || 1920);
+document.body.classList.add(W >= H ? 'landscape' : 'portrait');
+document.getElementById('stage').style.width = W + 'px';
+document.getElementById('stage').style.height = H + 'px';
+const P = W < H; // portrait
+
+const ease = {
+  out: (x) => 1 - Math.pow(1 - x, 3),
+  inOut: (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2),
+  in: (x) => x * x * x,
+  back: (x) => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+  lin: (x) => x,
+};
+const tweens = []; // { el, prop, t0, t1, from, to, e }
+const $ = (id) => document.getElementById(id);
+function tw(id, t0, t1, from, to, e = 'out') {
+  for (const k of Object.keys(to)) tweens.push({ el: $(id), prop: k, t0, t1, from: from[k], to: to[k], e: ease[e] });
+}
+// Show: fade + rise in; hide: fade + lift out.
+const show = (id, t, d = 0.6, dy = 50, e = 'out') => tw(id, t, t + d, { o: 0, y: dy }, { o: 1, y: 0 }, e);
+const hide = (id, t, d = 0.45, dy = -40) => tw(id, t, t + d, { o: 1, y: 0 }, { o: 0, y: dy }, 'in');
+
+// Scene A: hook (0 - 3.8)
+tw('hookSq', 0.05, 0.6, { o: 0, y: -120 }, { o: 1, y: 0 }, 'back');
+show('hook1', 0.3, 0.7, 80); show('hook2', 0.6, 0.7, 80);
+tw('pizza', 0.7, 1.6, { o: 0, s: 0.8, r: -30 }, { o: 1, s: 1, r: 0 }, 'out');
+hide('hookSq', 3.3); hide('hook1', 3.3); hide('hook2', 3.4);
+// Scene B (3.8 - 7.2)
+show('b1', 3.9, 0.6, 70); show('b2', 4.6, 0.6, 70);
+tw('pizza', 3.6, 4.4, { x: 0, y: 0 }, { x: 0, y: P ? -40 : 0 }, 'inOut');
+tw('pizza', 6.7, 7.3, { o: 1, s: 1 }, { o: 0, s: 1.25 }, 'in');
+hide('b1', 6.7); hide('b2', 6.8);
+// Scene C: phone build (7.2 - 15)
+show('kicker', 7.3, 0.6, 20);
+tw('phone', 7.2, 8.3, { o: 0, y: 600, r: 6 }, { o: 1, y: 0, r: 0 }, 'out');
+tw('ps2', 8.6, 9.0, { o: 0 }, { o: 1 }, 'inOut');
+show('cap', 8.8, 0.6, 40); show('total', 9.0, 0.6, 30, 'back');
+tw('ps3', 9.9, 10.3, { o: 0 }, { o: 1 }, 'inOut');
+['c1', 'c2', 'c3'].forEach((c, i) => tw(c, 9.8 + i * 0.22, 10.4 + i * 0.22, { o: 0, x: -260, s: 0.8 }, { o: 1, x: 0, s: 1 }, 'back'));
+tw('ps4', 11.3, 11.7, { o: 0 }, { o: 1 }, 'inOut');
+['c4', 'c5', 'c6'].forEach((c, i) => tw(c, 11.2 + i * 0.22, 11.8 + i * 0.22, { o: 0, x: 260, s: 0.8 }, { o: 1, x: 0, s: 1 }, 'back'));
+tw('cap', 12.7, 13.0, { o: 1 }, { o: 0 }, 'in'); tw('cap', 13.15, 13.6, { o: 0 }, { o: 1 }, 'out');
+['c1', 'c2', 'c3', 'c4', 'c5', 'c6'].forEach((c, i) => tw(c, 14.0 + i * 0.04, 14.4 + i * 0.04, { o: 1, s: 1 }, { o: 0, s: 0.85 }, 'in'));
+tw('phone', 14.4, 15.0, { o: 1, x: 0, s: 1 }, { o: 0, x: P ? 0 : -300, s: 0.85 }, 'in');
+hide('cap', 14.4); hide('total', 14.3); hide('kicker', 14.5);
+// Scene D: desktop (15 - 20)
+tw('browser', 15.0, 15.9, { o: 0, y: 220, s: 0.92 }, { o: 1, y: 0, s: 1 }, 'out');
+show('cap2', 15.4, 0.6, 40); show('cap2b', 15.6, 0.6, 30);
+tw('bs2', 16.6, 17.2, { o: 0, x: 120 }, { o: 1, x: 0 }, 'out');
+tw('cap2', 16.4, 16.7, { o: 1 }, { o: 0 }, 'in'); tw('cap2', 16.85, 17.3, { o: 0 }, { o: 1 }, 'out');
+tw('cap2b', 16.4, 16.7, { o: 1 }, { o: 0 }, 'in'); tw('cap2b', 16.95, 17.4, { o: 0 }, { o: 1 }, 'out');
+tw('bs3', 18.2, 18.8, { o: 0, x: 120 }, { o: 1, x: 0 }, 'out');
+tw('cap2', 18.0, 18.3, { o: 1 }, { o: 0 }, 'in'); tw('cap2', 18.45, 18.9, { o: 0 }, { o: 1 }, 'out');
+tw('cap2b', 18.0, 18.3, { o: 1 }, { o: 0 }, 'in'); tw('cap2b', 18.55, 19.0, { o: 0 }, { o: 1 }, 'out');
+tw('browser', 19.4, 20.0, { o: 1, s: 1 }, { o: 0, s: 0.9 }, 'in'); hide('cap2', 19.4); hide('cap2b', 19.45);
+// Scene E: phone scroll + promises (20 - 24)
+tw('phone2', 20.0, 20.8, { o: 0, y: 400 }, { o: 1, y: 0 }, 'out');
+tw('strip', 20.6, 23.6, { y: 0 }, { y: 1 }, 'inOut'); // 0..1 of the scroll range, applied below
+show('u1', 20.7, 0.6, 30); show('u2', 21.4, 0.6, 30); show('u3', 22.1, 0.6, 30);
+tw('phone2', 23.5, 24.0, { o: 1, s: 1 }, { o: 0, s: 0.9 }, 'in'); hide('u1', 23.5); hide('u2', 23.55); hide('u3', 23.6);
+// Scene F: brand + call to action (24 - 30)
+tw('mark', 24.0, 24.3, { o: 0 }, { o: 1 }, 'lin');
+tw('m_sq1', 24.05, 24.55, { y: -260, o: 0 }, { y: 0, o: 1 }, 'back');
+tw('m_sq2', 24.2, 24.7, { y: -260, o: 0 }, { y: 0, o: 1 }, 'back');
+tw('m_d', 24.35, 24.95, { x: 160, o: 0 }, { x: 0, o: 1 }, 'back');
+tw('mark', 25.6, 26.2, { y: 0, s: 1 }, { y: P ? -260 : -40, s: P ? 0.78 : 0.62 }, 'inOut');
+show('ask', 25.9, 0.6, 40);
+show('site', 26.9, 0.6, 60, 'back');
+tw('siteLine', 27.3, 28.0, { sx: 0, o: 1 }, { sx: 1, o: 1 }, 'inOut');
+show('word', 27.8, 0.6, 20); show('tag', 27.95, 0.6, 16); show('btn', 28.2, 0.6, 20, 'back');
+
+// Group tweens per element+property, sorted by start, for render().
+const tracks = new Map();
+for (const t of tweens) {
+  const key = t.el.id + '|' + t.prop;
+  if (!tracks.has(key)) tracks.set(key, { el: t.el, prop: t.prop, list: [] });
+  tracks.get(key).list.push(t);
+}
+for (const tr of tracks.values()) tr.list.sort((a, b) => a.t0 - b.t0);
+
+// Background: flour specks and floating food line art, seeded so every render matches.
+let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const bg = $('bg'); const specks = [];
+for (let i = 0; i < 90; i++) {
+  const d = document.createElement('i'); d.className = 'speck';
+  const s = 2 + rnd() * 5; d.style.width = d.style.height = s + 'px';
+  bg.appendChild(d); specks.push({ d, x: rnd() * W, y: rnd() * H, v: 10 + rnd() * 30, ph: rnd() * 6.28, o: 0.08 + rnd() * 0.3 });
+}
+const icons = {
+  slice: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"><path d="M50 92L14 18c22-12 50-12 72 0z"/><path d="M18 26c20-9 44-9 64 0"/><circle cx="44" cy="40" r="6"/><circle cx="58" cy="58" r="5"/><circle cx="40" cy="62" r="4"/></svg>',
+  mushroom: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"><path d="M12 52C12 28 30 14 50 14s38 14 38 38z"/><path d="M38 52v26c0 6 24 6 24 0V52"/><circle cx="34" cy="34" r="5"/><circle cx="62" cy="30" r="4"/></svg>',
+  chili: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M70 22c-6 30-24 54-52 62 30 4 58-20 62-50"/><path d="M70 22c4-8 10-10 16-8"/></svg>',
+  basil: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 80C24 40 50 18 84 16c-2 34-26 62-64 64z"/><path d="M20 80L64 34"/></svg>',
+  tomato: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="56" r="32"/><path d="M50 24l-8-10M50 24l10-8M50 24l14 2M50 24l-14 4"/></svg>',
+  olive: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2"><ellipse cx="50" cy="50" rx="30" ry="24"/><ellipse cx="50" cy="50" rx="10" ry="8"/></svg>',
+};
+const names = Object.keys(icons); const foods = [];
+for (let i = 0; i < 16; i++) {
+  const f = document.createElement('div'); f.className = 'food';
+  const size = (P ? 90 : 80) + rnd() * 80; f.style.width = f.style.height = size + 'px';
+  f.innerHTML = icons[names[i % names.length]];
+  bg.appendChild(f);
+  foods.push({ f, x: rnd() * (W - size), y: rnd() * (H - size), r0: rnd() * 360, vr: (rnd() - 0.5) * 18, vy: 8 + rnd() * 14, ph: rnd() * 6.28, o: 0.07 + rnd() * 0.09 });
+}
+
+const stripImg = $('strip'); const draws = [...document.querySelectorAll('#pizza .draw')]; const peps = [...document.querySelectorAll('#pizza .pep')];
+const totalVal = $('totalVal'); const capA = $('capA'); const cap2t = $('cap2t'); const cap2bt = $('cap2bt');
+const fmt = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
+
+window.render = function (t) {
+  // Background drift
+  for (const s of specks) {
+    const y = ((s.y - s.v * t) % H + H) % H;
+    const x = s.x + Math.sin(t * 0.6 + s.ph) * 12;
+    s.d.style.transform = `translate(${x}px, ${y}px)`;
+    s.d.style.opacity = s.o * (0.6 + 0.4 * Math.sin(t * 1.3 + s.ph));
+  }
+  for (const f of foods) {
+    const y = ((f.y - f.vy * t) % (H + 200) + H + 200) % (H + 200) - 100;
+    const x = f.x + Math.sin(t * 0.35 + f.ph) * 30;
+    f.f.style.transform = `translate(${x}px, ${y}px) rotate(${f.r0 + f.vr * t}deg)`;
+    f.f.style.opacity = f.o;
+  }
+  // Tweens
+  const state = new Map();
+  for (const tr of tracks.values()) {
+    const L = tr.list; let v;
+    if (t < L[0].t0) v = L[0].from;
+    else {
+      let cur = L[0];
+      for (const tw of L) if (tw.t0 <= t) cur = tw;
+      const p = Math.min(1, Math.max(0, (t - cur.t0) / (cur.t1 - cur.t0)));
+      v = cur.from + (cur.to - cur.from) * cur.e(p);
+    }
+    if (!state.has(tr.el)) state.set(tr.el, {});
+    state.get(tr.el)[tr.prop] = v;
+  }
+  for (const [el, s] of state) {
+    if (el.id === 'strip') continue;
+    const x = s.x ?? 0, y = s.y ?? 0, sc = s.s ?? 1, r = s.r ?? 0, sx = s.sx ?? 1;
+    el.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg) scale(${sc}) scaleX(${sx})`;
+    el.style.opacity = s.o ?? 1;
+  }
+  // Phone scroll: 0..1 maps to the strip's scroll range inside the screen.
+  const scr = stripImg.parentElement;
+  const range = stripImg.offsetHeight - scr.clientHeight;
+  stripImg.style.transform = `translateY(${-range * (state.get(stripImg)?.y ?? 0)}px)`;
+  // Line-art pizza draws itself, then the toppings pop on.
+  const dp = Math.min(1, Math.max(0, (t - 0.8) / 1.8));
+  draws.forEach((d, i) => { const local = Math.min(1, Math.max(0, dp * 1.6 - i * 0.1)); d.style.strokeDasharray = '1'; d.style.strokeDashoffset = String(1 - ease.inOut(local)); });
+  peps.forEach((p, i) => { const k = Math.min(1, Math.max(0, (t - 4.0 - i * 0.09) / 0.35)); const s = ease.back(k); p.style.transformBox = 'fill-box'; p.style.transformOrigin = 'center'; p.style.transform = `scale(${s})`; p.style.opacity = k > 0 ? 1 : 0; });
+  // Order total counts up with each build step.
+  let total = 333;
+  if (t >= 9.9) total = 333 + (548 - 333) * ease.out(Math.min(1, (t - 9.9) / 0.7));
+  if (t >= 11.3) total = 548 + (739 - 548) * ease.out(Math.min(1, (t - 11.3) / 0.7));
+  totalVal.textContent = fmt(total);
+  // Caption copy swaps at the faded moment.
+  capA.textContent = t < 12.9 ? 'Customers build their own pizza' : 'and order in a few taps';
+  cap2t.textContent = t < 16.75 ? 'Order in a few taps' : t < 18.4 ? 'Combo meals for 1, 2 and 4' : 'The full menu, in nine sections';
+  cap2bt.textContent = t < 16.75 ? 'A live receipt adds up every topping' : t < 18.4 ? 'Veg and non-veg, priced for every size' : 'Pizzas, sides, pastas, desserts and drinks';
+};
+window.ready = Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]);
+render(0);
+</script>
+</body>
+</html>
