@@ -66,4 +66,5 @@ await png(512, 'icon-512.png');
 await png(512, 'icon-512-maskable.png'); // same source, maskable declared in manifest
 await ico('favicon.ico');
 
-console.log('\nAll favicon files regenerated from public/icon.svg ✅');
+console.log('\nAll favicon files regenerated from public/icon.svg.');
+
